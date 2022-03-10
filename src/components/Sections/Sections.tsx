@@ -1,13 +1,13 @@
-import React from 'react';
-import { Section } from '../../App';
+import React from "react";
+import { Section } from "../../App";
 
 import SectionWrapper from "./SectionWrapper";
-import './sections.scss';
+import "./sections.scss";
 
 export interface SectionsProps {
-    sections: Array<Section>
-    activeSection: Section
-    setActiveSection: React.Dispatch<any>
+    sections: Array<Section>;
+    activeSection: Section;
+    setActiveSection: React.Dispatch<any>;
 }
 
 export default function Sections({

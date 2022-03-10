@@ -20,7 +20,6 @@
 
     & > .wrapper-scroll {
 		user-select: none;
-		cursor: pointer;
 		position: absolute;
 		bottom: 15px;
 		left: 50%;
@@ -30,6 +29,7 @@
 		transform: translate(-50%);
 
 		& > .scroll-icon {
+			cursor: pointer;
 			display: inline-block;
 			height: 3em;
 			width: 1.5em;

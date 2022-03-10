@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 import { Section } from "../../App";
+import { HandleUpdateAnchorURL } from "../../Utils/Navigation";
 
 export interface SectionWrapperProps {
     section: Section;
@@ -20,6 +21,10 @@ export default function SectionWrapper({
 
     useEffect(() => {
         if (inView) setActiveSection(section);
+        const update = setTimeout(() => {
+            HandleUpdateAnchorURL(section.name);
+        }, 150);
+        return () => clearTimeout(update);
     }, [inView, setActiveSection, section]);
 
     const setRefs = useCallback(

@@ -2,6 +2,11 @@ import React, { createRef, useState } from "react";
 import { BsGithub, BsLinkedin, BsDiscord } from "react-icons/bs";
 
 import { name } from "../../config";
+import {
+    HandleUpdateAnchorURL,
+    MoveNavbarDot,
+    ScrollToSection,
+} from "../../Utils/Navigation";
 
 import "./navbar.scss";
 
@@ -51,26 +56,15 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
             const index = sections.findIndex((s) => s.name === name);
             if (index === -1) return;
 
-            // Update URL
-            const url = `${window.location.origin}/#${section.name}`;
-            window.history.pushState({}, "", url);
+            HandleUpdateAnchorURL(section.name);
 
-            // Move dot
             //@ts-ignore
             const { height } = target.getBoundingClientRect();
-            if (dotRef.current) {
-                //@ts-ignore
-                dotRef.current.style.transform = `translate(285px, ${
-                    index * height + 25
-                }px)`;
-            }
+            MoveNavbarDot(index * height + 25, dotRef.current);
 
             // Scroll into view
             if (name !== activeSection.name) {
-                section.ref?.current?.scrollIntoView({
-                    block: "start",
-                    behavior: "smooth",
-                });
+                ScrollToSection(section);
             }
         }
     }

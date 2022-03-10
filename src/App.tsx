@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState, createContext } from "react";
 import "./App.scss";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -15,62 +15,63 @@ import VeilleTechnologique from "./components/Sections/VeilleTechno/Veilles";
 import Contact from "./components/Sections/Contact/Contact";
 
 export interface Section {
-	name: string
-	component: JSX.Element,
-	ref: React.RefObject<any>
+    name: string;
+    component: JSX.Element;
+    ref: React.RefObject<any>;
 }
 
-export default function App() {
-	const [sections] = useState<Array<Section>>([
-		{
-			name: "accueil",
-			component: <Accueil />,
-			ref: createRef(),
-		},
-		{
-			name: "aboutme",
-			component: <APropos />,
-			ref: createRef(),
-		},
-		{
-			name: "btssio",
-			component: <BTS />,
-			ref: createRef(),
-		},
-		{
-			name: "parcours",
-			component: <Parcours />,
-			ref: createRef(),
-		},
-		{
-			name: "projets",
-			component: <Projets />,
-			ref: createRef(),
-		},
-		{
-			name: "veilletechno",
-			component: <VeilleTechnologique />,
-			ref: createRef(),
-		},
-		{
-			name: "contact",
-			component: <Contact />,
-			ref: createRef(),
-		},
-	]);
-	const [activeSection, setActiveSection] = useState<Section>(sections[0]);
+const sections = [
+	{
+		name: "accueil",
+		component: <Accueil />,
+		ref: createRef(),
+	},
+	{
+		name: "aboutme",
+		component: <APropos />,
+		ref: createRef(),
+	},
+	{
+		name: "btssio",
+		component: <BTS />,
+		ref: createRef(),
+	},
+	{
+		name: "parcours",
+		component: <Parcours />,
+		ref: createRef(),
+	},
+	{
+		name: "projets",
+		component: <Projets />,
+		ref: createRef(),
+	},
+	{
+		name: "veilletechno",
+		component: <VeilleTechnologique />,
+		ref: createRef(),
+	},
+	{
+		name: "contact",
+		component: <Contact />,
+		ref: createRef(),
+	},
+];
+export const SectionsProvider = createContext(sections);
 
-	return (
-		<div className="App">
-			<Navbar
-				activeSection={activeSection}
-				sections={sections}
-			/>
-			<Sections
-				sections={sections}
-				activeSection={activeSection}
-				setActiveSection={setActiveSection}
-			/>
-		</div>
-	);
+export default function App() {
+    const [activeSection, setActiveSection] = useState<Section>(sections[0]);
+
+    return (
+        <div className="App">
+            <SectionsProvider.Provider value={sections}>
+                <Navbar activeSection={activeSection} sections={sections} />
+                <Sections
+                    sections={sections}
+                    activeSection={activeSection}
+                    setActiveSection={setActiveSection}
+                />
+            </SectionsProvider.Provider>
+        </div>
+    );
 }
