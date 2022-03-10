@@ -21,41 +21,48 @@ export interface Section {
 }
 
 const sections = [
-	{
-		name: "accueil",
-		component: <Accueil />,
-		ref: createRef(),
-	},
-	{
-		name: "aboutme",
-		component: <APropos />,
-		ref: createRef(),
-	},
-	{
-		name: "btssio",
-		component: <BTS />,
-		ref: createRef(),
-	},
-	{
-		name: "parcours",
-		component: <Parcours />,
-		ref: createRef(),
-	},
-	{
-		name: "projets",
-		component: <Projets />,
-		ref: createRef(),
-	},
-	{
-		name: "veilletechno",
-		component: <VeilleTechnologique />,
-		ref: createRef(),
-	},
-	{
-		name: "contact",
-		component: <Contact />,
-		ref: createRef(),
-	},
+    {
+        name: "accueil",
+        label: "Accueil",
+        component: <Accueil />,
+        ref: createRef(),
+    },
+    {
+        name: "aboutme",
+        label: "À propos",
+        component: <APropos />,
+        ref: createRef(),
+    },
+    {
+        name: "btssio",
+        label: "BTS SIO",
+        component: <BTS />,
+        ref: createRef(),
+    },
+    {
+        name: "parcours",
+        label: "Mon parcours",
+        component: <Parcours />,
+        ref: createRef(),
+    },
+    {
+        name: "projets",
+        label: "Mes projets",
+        component: <Projets />,
+        ref: createRef(),
+    },
+    {
+        name: "veilletechno",
+        label: "Veille Technologique",
+        component: <VeilleTechnologique />,
+        ref: createRef(),
+    },
+    {
+        name: "contact",
+        label: "Me contacter",
+        component: <Contact />,
+        ref: createRef(),
+    },
 ];
 export const SectionsProvider = createContext(sections);
 

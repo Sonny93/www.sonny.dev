@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef } from "react";
 import { BsGithub, BsLinkedin, BsDiscord } from "react-icons/bs";
 
 import { name } from "../../config";
@@ -17,36 +17,6 @@ export interface NavbarProps {
 
 export default function Navbar({ activeSection, sections }: NavbarProps) {
     const dotRef = createRef();
-    const [items] = useState([
-        {
-            name: "accueil",
-            label: "Accueil",
-        },
-        {
-            name: "aboutme",
-            label: "À propos",
-        },
-        {
-            name: "btssio",
-            label: "BTS SIO",
-        },
-        {
-            name: "parcours",
-            label: "Mon parcours",
-        },
-        {
-            name: "projets",
-            label: "Mes projets",
-        },
-        {
-            name: "veilletechno",
-            label: "Veilles",
-        },
-        {
-            name: "contact",
-            label: "Me contacter",
-        },
-    ]);
 
     function handleActiveSection(name: string, target: EventTarget) {
         if (!name) return console.error("name missing");
@@ -107,7 +77,7 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
             <ul className="items">
                 {/*@ts-ignore*/}
                 <div className="dot" ref={dotRef}></div>
-                {items.map(({ name, label }, key) => (
+                {sections.map(({ name, label }, key) => (
                     <li
                         className={
                             activeSection.name === name ? `item active` : "item"
