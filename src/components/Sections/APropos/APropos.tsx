@@ -1,3 +1,4 @@
+import React from 'react';
 import { name } from '../../../config';
 
 import "./apropos.scss";

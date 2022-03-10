@@ -1,3 +1,4 @@
+import React from 'react';
 import "./bts.scss";
 
 export default function BTS() {

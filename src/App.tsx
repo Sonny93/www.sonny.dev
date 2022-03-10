@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import React, { createRef, useState } from "react";
 import "./App.scss";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -14,8 +14,14 @@ import Projets from "./components/Sections/Projets/Projets";
 import VeilleTechnologique from "./components/Sections/VeilleTechno/Veilles";
 import Contact from "./components/Sections/Contact/Contact";
 
-function App() {
-	const [sections] = useState([
+export interface Section {
+	name: string
+	component: JSX.Element,
+	ref: React.RefObject<any>
+}
+
+export default function App() {
+	const [sections] = useState<Array<Section>>([
 		{
 			name: "accueil",
 			component: <Accueil />,
@@ -52,7 +58,7 @@ function App() {
 			ref: createRef(),
 		},
 	]);
-	const [activeSection, setActiveSection] = useState(sections[0]);
+	const [activeSection, setActiveSection] = useState<Section>(sections[0]);
 
 	return (
 		<div className="App">
@@ -68,5 +74,3 @@ function App() {
 		</div>
 	);
 }
-
-export default App;

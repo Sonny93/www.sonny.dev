@@ -1,11 +1,16 @@
-import { createRef, useState } from "react";
+import React, { createRef, useState } from "react";
 import { BsGithub, BsLinkedin, BsDiscord } from "react-icons/bs";
 
-import { name } from '../../config';
+import { name } from "../../config";
 
-import './navbar.scss';
+import "./navbar.scss";
 
-export default function Navbar({ activeSection, sections }) {
+export interface NavbarProps {
+    activeSection: any;
+    sections: Array<any>;
+}
+
+export default function Navbar({ activeSection, sections }: NavbarProps) {
     const dotRef = createRef();
     const [items] = useState([
         {
@@ -38,7 +43,7 @@ export default function Navbar({ activeSection, sections }) {
         },
     ]);
 
-    function handleActiveSection(name, target) {
+    function handleActiveSection(name: string, target: EventTarget) {
         if (!name) return console.error("name missing");
 
         const section = sections.find((s) => s.name === name);
@@ -51,9 +56,13 @@ export default function Navbar({ activeSection, sections }) {
             window.history.pushState({}, "", url);
 
             // Move dot
+            //@ts-ignore
             const { height } = target.getBoundingClientRect();
             if (dotRef.current) {
-                dotRef.current.style.transform = `translate(285px, ${index * height + 25}px)`;
+                //@ts-ignore
+                dotRef.current.style.transform = `translate(285px, ${
+                    index * height + 25
+                }px)`;
             }
 
             // Scroll into view
@@ -102,6 +111,7 @@ export default function Navbar({ activeSection, sections }) {
                 </ul>
             </div>
             <ul className="items">
+                {/*@ts-ignore*/}
                 <div className="dot" ref={dotRef}></div>
                 {items.map(({ name, label }, key) => (
                     <li

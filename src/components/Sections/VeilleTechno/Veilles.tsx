@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function VeilleTechnologique() {
     return (
         <div className="veille-technologique">
