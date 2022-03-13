@@ -25,8 +25,14 @@ a {
 #root {
 	height: 100%;
 	width: 100%;
-    background: url($bg-img) no-repeat;
+}
+
+.background {
+	height: 100%;
+	width: 100%;
+    background: #333;
     background-size: cover;
+	transition: .15s;
 }
 
 ::-webkit-scrollbar {

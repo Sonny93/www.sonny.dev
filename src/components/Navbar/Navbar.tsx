@@ -3,7 +3,6 @@ import { BsGithub, BsLinkedin, BsDiscord } from "react-icons/bs";
 
 import { name } from "../../config";
 import {
-    HandleUpdateAnchorURL,
     MoveNavbarDot,
     ScrollToSection,
 } from "../../Utils/Navigation";
@@ -25,8 +24,6 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
         if (section) {
             const index = sections.findIndex((s) => s.name === name);
             if (index === -1) return;
-
-            HandleUpdateAnchorURL(section.name);
 
             //@ts-ignore
             const { height } = target.getBoundingClientRect();

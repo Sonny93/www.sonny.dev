@@ -6,37 +6,34 @@ import { HandleUpdateAnchorURL } from "../../Utils/Navigation";
 export interface SectionWrapperProps {
     section: Section;
     activeSection: Section;
-    setActiveSection: React.Dispatch<any>;
+    setActiveSection: (section: Section) => void;
+    changeBackground: (section: Section) => void;
 }
 
 export default function SectionWrapper({
     section,
     activeSection,
     setActiveSection,
+    changeBackground,
 }: SectionWrapperProps) {
     const { component, ref: refSection } = section;
-    const { ref, inView } = useInView({
-        threshold: 0.5,
-    });
+    const { ref, inView } = useInView({ threshold: 0.5, });
 
     useEffect(() => {
-        if (inView) setActiveSection(section);
-        const update = setTimeout(() => {
+        if (inView) {
+            setActiveSection(section);
+            changeBackground(section);
             HandleUpdateAnchorURL(section.name);
-        }, 150);
-        return () => clearTimeout(update);
-    }, [inView, setActiveSection, section]);
+        }
+    }, [inView, setActiveSection, changeBackground, section]);
 
-    const setRefs = useCallback(
-        (node) => {
-            //@ts-ignore
-            refSection.current = node;
-            //@ts-ignore
-            activeSection.ref.current = node;
-            ref(node);
-        },
-        [ref, refSection, activeSection]
-    );
+    const setRefs = useCallback((node) => {
+        //@ts-ignore
+        refSection.current = node;
+        //@ts-ignore
+        activeSection.ref.current = node;
+        ref(node);
+    }, [ref, refSection, activeSection]);
 
     return (
         <div className="section" ref={setRefs} id={section.name}>

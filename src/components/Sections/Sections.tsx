@@ -7,13 +7,15 @@ import "./sections.scss";
 export interface SectionsProps {
     sections: Array<Section>;
     activeSection: Section;
-    setActiveSection: React.Dispatch<any>;
+    setActiveSection: (section: Section) => void;
+    changeBackground: (section: Section) => void;
 }
 
 export default function Sections({
     sections,
     activeSection,
     setActiveSection,
+    changeBackground,
 }: SectionsProps) {
     return (
         <div className="page-content">
@@ -23,6 +25,7 @@ export default function Sections({
                     section={section}
                     activeSection={activeSection}
                     setActiveSection={setActiveSection}
+                    changeBackground={changeBackground}
                 />
             ))}
         </div>
