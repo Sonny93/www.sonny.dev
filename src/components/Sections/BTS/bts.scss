@@ -6,6 +6,20 @@
 
         & > .option {
             width: calc(50% - 10px);
+            transition: .15s;
+
+            &:hover {
+                transform: scale(1.025);
+            }
+
+            & > h2 {
+                display: flex;
+                align-items: center;
+
+                & > svg {
+                    margin-right: 15px;
+                }
+            }
         }
     }
 }

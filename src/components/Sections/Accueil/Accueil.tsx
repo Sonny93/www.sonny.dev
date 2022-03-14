@@ -16,7 +16,7 @@ export default function AccueilWrapper() {
 }
 
 interface AccueilProps {
-    sections: any;
+    sections: Array<Section>;
 }
 
 function Accueil({ sections }: AccueilProps) {
@@ -38,7 +38,8 @@ function Accueil({ sections }: AccueilProps) {
 
     return (
         <div className="accueil">
-            <h1>{name}</h1>
+            <h2>{name}</h2>
+            <h1>Développeur Fullstack JS</h1>
             <p>Benvenue sur mon Portfolio !</p>
             {nextSection && (
                 <div className="wrapper-scroll">
