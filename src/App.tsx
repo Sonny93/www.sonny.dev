@@ -1,4 +1,4 @@
-import React, { createRef, useState, createContext } from "react";
+import React, { createRef, useState, createContext, useEffect } from "react";
 import "./App.scss";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -79,12 +79,22 @@ export default function App() {
     const [activeSection, setActiveSection] = useState<Section>(sections[0]);
     const [background, setBackground] = useState<string>(sections[0].background);
 
+    useEffect(() => {
+        for (const { background } of sections) {
+            const link = document.createElement('link');
+            link.setAttribute('rel', 'preload');
+            link.setAttribute('as', 'image');
+            link.setAttribute('href', background);
+            document.head.appendChild(link);
+        }
+    }, []);
+
     function changeBackground(section: Section): void {
         setBackground(section.background);
     }
 
     return (
-        <div className="background" style={{ background: `url(${background})` }}>
+        <div className="background" style={{ backgroundImage: `url(${background})` }}>
             <div className="App">
                 <SectionsProvider.Provider value={sections}>
                     <Navbar activeSection={activeSection} sections={sections} />
