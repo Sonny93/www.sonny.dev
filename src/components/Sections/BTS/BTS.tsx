@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BsCodeSlash, BsHddNetwork } from 'react-icons/bs';
-import { boldFirstChar } from '../../../Utils/Texte';
+import { boldFirstChar, List } from '../../../Utils/Texte';
 
 import "./bts.scss";
 
@@ -10,9 +10,7 @@ export default function BTS() {
         <div className="btssio">
             <h1>Qu'est ce que le BTS SIO</h1>
             <p className="box">
-                Le {boldFirstChar('Brevet')} de {boldFirstChar('Technicien')} {boldFirstChar('Supérieur')} {boldFirstChar('Services')} {boldFirstChar('Informatiques')} aux {boldFirstChar('Organisations')} (<b>BTS SIO</b>) est une formation en informatique à destination des futurs administrateurs réseaux et développeurs web.
-                <br /><br />
-                La formation se décline en deux options : <b>SISR</b> & <b>SLAM</b>
+                Le {boldFirstChar('Brevet')} de {boldFirstChar('Technicien')} {boldFirstChar('Supérieur')} {boldFirstChar('Services')} {boldFirstChar('Informatiques')} aux {boldFirstChar('Organisations')} (<b>BTS SIO</b>) est une formation en informatique à destination des futurs administrateurs réseaux et développeurs web. La formation se décline en deux options : <b>SISR</b> et <b>SLAM</b>
             </p>
             <div className="wrapper-options">
                 <div className="option sisr box">
@@ -22,16 +20,18 @@ export default function BTS() {
                     </p>
                     <p>
                         Les techniciens supérieurs en informatique option SISR, peuvent accéder aux métiers de :
-                        <ul>
-                            <li>Administrateur systèmes et réseaux</li>
-                            <li>Informaticien support et déploiement</li>
-                            <li>Pilote d’exploitation</li>
-                            <li>Support systèmes et réseaux</li>
-                            <li>Technicien d’infrastructure</li>
-                            <li>Technicien de production</li>
-                            <li>Technicien micro et réseaux</li>
-                        </ul>
                     </p>
+                    <List
+                        items={[
+                            'Administrateur systèmes et réseaux',
+                            'Informaticien support et déploiement',
+                            'Pilote d’exploitation',
+                            'Support systèmes et réseaux',
+                            'Technicien d’infrastructure',
+                            'Technicien de production',
+                            'Technicien micro et réseaux'
+                        ]}
+                    />
                 </div>
                 <div className="option slam box">
                     <h2><BsCodeSlash /> SLAM</h2>
@@ -40,19 +40,21 @@ export default function BTS() {
                     </p>
                     <p>
                         Les techniciens supérieurs en informatique option slam, sont préparés aux métiers de :
-                        <ul>
-                            <li>Développeur d’applications informatiques</li>
-                            <li>Développeur informatique</li>
-                            <li>Analyste d’applications ou d’études</li>
-                            <li>Analyste programmeur</li>
-                            <li>Chargé d’études informatiques</li>
-                            <li>Informaticien d’études</li>
-                            <li>Programmeur analyste</li>
-                            <li>Programmeur d’applications</li>
-                            <li>Responsable des services applicatifs</li>
-                            <li>Technicien d’études informatiques</li>
-                        </ul>
                     </p>
+                    <List
+                        items={[
+                            'Développeur d’applications informatiques',
+                            'Développeur informatique',
+                            'Analyste d’applications ou d’études',
+                            'Analyste programmeur',
+                            'Chargé d’études informatiques',
+                            'Informaticien d’études',
+                            'Programmeur analyste',
+                            'Programmeur d’applications',
+                            'Responsable des services applicatifs',
+                            'Technicien d’études informatiques'
+                        ]}
+                    />
                 </div>
             </div>
         </div>

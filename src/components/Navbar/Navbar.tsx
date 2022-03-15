@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import { BsGithub, BsLinkedin, BsDiscord } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsDiscord, BsFillSuitHeartFill } from "react-icons/bs";
 
 import { name } from "../../config";
 import {
@@ -89,7 +89,7 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
                 ))}
             </ul>
             <div className="footer">
-                Copyright 2022 © <b>{name}</b>
+                Made with <BsFillSuitHeartFill /> by <b>{name}</b>
             </div>
         </div>
     );

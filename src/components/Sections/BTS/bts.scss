@@ -13,13 +13,22 @@
             }
 
             & > h2 {
+                margin: 0;
+                gap: 15px;
                 display: flex;
                 align-items: center;
-
-                & > svg {
-                    margin-right: 15px;
-                }
             }
+        }
+    }
+}
+
+@media (max-width: 1140px) {
+	.wrapper-options {
+        flex-direction: column;
+
+        & > .option {
+            width: 100% !important;
+            margin-bottom: 1em;
         }
     }
 }

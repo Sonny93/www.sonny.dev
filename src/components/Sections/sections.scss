@@ -22,7 +22,12 @@
         display: inline-block;
         padding: 30px 0;
 
-        & > h1 {
+        & > h1,
+        & > h2,
+        & > h3,
+        & > h4,
+        & > h5,
+        & > h6 {
             width: fit-content;
             border-bottom: 5px solid rgba(0, 0, 0, .3);
         }

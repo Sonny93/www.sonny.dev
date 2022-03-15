@@ -82,6 +82,7 @@
             &.active,
             &:hover {
                 background: rgba(0, 0, 0, 0.25);
+                letter-spacing: 1px;
             }
 
             &:after {
@@ -110,5 +111,13 @@
         font-style: italic;
         padding: 20px 0;
         border-top: 1px solid $scnd-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0 5px;
+
+        & > svg {
+            color: red;
+        }
     }
 }

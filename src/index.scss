@@ -32,7 +32,20 @@ a {
 	width: 100%;
     background: #333;
     background-size: cover;
-	transition: .15s;
+	transition: .275s;
+	transition-delay: 150ms;
+}
+
+ul.reset {
+	padding-left: .5em;
+
+	& li {
+		margin-bottom: 5px;
+		list-style-type: none;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
 }
 
 ::-webkit-scrollbar {
