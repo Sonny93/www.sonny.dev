@@ -1,0 +1,47 @@
+@import "../../../vars";
+
+.section > .parcours {
+    display: flex !important;
+    flex-direction: column;
+    
+    & > .formations {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .timeline-container {
+        height: 100%;
+        display: flex;
+
+        & > .timeline {
+            height: 100%;
+            width: 3px;
+            margin: 0 35px;
+            background-color: $main-color;
+        }
+
+        & > ul {
+            margin: 0;
+
+            > li.item {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                & .label {
+                    padding: 15px;
+                    width: 100%;
+                }
+
+                & > .details {
+                    display: flex;
+                    gap: 0 10px;
+                }
+            }
+        }
+    }
+}

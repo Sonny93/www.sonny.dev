@@ -1,0 +1,29 @@
+[{
+    "dateDebut": "Sep. 2020",
+    "dateFin": "Aujourd'hui",
+    "ville": "Aulnays-Sous-Bois",
+    "cp": 93600,
+    "etablissement": "Lycée Voillaume",
+    "details": "BTS Système Informatique aux Organisations option Solutions Logicielles et Applications métiers"
+}, {
+    "dateDebut": "Juin 2020",
+    "dateFin": "Juin 2020",
+    "ville": "Aulnays-Sous-Bois",
+    "cp": 93600,
+    "etablissement": "Lycée Voillaume",
+    "details": "Obtention du BACCALAURÉAT (Mention très bien)"
+}, {
+    "dateDebut": "Sep. 2017",
+    "dateFin": "Juin 2020",
+    "ville": "Aulnays-Sous-Bois",
+    "cp": 93600,
+    "etablissement": "Lycée Voillaume",
+    "details": "BACCALAURÉAT Professionnel Système Numérique option Réseaux Infomatiques et Systèmes Communicants"
+}, {
+    "dateDebut": "Juin 2019",
+    "dateFin": "Juin 2019",
+    "ville": "Aulnays-Sous-Bois",
+    "cp": 93600,
+    "etablissement": "Lycée Voillaume",
+    "details": "Obtention du BEP"
+}]
