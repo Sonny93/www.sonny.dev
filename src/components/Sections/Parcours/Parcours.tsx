@@ -1,5 +1,7 @@
 import React from "react";
 
+import { CgChevronDoubleRight } from 'react-icons/cg';
+
 import "./parcours.scss";
 import formations from "./formations.json";
 
@@ -15,33 +17,58 @@ interface FormationProps {
 export default function Parcours() {
     return (
         <div className="parcours">
-            <div className="formations">
-                <h1>Formations</h1>
-                <div className="timeline-container">
-                    <div className="timeline"></div>
-                    <ul className="reset">
-                        {formations.map(({ dateDebut, dateFin, ville, cp, etablissement, details }: FormationProps, key: number) => {
-                            return (
-                                <li key={key} className="item">
-                                    <div className="label box">
-                                        {details}
-                                    </div>
-                                    <div className="details">
-                                        <div className="date">
-                                            {dateDebut} - {dateFin}
+            <h1>Mon parcours</h1>
+            <div className="timelines-wrapper">
+                <div className="timeline-wrapper">
+                    <h2>Formations</h2>
+                    <div className="timeline-container">
+                        <div className="timeline"></div>
+                        <ul className="reset">
+                            {formations.map(({ dateDebut, dateFin, ville, cp, etablissement, details }: FormationProps, key: number) => {
+                                return (
+                                    <li key={key} className="item">
+                                        <div className="label">
+                                            {details}
                                         </div>
-                                        <div className="location">
-                                            {etablissement} — {ville} ({cp})
+                                        <div className="details">
+                                            <div className="date">
+                                                {dateDebut} - {dateFin}
+                                            </div>
+                                            <div className="location">
+                                                <CgChevronDoubleRight /> {etablissement} — {ville} ({cp})
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div className="experiences-pro">
-                <h2>Expériences professionnelles</h2>
+                <div className="timeline-wrapper">
+                    <h2>Expériences professionnelles</h2>
+                    <div className="timeline-container">
+                        <div className="timeline"></div>
+                        <ul className="reset">
+                            {formations.map(({ dateDebut, dateFin, ville, cp, etablissement, details }: FormationProps, key: number) => {
+                                return (
+                                    <li key={key} className="item">
+                                        <div className="label">
+                                            {details}
+                                        </div>
+                                        <div className="details">
+                                            <div className="date">
+                                                {dateDebut} - {dateFin}
+                                            </div>
+                                            <div className="location">
+                                                <CgChevronDoubleRight /> {etablissement} — {ville} ({cp})
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     );

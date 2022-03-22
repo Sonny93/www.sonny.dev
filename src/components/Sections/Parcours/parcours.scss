@@ -9,6 +9,14 @@
         flex-direction: column;
     }
 
+    & > .timelines-wrapper {
+        display: flex;
+    }
+
+    & .timeline-wrapper h2 {
+        text-align: center;
+    }
+
     .timeline-container {
         height: 100%;
         display: flex;
@@ -17,29 +25,49 @@
             height: 100%;
             width: 3px;
             margin: 0 35px;
-            background-color: $main-color;
+            background-color: $black;
         }
 
         & > ul {
             margin: 0;
 
             > li.item {
+                position: relative;
+                margin-bottom: 15px;
                 display: flex;
                 align-items: flex-start;
                 flex-direction: column;
+
+                &:before {
+                    position: absolute;
+                    left: -60px;
+                    content: "";
+                    padding: 10px;
+                    background-color: #fff;
+                    border: 5px solid $main-color;
+                    border-radius: 50%;
+                }
 
                 &:last-child {
                     margin-bottom: 0;
                 }
 
                 & .label {
-                    padding: 15px;
                     width: 100%;
                 }
 
                 & > .details {
-                    display: flex;
+                    padding: 15px;
+                    background-color: $black;
                     gap: 0 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    & > .location {
+                        gap: 2px;
+                        display: flex;
+                        align-items: center;
+                    }
                 }
             }
         }
