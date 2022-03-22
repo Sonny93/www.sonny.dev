@@ -1,0 +1,59 @@
+@import "../../../vars";
+
+.section > .projets {
+    & > ul {
+        gap: 25px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    ul li.projet {
+        height: auto;
+        width: 430px;
+        transition: .25s;
+        
+        &:hover {
+            z-index: 1;
+            box-shadow: 0 0 8px 2px $black;
+            transform: scale(1.05);
+        }
+
+        & > a {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: column;
+
+            & > img {
+                height: auto;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            & > .details {
+                height: fit-content;
+                width: 100%;
+                color: #fff;
+                background-color: $black;
+                backdrop-filter: blur(4px);
+                padding: 10px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                & > .name {
+                    color: #fff;
+                    background-color: $main-color;
+                    padding: 5px 10px;
+                    margin-top: 2px;
+                    border-radius: 2px;
+                    border: 1px solid $main-color;
+                }
+            }
+        }
+    }
+}
