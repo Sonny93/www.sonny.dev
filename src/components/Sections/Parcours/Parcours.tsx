@@ -4,6 +4,7 @@ import { CgChevronDoubleRight } from 'react-icons/cg';
 
 import "./parcours.scss";
 import formations from "./formations.json";
+import experiences from "./experiences.json";
 
 interface FormationProps {
     dateDebut: string;
@@ -11,6 +12,17 @@ interface FormationProps {
     ville: string;
     cp: number;
     etablissement: string;
+    details: string;
+}
+
+interface ExperiencesProps {
+    dateDebut: string;
+    dateFin: string;
+    shortDate: string;
+    ville: string;
+    codePostal: number;
+    entreprise: string;
+    duree: number;
     details: string;
 }
 
@@ -49,7 +61,7 @@ export default function Parcours() {
                     <div className="timeline-container">
                         <div className="timeline"></div>
                         <ul className="reset">
-                            {formations.map(({ dateDebut, dateFin, ville, cp, etablissement, details }: FormationProps, key: number) => {
+                            {experiences.map(({ shortDate, ville, codePostal, entreprise, duree, details }: ExperiencesProps, key: number) => {
                                 return (
                                     <li key={key} className="item">
                                         <div className="label">
@@ -57,10 +69,10 @@ export default function Parcours() {
                                         </div>
                                         <div className="details">
                                             <div className="date">
-                                                {dateDebut} - {dateFin}
+                                                {shortDate} ({duree} mois)
                                             </div>
                                             <div className="location">
-                                                <CgChevronDoubleRight /> {etablissement} — {ville} ({cp})
+                                                <CgChevronDoubleRight /> {entreprise} — {ville} ({codePostal})
                                             </div>
                                         </div>
                                     </li>

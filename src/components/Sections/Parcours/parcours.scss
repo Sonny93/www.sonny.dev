@@ -1,20 +1,24 @@
 @import "../../../vars";
 
+.section#parcours {
+    min-height: auto;
+    height: auto;
+}
+
 .section > .parcours {
     display: flex !important;
     flex-direction: column;
-    
-    & > .formations {
-        display: flex;
-        flex-direction: column;
-    }
 
-    & > .timelines-wrapper {
+    & .timelines-wrapper {
         display: flex;
-    }
 
-    & .timeline-wrapper h2 {
-        text-align: center;
+        & .timeline-wrapper {
+            flex: 1 1 0px;
+
+            & h2 {
+                text-align: center;
+            }
+        }
     }
 
     .timeline-container {
@@ -23,8 +27,8 @@
 
         & > .timeline {
             height: 100%;
-            width: 3px;
-            margin: 0 35px;
+            width: 5px;
+            margin: 0 25px;
             background-color: $black;
         }
 
@@ -40,7 +44,7 @@
 
                 &:before {
                     position: absolute;
-                    left: -60px;
+                    left: -50px;
                     content: "";
                     padding: 10px;
                     background-color: #fff;
@@ -57,6 +61,7 @@
                 }
 
                 & > .details {
+                    width: 100%;
                     padding: 15px;
                     background-color: $black;
                     gap: 0 10px;
