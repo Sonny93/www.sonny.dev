@@ -16,18 +16,19 @@
             flex: 1 1 0px;
 
             & h2 {
-                text-align: center;
+                padding-left: 25px;
+                margin-top: 0;
             }
         }
     }
 
     .timeline-container {
-        height: 100%;
+        height: fit-content;
         display: flex;
 
         & > .timeline {
-            height: 100%;
-            width: 5px;
+            min-height: 100%;
+            min-width: 5px;
             margin: 0 25px;
             background-color: $black;
         }
@@ -37,7 +38,7 @@
 
             > li.item {
                 position: relative;
-                margin-bottom: 15px;
+                margin-bottom: 35px;
                 display: flex;
                 align-items: flex-start;
                 flex-direction: column;
