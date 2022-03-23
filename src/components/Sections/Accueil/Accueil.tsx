@@ -1,6 +1,6 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Typewriter from "typewriter-effect";
+
 import { Section, SectionsProvider } from "../../../App";
 import { name } from "../../../config";
 import { ScrollToSection } from "../../../Utils/Navigation";
@@ -20,9 +20,7 @@ interface AccueilProps {
 }
 
 function Accueil({ sections }: AccueilProps) {
-    const [nextSection, setNextSection] = useState<Section | undefined>(
-        undefined
-    );
+    const [nextSection, setNextSection] = useState<Section | undefined>(undefined);
 
     useEffect(() => {
         if (sections.length > 1) {
@@ -30,16 +28,21 @@ function Accueil({ sections }: AccueilProps) {
         }
     }, [sections]);
 
-    function handleNextSection() {
-        if (nextSection) {
-            ScrollToSection(nextSection);
-        }
-    }
+    const handleNextSection = () => nextSection ? ScrollToSection(nextSection) : null;
 
     return (
         <div className="accueil">
             <h2>{name}</h2>
-            <h1>Développeur Fullstack JS</h1>
+            <h1>
+                Développeur
+                <Typewriter
+                    options={{
+                        strings: ['Fullstack JS', 'Front End'],
+                        autoStart: true,
+                        loop: true
+                    }}
+                />
+            </h1>
             <p>Benvenue sur mon Portfolio !</p>
             {nextSection && (
                 <div className="wrapper-scroll">
