@@ -1,37 +1,25 @@
 import React from "react";
 
+import projets from './projets.json';
 import "./projets.scss";
 
 interface Projet {
     nom: string;
+    description: string;
     url: string;
     thumbnail: string;
     languages: string[];
 }
 
 export default function Projets() {
-    const projets: Projet[] = [{
-        nom: "next-uploader",
-        url: "https://uploader.sonnydata.fr/",
-        thumbnail: "uploader.png",
-        languages: ["HTML", "CSS/SASS", "JS/Next"]
-    }, {
-        nom: "cv-html",
-        url: "https://test-geoloc.vercel.app/",
-        thumbnail: "test-geoloc.png",
-        languages: ["HTML", "CSS/SASS", "JS/React"]
-    }, {
-        nom: "cv-html",
-        url: "https://www.sonny.dev/",
-        thumbnail: "cv-html.png",
-        languages: ["HTML", "CSS/SASS", "JS/React"]
-    }];
-
     return (
         <div className="projets">
             <h1>Mes projets</h1>
+            <p className="box">
+                Voici quelques uns de mes projets réalisés sur mon temps libre. Le code source de chacun des projets est sur Github (dans des repos privés) et sont hébergés chez Vercel ou sur mon VPS.
+            </p>
             <ul className="reset">
-                {projets.map(({ nom, url, thumbnail, languages }: Projet, key: number) => (
+                {projets.map(({ nom, description, url, thumbnail, languages }: Projet, key: number) => (
                     <li className="projet" key={key}>
                         <a href={url} target="_blank" rel="noreferrer">
                             <img src={thumbnail} alt={`${nom} thumbnail`} />
@@ -40,6 +28,9 @@ export default function Projets() {
                                 <span className="name">{nom}</span>
                             </div>
                         </a>
+                        <div className="description">
+                            {description}
+                        </div>
                     </li>
                 ))}
             </ul>
