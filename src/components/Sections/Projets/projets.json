@@ -1,0 +1,25 @@
+[{
+    "nom": "next-uploader",
+    "description": "Drive personnalisé à destination d'un public ayant le besoin d'uploader/modifier/supprimer des fichiers tout en ayant la possibilité de gérer des permissions liés à ceux-ci ainsi que la possibilité de partager des fichiers à n'importe qui.",
+    "url": "https://uploader.sonnydata.fr/",
+    "thumbnail": "uploader.png",
+    "languages": ["HTML", "CSS/SASS", "JS/Next"]
+}, {
+    "nom": "cv-html",
+    "description": "Mon CV sous format HTML / CSS (SASS) /JS (React)",
+    "url": "https://www.sonny.dev/",
+    "thumbnail": "cv-html.png",
+    "languages": ["HTML", "CSS/SASS", "JS/React"]
+},{
+    "nom": "superpipo",
+    "description": "Site permettant de créer des \"liens\" et \"dossiers de lien\"",
+    "url": "https://superpipo.fr/",
+    "thumbnail": "superpipo.png",
+    "languages": ["HTML", "CSS", "JS/React"]
+}, {
+    "nom": "test-geoloc",
+    "description": "Petit test de géolocalisation fait lors de ma période de stage.",
+    "url": "https://test-geoloc.vercel.app/",
+    "thumbnail": "test-geoloc.png",
+    "languages": ["HTML", "CSS/SASS", "JS/React"]
+}]

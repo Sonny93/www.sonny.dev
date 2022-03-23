@@ -1,19 +1,50 @@
 .section > .about-me {
     & > .competences {
         display: flex;
+        align-items: center;
         justify-content: center;
-        gap: 0 15px;
-        flex-basis: 0;
+        flex-direction: column;
 
         & h3 {
             text-transform: uppercase;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
         }
 
-        & .column {
-            flex: 1 1 0px;
+        & .row {
+            width: 100%;
+        }
+
+        & .row .languages {
+            gap: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & li {
+                cursor: pointer;
+                user-select: none;
+                height: 95px;
+                width: 160px;
+                background-color: rgba(0, 0, 0, .3);
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                transition: .15s;
+
+                &:hover {
+                    background: rgba(0, 0, 0, .1);
+                    box-shadow: 0 0 5px 1px rgba(0, 0, 0, .3);
+                }
+
+                & > svg {
+                    font-size: 1.75em;
+                }
+            }
         }
     }
 }

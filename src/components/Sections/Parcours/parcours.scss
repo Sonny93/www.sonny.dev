@@ -1,0 +1,81 @@
+@import "../../../vars";
+
+.section#parcours {
+    min-height: auto;
+    height: auto;
+}
+
+.section > .parcours {
+    display: flex !important;
+    flex-direction: column;
+
+    & .timelines-wrapper {
+        display: flex;
+
+        & .timeline-wrapper {
+            flex: 1 1 0px;
+
+            & h2 {
+                padding-left: 25px;
+                margin-top: 0;
+            }
+        }
+    }
+
+    .timeline-container {
+        height: fit-content;
+        display: flex;
+
+        & > .timeline {
+            min-height: 100%;
+            min-width: 5px;
+            margin: 0 25px;
+            background-color: $black;
+        }
+
+        & > ul {
+            margin: 0;
+
+            > li.item {
+                position: relative;
+                margin-bottom: 35px;
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+
+                &:before {
+                    position: absolute;
+                    left: -50px;
+                    content: "";
+                    padding: 10px;
+                    background-color: #fff;
+                    border: 5px solid $main-color;
+                    border-radius: 50%;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                & .label {
+                    width: 100%;
+                }
+
+                & > .details {
+                    width: 100%;
+                    padding: 15px;
+                    background-color: $black;
+                    gap: 0 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    & > .location {
+                        gap: 2px;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+}
