@@ -17,7 +17,7 @@ export default function SectionWrapper({
     changeBackground,
 }: SectionWrapperProps) {
     const { component, ref: refSection } = section;
-    const { ref, inView } = useInView({ threshold: 0.5, });
+    const { ref, inView } = useInView({ threshold: .15 });
 
     useEffect(() => {
         if (inView) {

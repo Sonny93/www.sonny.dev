@@ -8,6 +8,7 @@
 .section > .projets {
     & > ul {
         gap: 25px;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,9 +34,9 @@
             background-color: $black;
             backdrop-filter: blur(4px);
             padding: 25px;
-            transition: .15s;
+            transition: 0.15s;
         }
-        
+
         &:hover {
             & a {
                 z-index: 1;
@@ -46,7 +47,8 @@
                 box-shadow: inset 0 0 3px 1px $black;
             }
 
-            & img, & .details {
+            & img,
+            & .details {
                 box-shadow: 0 0 8px 2px $black;
             }
         }
@@ -61,13 +63,13 @@
             align-items: center;
             justify-content: flex-end;
             flex-direction: column;
-            transition: .25s;
+            transition: 0.25s;
 
             & > img {
                 height: auto;
                 width: 100%;
                 object-fit: cover;
-                transition: .15s;
+                transition: 0.15s;
             }
 
             & > .details {
@@ -81,7 +83,7 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                transition: .15s;
+                transition: 0.15s;
 
                 & > .name {
                     color: #fff;
@@ -93,5 +95,30 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 1224px) {
+    .section > .projets {
+        & ul li.projet {
+            width: 100%;
+            margin-bottom: 25px;
+            flex-direction: column !important;
+
+            & > a {
+                max-width: 100%;
+                min-width: 100%;
+            }
+
+            & > .description {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section > .projets ul li.projet {
+        flex-direction: column !important;
     }
 }
