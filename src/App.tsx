@@ -12,7 +12,7 @@ import APropos from "./components/Sections/APropos/APropos";
 import BTS from "./components/Sections/BTS/BTS";
 import Parcours from "./components/Sections/Parcours/Parcours";
 import Projets from "./components/Sections/Projets/Projets";
-import VeilleTechnologique from "./components/Sections/VeilleTechno/Veilles";
+import VeilleTechnologique from "./components/Sections/VeilleTechno/Veille";
 import Contact from "./components/Sections/Contact/Contact";
 
 export interface Section {
