@@ -1,5 +1,6 @@
 import React, { createRef, useState, createContext, useEffect } from "react";
 import "./App.scss";
+import "./input.scss";
 
 import Navbar from "./components/Navbar/Navbar";
 
