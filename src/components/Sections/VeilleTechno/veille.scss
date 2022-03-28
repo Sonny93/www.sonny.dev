@@ -1,0 +1,42 @@
+.section > .veille-technologique {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.section > .veille-technologique {
+    display: flex;
+    flex-direction: column;
+
+    & > iframe {
+        flex: 1;
+        transition: .15s;
+    }
+
+    & .loading {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        & > svg {
+            font-size: 2em;
+            animation: rotating 2s linear infinite;
+        }
+    }
+
+    & .loading-iframe {
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
