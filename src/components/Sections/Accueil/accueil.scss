@@ -82,3 +82,13 @@
         opacity: 0;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .section > .accueil > h1 {
+        flex-direction: column;
+
+		& > .Typewriter {
+			text-align: center;
+		}
+    }
+}

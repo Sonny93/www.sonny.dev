@@ -8,7 +8,7 @@ import "./bts.scss";
 export default function BTS() {
     return (
         <div className="btssio">
-            <h1>Qu'est ce que le BTS SIO</h1>
+            <h1>Qu'est ce que le BTS SIO ?</h1>
             <p className="box">
                 Le {boldFirstChar('Brevet')} de {boldFirstChar('Technicien')} {boldFirstChar('Supérieur')} {boldFirstChar('Services')} {boldFirstChar('Informatiques')} aux {boldFirstChar('Organisations')} (<b>BTS SIO</b>) est une formation en informatique à destination des futurs administrateurs réseaux et développeurs web. La formation se décline en deux options : <b>SISR</b> et <b>SLAM</b>
             </p>

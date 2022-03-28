@@ -34,6 +34,7 @@
         }
 
         & > ul {
+            width: 100%;
             margin: 0;
 
             > li.item {
@@ -75,6 +76,18 @@
                         align-items: center;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .section > .parcours {
+        & .timelines-wrapper {
+            flex-direction: column;
+
+            & > .timeline-wrapper {
+                margin-bottom: 40px;
             }
         }
     }
