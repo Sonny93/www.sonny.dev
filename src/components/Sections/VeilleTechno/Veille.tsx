@@ -4,9 +4,15 @@ import { AiOutlineLoading } from 'react-icons/ai';
 
 import './veille.scss'
 
-export default function VeilleTechnologique() {
+interface VeilleTechnologiqueProps {
+    inView?: boolean;
+}
+
+export default function VeilleTechnologique({ inView }: VeilleTechnologiqueProps) {
     const [loading, setLoading] = useState<boolean>(true);
     const src = "https://flipboard.com/@alonswartz/cloud-computing-4s4so98hz/widget?layout=banner";
+
+    console.log(inView);
 
     return (
         <div className="veille-technologique">
@@ -17,14 +23,15 @@ export default function VeilleTechnologique() {
                     Chargement en cours...
                 </p>
             </div>}
-            <iframe
-                onLoad={() => setLoading(false)}
-                loading="lazy"
-                src={src}
-                frameBorder="0"
-                title="Iframe flipboard 'cloud computing'"
-                className={loading ? 'loading-iframe' : ''}
-            />
+            {inView && (
+                <iframe
+                    onLoad={() => setLoading(false)}
+                    src={src}
+                    frameBorder="0"
+                    title="Iframe flipboard 'cloud computing'"
+                    className={loading ? "loading-iframe" : ""}
+                />
+            )}
         </div>
     );
 }

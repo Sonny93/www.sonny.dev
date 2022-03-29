@@ -19,7 +19,7 @@ export interface Section {
     name: string;
     label: string;
     background: string;
-    component: JSX.Element;
+    component: any;
     ref: React.RefObject<any>;
 }
 
@@ -28,49 +28,49 @@ const sections = [
         name: "accueil",
         label: "Accueil",
         background: "accueil-bg.webp",
-        component: <Accueil />,
+        component: Accueil,
         ref: createRef(),
     },
     {
         name: "aboutme",
         label: "À propos",
         background: "apropos-bg.webp",
-        component: <APropos />,
+        component: APropos,
         ref: createRef(),
     },
     {
         name: "btssio",
         label: "BTS SIO",
         background: "bts-sio-bg.webp",
-        component: <BTS />,
+        component: BTS,
         ref: createRef(),
     },
     {
         name: "parcours",
         label: "Mon parcours",
         background: "mon-parcours-bg.webp",
-        component: <Parcours />,
+        component: Parcours,
         ref: createRef(),
     },
     {
         name: "projets",
         label: "Mes projets",
         background: "mes-projets-bg.webp",
-        component: <Projets />,
+        component: Projets,
         ref: createRef(),
     },
     {
         name: "veilletechno",
         label: "Veille Technologique",
         background: "veille-techno-bg.webp",
-        component: <VeilleTechnologique />,
+        component: VeilleTechnologique,
         ref: createRef(),
     },
     {
         name: "contact",
         label: "Me contacter",
         background: "me-contacter-bg.webp",
-        component: <Contact />,
+        component: Contact,
         ref: createRef(),
     },
 ];
