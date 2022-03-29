@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from "react";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Section } from "../../App";
 import { HandleUpdateAnchorURL } from "../../Utils/Navigation";
@@ -16,16 +17,24 @@ export default function SectionWrapper({
     setActiveSection,
     changeBackground,
 }: SectionWrapperProps) {
-    const { component, ref: refSection } = section;
-    const { ref, inView } = useInView({ threshold: .15 });
+    const threshold = .3;
+    const { component: Component, ref: refSection } = section;
+    const { ref, inView, entry } = useInView({ threshold });
+    const [isInView, setInView] = useState<boolean>(false);
 
     useEffect(() => {
-        if (inView) {
+        if (inView && entry?.intersectionRatio) {
+            if (entry.intersectionRatio < threshold && !isInView) {
+                setInView(false);
+                return;
+            }
+
+            setInView(true);
             setActiveSection(section);
             changeBackground(section);
             HandleUpdateAnchorURL(section.name);
         }
-    }, [inView, setActiveSection, changeBackground, section]);
+    }, [inView, setActiveSection, changeBackground, section, entry, isInView]);
 
     const setRefs = useCallback((node) => {
         //@ts-ignore
@@ -37,7 +46,7 @@ export default function SectionWrapper({
 
     return (
         <div className="section" ref={setRefs} id={section.name}>
-            {component}
+            <Component inView={isInView} />
         </div>
     );
 }

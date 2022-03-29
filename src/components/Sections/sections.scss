@@ -16,6 +16,10 @@
     padding: 0 30px;
     scroll-snap-align: start;
 
+    &:not(:last-child) {
+        margin-bottom: 50px;
+    }
+
     & > div:not(.accueil) {
         height: 100%;
         width: 100%;
@@ -34,14 +38,14 @@
 
         & .box {
             backdrop-filter: blur(7px);
-            background: rgba(0, 0, 0, .3);
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
         }
     }
 }
 
 @media (max-width: 1430px) {
-	.page-content > .section {
-		width: 100%;
-	}
+    .page-content > .section {
+        width: 100%;
+    }
 }
