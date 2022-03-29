@@ -5,6 +5,7 @@ import { Section } from "../../App";
 import { HandleUpdateAnchorURL } from "../../Utils/Navigation";
 
 export interface SectionWrapperProps {
+    sections: Section[];
     section: Section;
     activeSection: Section;
     setActiveSection: (section: Section) => void;
@@ -12,6 +13,7 @@ export interface SectionWrapperProps {
 }
 
 export default function SectionWrapper({
+    sections,
     section,
     activeSection,
     setActiveSection,
@@ -32,9 +34,15 @@ export default function SectionWrapper({
             setInView(true);
             setActiveSection(section);
             changeBackground(section);
-            HandleUpdateAnchorURL(section.name);
+
+            const index = sections.findIndex(s => s.name === section.name);
+            if (index === 0)
+                HandleUpdateAnchorURL();
+            else
+                HandleUpdateAnchorURL(section.name);
+
         }
-    }, [inView, setActiveSection, changeBackground, section, entry, isInView]);
+    }, [inView, setActiveSection, changeBackground, section, entry, isInView, sections]);
 
     const setRefs = useCallback((node) => {
         //@ts-ignore

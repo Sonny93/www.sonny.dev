@@ -43,18 +43,19 @@ function Accueil({ sections }: AccueilProps) {
                     }}
                 />
             </h1>
-            <p>Benvenue sur mon Portfolio !</p>
+            <p>Bienvenue sur mon Portfolio !</p>
             {nextSection && (
                 <div className="wrapper-scroll">
-                    <span
-                        className="scroll-icon"
-                        onClick={() => handleNextSection()}
-                    >
-                        <span className="scroll-icon__dot"></span>
-                    </span>
+                    <ScrollMouse handleNextSection={handleNextSection} />
                     <p>Défiler pour voir la suite !</p>
                 </div>
             )}
         </div>
     );
 }
+
+const ScrollMouse = (handleNextSection: any): JSX.Element => (
+    <span className="scroll-icon" onClick={() => handleNextSection()}>
+        <span className="scroll-icon__dot"></span>
+    </span>
+);

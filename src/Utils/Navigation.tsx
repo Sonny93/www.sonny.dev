@@ -1,7 +1,7 @@
 import { Section } from "../App";
 
-export function HandleUpdateAnchorURL(anchor: string): void {
-    const url = `${window.location.origin}/#${anchor}`;
+export function HandleUpdateAnchorURL(anchor?: string): void {
+    const url = window.location.origin + (anchor ? `/#${anchor}` : "");
     window.history.pushState({}, "", url);
 }
 

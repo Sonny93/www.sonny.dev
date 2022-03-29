@@ -1,11 +1,12 @@
 input,
 textarea {
-	color: #fff;
-	background: rgba(0, 0, 0, 0.3);
-	padding: 10px;
-	border: 1px solid transparent;
-	border-bottom: 3px solid transparent;
-	transition: 0.15s;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border: 1px solid transparent;
+    border-bottom: 3px solid transparent;
+    resize: none;
+    transition: 0.15s;
 
     &::placeholder {
         color: #acacac;
@@ -23,21 +24,21 @@ textarea {
 
 button,
 .btn {
-	cursor: pointer;
-	height: fit-content;
-	min-height: 30px;
-	width: 195px;
-	font-family: 'Poppins', sans-serif;
-	color: #fff;
-	padding: 5px 7px;
-	background: #3f88c5;
-	border: 1px solid #3f88c5;
-	border-radius: 3px;
-	transition: 0.15s;
+    cursor: pointer;
+    height: fit-content;
+    min-height: 30px;
+    width: 195px;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    padding: 5px 7px;
+    background: #3f88c5;
+    border: 1px solid #3f88c5;
+    border-radius: 3px;
+    transition: 0.15s;
 
     &:disabled {
         cursor: default;
-        opacity: .5;
+        opacity: 0.5;
     }
 
     &:not(:disabled):hover {

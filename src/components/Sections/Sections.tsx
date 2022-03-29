@@ -22,6 +22,7 @@ export default function Sections({
             {sections.map((section: Section, key: number) => (
                 <SectionWrapper
                     key={key}
+                    sections={sections}
                     section={section}
                     activeSection={activeSection}
                     setActiveSection={setActiveSection}
