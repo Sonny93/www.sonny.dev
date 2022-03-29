@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { AiOutlineLoading } from 'react-icons/ai';
 
 import './veille.scss'
