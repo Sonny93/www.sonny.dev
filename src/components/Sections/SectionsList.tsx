@@ -1,8 +1,8 @@
-import React from "react";
-import { Section } from "../../App";
+import React from 'react';
+import { Section } from '../../types';
 
-import SectionWrapper from "./SectionWrapper";
-import "./sections.scss";
+import SectionWrapper from './SectionWrapper';
+import './sections.scss';
 
 export interface SectionsProps {
     sections: Array<Section>;
@@ -11,14 +11,14 @@ export interface SectionsProps {
     changeBackground: (section: Section) => void;
 }
 
-export default function Sections({
+export default function SectionsList({
     sections,
     activeSection,
     setActiveSection,
     changeBackground,
 }: SectionsProps) {
     return (
-        <div className="page-content">
+        <div className='page-content'>
             {sections.map((section: Section, key: number) => (
                 <SectionWrapper
                     key={key}

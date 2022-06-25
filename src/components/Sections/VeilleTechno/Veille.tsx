@@ -11,8 +11,6 @@ export default function VeilleTechnologique({ inView }: VeilleTechnologiqueProps
     const [loading, setLoading] = useState<boolean>(true);
     const src = "https://flipboard.com/@alonswartz/cloud-computing-4s4so98hz/widget?layout=banner";
 
-    console.log(inView);
-
     return (
         <div className="veille-technologique">
             <h1>Veille technologique</h1>

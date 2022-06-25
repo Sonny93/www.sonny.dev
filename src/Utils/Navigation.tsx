@@ -1,8 +1,8 @@
-import { Section } from "../App";
+import { Section } from '../types';
 
 export function HandleUpdateAnchorURL(anchor?: string): void {
-    const url = window.location.origin + (anchor ? `/#${anchor}` : "");
-    window.history.pushState({}, "", url);
+    const url = window.location.origin + (anchor ? `/#${anchor}` : '');
+    window.history.pushState({}, '', url);
 }
 
 export function MoveNavbarDot(offset: number, target: any) {
@@ -12,8 +12,8 @@ export function MoveNavbarDot(offset: number, target: any) {
 }
 
 export function ScrollToSection(section: Section) {
-    section.ref.current.scrollIntoView({
-        block: "start",
-        behavior: "smooth",
+    section.ref.current?.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
     });
 }

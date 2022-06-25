@@ -3,6 +3,8 @@ import React from "react";
 import projets from './projets.json';
 import "./projets.scss";
 
+const PATH_IMAGES = '/img/projets';
+
 interface Projet {
     nom: string;
     description: string;
@@ -22,7 +24,7 @@ export default function Projets() {
                 {projets.map(({ nom, description, url, thumbnail, languages }: Projet, key: number) => (
                     <li className="projet" key={key}>
                         <a href={url} target="_blank" rel="noreferrer">
-                            <img src={thumbnail} alt={`${nom} thumbnail`} />
+                            <img src={PATH_IMAGES + '/' + thumbnail} alt={`${nom} thumbnail`} />
                             <div className="details">
                                 <span className="languages">{languages.join(", ")}</span>
                                 <span className="name">{nom}</span>

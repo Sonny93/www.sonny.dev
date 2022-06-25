@@ -11,6 +11,7 @@ import {
 } from "../../Utils/Navigation";
 
 import "./navbar.scss";
+import Avatar from "../Avatar";
 
 export interface NavbarProps {
     activeSection: any;
@@ -54,6 +55,7 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
         <div className={classNameNavbar} onClick={(e) => handleClickNavbarWrapper(e)}>
             <div className="navbar">
                 <div className="header">
+                    <Avatar size={168} />
                     <h2>{name}</h2>
                     <p>Où me retrouver ?</p>
                     <ul className="find-me">

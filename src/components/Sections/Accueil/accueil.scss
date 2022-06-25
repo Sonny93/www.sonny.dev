@@ -1,26 +1,34 @@
+@import "../../../vars.scss";
+
 .section > .accueil {
-    user-select: none;
-    position: relative;
+	user-select: none;
+	position: relative;
 	height: 100%;
 	width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 
-    & > h1 {
-        font-size: 45px;
-        letter-spacing: 3px;
+	& > h1 {
+		font-size: 45px;
+		letter-spacing: 3px;
 		display: flex;
+		align-items: center;
 		gap: 15px;
-    }
 
-    & > p {
-        font-style: oblique;
-        font-size: 22px;
-    }
+		& .type {
+			color: $main-color;
+		}
+	}
 
-    & > .wrapper-scroll {
+	& > p {
+		font-style: oblique;
+		font-size: 22px;
+		text-align: center;
+	}
+
+	& > .wrapper-scroll {
 		user-select: none;
 		position: absolute;
 		bottom: 15px;
@@ -37,12 +45,12 @@
 			width: 1.5em;
 			border: 3px solid #fff;
 			border-radius: 1em;
-			transition: .15s;
-	
+			transition: 0.15s;
+
 			&:hover {
-				transform: scale(1.1)
+				transform: scale(1.1);
 			}
-	
+
 			& > .scroll-icon__dot {
 				display: block;
 				position: absolute;
@@ -60,35 +68,35 @@
 		}
 
 		& > p {
-			font-size: .8em;
+			font-size: 0.8em;
 		}
 	}
 }
 
 @keyframes scroll_wheel {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    25% {
-        opacity: 1;
-    }
-    75% {
-        transform: translateY(0.75em);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 0;
-    }
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	25% {
+		opacity: 1;
+	}
+	75% {
+		transform: translateY(0.75em);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 0;
+	}
 }
 
 @media screen and (max-width: 768px) {
-    .section > .accueil > h1 {
-        flex-direction: column;
+	.section > .accueil > h1 {
+		flex-direction: column;
 
 		& > .Typewriter {
 			text-align: center;
 		}
-    }
+	}
 }
