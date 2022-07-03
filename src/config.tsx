@@ -33,49 +33,56 @@ export const sections = [{
     background: "accueil-bg.webp",
     component: Accueil,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "aboutme",
     label: "À propos",
     background: "apropos-bg.webp",
     component: APropos,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "btssio",
     label: "BTS SIO",
     background: "bts-sio-bg.webp",
     component: BTS,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "parcours",
     label: "Mon parcours",
     background: "mon-parcours-bg.webp",
     component: Parcours,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "projets",
     label: "Mes projets",
     background: "mes-projets-bg.webp",
     component: Projets,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "veilletechno",
     label: "Veille Technologique",
     background: "veille-techno-bg.webp",
     component: VeilleTechnologique,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }, {
     name: "contact",
     label: "Me contacter",
     background: "me-contacter-bg.webp",
     component: Contact,
     ref: createRef<HTMLDivElement>(),
-    clientRect: null
+    heightOffset: 0,
+    isInView: false
 }];
 
 export const SectionsProvider = createContext(sections);

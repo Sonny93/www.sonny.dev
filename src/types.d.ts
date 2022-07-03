@@ -4,5 +4,4 @@ export interface Section {
     background: string;
     component: any;
     ref: React.RefObject<HTMLDivElement>;
-    clientRect: DOMRect | null;
 }

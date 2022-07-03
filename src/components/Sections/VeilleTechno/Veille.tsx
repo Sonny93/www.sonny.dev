@@ -20,7 +20,7 @@ export default function VeilleTechnologique({ inView }: VeilleTechnologiqueProps
                     Chargement en cours...
                 </p>
             </div>}
-            {inView && (
+            {inView ? (
                 <iframe
                     onLoad={() => setLoading(false)}
                     src={src}
@@ -28,6 +28,8 @@ export default function VeilleTechnologique({ inView }: VeilleTechnologiqueProps
                     title="Iframe flipboard 'cloud computing'"
                     className={loading ? "loading-iframe" : ""}
                 />
+            ) : (
+                <p>not in view</p>
             )}
         </div>
     );

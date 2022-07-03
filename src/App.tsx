@@ -12,20 +12,23 @@ export default function App() {
     const [activeSection, setActiveSection] = useState<Section>(sections[0]);
     const [background, setBackground] = useState<string>(sections[0].background);
 
-    useEffect(() => sections.forEach(({ background }) => PreloadImage(background)), []);
-
-    const changeBackground = (section: Section): void => setBackground(section.background);
+    useEffect(() => sections.forEach(({ background }: Section) => PreloadImage(background)), []);
+    useEffect(() => {
+        if (activeSection === null) return;
+        setBackground(activeSection.background);
+    }, [activeSection]);
 
     return (
         <div className='background' style={{ backgroundImage: `url(${PATH_BG_IMG}/${background})` }}>
             <div className='App'>
                 <SectionsProvider.Provider value={sections}>
-                    <Navbar activeSection={activeSection} sections={sections} />
+                    <Navbar
+                        activeSection={activeSection}
+                        sections={sections}
+                    />
                     <SectionsList
                         sections={sections}
-                        activeSection={activeSection}
                         setActiveSection={setActiveSection}
-                        changeBackground={changeBackground}
                     />
                 </SectionsProvider.Provider>
             </div>
