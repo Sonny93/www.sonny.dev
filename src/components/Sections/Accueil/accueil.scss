@@ -93,10 +93,16 @@
 
 @media screen and (max-width: 768px) {
 	.section > .accueil > h1 {
+		font-size: 35px;
+		gap: 0;
 		flex-direction: column;
+	}
 
-		& > .Typewriter {
-			text-align: center;
-		}
+	.section > .accueil > p {
+		font-size: 18px;
+	}
+
+	.section > .accueil > .wrapper-scroll {
+		display: none;
 	}
 }

@@ -31,6 +31,7 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
         }
     };
     useEffect(() => {
+        handleWindowSizeChange();
         window.addEventListener('resize', handleWindowSizeChange);
         return () => window.removeEventListener('resize', handleWindowSizeChange);
     }, []);
