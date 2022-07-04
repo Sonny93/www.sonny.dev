@@ -1,46 +1,57 @@
 [
     {
-        "nom": "next-uploader",
-        "description": "Drive personnalisé à destination d'un public ayant le besoin de mettre en ligne / modifier / supprimer des fichiers tout en ayant la possibilité de gérer des permissions liées à ceux-ci ainsi que la possibilité de partager des fichiers à n'importe qui.",
+        "nom": "Next Uploader",
+        "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres",
         "url": "https://uploader.sonnydata.fr/",
         "thumbnail": "uploader.webp",
         "languages": [
             "HTML",
-            "CSS/SASS",
-            "JS/Next"
+            "SASS",
+            "Next.JS"
         ]
     },
     {
-        "nom": "cv-html",
-        "description": "Mon CV sous format HTML / CSS (SASS) /JS (React)",
+        "nom": "Portfolio",
+        "description": "Mon portfolio",
         "url": "https://www.sonny.dev/",
+        "thumbnail": "portfolio.webp",
+        "languages": [
+            "HTML",
+            "SASS",
+            "React.JS"
+        ]
+    },
+    {
+        "nom": "CV",
+        "description": "Mon CV au format HTML",
+        "url": "https://cv.sonny.dev/",
         "thumbnail": "cv-html.webp",
         "languages": [
             "HTML",
-            "CSS/SASS",
-            "JS/React"
+            "SASS",
+            "React.JS"
         ]
     },
     {
-        "nom": "superpipo",
-        "description": "Site permettant de créer des \"liens\" et \"dossiers de lien\"",
+        "nom": "Superpipo",
+        "description": "Site permettant de créer des \"liens\" et \"dossiers de lien\" (projet privé)",
         "url": "https://superpipo.fr/",
         "thumbnail": "superpipo.webp",
         "languages": [
             "HTML",
-            "CSS",
-            "JS/React"
+            "SASS",
+            "React.JS"
         ]
     },
     {
-        "nom": "test-geoloc",
-        "description": "Petit test de géolocalisation fait lors de ma période de stage.",
+        "nom": "Test Geoloc",
+        "description": "Test d'une app de géoloc",
         "url": "https://test-geoloc.vercel.app/",
         "thumbnail": "test-geoloc.webp",
         "languages": [
             "HTML",
-            "CSS/SASS",
-            "JS/React"
+            "SASS",
+            "React.JS"
         ]
     }
 ]
