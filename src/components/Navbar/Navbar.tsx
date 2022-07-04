@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState, MouseEvent } from 'react';
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import { BsFillSuitHeartFill } from 'react-icons/bs';
@@ -22,7 +22,14 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
     const [isMobile, setIsMobile] = useState<boolean>(false);
     const dotRef = createRef();
 
-    const handleWindowSizeChange = () => setIsMobile(window.innerWidth <= 768);
+    const handleWindowSizeChange = () => {
+        if (window.innerWidth <= 768) {
+            setIsMobile(true);
+        } else {
+            setMenuOpen(false);
+            setIsMobile(true);
+        }
+    };
     useEffect(() => {
         window.addEventListener('resize', handleWindowSizeChange);
         return () => window.removeEventListener('resize', handleWindowSizeChange);
@@ -63,9 +70,9 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
                     <h2>{name}</h2>
                     <p>Où me retrouver ?</p>
                     <ul className='find-me'>
-                        {findMe.map(({ link, icon }, key) => (
+                        {findMe.map(({ link, icon, title }, key) => (
                             <li className='item' key={key}>
-                                <a href={link} target='_blank' rel='noreferrer'>
+                                <a href={link} target='_blank' rel='noreferrer' title={title}>
                                     {icon}
                                 </a>
                             </li>
@@ -77,7 +84,7 @@ export default function Navbar({ activeSection, sections }: NavbarProps) {
                     <div className='dot' ref={dotRef}></div>
                     {sections.map(({ name, label }, key) => {
                         const className = activeSection.name === name ? 'item active' : 'item';
-                        const onClick = ({ target }: React.MouseEvent<HTMLElement>) => handleActiveSection(name, target);
+                        const onClick = ({ target }: MouseEvent<HTMLElement>) => handleActiveSection(name, target);
 
                         return (
                             <li className={className} onClick={onClick} key={key}>
