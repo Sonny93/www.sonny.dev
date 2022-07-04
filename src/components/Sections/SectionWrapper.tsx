@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Section } from '../../types';
+import { HandleUpdateAnchorURL } from '../../Utils/Navigation';
 
 export interface SectionWrapperProps {
     section: Section;
@@ -25,6 +26,7 @@ export default function SectionWrapper({
 
         if (listScrollTop >= offset && listScrollTop < offset + height) {
             setActiveSection(section);
+            HandleUpdateAnchorURL(name);
             setInView(true);
         } else {
             setInView(false);

@@ -55,11 +55,16 @@
                 }
 
                 &:last-child {
-                    margin-bottom: 0;
+                    margin-bottom: -40px;
                 }
 
                 & .label {
                     width: 100%;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 & > .details {

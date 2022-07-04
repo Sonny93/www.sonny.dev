@@ -1,70 +1,82 @@
-[{
-    "dateDebut": "31/05/2021",
-    "dateFin": "30/06/2021",
-    "shortDate": "Mai 2021|Juin 2021",
-    "ville": "Vincennes",
-    "codePostal": 94300,
-    "entreprise": "Andafter",
-    "duree": 4,
-    "details": "Développement web"
-},
-{
-    "dateDebut": "18/11/2019",
-    "dateFin": "24/01/2020",
-    "shortDate": "Nov. 2019|Jan. 2020",
-    "ville": "Vincennes",
-    "codePostal": 94300,
-    "entreprise": "Andafter",
-    "duree": 8,
-    "details": "Développement web"
-},
-{
-    "dateDebut": "18/03/2019",
-    "dateFin": "24/05/2019",
-    "shortDate": "Mars 2019|Mai 2019",
-    "ville": "Suresnes",
-    "codePostal": 92150,
-    "entreprise": "ACMS",
-    "duree": 8,
-    "details": "Administration réseau et maintenance informatique"
-},
-{
-    "dateDebut": "22/05/2018",
-    "dateFin": "29/06/2018",
-    "shortDate": "Mai 2018|Juin 2018",
-    "ville": "Maisons-Alfort",
-    "codePostal": 94700,
-    "entreprise": "Mac2 Webintelligence",
-    "duree": 6,
-    "details": "Développement web"
-},
-{
-    "dateDebut": "27/02/2017",
-    "dateFin": "03/03/2017",
-    "shortDate": "Fev. 2017|Mars 2017",
-    "ville": "Villepinte",
-    "codePostal": 93420,
-    "entreprise": "DAF Truck France",
-    "duree": 1,
-    "details": "Réseau informatique"
-},
-{
-    "dateDebut": "04/01/2016",
-    "dateFin": "08/01/2016",
-    "shortDate": "Jan. 2016|Jan. 2016",
-    "ville": "Rosny-Sous-Bois",
-    "codePostal": 93110,
-    "entreprise": "2Jpartners",
-    "duree": 1,
-    "details": "Observation réseau informatique et observation technique"
-},
-{
-    "dateDebut": "05/12/2015",
-    "dateFin": "09/12/2015",
-    "shortDate": "Dec. 2015|Dec. 2015",
-    "ville": "Rosny-Sous-Bois",
-    "codePostal": 93110,
-    "entreprise": "2Jpartners",
-    "duree": 1,
-    "details": "Observation réseau informatique et observation technique"
-}]
+[
+    {
+        "dateDebut": "17/01/2022",
+        "dateFin": "11/03/2022",
+        "shortDate": "Janv. 2022 — Mars 2022",
+        "ville": "Paris",
+        "codePostal": 75002,
+        "entreprise": "AIOS SH",
+        "duree": 8,
+        "details": "Développement web"
+    },
+    {
+        "dateDebut": "31/05/2021",
+        "dateFin": "30/06/2021",
+        "shortDate": "Mai 2021 — Juin 2021",
+        "ville": "Vincennes",
+        "codePostal": 94300,
+        "entreprise": "Andafter",
+        "duree": 4,
+        "details": "Développement web"
+    },
+    {
+        "dateDebut": "18/11/2019",
+        "dateFin": "24/01/2020",
+        "shortDate": "Nov. 2019 — Jan. 2020",
+        "ville": "Vincennes",
+        "codePostal": 94300,
+        "entreprise": "Andafter",
+        "duree": 8,
+        "details": "Développement web"
+    },
+    {
+        "dateDebut": "18/03/2019",
+        "dateFin": "24/05/2019",
+        "shortDate": "Mars 2019 — Mai 2019",
+        "ville": "Suresnes",
+        "codePostal": 92150,
+        "entreprise": "ACMS",
+        "duree": 8,
+        "details": "Administration réseau et maintenance informatique"
+    },
+    {
+        "dateDebut": "22/05/2018",
+        "dateFin": "29/06/2018",
+        "shortDate": "Mai 2018 — Juin 2018",
+        "ville": "Maisons-Alfort",
+        "codePostal": 94700,
+        "entreprise": "Mac2 Webintelligence",
+        "duree": 6,
+        "details": "Développement web"
+    },
+    {
+        "dateDebut": "27/02/2017",
+        "dateFin": "03/03/2017",
+        "shortDate": "Fev. 2017 — Mars 2017",
+        "ville": "Villepinte",
+        "codePostal": 93420,
+        "entreprise": "DAF Truck France",
+        "duree": 1,
+        "details": "Réseau informatique"
+    },
+    {
+        "dateDebut": "04/01/2016",
+        "dateFin": "08/01/2016",
+        "shortDate": "Jan. 2016 — Jan. 2016",
+        "ville": "Rosny-Sous-Bois",
+        "codePostal": 93110,
+        "entreprise": "2Jpartners",
+        "duree": 1,
+        "details": "Observation réseau informatique et observation technique"
+    },
+    {
+        "dateDebut": "05/12/2015",
+        "dateFin": "09/12/2015",
+        "shortDate": "Dec. 2015 — Dec. 2015",
+        "ville": "Rosny-Sous-Bois",
+        "codePostal": 93110,
+        "entreprise": "2Jpartners",
+        "duree": 1,
+        "details": "Observation réseau informatique et observation technique"
+    }
+]
