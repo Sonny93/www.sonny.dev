@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Typewriter from "typewriter-effect";
+import React, { useEffect, useState } from 'react';
 
-import { Section, SectionsProvider } from "../../../App";
-import { name } from "../../../config";
-import { ScrollToSection } from "../../../Utils/Navigation";
+import { Section } from '../../../types';
 
-import "./accueil.scss";
+import { name, SectionsProvider } from '../../../config';
+import { ScrollToSection } from '../../../Utils/Navigation';
+
+import Avatar from '../../Avatar';
+
+import './accueil.scss';
 
 export default function AccueilWrapper() {
     return (
@@ -19,7 +21,7 @@ interface AccueilProps {
     sections: Array<Section>;
 }
 
-function Accueil({ sections }: AccueilProps) {
+function Accueil({ sections }: AccueilProps): JSX.Element {
     const [nextSection, setNextSection] = useState<Section | undefined>(undefined);
 
     useEffect(() => {
@@ -31,21 +33,15 @@ function Accueil({ sections }: AccueilProps) {
     const handleNextSection = () => nextSection ? ScrollToSection(nextSection) : null;
 
     return (
-        <div className="accueil">
-            <h2>{name}</h2>
+        <div className='accueil'>
+            <Avatar size={240} />
+            <h2>{name} ✌️</h2>
             <h1>
-                Développeur
-                <Typewriter
-                    options={{
-                        strings: ['Fullstack JS', 'Front End'],
-                        autoStart: true,
-                        loop: true
-                    }}
-                />
+                Développeur <span className='type'>Fullstack</span>
             </h1>
-            <p>Bienvenue sur mon Portfolio !</p>
+            <p>Étudiant de 19 ans en deuxième année de <b>BTS SIO</b> (Option <b>SLAM</b>)</p>
             {nextSection && (
-                <div className="wrapper-scroll">
+                <div className='wrapper-scroll'>
                     <ScrollMouse handleNextSection={handleNextSection} />
                     <p>Défiler pour voir la suite !</p>
                 </div>
@@ -54,8 +50,8 @@ function Accueil({ sections }: AccueilProps) {
     );
 }
 
-const ScrollMouse = (handleNextSection: any): JSX.Element => (
-    <span className="scroll-icon" onClick={() => handleNextSection()}>
-        <span className="scroll-icon__dot"></span>
+const ScrollMouse = ({ handleNextSection }: { handleNextSection: () => void; }): JSX.Element => (
+    <span className='scroll-icon' onClick={handleNextSection}>
+        <span className='scroll-icon__dot'></span>
     </span>
 );

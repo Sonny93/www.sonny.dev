@@ -1,16 +1,17 @@
-@import 'vars.scss';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+@import "vars.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,600;1,300;1,600&display=swap");
 
 * {
 	outline: none;
 	box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
 	height: 100vh;
 	width: 100vw;
 	font-size: 17px;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Poppins", sans-serif;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -30,14 +31,14 @@ a {
 .background {
 	height: 100%;
 	width: 100%;
-    background: #333;
-    background-size: cover;
-	transition: .275s;
+	background: #333;
+	background-size: cover;
+	transition: 0.275s;
 	transition-delay: 150ms;
 }
 
 ul.reset {
-	padding-left: .5em;
+	padding-left: 0.5em;
 
 	& li {
 		margin-bottom: 5px;
@@ -46,14 +47,6 @@ ul.reset {
 		align-items: center;
 		gap: 5px;
 	}
-}
-
-.Typewriter__wrapper {
-	color: $main-color;
-}
-
-.react-confirm-alert-body {
-	white-space: pre-wrap;
 }
 
 ::-webkit-scrollbar {

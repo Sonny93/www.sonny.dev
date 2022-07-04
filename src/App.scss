@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px) brightness(0.7);
     animation: 0.75s fadeInTop both;
 }
 

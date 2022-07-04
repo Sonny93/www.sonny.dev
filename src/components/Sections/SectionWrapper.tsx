@@ -1,59 +1,40 @@
-import React, { useEffect, useCallback } from "react";
-import { useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { Section } from "../../App";
-import { HandleUpdateAnchorURL } from "../../Utils/Navigation";
+import React, { useEffect, useState } from 'react';
+
+import { Section } from '../../types';
+import { HandleUpdateAnchorURL } from '../../Utils/Navigation';
 
 export interface SectionWrapperProps {
-    sections: Section[];
     section: Section;
-    activeSection: Section;
+    listScrollTop: number;
     setActiveSection: (section: Section) => void;
-    changeBackground: (section: Section) => void;
 }
 
 export default function SectionWrapper({
-    sections,
     section,
-    activeSection,
-    setActiveSection,
-    changeBackground,
+    listScrollTop,
+    setActiveSection
 }: SectionWrapperProps) {
-    const threshold = .3;
-    const { component: Component, ref: refSection } = section;
-    const { ref, inView, entry } = useInView({ threshold });
+    const { name, component: Component, ref } = section;
     const [isInView, setInView] = useState<boolean>(false);
 
     useEffect(() => {
-        if (inView && entry?.intersectionRatio) {
-            if (entry.intersectionRatio < threshold && !isInView) {
-                setInView(false);
-                return;
-            }
+        if (!ref.current) return;
 
-            setInView(true);
+        const element = ref.current;
+        const offset = element.offsetTop;
+        const height = element.offsetHeight;
+
+        if (listScrollTop >= offset && listScrollTop < offset + height) {
             setActiveSection(section);
-            changeBackground(section);
-
-            const index = sections.findIndex(s => s.name === section.name);
-            if (index === 0)
-                HandleUpdateAnchorURL();
-            else
-                HandleUpdateAnchorURL(section.name);
-
+            HandleUpdateAnchorURL(name);
+            setInView(true);
+        } else {
+            setInView(false);
         }
-    }, [inView, setActiveSection, changeBackground, section, entry, isInView, sections]);
-
-    const setRefs = useCallback((node) => {
-        //@ts-ignore
-        refSection.current = node;
-        //@ts-ignore
-        activeSection.ref.current = node;
-        ref(node);
-    }, [ref, refSection, activeSection]);
+    }, [name, ref, listScrollTop, setActiveSection, section]);
 
     return (
-        <div className="section" ref={setRefs} id={section.name}>
+        <div className='section' ref={ref} id={section.name}>
             <Component inView={isInView} />
         </div>
     );
