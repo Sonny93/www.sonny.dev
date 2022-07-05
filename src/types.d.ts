@@ -3,5 +3,11 @@ export interface Section {
     label: string;
     background: string;
     component: any;
-    ref: React.RefObject<HTMLDivElement>;
+}
+
+export interface SocialNetwork {
+    id: 'github' | 'linkedin' | 'discord' | 'email';
+    title: string;
+    icon: any;
+    link: string;
 }

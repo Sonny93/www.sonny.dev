@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-scroll';
 
 import { Section } from '../../../types';
-
 import { name, SectionsProvider } from '../../../config';
-import { ScrollToSection } from '../../../Utils/Navigation';
 
 import Avatar from '../../Avatar';
 
@@ -30,8 +29,6 @@ function Accueil({ sections }: AccueilProps): JSX.Element {
         }
     }, [sections]);
 
-    const handleNextSection = () => nextSection ? ScrollToSection(nextSection) : null;
-
     return (
         <div className='accueil'>
             <Avatar size={240} />
@@ -42,7 +39,13 @@ function Accueil({ sections }: AccueilProps): JSX.Element {
             <p>Étudiant de 19 ans en deuxième année de <b>BTS SIO</b> (Option <b>SLAM</b>)</p>
             {nextSection && (
                 <div className='wrapper-scroll'>
-                    <ScrollMouse handleNextSection={handleNextSection} />
+                    <Link
+                        smooth
+                        to={nextSection.name}
+                        containerId='page-content'
+                    >
+                        <ScrollMouse />
+                    </Link>
                     <p>Défiler pour voir la suite !</p>
                 </div>
             )}
@@ -50,8 +53,8 @@ function Accueil({ sections }: AccueilProps): JSX.Element {
     );
 }
 
-const ScrollMouse = ({ handleNextSection }: { handleNextSection: () => void; }): JSX.Element => (
-    <span className='scroll-icon' onClick={handleNextSection}>
+const ScrollMouse = (): JSX.Element => (
+    <span className='scroll-icon'>
         <span className='scroll-icon__dot'></span>
     </span>
 );

@@ -14,22 +14,29 @@ export default function App() {
 
     useEffect(() => sections.forEach(({ background }: Section) => PreloadImage(background)), []);
     useEffect(() => {
-        if (activeSection === null) return;
-        setBackground(activeSection.background);
+        if (activeSection) {
+            setBackground(activeSection.background);
+        }
     }, [activeSection]);
+
+    const changeActiveSection = (name: string) => {
+        const section = sections.find((s => s.name === name));
+        if (section) {
+            setActiveSection(section);
+        } else {
+            console.warn('Unable to find active section');
+        }
+    }
 
     return (
         <div className='background' style={{ backgroundImage: `url(${PATH_BG_IMG}/${background})` }}>
             <div className='App'>
                 <SectionsProvider.Provider value={sections}>
                     <Navbar
-                        activeSection={activeSection}
+                        setActiveSection={changeActiveSection}
                         sections={sections}
                     />
-                    <SectionsList
-                        sections={sections}
-                        setActiveSection={setActiveSection}
-                    />
+                    <SectionsList sections={sections} />
                 </SectionsProvider.Provider>
             </div>
         </div>

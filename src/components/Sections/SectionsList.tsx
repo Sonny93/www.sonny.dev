@@ -1,32 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Section } from '../../types';
 
 import './sections.scss';
-import SectionWrapper from './SectionWrapper';
 
-export interface SectionsProps {
-    sections: Array<Section>;
-    setActiveSection: (section: Section) => void;
-}
-
-export default function SectionsList({
-    sections,
-    setActiveSection
-}: SectionsProps) {
-    const [listScrollTop, setListScrollTop] = useState<number>(0);
-
-    const handleScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) =>
-        setListScrollTop(event.currentTarget.scrollTop);
-
+export default function SectionsList({ sections }: { sections: Array<Section>; }): JSX.Element {
     return (
-        <div className='page-content' onScroll={handleScroll}>
+        <div className='page-content' id='page-content'>
             {sections.map((section: Section, key: number) => (
-                <SectionWrapper
-                    key={key}
-                    section={section}
-                    listScrollTop={listScrollTop}
-                    setActiveSection={setActiveSection}
-                />
+                <div className='section' key={key} id={section.name}>
+                    <section.component
+                        {...section}
+                    />
+                </div>
             ))}
         </div>
     );
