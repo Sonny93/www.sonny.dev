@@ -1,5 +1,6 @@
-import React, { createContext, createRef } from 'react';
+import React, { createContext } from 'react';
 import { BsDiscord, BsGithub, BsLinkedin } from 'react-icons/bs';
+import { IoMailOutline } from 'react-icons/io5';
 
 import Accueil from './components/Sections/Accueil/Accueil';
 import APropos from './components/Sections/APropos/APropos';
@@ -36,7 +37,7 @@ export const socialNetworks: Array<SocialNetwork> = [
     }, {
         id: 'email',
         link: 'mailto:' + email,
-        icon: <BsDiscord />,
+        icon: <IoMailOutline />,
         title: 'Adresse email : ' + email
     }
 ];
