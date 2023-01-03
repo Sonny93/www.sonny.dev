@@ -1,7 +1,7 @@
 [
     {
         "nom": "Next Uploader",
-        "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres",
+        "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
         "url": "https://uploader.sonnydata.fr/",
         "thumbnail": "uploader.webp",
         "languages": [
@@ -24,7 +24,7 @@
     },
     {
         "nom": "Portfolio",
-        "description": "Mon portfolio",
+        "description": "Mon portfolio.",
         "url": "https://www.sonny.dev/",
         "thumbnail": "portfolio.webp",
         "languages": [
@@ -36,7 +36,7 @@
     },
     {
         "nom": "CV",
-        "description": "Mon CV au format HTML",
+        "description": "Mon CV au format HTML.",
         "url": "https://cv.sonny.dev/",
         "thumbnail": "cv-html.webp",
         "languages": [
@@ -46,10 +46,9 @@
         ]
     },
     {
-        "nom": "Superpipo",
-        "description": "Site permettant de créer des \"liens\" et \"dossiers de lien\" (projet privé)",
-        "url": "https://superpipo.fr/",
-        "thumbnail": "superpipo.webp",
+        "nom": "My Links",
+        "description": "Outil de centralisation des favoris, des collections avancées.",
+        "thumbnail": "my-links.webp",
         "languages": [
             "HTML",
             "SASS",
@@ -58,7 +57,7 @@
     },
     {
         "nom": "Test Geoloc",
-        "description": "Test d'une app de géoloc",
+        "description": "Test d'une app de géolocalisation",
         "url": "https://test-geoloc.vercel.app/",
         "thumbnail": "test-geoloc.webp",
         "languages": [

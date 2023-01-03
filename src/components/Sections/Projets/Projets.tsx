@@ -28,25 +28,11 @@ export default function Projets() {
 }
 
 function ProjectItem({ projet }: { projet: Projet }) {
-    const { nom, description, url, thumbnail, languages, github } = projet;
+    const { description, github } = projet;
 
     return (
         <li className="projet">
-            <a
-                className="direct-link"
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-            >
-                <img
-                    src={PATH_IMAGES + "/" + thumbnail}
-                    alt={`${nom} thumbnail`}
-                />
-                <div className="details">
-                    <span className="languages">{languages.join(", ")}</span>
-                    <span className="name">{nom}</span>
-                </div>
-            </a>
+            <ProjectItemLink projet={projet} />
             <div className="description">
                 <div className="details-description">{description}</div>
                 <div className="github">
@@ -60,5 +46,34 @@ function ProjectItem({ projet }: { projet: Projet }) {
                 </div>
             </div>
         </li>
+    );
+}
+
+function ProjectItemLink({ projet }: { projet: Projet }) {
+    const { thumbnail, nom, languages, url } = projet;
+
+    if (!url) {
+        return (
+            <div className="direct-link">
+                <img
+                    src={PATH_IMAGES + "/" + thumbnail}
+                    alt={`${nom} thumbnail`}
+                />
+                <div className="details">
+                    <span className="languages">{languages.join(", ")}</span>
+                    <span className="name">{nom}</span>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <a className="direct-link" href={url} target="_blank" rel="noreferrer">
+            <img src={PATH_IMAGES + "/" + thumbnail} alt={`${nom} thumbnail`} />
+            <div className="details">
+                <span className="languages">{languages.join(", ")}</span>
+                <span className="name">{nom}</span>
+            </div>
+        </a>
     );
 }

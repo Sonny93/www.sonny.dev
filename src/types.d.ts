@@ -16,7 +16,7 @@ export interface SocialNetwork {
 interface Projet {
     nom: string;
     description: string;
-    url: string;
+    url?: string;
     thumbnail: string;
     languages: string[];
     github?: string;
