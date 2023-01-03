@@ -1,14 +1,12 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
-import { Link } from 'react-scroll';
+import React, { MouseEvent, useEffect, useState } from "react";
+import { Link } from "react-scroll";
+import { AiOutlineMenu } from "react-icons/ai";
 
-import { AiOutlineMenu } from 'react-icons/ai';
-import { BsFillSuitHeartFill } from 'react-icons/bs';
+import { name, socialNetworks } from "../../config";
 
-import { name, socialNetworks } from '../../config';
-
-import { Section, SocialNetwork } from '../../types';
-import Avatar from '../Avatar';
-import './navbar.scss';
+import { Section, SocialNetwork } from "../../types";
+import Avatar from "../Avatar";
+import "./navbar.scss";
 
 export interface NavbarProps {
     sections: Array<any>;
@@ -29,82 +27,88 @@ export default function Navbar({ sections, setActiveSection }: NavbarProps) {
     };
     useEffect(() => {
         handleWindowSizeChange();
-        window.addEventListener('resize', handleWindowSizeChange);
-        return () => window.removeEventListener('resize', handleWindowSizeChange);
+        window.addEventListener("resize", handleWindowSizeChange);
+        return () =>
+            window.removeEventListener("resize", handleWindowSizeChange);
     }, []);
 
     const toggleMenu = () => setMenuOpen((state: boolean) => !state);
-    const handleClickNavbarWrapper = ({ currentTarget }: MouseEvent<HTMLElement>) =>
-        currentTarget.className.startsWith('navbar-wrapper') ? setMenuOpen(false) : null;
+    const handleClickNavbarWrapper = ({
+        currentTarget,
+    }: MouseEvent<HTMLElement>) =>
+        currentTarget.className.startsWith("navbar-wrapper")
+            ? setMenuOpen(false)
+            : null;
 
-    const classNameNavbar = `navbar-wrapper ${isMobile ? (menuOpen ? 'mobile-open' : 'mobile-close') : ''}`;
-    return (<>
-        <div className='btn-navbar-menu' onClick={toggleMenu}>
-            <AiOutlineMenu />
-        </div>
-        <div className={classNameNavbar} onClick={handleClickNavbarWrapper}>
-            <div className='navbar'>
-                <div className='header'>
-                    <Avatar size={168} />
-                    <h2>{name}</h2>
-                    <p>Où me retrouver ?</p>
-                    <ul className='find-me'>
-                        {socialNetworks.map((social, key) => (
-                            <NavbarSocialItem
+    const classNameNavbar = `navbar-wrapper ${
+        isMobile ? (menuOpen ? "mobile-open" : "mobile-close") : ""
+    }`;
+    return (
+        <>
+            <div className="btn-navbar-menu" onClick={toggleMenu}>
+                <AiOutlineMenu />
+            </div>
+            <div className={classNameNavbar} onClick={handleClickNavbarWrapper}>
+                <div className="navbar">
+                    <div className="header">
+                        <Avatar size={168} />
+                        <h2>{name}</h2>
+                        <p>Où me retrouver ?</p>
+                        <ul className="find-me">
+                            {socialNetworks.map((social, key) => (
+                                <NavbarSocialItem key={key} {...social} />
+                            ))}
+                        </ul>
+                    </div>
+                    <ul className="items">
+                        {sections.map((section, key) => (
+                            <NavbarSectionItem
+                                setActiveSection={setActiveSection}
+                                section={section}
                                 key={key}
-                                {...social}
                             />
                         ))}
                     </ul>
-                </div>
-                <ul className='items'>
-                    {sections.map((section, key) => (
-                        <NavbarSectionItem
-                            setActiveSection={setActiveSection}
-                            section={section}
-                            key={key}
-                        />
-                    ))}
-                </ul>
-                <div className='footer'>
-                    Made with <BsFillSuitHeartFill /> by <b>{name}</b>
+                    <div className="footer">
+                        Fait avec ❤️ par <b>{name}</b>
+                    </div>
                 </div>
             </div>
-        </div>
-    </>);
+        </>
+    );
 }
 
 function NavbarSectionItem({
     section,
-    setActiveSection
+    setActiveSection,
 }: {
     section: Section;
     setActiveSection: (name: string) => void;
 }) {
     const { name, label } = section;
-    return (<>
+    return (
         <li>
             <Link
-                className='navbar-item'
-                activeClass='active'
+                className="navbar-item"
+                activeClass="active"
                 smooth
                 spy
                 to={name}
-                containerId='page-content'
+                containerId="page-content"
                 onSetActive={setActiveSection}
             >
                 {label}
             </Link>
         </li>
-    </>);
+    );
 }
 
 function NavbarSocialItem({ title, link, icon }: SocialNetwork) {
-    return (<>
-        <li className='item'>
-            <a href={link} target='_blank' rel='noreferrer' title={title}>
+    return (
+        <li className="item">
+            <a href={link} target="_blank" rel="noreferrer" title={title}>
                 {icon}
             </a>
         </li>
-    </>);
+    );
 }
