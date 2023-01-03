@@ -1,5 +1,15 @@
 [
     {
+        "dateDebut": "03/10/2022",
+        "dateFin": "Aujourd'hui",
+        "shortDate": "Oct. 2022 — Aujourd'hui",
+        "ville": "Paris",
+        "codePostal": 75002,
+        "entreprise": "AIOS SH",
+        "duree": 54,
+        "details": "Alternance - Développement web"
+    },
+    {
         "dateDebut": "17/01/2022",
         "dateFin": "11/03/2022",
         "shortDate": "Janv. 2022 — Mars 2022",

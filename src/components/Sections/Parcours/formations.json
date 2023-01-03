@@ -1,5 +1,13 @@
 [
     {
+        "dateDebut": "Oct. 2022",
+        "dateFin": "Aujourd'hui",
+        "ville": "Paris",
+        "codePostal": 75012,
+        "etablissement": "IPSSI",
+        "details": "Bachelor Développement fullstack & DevOps"
+    },
+    {
         "dateDebut": "Juillet 2022",
         "dateFin": "Juillet 2022",
         "ville": "Aulnays-Sous-Bois",
@@ -9,7 +17,7 @@
     },
     {
         "dateDebut": "Sep. 2020",
-        "dateFin": "Aujourd'hui",
+        "dateFin": "Mai 2022",
         "duree": 2,
         "ville": "Aulnays-Sous-Bois",
         "codePostal": 93600,
