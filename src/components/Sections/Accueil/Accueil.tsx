@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-scroll';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-scroll";
 
-import { Section } from '../../../types';
-import { name, SectionsProvider } from '../../../config';
+import { Section } from "../../../types";
+import { name, SectionsProvider } from "../../../config";
 
-import Avatar from '../../Avatar';
+import Avatar from "../../Avatar";
 
-import './accueil.scss';
+import "./accueil.scss";
 
 export default function AccueilWrapper() {
     return (
@@ -21,7 +21,9 @@ interface AccueilProps {
 }
 
 function Accueil({ sections }: AccueilProps): JSX.Element {
-    const [nextSection, setNextSection] = useState<Section | undefined>(undefined);
+    const [nextSection, setNextSection] = useState<Section | undefined>(
+        undefined
+    );
 
     useEffect(() => {
         if (sections.length > 1) {
@@ -30,19 +32,28 @@ function Accueil({ sections }: AccueilProps): JSX.Element {
     }, [sections]);
 
     return (
-        <div className='accueil'>
+        <div className="accueil">
             <Avatar size={240} />
             <h2>{name} ✌️</h2>
             <h1>
-                Développeur <span className='type'>Fullstack</span>
+                Développeur <span className="type">Fullstack</span>
             </h1>
-            <p>Étudiant de 19 ans en deuxième année de <b>BTS SIO</b> (Option <b>SLAM</b>)</p>
+            <p>
+                Étudiant en Bachelor Développement fullstack & DevOps à{" "}
+                <a
+                    href="https://ecole-ipssi.com/ecole-informatique-paris/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    IPSSI Paris
+                </a>
+            </p>
             {nextSection && (
-                <div className='wrapper-scroll'>
+                <div className="wrapper-scroll">
                     <Link
                         smooth
                         to={nextSection.name}
-                        containerId='page-content'
+                        containerId="page-content"
                     >
                         <ScrollMouse />
                     </Link>
@@ -54,7 +65,7 @@ function Accueil({ sections }: AccueilProps): JSX.Element {
 }
 
 const ScrollMouse = (): JSX.Element => (
-    <span className='scroll-icon'>
-        <span className='scroll-icon__dot'></span>
+    <span className="scroll-icon">
+        <span className="scroll-icon__dot"></span>
     </span>
 );
