@@ -11,6 +11,17 @@
         ]
     },
     {
+        "nom": "InstallerWindows",
+        "description": "Guide sur l'installation ou la réinstallation propre de Windows 11. Il s'agit d'un guide complet, que que l'on peut suivre quel que soit notre niveau en informatique.",
+        "url": "https://www.installerwindows.fr/",
+        "thumbnail": "installer-windows.webp",
+        "languages": [
+            "HTML",
+            "SASS",
+            "Next.JS"
+        ]
+    },
+    {
         "nom": "Portfolio",
         "description": "Mon portfolio",
         "url": "https://www.sonny.dev/",
@@ -40,7 +51,7 @@
         "languages": [
             "HTML",
             "SASS",
-            "React.JS"
+            "Next.JS"
         ]
     },
     {
