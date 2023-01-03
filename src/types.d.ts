@@ -19,6 +19,7 @@ interface Projet {
     url: string;
     thumbnail: string;
     languages: string[];
+    github?: string;
     disabled?: boolean;
 }
 

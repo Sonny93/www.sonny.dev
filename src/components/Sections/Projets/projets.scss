@@ -27,23 +27,50 @@
             flex-direction: row-reverse;
         }
 
-        & > .description {
+        & .description {
             height: 100%;
-            width: 400px;
-            color: #fff;
-            background-color: $black;
-            backdrop-filter: blur(4px);
-            padding: 25px;
-            transition: 0.15s;
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+
+            & .details-description {
+                height: 100%;
+                width: 400px;
+                color: #fff;
+                background-color: $black;
+                backdrop-filter: blur(4px);
+                padding: 25px;
+                transition: 0.15s;
+            }
+
+            & .github > a {
+                font-size: 0.8em;
+                color: #fff;
+                background-color: $main-color;
+                padding: 0.5em 0.75em;
+                border-radius: 5px;
+                border: 1px solid $main-color;
+                display: flex;
+                gap: 0.5em;
+                align-items: center;
+                justify-content: center;
+                transition: 0.15s;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
         }
 
         &:hover {
-            & a {
+            & a.direct-link {
                 z-index: 1;
                 transform: scale(1.05);
             }
 
-            & .description {
+            & .details-description {
                 box-shadow: inset 0 0 3px 1px $black;
             }
 

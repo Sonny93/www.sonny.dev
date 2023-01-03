@@ -8,7 +8,8 @@
             "HTML",
             "SASS",
             "Next.JS"
-        ]
+        ],
+        "github": "https://github.com/Sonny93/next-uploader"
     },
     {
         "nom": "InstallerWindows",
@@ -30,7 +31,8 @@
             "HTML",
             "SASS",
             "React.JS"
-        ]
+        ],
+        "github": "https://github.com/Sonny93/portfolio"
     },
     {
         "nom": "CV",
@@ -63,6 +65,7 @@
             "HTML",
             "SASS",
             "React.JS"
-        ]
+        ],
+        "github": "https://github.com/Sonny93/test-geoloc"
     }
 ]
