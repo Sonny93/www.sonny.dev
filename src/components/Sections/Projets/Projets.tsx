@@ -12,7 +12,7 @@ export default function Projets() {
     const projets = projetList.filter((projet: Projet) => !projet?.disabled);
     return (
         <div className="projets">
-            <h1>Mes projets</h1>
+            <h2>Mes projets</h2>
             <p className="box">
                 Voici quelques uns de mes projets réalisés sur mon temps libre.
                 Le code source de chacun des projets est sur Github (dans des

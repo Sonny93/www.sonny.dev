@@ -47,7 +47,7 @@
     },
     {
         "nom": "My Links",
-        "description": "Outil de centralisation des favoris, des collections avancées.",
+        "description": "Outil de centralisation des favoris.",
         "thumbnail": "my-links.webp",
         "languages": [
             "HTML",

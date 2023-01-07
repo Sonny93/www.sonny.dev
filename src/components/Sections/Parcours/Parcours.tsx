@@ -11,10 +11,10 @@ import "./parcours.scss";
 export default function Parcours() {
     return (
         <div className="parcours">
-            <h1>Mon parcours</h1>
+            <h2>Mon parcours</h2>
             <div className="timelines-wrapper">
                 <div className="timeline-wrapper">
-                    <h2>Formations</h2>
+                    <h3>Formations</h3>
                     <div className="timeline-container">
                         <div className="timeline"></div>
                         <ul className="reset">
@@ -27,7 +27,7 @@ export default function Parcours() {
                     </div>
                 </div>
                 <div className="timeline-wrapper">
-                    <h2>Expériences professionnelles</h2>
+                    <h3>Expériences professionnelles</h3>
                     <div className="timeline-container">
                         <div className="timeline"></div>
                         <ul className="reset">
