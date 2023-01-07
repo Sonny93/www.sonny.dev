@@ -49,6 +49,12 @@ ul.reset {
 	}
 }
 
+input,
+textarea,
+button {
+	border-radius: $border-radius;
+}
+
 ::-webkit-scrollbar {
 	width: 10px;
 }
