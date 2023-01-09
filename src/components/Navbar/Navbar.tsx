@@ -96,6 +96,7 @@ function NavbarSectionItem({
                 to={name}
                 containerId="page-content"
                 onSetActive={setActiveSection}
+                offset={-(window.innerHeight / 2.75)}
             >
                 {label}
             </Link>
