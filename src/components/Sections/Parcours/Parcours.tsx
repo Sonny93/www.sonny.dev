@@ -1,12 +1,18 @@
 import React from "react";
 import { CgChevronDoubleRight } from "react-icons/cg";
 
-import experiences from "./experiences.json";
-import formations from "./formations.json";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
+import TimeRelative from "dayjs/plugin/relativeTime";
+
+import experiences from "../../jsons/experiences.json";
+import formations from "../../jsons/formations.json";
 
 import { Experience, Formation } from "../../../types";
 
 import "./parcours.scss";
+
+dayjs.extend(TimeRelative);
 
 export default function Parcours() {
     return (
@@ -33,7 +39,10 @@ export default function Parcours() {
                         <ul className="reset">
                             {experiences.map(
                                 (experience: Experience, key: number) => (
-                                    <ExperienceItem key={key} {...experience} />
+                                    <ExperienceItem
+                                        key={key}
+                                        experience={experience}
+                                    />
                                 )
                             )}
                         </ul>
@@ -88,37 +97,50 @@ function FormationItem({
     );
 }
 
-function ExperienceItem({
-    details,
-    shortDate,
-    duree,
-    entreprise,
-    ville,
-    codePostal,
-}: Experience) {
+const SHORT_DATE_FORMAT = "MMM YYYY";
+function ExperienceItem({ experience }: { experience: Experience }) {
+    const { details, date, company, city, zipCode, type } = experience;
+    const startDate = dayjs(date.start);
+    const endDateOrToday = dayjs(date.end || Date.now());
+
+    const startDateFormated = startDate.locale("fr").format(SHORT_DATE_FORMAT);
+    const endDateFormated = date.end
+        ? endDateOrToday.locale("fr").format(SHORT_DATE_FORMAT)
+        : "Aujourd'hui";
+
+    const duration = startDate.locale("fr").from(endDateOrToday, true);
+
     return (
-        <>
-            <li className="item">
-                <div className="label" title={details}>
-                    {details}
-                </div>
-                <div className="details">
-                    <div className="date">
-                        {shortDate}{" "}
-                        <span style={{ color: "#aaa" }}>
-                            {" "}
-                            — {duree} semaines
-                        </span>
+        <li className="item">
+            <div className="label" title={details}>
+                {details}
+            </div>
+            <div className="details">
+                <div className="date">
+                    <div
+                        className="start"
+                        style={{ textTransform: "capitalize" }}
+                    >
+                        {startDateFormated}
                     </div>
-                    <div className="location">
-                        <CgChevronDoubleRight /> {entreprise}
-                        <span style={{ color: "#aaa" }}>
-                            {" "}
-                            — {ville}, {codePostal}
-                        </span>
+                    {" — "}
+                    <div
+                        className="end"
+                        style={{ textTransform: "capitalize" }}
+                    >
+                        {endDateFormated}
                     </div>
+                    <div className="duration">({duration})</div>
                 </div>
-            </li>
-        </>
+                <div className="location">
+                    <CgChevronDoubleRight /> {company} —
+                    <span style={{ color: "#aaa" }}>
+                        {" "}
+                        {city}, {zipCode}
+                    </span>
+                </div>
+                <div className="type">{type}</div>
+            </div>
+        </li>
     );
 }

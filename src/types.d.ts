@@ -34,12 +34,15 @@ interface Formation {
 }
 
 interface Experience {
-    dateDebut: string;
-    dateFin: string;
-    shortDate: string;
-    ville: string;
-    codePostal: number;
-    entreprise: string;
-    duree: number;
+    date: {
+        start: string;
+        end: string | null;
+    };
+
+    city: string;
+    zipCode: number;
+    company: string;
+
     details: string;
+    type: string;
 }
