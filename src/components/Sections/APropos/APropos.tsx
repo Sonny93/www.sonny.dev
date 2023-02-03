@@ -5,7 +5,9 @@ import {
     SiExpress,
     SiFastify,
     SiHtml5,
+    SiJava,
     SiJavascript,
+    SiKotlin,
     SiMysql,
     SiNextdotjs,
     SiPhp,
@@ -20,6 +22,7 @@ import "./apropos.scss";
 interface Langage {
     label: string;
     icon: JSX.Element;
+    color?: string;
 }
 
 export default function APropos() {
@@ -27,22 +30,27 @@ export default function APropos() {
         {
             label: "HTML",
             icon: <SiHtml5 />,
+            color: "#dd4b25",
         },
         {
             label: "CSS",
             icon: <SiCss3 />,
+            color: "#146eb0",
         },
         {
             label: "SASS",
             icon: <SiSass />,
+            color: "#c76494",
         },
         {
             label: "JavaScript",
             icon: <SiJavascript />,
+            color: "#efd81d",
         },
         {
             label: "React",
             icon: <SiReact />,
+            color: "#5ed3f3",
         },
     ];
 
@@ -50,18 +58,32 @@ export default function APropos() {
         {
             label: "Next",
             icon: <SiNextdotjs />,
+            color: "#000",
         },
         {
             label: "Express",
             icon: <SiExpress />,
+            color: "#464646",
         },
         {
             label: "Fastify",
             icon: <SiFastify />,
+            color: "#fff",
         },
         {
             label: "PHP",
             icon: <SiPhp />,
+            color: "#777BB3",
+        },
+        {
+            label: "Kotlin",
+            icon: <SiKotlin />,
+            color: "#B125EA",
+        },
+        {
+            label: "Java",
+            icon: <SiJava />,
+            color: "#f89820",
         },
     ];
 
@@ -69,14 +91,17 @@ export default function APropos() {
         {
             label: "Python",
             icon: <SiPython />,
+            color: "#4584b6",
         },
         {
             label: "C#",
             icon: <SiCsharp />,
+            color: "#823085",
         },
         {
             label: "MySQL",
             icon: <SiMysql />,
+            color: "#F29111",
         },
     ];
 
@@ -107,19 +132,25 @@ export default function APropos() {
     );
 }
 
-function BuildItem({ label, icon }: Langage) {
+function BuildItem({ label, icon, color }: Langage) {
     return (
-        <LangageItem>
+        <LangageItem color={color}>
             {icon}
             {label}
         </LangageItem>
     );
 }
 
-function LangageItem({ children }: { children: ReactNode }) {
+function LangageItem({
+    children,
+    color = "",
+}: {
+    children: ReactNode;
+    color?: string;
+}) {
     return (
         <Tilt tiltReverse perspective={500}>
-            <li>{children}</li>
+            <li style={{ "--lng-color": color } as any}>{children}</li>
         </Tilt>
     );
 }
