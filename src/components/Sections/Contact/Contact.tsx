@@ -30,7 +30,7 @@ export default function Contact() {
                     <input
                         type="text"
                         id="input-subject"
-                        placeholder="Quel est le sujet ?"
+                        placeholder="Pour quelle(s) raison(s) souhaitez-vous prendre contact ?"
                         value={subject}
                         onChange={({ target }) => setSubject(target.value)}
                     />
@@ -39,7 +39,7 @@ export default function Contact() {
                     <label htmlFor="input-body">Contenu du message</label>
                     <textarea
                         id="input-body"
-                        placeholder="Quel est le contenu du message ?"
+                        placeholder="Détaillez votre demande :)"
                         value={body}
                         onChange={({ target }) => setBody(target.value)}
                     />

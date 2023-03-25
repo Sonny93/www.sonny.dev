@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
+import { FaJava } from "react-icons/fa";
 import {
     SiCsharp,
     SiCss3,
     SiExpress,
     SiFastify,
     SiHtml5,
-    SiJava,
     SiJavascript,
     SiKotlin,
     SiMysql,
@@ -82,7 +82,7 @@ export default function APropos() {
         },
         {
             label: "Java",
-            icon: <SiJava />,
+            icon: <FaJava />,
             color: "#f89820",
         },
     ];
