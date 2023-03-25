@@ -1,5 +1,17 @@
 [
     {
+        "nom": "Installerwindows.fr",
+        "description": "Guides pour (ré)installer Windows 10/11 au propre et faire des optimisations saines pour votre machine. Il s'agit de guides complets, que vous devriez pouvoir suivre quel que soit votre niveau en informatique.",
+        "url": "https://www.installerwindows.fr/",
+        "thumbnail": "installer-windows.webp",
+        "languages": [
+            "HTML",
+            "SASS",
+            "Next.JS"
+        ],
+        "github": "https://github.com/Sonny93/installerwindows.fr"
+    },
+    {
         "nom": "Next Uploader",
         "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
         "url": "https://uploader.sonnydata.fr/",
@@ -10,17 +22,6 @@
             "Next.JS"
         ],
         "github": "https://github.com/Sonny93/next-uploader"
-    },
-    {
-        "nom": "InstallerWindows",
-        "description": "Guide sur l'installation ou la réinstallation propre de Windows 11. Il s'agit d'un guide complet, que que l'on peut suivre quel que soit notre niveau en informatique.",
-        "url": "https://www.installerwindows.fr/",
-        "thumbnail": "installer-windows.webp",
-        "languages": [
-            "HTML",
-            "SASS",
-            "Next.JS"
-        ]
     },
     {
         "nom": "Portfolio",

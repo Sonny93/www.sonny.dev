@@ -14,9 +14,11 @@ export default function Projets() {
         <div className="projets">
             <h2>Mes projets</h2>
             <p className="box">
-                Voici quelques uns de mes projets réalisés sur mon temps libre.
-                Le code source de chacun des projets est sur Github (dans des
-                repos privés) et sont hébergés chez Vercel ou sur mon VPS.
+                Ci-dessous la liste des projets que j'ai réalisé sur mon temps
+                libre.
+                <br />
+                J'ai utilisé Github pour le versionning, et m'occupe moi-même de
+                l'hébergement des ces derniers.
             </p>
             <ul className="reset">
                 {projets.map((projet: Projet, key: number) => (
