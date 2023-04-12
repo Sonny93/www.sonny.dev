@@ -17,6 +17,9 @@ import {
 } from "react-icons/si";
 import Tilt from "react-parallax-tilt";
 
+import skills from "../../jsons/competences";
+
+import { Skill } from "../../../types";
 import "./apropos.scss";
 
 interface Langage {
@@ -109,30 +112,20 @@ export default function APropos() {
         <div className="about-me">
             <h2>Mes compétences</h2>
             <div className="competences">
-                <div className="row">
-                    <h3>&#60;FrontEnd /&#62;</h3>
-                    <ul className="reset languages lang-fe">
-                        {frontLangages.map(BuildItem)}
-                    </ul>
-                </div>
-                <div className="row">
-                    <h3>&#60;BackEnd /&#62;</h3>
-                    <ul className="reset languages lang-fe">
-                        {backLangages.map(BuildItem)}
-                    </ul>
-                </div>
-                <div className="row">
-                    <h3>&#60;Autres /&#62;</h3>
-                    <ul className="reset languages lang-fe">
-                        {otherLangages.map(BuildItem)}
-                    </ul>
-                </div>
+                {skills.map(({ name, skills }) => (
+                    <div className="row">
+                        <h3>&#60;{name} /&#62;</h3>
+                        <ul className="reset languages lang-fe">
+                            {skills.map(BuildItem)}
+                        </ul>
+                    </div>
+                ))}
             </div>
         </div>
     );
 }
 
-function BuildItem({ label, icon, color }: Langage) {
+function BuildItem({ label, icon, color }: Skill) {
     return (
         <LangageItem color={color}>
             {icon}

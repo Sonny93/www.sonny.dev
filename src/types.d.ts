@@ -46,3 +46,16 @@ interface Experience {
     details: string;
     type: string;
 }
+
+export interface SkillSection {
+    name: string;
+    skills: Skills;
+}
+
+export interface Skill {
+    label: string;
+    icon: JSX.Element;
+    color?: string;
+}
+
+export type Skills = Skill[];
