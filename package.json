@@ -1,20 +1,20 @@
 {
   "name": "portfolio",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": true,
   "dependencies": {
     "dayjs": "^1.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-parallax-tilt": "^1.7.97",
+    "react-icons": "^4.8.0",
+    "react-parallax-tilt": "^1.7.127",
     "react-scroll": "^1.8.9",
-    "sass": "^1.58.0"
+    "sass": "^1.62.0"
   },
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -29,14 +29,14 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.34",
+    "@types/react-dom": "^18.0.11",
     "@types/react-scroll": "^1.8.6",
     "@vitejs/plugin-react": "^3.1.0",
     "vite": "^4.2.1",
     "vite-plugin-svgr": "^2.4.0",
-    "vite-tsconfig-paths": "^4.0.7",
-    "typescript": "^4.9.5"
+    "vite-tsconfig-paths": "^4.1.0",
+    "typescript": "^5.0.4"
   }
 }

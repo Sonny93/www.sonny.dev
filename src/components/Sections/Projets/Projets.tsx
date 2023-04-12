@@ -1,12 +1,11 @@
 import React from "react";
 import { BsGithub } from "react-icons/bs";
 
+import { buildProjectImageUrl } from "../../../Utils/link";
 import { Projet } from "../../../types";
 import projetList from "./projets.json";
 
 import "./projets.scss";
-
-const PATH_IMAGES = "/img/projets";
 
 export default function Projets() {
     const projets = projetList.filter((projet: Projet) => !projet?.disabled);
@@ -58,7 +57,7 @@ function ProjectItemLink({ projet }: { projet: Projet }) {
         return (
             <div className="direct-link">
                 <img
-                    src={PATH_IMAGES + "/" + thumbnail}
+                    src={buildProjectImageUrl(thumbnail)}
                     alt={`${nom} thumbnail`}
                 />
                 <div className="details">
@@ -71,7 +70,10 @@ function ProjectItemLink({ projet }: { projet: Projet }) {
 
     return (
         <a className="direct-link" href={url} target="_blank" rel="noreferrer">
-            <img src={PATH_IMAGES + "/" + thumbnail} alt={`${nom} thumbnail`} />
+            <img
+                src={buildProjectImageUrl(thumbnail)}
+                alt={`${nom} thumbnail`}
+            />
             <div className="details">
                 <span className="languages">{languages.join(", ")}</span>
                 <span className="name">{nom}</span>

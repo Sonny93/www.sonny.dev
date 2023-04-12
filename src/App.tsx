@@ -8,6 +8,9 @@ import SectionsList from "./components/Sections/SectionsList";
 // Config
 import { PATH_BG_IMG, sections, SectionsProvider } from "./config";
 
+// Utils
+import { buildBackgroundImageUrl } from "./Utils/link";
+
 export default function App() {
     const [activeSection, setActiveSection] = useState<Section>(sections[0]);
     const [background, setBackground] = useState<string>(
@@ -60,6 +63,6 @@ function PreloadImage(image: string): void {
     link.setAttribute("as", "image");
     link.setAttribute("crossorigin", "anonymous");
     link.setAttribute("importance", "high");
-    link.setAttribute("href", image);
+    link.setAttribute("href", buildBackgroundImageUrl(image));
     document.head.appendChild(link);
 }
