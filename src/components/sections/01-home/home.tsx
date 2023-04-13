@@ -1,38 +1,33 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Link } from "react-scroll";
 
-import Avatar from "components/Avatar";
+import Avatar from "components/avatar";
 
 import { name, SectionsProvider } from "config";
 import { Section } from "types";
 
-import "./accueil.scss";
+import "./home.scss";
 
-export default function AccueilWrapper() {
+export default function HomeWrapper() {
     return (
         <SectionsProvider.Consumer>
-            {(value) => <Accueil sections={value} />}
+            {(value) => <Home sections={value} />}
         </SectionsProvider.Consumer>
     );
 }
 
-interface AccueilProps {
+interface HomeProps {
     sections: Array<Section>;
 }
 
-function Accueil({ sections }: AccueilProps): JSX.Element {
-    const [nextSection, setNextSection] = useState<Section | undefined>(
-        undefined
+function Home({ sections }: HomeProps): JSX.Element {
+    const nextSection = useMemo<Section | undefined>(
+        () => (sections.length > 1 ? sections[1] : undefined),
+        [sections]
     );
 
-    useEffect(() => {
-        if (sections.length > 1) {
-            setNextSection(sections[1]);
-        }
-    }, [sections]);
-
     return (
-        <div className="accueil">
+        <div className="home">
             <Avatar size={240} />
             <h2>{name} ✌️</h2>
             <h1>

@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-scroll";
 
-import Avatar from "components/Avatar";
+import Avatar from "components/avatar";
 
 import { name, socialNetworks } from "config";
 import { Section, SocialNetwork } from "types";

@@ -4,12 +4,12 @@ import Tilt from "react-parallax-tilt";
 import skills from "data/skills";
 import { Skill } from "types";
 
-import "./apropos.scss";
+import "./aboutme.scss";
 
 const APropos = () => (
     <div className="about-me">
         <h2>Mes compétences</h2>
-        <div className="competences">
+        <div className="skills">
             {skills.map(({ name, skills }) => (
                 <div className="row" key={name}>
                     <h3>&#60;{name} /&#62;</h3>

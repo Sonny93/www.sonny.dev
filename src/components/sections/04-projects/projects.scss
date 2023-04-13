@@ -1,11 +1,11 @@
 @import "styles/vars";
 
-.section#projets {
+.section#projects {
     min-height: auto;
     height: auto;
 }
 
-.section > .projets {
+.section > .projects {
     & > ul {
         gap: 25px;
         padding: 0;

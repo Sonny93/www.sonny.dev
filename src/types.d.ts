@@ -12,7 +12,7 @@ export interface SocialNetwork {
     link: string;
 }
 
-interface Projet {
+interface Project {
     name: string;
     description: string;
     url?: string;

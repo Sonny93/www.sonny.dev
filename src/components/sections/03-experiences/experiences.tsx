@@ -9,13 +9,13 @@ import formations from "data/formations.json";
 
 import { Experience, Formation } from "types";
 
-import "./parcours.scss";
+import "./experiences.scss";
 
 dayjs.extend(TimeRelative);
 
-export default function Parcours() {
+export default function Experiences() {
     return (
-        <div className="parcours">
+        <div className="experiences">
             <h2>Mon parcours</h2>
             <div className="timelines-wrapper">
                 <div className="timeline-wrapper">

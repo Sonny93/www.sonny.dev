@@ -1,17 +1,17 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 import { BsDiscord, BsGithub, BsLinkedin } from "react-icons/bs";
 import { IoMailOutline } from "react-icons/io5";
 
-import Accueil from "components/Sections/Accueil/Accueil";
-import APropos from "components/Sections/APropos/APropos";
-import Contact from "components/Sections/Contact/Contact";
-import Parcours from "components/Sections/Parcours/Parcours";
-import Projets from "components/Sections/Projets/Projets";
+import Home from "components/sections/01-home/home";
+import AboutMe from "components/sections/02-aboutme/aboutme";
+import Experiences from "components/sections/03-experiences/experiences";
+import Projects from "components/sections/04-projects/projects";
+import Contact from "components/sections/05-contact/contact";
 
 import { Section, SocialNetwork } from "types";
 
 export const PATH_BG_IMG = "/img/background";
-export const PATH_BG_PROJETS = "/img/projets";
+export const PATH_BG_PROJETS = "/img/projects";
 
 export const name: string = "Sonny";
 export const email: string = "sonnylallier1@gmail.com";
@@ -45,33 +45,33 @@ export const socialNetworks: Array<SocialNetwork> = [
 
 export const sections: Section[] = [
     {
-        name: "accueil",
+        name: "home",
         label: "Accueil",
-        background: "accueil-bg.webp",
-        component: Accueil,
+        background: "home.webp",
+        component: Home,
     },
     {
         name: "aboutme",
         label: "À propos",
-        background: "apropos-bg.webp",
-        component: APropos,
+        background: "aboutme.webp",
+        component: AboutMe,
     },
     {
-        name: "parcours",
+        name: "experiences",
         label: "Mon parcours",
-        background: "mon-parcours-bg.webp",
-        component: Parcours,
+        background: "experiences.webp",
+        component: Experiences,
     },
     {
-        name: "projets",
+        name: "projects",
         label: "Mes projets",
-        background: "mes-projets-bg.webp",
-        component: Projets,
+        background: "projects.webp",
+        component: Projects,
     },
     {
         name: "contact",
         label: "Me contacter",
-        background: "me-contacter-bg.webp",
+        background: "contact.webp",
         component: Contact,
     },
 ];

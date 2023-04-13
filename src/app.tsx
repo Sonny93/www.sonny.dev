@@ -1,31 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import Navbar from "components/Navbar/Navbar";
-import SectionsList from "components/Sections/SectionsList";
+import Navbar from "components/navbar/navbar";
+import SectionsList from "components/sections/sectionsList";
 
-import { PATH_BG_IMG, sections, SectionsProvider } from "config";
+import { sections, SectionsProvider } from "config";
 import { Section } from "types";
 
 import { buildBackgroundImageUrl } from "utils/link";
 
 export default function App() {
     const [activeSection, setActiveSection] = useState<Section>(sections[0]);
-    const [background, setBackground] = useState<string>(
-        sections[0].background
+    const background = useMemo<Section["background"]>(
+        () => activeSection.background || "",
+        [activeSection]
     );
 
-    useEffect(
-        () =>
-            sections.forEach(({ background }: Section) =>
-                PreloadImage(background)
-            ),
-        []
-    );
-    useEffect(() => {
-        if (activeSection) {
-            setBackground(activeSection.background);
-        }
-    }, [activeSection]);
+    useEffect(preloadBackgrounds, []);
 
     const changeActiveSection = (name: string) => {
         const section = sections.find((s) => s.name === name);
@@ -39,7 +29,9 @@ export default function App() {
     return (
         <div
             className="background"
-            style={{ backgroundImage: `url(${PATH_BG_IMG}/${background})` }}
+            style={{
+                backgroundImage: `url(${buildBackgroundImageUrl(background)}`,
+            }}
         >
             <div className="App">
                 <SectionsProvider.Provider value={sections}>
@@ -54,7 +46,10 @@ export default function App() {
     );
 }
 
-function PreloadImage(image: string): void {
+const preloadBackgrounds = () =>
+    sections.forEach(({ background }) => preloadImage(background));
+
+function preloadImage(image: string): void {
     const link = document.createElement("link");
     link.setAttribute("rel", "prefetch");
     link.setAttribute("as", "image");
