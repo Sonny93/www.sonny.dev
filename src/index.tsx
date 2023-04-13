@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import App from "./app";
+import { initializeAnalytic } from "./utils/analytic";
 
 import "styles/index.scss";
 
@@ -13,6 +14,8 @@ if (container) {
             <App />
         </React.StrictMode>
     );
+
+    initializeAnalytic();
 } else {
     throw new Error("Unable to find #root element");
 }
