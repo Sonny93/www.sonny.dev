@@ -112,7 +112,7 @@ function ExperienceItem({ experience }: { experience: Experience }) {
     return (
         <li className="item">
             <div className="label" title={details}>
-                {details}
+                [{type}] {details}
             </div>
             <div className="details">
                 <div className="date">
@@ -138,7 +138,6 @@ function ExperienceItem({ experience }: { experience: Experience }) {
                         {city}, {zipCode}
                     </span>
                 </div>
-                <div className="type">{type}</div>
             </div>
         </li>
     );

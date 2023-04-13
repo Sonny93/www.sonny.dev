@@ -129,7 +129,7 @@
 }
 
 @media screen and (max-width: 1224px) {
-    .section > .projets {
+    .section > .projects {
         & ul li.projet {
             width: 100%;
             margin-bottom: 25px;
@@ -149,7 +149,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .section > .projets ul li.projet {
+    .section > .projects ul li.projet {
         flex-direction: column !important;
     }
 }

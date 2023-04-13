@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { BsDiscord, BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { IoMailOutline } from "react-icons/io5";
 
 import Home from "components/sections/01-home/home";
@@ -28,12 +28,6 @@ export const socialNetworks: Array<SocialNetwork> = [
         link: "https://www.linkedin.com/in/sonnylallier/",
         icon: <BsLinkedin />,
         title: "Page Linkedin",
-    },
-    {
-        id: "discord",
-        link: "https://discord.com/",
-        icon: <BsDiscord />,
-        title: "Identifiant Discord : Sonny#0005",
     },
     {
         id: "email",
