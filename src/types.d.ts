@@ -3,7 +3,6 @@ export interface Section {
     label: string;
     background: string;
     component: any;
-    disabled?: boolean;
 }
 
 export interface SocialNetwork {
@@ -14,7 +13,7 @@ export interface SocialNetwork {
 }
 
 interface Projet {
-    nom: string;
+    name: string;
     description: string;
     url?: string;
     thumbnail: string;

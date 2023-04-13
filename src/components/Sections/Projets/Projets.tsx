@@ -1,9 +1,9 @@
-import React from "react";
 import { BsGithub } from "react-icons/bs";
 
-import { buildProjectImageUrl } from "../../../Utils/link";
-import { Projet } from "../../../types";
-import projetList from "./projets.json";
+import { buildProjectImageUrl } from "utils/link";
+
+import projetList from "data/projects.json";
+import { Projet } from "types";
 
 import "./projets.scss";
 
@@ -51,18 +51,18 @@ function ProjectItem({ projet }: { projet: Projet }) {
 }
 
 function ProjectItemLink({ projet }: { projet: Projet }) {
-    const { thumbnail, nom, languages, url } = projet;
+    const { thumbnail, name, languages, url } = projet;
 
     if (!url) {
         return (
             <div className="direct-link">
                 <img
                     src={buildProjectImageUrl(thumbnail)}
-                    alt={`${nom} thumbnail`}
+                    alt={`${name} thumbnail`}
                 />
                 <div className="details">
                     <span className="languages">{languages.join(", ")}</span>
-                    <span className="name">{nom}</span>
+                    <span className="name">{name}</span>
                 </div>
             </div>
         );
@@ -72,11 +72,11 @@ function ProjectItemLink({ projet }: { projet: Projet }) {
         <a className="direct-link" href={url} target="_blank" rel="noreferrer">
             <img
                 src={buildProjectImageUrl(thumbnail)}
-                alt={`${nom} thumbnail`}
+                alt={`${name} thumbnail`}
             />
             <div className="details">
                 <span className="languages">{languages.join(", ")}</span>
-                <span className="name">{nom}</span>
+                <span className="name">{name}</span>
             </div>
         </a>
     );

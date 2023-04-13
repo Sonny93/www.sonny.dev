@@ -27,7 +27,16 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "incremental": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@styles": [
+        "./styles/*"
+      ]
+    }
   },
   "include": [
     "src/**/*"

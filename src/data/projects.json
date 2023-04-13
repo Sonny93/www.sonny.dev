@@ -1,6 +1,6 @@
 [
     {
-        "nom": "Installerwindows.fr",
+        "name": "Installerwindows.fr",
         "description": "Guides pour (ré)installer Windows 10/11 au propre et faire des optimisations saines pour votre machine. Il s'agit de guides complets, que vous devriez pouvoir suivre quel que soit votre niveau en informatique.",
         "url": "https://www.installerwindows.fr/",
         "thumbnail": "installer-windows.webp",
@@ -12,7 +12,7 @@
         "github": "https://github.com/Sonny93/installerwindows.fr"
     },
     {
-        "nom": "Next Uploader",
+        "name": "Next Uploader",
         "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
         "url": "https://uploader.sonnydata.fr/",
         "thumbnail": "uploader.webp",
@@ -24,7 +24,7 @@
         "github": "https://github.com/Sonny93/next-uploader"
     },
     {
-        "nom": "Portfolio",
+        "name": "Portfolio",
         "description": "Mon portfolio.",
         "url": "https://www.sonny.dev/",
         "thumbnail": "portfolio.webp",
@@ -36,7 +36,7 @@
         "github": "https://github.com/Sonny93/portfolio"
     },
     {
-        "nom": "CV",
+        "name": "CV",
         "description": "Mon CV au format HTML.",
         "url": "https://cv.sonny.dev/",
         "thumbnail": "cv-html.webp",
@@ -47,7 +47,7 @@
         ]
     },
     {
-        "nom": "My Links",
+        "name": "My Links",
         "description": "Outil de centralisation des favoris.",
         "thumbnail": "my-links.webp",
         "languages": [
@@ -57,7 +57,7 @@
         ]
     },
     {
-        "nom": "Test Geoloc",
+        "name": "Test Geoloc",
         "description": "Test d'une app de géolocalisation",
         "url": "https://test-geoloc.vercel.app/",
         "thumbnail": "test-geoloc.webp",

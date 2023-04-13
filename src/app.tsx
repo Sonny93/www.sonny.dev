@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Section } from "./types";
+import { useEffect, useState } from "react";
 
-// Components
-import Navbar from "./components/Navbar/Navbar";
-import SectionsList from "./components/Sections/SectionsList";
+import Navbar from "components/Navbar/Navbar";
+import SectionsList from "components/Sections/SectionsList";
 
-// Config
-import { PATH_BG_IMG, sections, SectionsProvider } from "./config";
+import { PATH_BG_IMG, sections, SectionsProvider } from "config";
+import { Section } from "types";
 
-// Utils
-import { buildBackgroundImageUrl } from "./Utils/link";
+import { buildBackgroundImageUrl } from "utils/link";
 
 export default function App() {
     const [activeSection, setActiveSection] = useState<Section>(sections[0]);

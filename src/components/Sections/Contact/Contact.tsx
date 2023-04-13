@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-import { email } from "../../../config";
+import { email } from "config";
 import "./contact.scss";
 
 export default function Contact() {

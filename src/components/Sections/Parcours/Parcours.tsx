@@ -1,14 +1,13 @@
-import React from "react";
 import { CgChevronDoubleRight } from "react-icons/cg";
 
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import TimeRelative from "dayjs/plugin/relativeTime";
 
-import experiences from "../../jsons/experiences.json";
-import formations from "../../jsons/formations.json";
+import experiences from "data/experiences.json";
+import formations from "data/formations.json";
 
-import { Experience, Formation } from "../../../types";
+import { Experience, Formation } from "types";
 
 import "./parcours.scss";
 

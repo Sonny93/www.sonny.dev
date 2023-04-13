@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 
-import { Section } from "../../../types";
-import { name, SectionsProvider } from "../../../config";
+import Avatar from "components/Avatar";
 
-import Avatar from "../../Avatar";
+import { name, SectionsProvider } from "config";
+import { Section } from "types";
 
 import "./accueil.scss";
 

@@ -15,7 +15,7 @@ import {
     SiSass,
     SiSpringboot,
 } from "react-icons/si";
-import { SkillSection } from "../../types";
+import { SkillSection } from "types";
 
 const frontSkills: SkillSection = {
     name: "FrontEnd",

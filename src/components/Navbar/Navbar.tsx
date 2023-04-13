@@ -1,11 +1,12 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import { Link } from "react-scroll";
+import { MouseEvent, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-scroll";
 
-import { name, socialNetworks } from "../../config";
+import Avatar from "components/Avatar";
 
-import { Section, SocialNetwork } from "../../types";
-import Avatar from "../Avatar";
+import { name, socialNetworks } from "config";
+import { Section, SocialNetwork } from "types";
+
 import "./navbar.scss";
 
 export interface NavbarProps {

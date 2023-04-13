@@ -1,16 +1,18 @@
-import React from 'react';
-import { Section } from '../../types';
+import { Section } from "types";
 
-import './sections.scss';
+import "./sections.scss";
 
-export default function SectionsList({ sections }: { sections: Array<Section>; }): JSX.Element {
+interface SectionsListProps {
+    sections: Array<Section>;
+}
+export default function SectionsList({
+    sections,
+}: SectionsListProps): JSX.Element {
     return (
-        <div className='page-content' id='page-content'>
+        <div className="page-content" id="page-content">
             {sections.map((section: Section, key: number) => (
-                <div className='section' key={key} id={section.name}>
-                    <section.component
-                        {...section}
-                    />
+                <div className="section" key={key} id={section.name}>
+                    <section.component {...section} />
                 </div>
             ))}
         </div>
