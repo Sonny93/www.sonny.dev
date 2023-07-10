@@ -7,7 +7,6 @@ export default function Contact() {
   const [fields, setFields] = useState<{
     [key: string]: HTMLInputElement | null;
   }>({
-    email: null,
     subject: null,
     body: null,
   });
@@ -35,9 +34,9 @@ export default function Contact() {
       return alert("At least one field is missing");
     }
 
-    const url = `mailto:${fields.email?.value!}?subject=${
+    const url = `mailto:${email!}?subject=${
       fields.subject?.value
-    }&body=${encodeURI(fields.body?.value!)}&to=${email}`;
+    }&body=${encodeURI(fields.body?.value!)}`;
     window.open(url, "_blank")?.focus();
   };
 
@@ -49,16 +48,6 @@ export default function Contact() {
         onSubmit={handleSubmitContact}
         onChange={handleInputChange}
       >
-        <div className="field email">
-          <label htmlFor="email">Qui êtes-vous ? </label>
-          <input
-            type="text"
-            id="email"
-            placeholder="À quel adresse email puis-je vous répondre ?"
-            minLength={4}
-            required
-          />
-        </div>
         <div className="field subject">
           <label htmlFor="subject">Sujet</label>
           <input
