@@ -32,6 +32,8 @@ const ProjectItemBody = ({ project }: ProjectItemProps) => (
     <img
       src={buildProjectImageUrl(project.thumbnail)}
       alt={`${project.name} thumbnail`}
+      height={242}
+      width={430}
     />
     <div className="details">
       <span className="languages">{project.languages.join(", ")}</span>

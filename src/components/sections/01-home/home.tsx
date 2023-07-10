@@ -23,7 +23,7 @@ interface HomeProps {
 function Home({ sections }: HomeProps): JSX.Element {
   const nextSection = useMemo<Section | undefined>(
     () => (sections.length > 1 ? sections[1] : undefined),
-    [sections],
+    [sections]
   );
 
   return (
@@ -45,10 +45,15 @@ function Home({ sections }: HomeProps): JSX.Element {
       </p>
       {nextSection && (
         <div className="wrapper-scroll">
-          <Link smooth to={nextSection.name} containerId="page-content">
+          <Link
+            href="#"
+            smooth
+            to={nextSection.name}
+            containerId="page-content"
+          >
             <ScrollMouse />
+            <p>Défiler pour voir la suite !</p>
           </Link>
-          <p>Défiler pour voir la suite !</p>
         </div>
       )}
     </div>

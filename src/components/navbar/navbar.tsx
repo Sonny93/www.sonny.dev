@@ -91,6 +91,7 @@ function NavbarSectionItem({
       <Link
         className="navbar-item"
         activeClass="active"
+        href="#"
         smooth
         spy
         to={name}
