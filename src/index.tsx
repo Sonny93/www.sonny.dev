@@ -8,14 +8,14 @@ import "styles/index.scss";
 
 const container = document.getElementById("root");
 if (container) {
-    const root = createRoot(container);
-    root.render(
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
-    );
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
 
-    initializeAnalytic();
+  initializeAnalytic();
 } else {
-    throw new Error("Unable to find #root element");
+  throw new Error("Unable to find #root element");
 }

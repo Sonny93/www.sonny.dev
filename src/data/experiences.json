@@ -1,101 +1,101 @@
 [
-    {
-        "date": {
-            "start": "1 September 2022",
-            "end": ""
-        },
-        "city": "Paris",
-        "zipCode": 75002,
-        "company": "AIOS SH",
-        "details": "Développement web",
-        "type": "alternance"
+  {
+    "date": {
+      "start": "1 September 2022",
+      "end": ""
     },
-    {
-        "date": {
-            "start": "17 January 2022",
-            "end": "11 March 2022"
-        },
-        "city": "Paris",
-        "zipCode": 75002,
-        "company": "AIOS SH",
-        "details": "Développement web",
-        "type": "stage"
+    "city": "Paris",
+    "zipCode": 75002,
+    "company": "AIOS SH",
+    "details": "Développement web",
+    "type": "alternance"
+  },
+  {
+    "date": {
+      "start": "17 January 2022",
+      "end": "11 March 2022"
     },
-    {
-        "date": {
-            "start": "31 May 2021",
-            "end": "30 June 2021"
-        },
-        "city": "Vincennes",
-        "zipCode": 94300,
-        "company": "Andafter",
-        "details": "Développement web",
-        "type": "stage"
+    "city": "Paris",
+    "zipCode": 75002,
+    "company": "AIOS SH",
+    "details": "Développement web",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "31 May 2021",
+      "end": "30 June 2021"
     },
-    {
-        "date": {
-            "start": "18 November 2019",
-            "end": "24 January 2020"
-        },
-        "city": "Vincennes",
-        "zipCode": 94300,
-        "company": "Andafter",
-        "details": "Développement web",
-        "type": "stage"
+    "city": "Vincennes",
+    "zipCode": 94300,
+    "company": "Andafter",
+    "details": "Développement web",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "18 November 2019",
+      "end": "24 January 2020"
     },
-    {
-        "date": {
-            "start": "18 March 2019",
-            "end": "24 May 2019"
-        },
-        "city": "Suresnes",
-        "zipCode": 92150,
-        "company": "ACMS",
-        "details": "Administration réseau et maintenance informatique",
-        "type": "stage"
+    "city": "Vincennes",
+    "zipCode": 94300,
+    "company": "Andafter",
+    "details": "Développement web",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "18 March 2019",
+      "end": "24 May 2019"
     },
-    {
-        "date": {
-            "start": "22 May 2018",
-            "end": "29 June 2018"
-        },
-        "city": "Maisons-Alfort",
-        "zipCode": 94700,
-        "company": "Mac2 Webintelligence",
-        "details": "Développement web",
-        "type": "stage"
+    "city": "Suresnes",
+    "zipCode": 92150,
+    "company": "ACMS",
+    "details": "Administration réseau et maintenance informatique",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "22 May 2018",
+      "end": "29 June 2018"
     },
-    {
-        "date": {
-            "start": "27 February 2017",
-            "end": "3 March 2017"
-        },
-        "city": "Villepinte",
-        "zipCode": 93420,
-        "company": "DAF Truck France",
-        "details": "Réseau informatique",
-        "type": "stage"
+    "city": "Maisons-Alfort",
+    "zipCode": 94700,
+    "company": "Mac2 Webintelligence",
+    "details": "Développement web",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "27 February 2017",
+      "end": "3 March 2017"
     },
-    {
-        "date": {
-            "start": "4 January 2016",
-            "end": "8 January 2016"
-        },
-        "city": "Rosny-Sous-Bois",
-        "zipCode": 93110,
-        "company": "2Jpartners",
-        "details": "Observation réseau informatique et observation technique",
-        "type": "stage"
+    "city": "Villepinte",
+    "zipCode": 93420,
+    "company": "DAF Truck France",
+    "details": "Réseau informatique",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "4 January 2016",
+      "end": "8 January 2016"
     },
-    {
-        "date": {
-            "start": "7 December 2015",
-            "end": "11 December 2015"
-        },
-        "city": "Rosny-Sous-Bois",
-        "zipCode": 93110,
-        "company": "2Jpartners",
-        "details": "Observation réseau informatique et observation technique",
-        "type": "stage"
-    }
+    "city": "Rosny-Sous-Bois",
+    "zipCode": 93110,
+    "company": "2Jpartners",
+    "details": "Observation réseau informatique et observation technique",
+    "type": "stage"
+  },
+  {
+    "date": {
+      "start": "7 December 2015",
+      "end": "11 December 2015"
+    },
+    "city": "Rosny-Sous-Bois",
+    "zipCode": 93110,
+    "company": "2Jpartners",
+    "details": "Observation réseau informatique et observation technique",
+    "type": "stage"
+  }
 ]

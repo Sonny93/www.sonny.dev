@@ -1,57 +1,57 @@
 .section#aboutme {
-    min-height: auto;
-    height: auto;
+  min-height: auto;
+  height: auto;
 }
 
 .section > .about-me {
-    & > .skills {
+  & > .skills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    & h3 {
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    & .row {
+      width: 100%;
+    }
+
+    & .row .languages {
+      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+
+      & li {
+        user-select: none;
+        height: 95px;
+        width: 160px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        transition: 0.15s;
 
-        & h3 {
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 8px 4px -4px var(--lng-color);
+          transform: scale(1.15);
         }
 
-        & .row {
-            width: 100%;
+        & > svg {
+          font-size: 1.75em;
+          filter: drop-shadow(0 0 0.25em var(--lng-color));
         }
-
-        & .row .languages {
-            gap: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-
-            & li {
-                user-select: none;
-                height: 95px;
-                width: 160px;
-                background-color: rgba(0, 0, 0, 0.3);
-                border-radius: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                transition: 0.15s;
-
-                &:hover {
-                    background: rgba(0, 0, 0, 0.1);
-                    box-shadow: 0px 8px 4px -4px var(--lng-color);
-                    transform: scale(1.15);
-                }
-
-                & > svg {
-                    font-size: 1.75em;
-                    filter: drop-shadow(0 0 0.25em var(--lng-color));
-                }
-            }
-        }
+      }
     }
+  }
 }

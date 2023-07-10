@@ -1,37 +1,37 @@
 @import "styles/vars";
 
 .section > .contact {
-    display: flex !important;
-    flex-direction: column;
+  display: flex !important;
+  flex-direction: column;
 }
 
 .section > .contact > .form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  & > .field {
+    margin-bottom: 25px;
     display: flex;
-    flex: 1;
+    justify-content: center;
     flex-direction: column;
 
-    & > .field {
-        margin-bottom: 25px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        & > label {
-            user-select: none;
-            font-size: 1.15em;
-            margin-bottom: 5px;
-        }
-
-        & > textarea {
-            flex: 1;
-        }
-
-        &.body {
-            flex: 1;
-        }
-
-        &.confirm {
-            align-items: center;
-        }
+    & > label {
+      user-select: none;
+      font-size: 1.15em;
+      margin-bottom: 5px;
     }
+
+    & > textarea {
+      flex: 1;
+    }
+
+    &.body {
+      flex: 1;
+    }
+
+    &.confirm {
+      align-items: center;
+    }
+  }
 }

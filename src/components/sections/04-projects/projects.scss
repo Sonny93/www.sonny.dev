@@ -1,155 +1,155 @@
 @import "styles/vars";
 
 .section#projects {
-    min-height: auto;
-    height: auto;
+  min-height: auto;
+  height: auto;
 }
 
 .section > .projects {
-    & > ul {
-        gap: 25px;
-        padding: 0;
+  & > ul {
+    gap: 25px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  & ul li.projet {
+    height: auto;
+    width: fit-content;
+    margin-bottom: 15px;
+    gap: 15px;
+    display: flex;
+    align-items: flex-start;
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    & .description {
+      height: 100%;
+      display: flex;
+      gap: 1em;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+
+      & .details-description {
+        height: 100%;
+        width: 400px;
+        color: #fff;
+        background-color: $black;
+        backdrop-filter: blur(4px);
+        padding: 25px;
+        border-radius: $border-radius;
+        transition: 0.15s;
+      }
+
+      & .github > a {
+        font-size: 0.8em;
+        color: #fff;
+        background-color: $main-color;
+        padding: 0.5em 0.75em;
+        border-radius: 3px;
+        border: 1px solid $main-color;
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+        justify-content: center;
+        transition: 0.15s;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &:hover {
+      & .direct-link {
+        z-index: 1;
+        transform: scale(1.05);
+      }
+
+      & .details-description {
+        box-shadow: inset 0 0 3px 1px $black;
+      }
+
+      & img,
+      & .details {
+        box-shadow: 0 0 8px 2px $black;
+      }
+    }
+
+    & .direct-link {
+      height: 100%;
+      max-width: 430px;
+      min-width: 430px;
+      gap: 15px;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      transition: 0.25s;
+
+      & > img {
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+        border-radius: $border-radius;
+        transition: 0.15s;
+      }
+
+      & > .details {
+        height: fit-content;
+        width: 100%;
+        color: #fff;
+        background-color: $black;
+        backdrop-filter: blur(4px);
+        padding: 10px;
+        border-radius: $border-radius;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        transition: 0.15s;
+
+        & > .name {
+          color: #fff;
+          background-color: $main-color;
+          padding: 5px 10px;
+          margin-top: 2px;
+          border-radius: 3px;
+          border: 1px solid $main-color;
+        }
+      }
     }
-
-    & ul li.projet {
-        height: auto;
-        width: fit-content;
-        margin-bottom: 15px;
-        gap: 15px;
-        display: flex;
-        align-items: flex-start;
-
-        &:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        & .description {
-            height: 100%;
-            display: flex;
-            gap: 1em;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-
-            & .details-description {
-                height: 100%;
-                width: 400px;
-                color: #fff;
-                background-color: $black;
-                backdrop-filter: blur(4px);
-                padding: 25px;
-                border-radius: $border-radius;
-                transition: 0.15s;
-            }
-
-            & .github > a {
-                font-size: 0.8em;
-                color: #fff;
-                background-color: $main-color;
-                padding: 0.5em 0.75em;
-                border-radius: 3px;
-                border: 1px solid $main-color;
-                display: flex;
-                gap: 0.5em;
-                align-items: center;
-                justify-content: center;
-                transition: 0.15s;
-
-                &:hover {
-                    transform: scale(1.05);
-                }
-            }
-        }
-
-        &:hover {
-            & .direct-link {
-                z-index: 1;
-                transform: scale(1.05);
-            }
-
-            & .details-description {
-                box-shadow: inset 0 0 3px 1px $black;
-            }
-
-            & img,
-            & .details {
-                box-shadow: 0 0 8px 2px $black;
-            }
-        }
-
-        & .direct-link {
-            height: 100%;
-            max-width: 430px;
-            min-width: 430px;
-            gap: 15px;
-            display: flex;
-            flex: 1;
-            align-items: center;
-            justify-content: flex-end;
-            flex-direction: column;
-            transition: 0.25s;
-
-            & > img {
-                height: auto;
-                width: 100%;
-                object-fit: cover;
-                border-radius: $border-radius;
-                transition: 0.15s;
-            }
-
-            & > .details {
-                height: fit-content;
-                width: 100%;
-                color: #fff;
-                background-color: $black;
-                backdrop-filter: blur(4px);
-                padding: 10px;
-                border-radius: $border-radius;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                transition: 0.15s;
-
-                & > .name {
-                    color: #fff;
-                    background-color: $main-color;
-                    padding: 5px 10px;
-                    margin-top: 2px;
-                    border-radius: 3px;
-                    border: 1px solid $main-color;
-                }
-            }
-        }
-    }
+  }
 }
 
 @media screen and (max-width: 1224px) {
-    .section > .projects {
-        & ul li.projet {
-            width: 100%;
-            margin-bottom: 25px;
-            flex-direction: column !important;
+  .section > .projects {
+    & ul li.projet {
+      width: 100%;
+      margin-bottom: 25px;
+      flex-direction: column !important;
 
-            & .direct-link {
-                max-width: 100%;
-                min-width: 100%;
-            }
+      & .direct-link {
+        max-width: 100%;
+        min-width: 100%;
+      }
 
-            & .description,
-            & .description .details-description {
-                width: 100%;
-            }
-        }
+      & .description,
+      & .description .details-description {
+        width: 100%;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .section > .projects ul li.projet {
-        flex-direction: column !important;
-    }
+  .section > .projects ul li.projet {
+    flex-direction: column !important;
+  }
 }

@@ -17,57 +17,57 @@ export const name: string = "Sonny";
 export const email: string = "sonnylallier1@gmail.com";
 
 export const socialNetworks: Array<SocialNetwork> = [
-    {
-        id: "github",
-        link: "https://github.com/Sonny93",
-        icon: <BsGithub />,
-        title: "Page Github",
-    },
-    {
-        id: "linkedin",
-        link: "https://www.linkedin.com/in/sonnylallier/",
-        icon: <BsLinkedin />,
-        title: "Page Linkedin",
-    },
-    {
-        id: "email",
-        link: "mailto:" + email,
-        icon: <IoMailOutline />,
-        title: "Adresse email : " + email,
-    },
+  {
+    id: "github",
+    link: "https://github.com/Sonny93",
+    icon: <BsGithub />,
+    title: "Page Github",
+  },
+  {
+    id: "linkedin",
+    link: "https://www.linkedin.com/in/sonnylallier/",
+    icon: <BsLinkedin />,
+    title: "Page Linkedin",
+  },
+  {
+    id: "email",
+    link: "mailto:" + email,
+    icon: <IoMailOutline />,
+    title: "Adresse email : " + email,
+  },
 ];
 
 export const sections: Section[] = [
-    {
-        name: "home",
-        label: "Accueil",
-        background: "home.webp",
-        component: Home,
-    },
-    {
-        name: "aboutme",
-        label: "À propos",
-        background: "aboutme.webp",
-        component: AboutMe,
-    },
-    {
-        name: "experiences",
-        label: "Mon parcours",
-        background: "experiences.webp",
-        component: Experiences,
-    },
-    {
-        name: "projects",
-        label: "Mes projets",
-        background: "projects.webp",
-        component: Projects,
-    },
-    {
-        name: "contact",
-        label: "Me contacter",
-        background: "contact.webp",
-        component: Contact,
-    },
+  {
+    name: "home",
+    label: "Accueil",
+    background: "home.webp",
+    component: Home,
+  },
+  {
+    name: "aboutme",
+    label: "À propos",
+    background: "aboutme.webp",
+    component: AboutMe,
+  },
+  {
+    name: "experiences",
+    label: "Mon parcours",
+    background: "experiences.webp",
+    component: Experiences,
+  },
+  {
+    name: "projects",
+    label: "Mes projets",
+    background: "projects.webp",
+    component: Projects,
+  },
+  {
+    name: "contact",
+    label: "Me contacter",
+    background: "contact.webp",
+    component: Contact,
+  },
 ];
 
 export const SectionsProvider = createContext(sections);

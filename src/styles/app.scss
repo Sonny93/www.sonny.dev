@@ -1,25 +1,25 @@
 @import "styles/vars.scss";
 
 .App {
-    height: 100%;
-    width: 100%;
-    color: $font-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    backdrop-filter: blur(25px) brightness(0.7);
-    animation: 0.75s fadeInTop both;
+  height: 100%;
+  width: 100%;
+  color: $font-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  backdrop-filter: blur(25px) brightness(0.7);
+  animation: 0.75s fadeInTop both;
 }
 
 @keyframes fadeInTop {
-    0% {
-        opacity: 0;
-        transform: translate(0, -100px);
-    }
+  0% {
+    opacity: 0;
+    transform: translate(0, -100px);
+  }
 
-    100% {
-        opacity: initial;
-        transform: translate(0, 0);
-    }
+  100% {
+    opacity: initial;
+    transform: translate(0, 0);
+  }
 }

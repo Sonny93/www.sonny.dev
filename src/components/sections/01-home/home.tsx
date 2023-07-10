@@ -9,58 +9,54 @@ import { Section } from "types";
 import "./home.scss";
 
 export default function HomeWrapper() {
-    return (
-        <SectionsProvider.Consumer>
-            {(value) => <Home sections={value} />}
-        </SectionsProvider.Consumer>
-    );
+  return (
+    <SectionsProvider.Consumer>
+      {(value) => <Home sections={value} />}
+    </SectionsProvider.Consumer>
+  );
 }
 
 interface HomeProps {
-    sections: Array<Section>;
+  sections: Array<Section>;
 }
 
 function Home({ sections }: HomeProps): JSX.Element {
-    const nextSection = useMemo<Section | undefined>(
-        () => (sections.length > 1 ? sections[1] : undefined),
-        [sections]
-    );
+  const nextSection = useMemo<Section | undefined>(
+    () => (sections.length > 1 ? sections[1] : undefined),
+    [sections],
+  );
 
-    return (
-        <div className="home">
-            <Avatar size={240} />
-            <h2>{name} ✌️</h2>
-            <h1>
-                Développeur <span className="type">Fullstack</span>
-            </h1>
-            <p>
-                Étudiant en Bachelor Développement fullstack & DevOps à{" "}
-                <a
-                    href="https://ecole-ipssi.com/ecole-informatique-paris/"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    IPSSI Paris
-                </a>
-            </p>
-            {nextSection && (
-                <div className="wrapper-scroll">
-                    <Link
-                        smooth
-                        to={nextSection.name}
-                        containerId="page-content"
-                    >
-                        <ScrollMouse />
-                    </Link>
-                    <p>Défiler pour voir la suite !</p>
-                </div>
-            )}
+  return (
+    <div className="home">
+      <Avatar size={240} />
+      <h2>{name} ✌️</h2>
+      <h1>
+        Développeur <span className="type">Fullstack</span>
+      </h1>
+      <p>
+        Étudiant en Bachelor Développement fullstack & DevOps à{" "}
+        <a
+          href="https://ecole-ipssi.com/ecole-informatique-paris/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          IPSSI Paris
+        </a>
+      </p>
+      {nextSection && (
+        <div className="wrapper-scroll">
+          <Link smooth to={nextSection.name} containerId="page-content">
+            <ScrollMouse />
+          </Link>
+          <p>Défiler pour voir la suite !</p>
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 const ScrollMouse = (): JSX.Element => (
-    <span className="scroll-icon">
-        <span className="scroll-icon__dot"></span>
-    </span>
+  <span className="scroll-icon">
+    <span className="scroll-icon__dot"></span>
+  </span>
 );

@@ -1,108 +1,108 @@
 @import "styles/vars.scss";
 
 .section > .home {
-	user-select: none;
-	position: relative;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  user-select: none;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-	& > h1 {
-		font-size: 2.5em;
-		display: flex;
-		gap: 0.25em;
-		align-items: center;
+  & > h1 {
+    font-size: 2.5em;
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
 
-		& .type {
-			color: $main-color;
-		}
-	}
+    & .type {
+      color: $main-color;
+    }
+  }
 
-	& > p {
-		font-style: oblique;
-		font-size: 1.25em;
-		text-align: center;
-	}
+  & > p {
+    font-style: oblique;
+    font-size: 1.25em;
+    text-align: center;
+  }
 
-	& > .wrapper-scroll {
-		user-select: none;
-		position: absolute;
-		bottom: 15px;
-		left: 50%;
-		right: 50%;
-		width: fit-content;
-		text-align: center;
-		transform: translate(-50%);
+  & > .wrapper-scroll {
+    user-select: none;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    right: 50%;
+    width: fit-content;
+    text-align: center;
+    transform: translate(-50%);
 
-		& .scroll-icon {
-			cursor: pointer;
-			display: inline-block;
-			height: 3em;
-			width: 1.5em;
-			border: 3px solid #fff;
-			border-radius: 1em;
-			transition: 0.15s;
+    & .scroll-icon {
+      cursor: pointer;
+      display: inline-block;
+      height: 3em;
+      width: 1.5em;
+      border: 3px solid #fff;
+      border-radius: 1em;
+      transition: 0.15s;
 
-			&:hover {
-				transform: scale(1.1);
-			}
+      &:hover {
+        transform: scale(1.1);
+      }
 
-			& > .scroll-icon__dot {
-				display: block;
-				position: absolute;
-				left: 50%;
-				background: #fff;
-				height: 0.5em;
-				width: 0.5em;
-				top: 0.6em;
-				margin-left: -0.25em;
-				border-radius: 50%;
-				transform-origin: top center;
-				backface-visibility: hidden;
-				animation: scroll_wheel 2s ease-out infinite;
-			}
-		}
+      & > .scroll-icon__dot {
+        display: block;
+        position: absolute;
+        left: 50%;
+        background: #fff;
+        height: 0.5em;
+        width: 0.5em;
+        top: 0.6em;
+        margin-left: -0.25em;
+        border-radius: 50%;
+        transform-origin: top center;
+        backface-visibility: hidden;
+        animation: scroll_wheel 2s ease-out infinite;
+      }
+    }
 
-		& > p {
-			font-size: 0.8em;
-			white-space: nowrap;
-		}
-	}
+    & > p {
+      font-size: 0.8em;
+      white-space: nowrap;
+    }
+  }
 }
 
 @keyframes scroll_wheel {
-	0% {
-		transform: translateY(0);
-		opacity: 1;
-	}
-	25% {
-		opacity: 1;
-	}
-	75% {
-		transform: translateY(0.75em);
-		opacity: 0;
-	}
-	100% {
-		transform: translateY(0);
-		opacity: 0;
-	}
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(0.75em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 768px) {
-	.section > .accueil > h1 {
-		font-size: 35px;
-		gap: 0;
-		flex-direction: column;
-	}
+  .section > .accueil > h1 {
+    font-size: 35px;
+    gap: 0;
+    flex-direction: column;
+  }
 
-	.section > .accueil > p {
-		font-size: 18px;
-	}
+  .section > .accueil > p {
+    font-size: 18px;
+  }
 
-	.section > .accueil > .wrapper-scroll {
-		display: none;
-	}
+  .section > .accueil > .wrapper-scroll {
+    display: none;
+  }
 }

@@ -5,10 +5,10 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    resolve: {
-        alias: {
-            styles: require("path").resolve(__dirname, "src", "styles"),
-        },
+  resolve: {
+    alias: {
+      styles: require("path").resolve(__dirname, "src", "styles"),
     },
-    plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
+  },
+  plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
 });
