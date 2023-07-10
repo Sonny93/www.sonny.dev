@@ -1,6 +1,7 @@
-import { buildProjectImageUrl } from "@/utils/link";
 import { ReactNode } from "react";
+
 import { Project } from "types";
+import { buildProjectImageUrl } from "utils/link";
 
 interface ProjectItemProps {
   project: Project;

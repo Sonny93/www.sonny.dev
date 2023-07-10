@@ -32,9 +32,11 @@ interface SkillItemProps {
   color?: string;
 }
 const SkillItem = ({ children, color = "" }: SkillItemProps) => (
-  <Tilt tiltReverse perspective={500}>
-    <li style={{ "--lng-color": color } as any}>{children}</li>
-  </Tilt>
+  <li style={{ "--lng-color": color } as any}>
+    <Tilt tiltReverse perspective={500}>
+      {children}
+    </Tilt>
+  </li>
 );
 
 export default APropos;

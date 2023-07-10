@@ -1,6 +1,6 @@
 import { FormEvent, useMemo, useState } from "react";
 
-import { email } from "@/config";
+import { email } from "config";
 import "./contact.scss";
 
 export default function Contact() {
@@ -15,7 +15,7 @@ export default function Contact() {
   const canSend = useMemo<boolean>(() => {
     const fieldValues = Object.values(fields);
     const filledInputs = fieldValues.filter(
-      (field) => field?.value.trim() !== "" && field?.checkValidity(),
+      (field) => field?.value.trim() !== "" && field?.checkValidity()
     );
     return filledInputs.length === fieldValues.length;
   }, [fields]);
@@ -35,8 +35,9 @@ export default function Contact() {
       return alert("At least one field is missing");
     }
 
-    const url = `mailto:${fields.email?.value!}?subject=${fields.subject
-      ?.value}&body=${encodeURI(fields.body?.value!)}&to=${email}`;
+    const url = `mailto:${fields.email?.value!}?subject=${
+      fields.subject?.value
+    }&body=${encodeURI(fields.body?.value!)}&to=${email}`;
     window.open(url, "_blank")?.focus();
   };
 
