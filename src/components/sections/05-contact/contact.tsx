@@ -1,55 +1,89 @@
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
-import { email } from "config";
+import { email } from "@/config";
 import "./contact.scss";
 
 export default function Contact() {
-    const [subject, setSubject] = useState<string>("");
-    const [body, setBody] = useState<string>("");
+    const [fields, setFields] = useState<{
+        [key: string]: HTMLInputElement | null;
+    }>({
+        email: null,
+        subject: null,
+        body: null,
+    });
 
-    const canSend = useMemo<boolean>(
-        () => body !== "" && subject !== "",
-        [body, subject]
-    );
+    const canSend = useMemo<boolean>(() => {
+        const fieldValues = Object.values(fields);
+        const filledInputs = fieldValues.filter(
+            (field) => field?.value.trim() !== "" && field?.checkValidity()
+        );
+        return filledInputs.length === fieldValues.length;
+    }, [fields]);
 
-    const encodeBody = (str: string): string => encodeURI(str);
-    const openMailTo = () =>
-        window
-            .open(
-                `mailto:${email}?subject=${subject}&body=${encodeBody(body)}`,
-                "_blank"
-            )
-            ?.focus();
+    const handleInputChange = (event: FormEvent) => {
+        const input = event.target as HTMLInputElement;
+        input.checkValidity();
+        setFields((_fields) => ({
+            ..._fields,
+            [input.id]: input,
+        }));
+    };
+
+    const handleSubmitContact = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!canSend) {
+            return alert("At least one field is missing");
+        }
+
+        const url = `mailto:${fields.email?.value!}?subject=${
+            fields.subject?.value
+        }&body=${encodeURI(fields.body?.value!)}&to=${email}`;
+        window.open(url, "_blank")?.focus();
+    };
 
     return (
         <div className="contact">
             <h2>Me contacter</h2>
-            <div className="form">
-                <div className="field subject">
-                    <label htmlFor="input-subject">Sujet</label>
+            <form
+                className="form"
+                onSubmit={handleSubmitContact}
+                onChange={handleInputChange}
+            >
+                <div className="field email">
+                    <label htmlFor="email">Qui êtes-vous ? </label>
                     <input
                         type="text"
-                        id="input-subject"
+                        id="email"
+                        placeholder="À quel adresse email puis-je vous répondre ?"
+                        minLength={4}
+                        required
+                    />
+                </div>
+                <div className="field subject">
+                    <label htmlFor="subject">Sujet</label>
+                    <input
+                        type="text"
+                        id="subject"
                         placeholder="Pour quelle(s) raison(s) souhaitez-vous prendre contact ?"
-                        value={subject}
-                        onChange={({ target }) => setSubject(target.value)}
+                        minLength={4}
+                        required
                     />
                 </div>
                 <div className="field body">
-                    <label htmlFor="input-body">Contenu du message</label>
+                    <label htmlFor="body">Contenu du message</label>
                     <textarea
-                        id="input-body"
+                        id="body"
                         placeholder="Détaillez votre demande :)"
-                        value={body}
-                        onChange={({ target }) => setBody(target.value)}
+                        minLength={4}
+                        required
                     />
                 </div>
                 <div className="field confirm">
-                    <button onClick={openMailTo} disabled={!canSend}>
+                    <button type="submit" disabled={!canSend}>
                         Envoyer
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
