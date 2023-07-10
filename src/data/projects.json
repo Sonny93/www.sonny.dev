@@ -4,15 +4,34 @@
     "description": "Guides pour (ré)installer Windows 10/11 au propre et faire des optimisations saines pour votre machine. Il s'agit de guides complets, que vous devriez pouvoir suivre quel que soit votre niveau en informatique.",
     "url": "https://www.installerwindows.fr/",
     "thumbnail": "installer-windows.webp",
-    "languages": ["HTML", "SASS", "Next.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "Next.JS"
+    ],
     "github": "https://github.com/Sonny93/installerwindows.fr"
+  },
+  {
+    "name": "My Links",
+    "description": "MyLinks est un outil qui fonctionne comme le gestionnaire de favoris de votre navigateur à la différence près que vos liens MyLinks sont accessibles sur depuis tous vos appareils via le navigateur de votre choix.",
+    "thumbnail": "my-links.webp",
+    "languages": [
+      "HTML",
+      "SASS",
+      "Next.JS"
+    ],
+    "github": "https://github.com/Sonny93/my-links"
   },
   {
     "name": "Next Uploader",
     "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
     "url": "https://uploader.sonnydata.fr/",
     "thumbnail": "uploader.webp",
-    "languages": ["HTML", "SASS", "Next.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "Next.JS"
+    ],
     "github": "https://github.com/Sonny93/next-uploader"
   },
   {
@@ -20,7 +39,11 @@
     "description": "Mon portfolio.",
     "url": "https://www.sonny.dev/",
     "thumbnail": "portfolio.webp",
-    "languages": ["HTML", "SASS", "React.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "React.JS"
+    ],
     "github": "https://github.com/Sonny93/portfolio"
   },
   {
@@ -28,20 +51,22 @@
     "description": "Mon CV au format HTML.",
     "url": "https://cv.sonny.dev/",
     "thumbnail": "cv-html.webp",
-    "languages": ["HTML", "SASS", "React.JS"]
-  },
-  {
-    "name": "My Links",
-    "description": "Outil de centralisation des favoris.",
-    "thumbnail": "my-links.webp",
-    "languages": ["HTML", "SASS", "Next.JS"]
+    "languages": [
+      "HTML",
+      "SASS",
+      "React.JS"
+    ]
   },
   {
     "name": "Test Geoloc",
     "description": "Test d'une app de géolocalisation",
     "url": "https://test-geoloc.vercel.app/",
     "thumbnail": "test-geoloc.webp",
-    "languages": ["HTML", "SASS", "React.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "React.JS"
+    ],
     "github": "https://github.com/Sonny93/test-geoloc"
   }
 ]

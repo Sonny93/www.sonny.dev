@@ -38,16 +38,16 @@
       & .details-description {
         height: 100%;
         width: 400px;
+        line-height: 1.35em;
         color: #fff;
         background-color: $black;
-        backdrop-filter: blur(4px);
-        padding: 25px;
+        padding: 1.5em;
         border-radius: $border-radius;
         transition: 0.15s;
       }
 
       & .github > a {
-        font-size: 0.8em;
+        font-size: 0.9em;
         color: #fff;
         background-color: $main-color;
         padding: 0.5em 0.75em;

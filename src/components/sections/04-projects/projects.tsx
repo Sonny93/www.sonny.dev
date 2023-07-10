@@ -14,7 +14,7 @@ const Projects = () => (
       Ci-dessous la liste des projets que j'ai réalisé sur mon temps libre.
       <br />
       J'ai utilisé Github pour le versionning, et m'occupe moi-même de
-      l'hébergement des ces derniers.
+      l'hébergement de ces derniers.
     </p>
     <ul className="reset">
       {projects.map((project: Project, key: number) => (
@@ -32,10 +32,10 @@ const ProjectItemCard = ({ project }: { project: Project }) => (
       <div className="github">
         {project.github ? (
           <a href={project.github} target="_blank" rel="noreferrer">
-            <BsGithub /> Github
+            <BsGithub /> Voir le repo Github
           </a>
         ) : (
-          <i>Github non disponible</i>
+          <i>Repo github non disponible</i>
         )}
       </div>
     </div>
