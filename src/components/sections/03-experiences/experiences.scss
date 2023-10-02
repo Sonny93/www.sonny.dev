@@ -113,6 +113,7 @@
 @media screen and (max-width: 1224px) {
   .section > .experiences {
     & .timelines-wrapper {
+      gap: 3em;
       flex-direction: column;
 
       & > .timeline-wrapper {

@@ -12,9 +12,8 @@
 
   & > h1 {
     font-size: 2.5em;
-    display: flex;
-    gap: 0.25em;
-    align-items: center;
+    text-align: center;
+    white-space: pre-wrap;
 
     & .highlight {
       color: $main-color;
@@ -94,17 +93,11 @@
 }
 
 @media screen and (max-width: 768px) {
-  .section > .accueil > h1 {
-    font-size: 35px;
-    gap: 0;
-    flex-direction: column;
+  .section > .home > h1 {
+    font-size: 2em;
   }
 
-  .section > .accueil > p {
-    font-size: 18px;
-  }
-
-  .section > .accueil > .wrapper-scroll {
-    display: none;
+  .section > .home > p {
+    font-size: 1.15em;
   }
 }
