@@ -23,7 +23,7 @@ interface HomeProps {
 function Home({ sections }: HomeProps): JSX.Element {
   const nextSection = useMemo<Section | undefined>(
     () => (sections.length > 1 ? sections[1] : undefined),
-    [sections]
+    [sections],
   );
 
   return (

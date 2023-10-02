@@ -14,7 +14,7 @@ export default function Contact() {
   const canSend = useMemo<boolean>(() => {
     const fieldValues = Object.values(fields);
     const filledInputs = fieldValues.filter(
-      (field) => field?.value.trim() !== "" && field?.checkValidity()
+      (field) => field?.value.trim() !== "" && field?.checkValidity(),
     );
     return filledInputs.length === fieldValues.length;
   }, [fields]);
@@ -34,9 +34,8 @@ export default function Contact() {
       return alert("At least one field is missing");
     }
 
-    const url = `mailto:${email!}?subject=${
-      fields.subject?.value
-    }&body=${encodeURI(fields.body?.value!)}`;
+    const url = `mailto:${email!}?subject=${fields.subject
+      ?.value}&body=${encodeURI(fields.body?.value!)}`;
     window.open(url, "_blank")?.focus();
   };
 
