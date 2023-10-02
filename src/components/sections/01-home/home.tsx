@@ -34,7 +34,7 @@ function Home({ sections }: HomeProps): JSX.Element {
         Développeur <span className="type">Fullstack</span>
       </h1>
       <p>
-        Étudiant en Bachelor Développement fullstack & DevOps à{" "}
+        Étudiant en Mastère dev bigdata & IA à{" "}
         <a
           href="https://ecole-ipssi.com/ecole-informatique-paris/"
           target="_blank"

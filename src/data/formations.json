@@ -1,7 +1,15 @@
 [
   {
+    "dateDebut": "Oct. 2023",
+    "dateFin": "",
+    "ville": "Paris",
+    "codePostal": 75012,
+    "etablissement": "IPSSI",
+    "details": "Mastère dev bigdata & IA"
+  },
+  {
     "dateDebut": "Oct. 2022",
-    "dateFin": "Aujourd'hui",
+    "dateFin": "Sept. 2023",
     "ville": "Paris",
     "codePostal": 75012,
     "etablissement": "IPSSI",
