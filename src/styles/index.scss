@@ -59,14 +59,17 @@ button {
 
 ::-webkit-scrollbar {
   width: 10px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: $main-color;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
