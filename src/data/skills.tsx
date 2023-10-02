@@ -1,5 +1,6 @@
 import { FaJava } from "react-icons/fa";
 import {
+  SiAdonisjs,
   SiCsharp,
   SiCss3,
   SiDocker,
@@ -11,6 +12,7 @@ import {
   SiMysql,
   SiNextdotjs,
   SiPhp,
+  SiPostgresql,
   SiReact,
   SiSass,
   SiSpringboot,
@@ -86,6 +88,11 @@ const backendSkills: SkillSection = {
       icon: <SiSpringboot />,
       color: "#6cb52d",
     },
+    {
+      label: "Adonis.js",
+      icon: <SiAdonisjs />,
+      color: "#5a45ff",
+    },
   ],
 };
 
@@ -96,6 +103,11 @@ const dbSkill: SkillSection = {
       label: "MySQL",
       icon: <SiMysql />,
       color: "#F29111",
+    },
+    {
+      label: "Postgres",
+      icon: <SiPostgresql />,
+      color: "#699eca",
     },
   ],
 };
