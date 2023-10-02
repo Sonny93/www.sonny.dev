@@ -31,10 +31,11 @@ function Home({ sections }: HomeProps): JSX.Element {
       <Avatar size={240} />
       <h2>{name} ✌️</h2>
       <h1>
-        Développeur <span className="type">Fullstack</span>
+        Développeur <span className="highlight">Fullstack</span> &{" "}
+        <span className="highlight">DevOps</span>
       </h1>
       <p>
-        Étudiant en Mastère dev bigdata & IA à{" "}
+        Étudiant en <u>Mastère dev bigdata & IA</u> à{" "}
         <a
           href="https://ecole-ipssi.com/ecole-informatique-paris/"
           target="_blank"
