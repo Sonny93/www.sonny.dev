@@ -9,7 +9,8 @@
   },
   {
     "name": "My Links",
-    "description": "MyLinks est un outil qui fonctionne comme le gestionnaire de favoris de votre navigateur à la différence près que vos liens MyLinks sont accessibles sur depuis tous vos appareils via le navigateur de votre choix.",
+    "description": "MyLinks est un outil qui vous permet de gérer vos liens favoris dans une interface intuitive. Projet libre et open source, axé sur la confidentialité et l'auto-hébergement.",
+    "url": "https://my-links.sonnydata.fr/",
     "thumbnail": "my-links.webp",
     "languages": ["HTML", "SASS", "Next.JS"],
     "github": "https://github.com/Sonny93/my-links"
