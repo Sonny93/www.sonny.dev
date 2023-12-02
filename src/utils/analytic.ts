@@ -7,7 +7,7 @@ export function initializeAnalytic() {
 }
 
 export function initUmami(umamiId: string): void {
-  const script = createScriptTag("https://umami.sonnydata.fr/umami.js");
+  const script = createScriptTag("https://umami.sonnydata.fr/script.js");
   script.setAttribute("data-website-id", umamiId);
   document.head.appendChild(script);
 }
