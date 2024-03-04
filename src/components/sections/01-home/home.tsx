@@ -37,7 +37,7 @@ function Home({ sections }: HomeProps): JSX.Element {
       <p>
         Étudiant en <u>Mastère dev bigdata & IA</u> à{" "}
         <a
-          href="https://ecole-ipssi.com/ecole-informatique-paris/"
+          href="https://ecole-ipssi.com/ecole-informatique-a-paris/"
           target="_blank"
           rel="noreferrer"
         >
