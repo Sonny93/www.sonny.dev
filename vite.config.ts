@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import viteTsconfigPaths from "vite-tsconfig-paths";
 
+const PORT = 3000
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -11,4 +13,10 @@ export default defineConfig({
     },
   },
   plugins: [react(), viteTsconfigPaths()],
+  server: {
+    port: PORT
+  },
+  preview: {
+    port: PORT
+  }
 });

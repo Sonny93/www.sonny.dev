@@ -100,7 +100,10 @@ function ExperienceItem({ experience }: { experience: Experience }) {
     ? endDateOrToday.locale("fr").format(SHORT_DATE_FORMAT)
     : "Aujourd'hui";
 
-  const duration = startDate.locale("fr").from(endDateOrToday, true);
+  const duration = startDate
+    .subtract(1, "day")
+    .locale("fr")
+    .from(endDateOrToday, true);
 
   return (
     <li className="item">

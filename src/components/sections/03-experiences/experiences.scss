@@ -46,10 +46,11 @@
 
         &:before {
           position: absolute;
-          left: -50px;
+          top: -0.1em;
+          left: -3em;
           content: "";
           padding: 10px;
-          background-color: #fff;
+          background-color: #555;
           border: 5px solid $main-color;
           border-radius: 50%;
         }

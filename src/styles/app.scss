@@ -8,18 +8,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  backdrop-filter: blur(25px) brightness(0.7);
-  animation: 0.75s fadeInTop both;
+  backdrop-filter: blur(1em) brightness(0.7);
+  animation: 0.5s fadeIn both;
 }
 
-@keyframes fadeInTop {
+@keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translate(0, -100px);
   }
 
   100% {
-    opacity: initial;
-    transform: translate(0, 0);
+    opacity: 1;
   }
 }
