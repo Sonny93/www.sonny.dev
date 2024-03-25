@@ -1,22 +1,68 @@
+import styled from "@emotion/styled";
+import skills from "data/skills";
+import { styleVars } from "globalStyles";
 import { ReactNode } from "react";
 import Tilt from "react-parallax-tilt";
-
-import skills from "data/skills";
 import { Skill } from "types";
 
-import "./aboutme.scss";
+const SmallTitle = styled.h3({
+  textTransform: "uppercase",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "5px",
+});
+
+const Skills = styled.div({
+  display: "flex",
+  alignIems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+});
+
+const SkillStyle = styled.li({
+  userSelect: "none",
+  height: "95px",
+  width: "160px",
+  backgroundColor: styleVars.black,
+  borderRadius: styleVars.borderRadius,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+  transition: "0.15s",
+
+  "&:hover": {
+    background: styleVars.lightBlack,
+    boxShadow: "0px 8px 4px -4px var(--lng-color)",
+    transform: "scale(1.15)",
+  },
+
+  "& > svg": {
+    fontSize: "1.75em",
+    filter: "drop-shadow(0 0 0.25em var(--lng-color))",
+  },
+});
+
+const Languages = styled.ul({
+  display: "flex",
+  gap: "20px",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
 const APropos = () => (
-  <div className="about-me">
+  <div>
     <h2>Mes compétences</h2>
-    <div className="skills">
+    <Skills>
       {skills.map(({ name, skills }) => (
-        <div className="row" key={name}>
-          <h3>&#60;{name} /&#62;</h3>
-          <ul className="reset languages lang-fe">{skills.map(BuildItem)}</ul>
+        <div css={{ width: "100%" }} key={name}>
+          <SmallTitle>&#60;{name} /&#62;</SmallTitle>
+          <Languages className="reset">{skills.map(BuildItem)}</Languages>
         </div>
       ))}
-    </div>
+    </Skills>
   </div>
 );
 
@@ -32,11 +78,9 @@ interface SkillItemProps {
   color?: string;
 }
 const SkillItem = ({ children, color = "" }: SkillItemProps) => (
-  <li style={{ "--lng-color": color } as any}>
-    <Tilt tiltReverse perspective={500}>
-      {children}
-    </Tilt>
-  </li>
+  <Tilt tiltReverse perspective={500}>
+    <SkillStyle style={{ "--lng-color": color } as any}>{children}</SkillStyle>
+  </Tilt>
 );
 
 export default APropos;

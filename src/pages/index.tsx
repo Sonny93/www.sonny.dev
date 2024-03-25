@@ -1,17 +1,37 @@
-import { useEffect, useMemo, useState } from "react";
-
+import styled from "@emotion/styled";
 import Navbar from "components/navbar/navbar";
 import SectionsList from "components/sections/sectionsList";
-
-import { sections, SectionsProvider } from "config";
+import { sections } from "config";
+import { useEffect, useMemo, useState } from "react";
 import { Section } from "types";
-
+import { initializeAnalytic } from "utils/analytic";
 import { buildBackgroundImageUrl } from "utils/link";
+
+initializeAnalytic();
+
+const Background = styled.div({
+  position: "relative",
+  height: "100%",
+  width: "100%",
+  backgroundSize: "cover",
+  display: "flex",
+  alignItems: "center",
+  transition: "0.275s",
+  "&::before": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+    content: "''",
+    backdropFilter: "brightness(0.7) blur(1em)",
+  },
+});
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>(sections[0]);
   const background = useMemo<Section["background"]>(
-    () => activeSection.background || "",
+    () => activeSection.background ?? "",
     [activeSection],
   );
 
@@ -27,19 +47,14 @@ export default function App() {
   };
 
   return (
-    <div
-      className="background"
+    <Background
       style={{
-        backgroundImage: `url(${buildBackgroundImageUrl(background)}`,
+        backgroundImage: `url(${buildBackgroundImageUrl(background)})`,
       }}
     >
-      <div className="App">
-        <SectionsProvider.Provider value={sections}>
-          <Navbar setActiveSection={changeActiveSection} sections={sections} />
-          <SectionsList sections={sections} />
-        </SectionsProvider.Provider>
-      </div>
-    </div>
+      <Navbar setActiveSection={changeActiveSection} />
+      <SectionsList />
+    </Background>
   );
 }
 

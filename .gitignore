@@ -1,5 +1,13 @@
-node_modules/
-build/*
-dist/*
-.env
-tsconfig.tsbuildinfo
+# dependencies
+node_modules
+
+# next
+dist
+.next
+
+# yarn
+yarn.lock
+yarn-error.log
+
+# mac
+.DS_Store

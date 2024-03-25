@@ -1,20 +1,26 @@
+import styled from "@emotion/styled";
+import Avatar from "components/avatar";
+import { name, sections, socialNetworks } from "config";
 import { MouseEvent, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-scroll";
+import BtnNavbarMenu from "./btnNavbarMenu";
+import FindMe from "./findMe";
+import NavbarFooter from "./navbarFooter";
+import NavbarSectionItem from "./navbarSectionItem";
+import NavbarSectionList from "./navbarSectionList";
+import NavbarSocialItem from "./navbarSocialItem";
+import NavbarStyle from "./navbarStyle";
+import NavbarWrapper from "./navbarWrapper";
 
-import Avatar from "components/avatar";
-
-import { name, socialNetworks } from "config";
-import { Section, SocialNetwork } from "types";
-
-import "./navbar.scss";
+const NavbarTitle = styled.h2({
+  textAlign: "center",
+});
 
 export interface NavbarProps {
-  sections: Array<any>;
   setActiveSection: (name: string) => void;
 }
 
-export default function Navbar({ sections, setActiveSection }: NavbarProps) {
+export default function Navbar({ setActiveSection }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -36,31 +42,38 @@ export default function Navbar({ sections, setActiveSection }: NavbarProps) {
   const handleClickNavbarWrapper = ({
     currentTarget,
   }: MouseEvent<HTMLElement>) =>
-    currentTarget.className.startsWith("navbar-wrapper")
-      ? setMenuOpen(false)
-      : null;
+    currentTarget.id === "navbar-wrapper" ? setMenuOpen(false) : null;
 
-  const classNameNavbar = `navbar-wrapper ${
-    isMobile ? (menuOpen ? "mobile-open" : "mobile-close") : ""
-  }`;
   return (
     <>
-      <div className="btn-navbar-menu" onClick={toggleMenu}>
+      <BtnNavbarMenu onClick={toggleMenu}>
         <AiOutlineMenu />
-      </div>
-      <div className={classNameNavbar} onClick={handleClickNavbarWrapper}>
-        <div className="navbar">
-          <div className="header">
+      </BtnNavbarMenu>
+      <NavbarWrapper
+        isActive={isMobile ? menuOpen : false}
+        onClick={handleClickNavbarWrapper}
+        id="navbar-wrapper"
+      >
+        <NavbarStyle>
+          <div css={{ height: "fit-content", width: "100%" }}>
             <Avatar size={168} />
-            <h2>{name}</h2>
-            <p>Où me retrouver ?</p>
-            <ul className="find-me">
+            <NavbarTitle>{name}</NavbarTitle>
+            <p
+              css={{
+                fontSize: "0.9em",
+                fontStyle: "italic",
+                margin: "5px 0",
+              }}
+            >
+              Où me retrouver ?
+            </p>
+            <FindMe>
               {socialNetworks.map((social, key) => (
                 <NavbarSocialItem key={key} {...social} />
               ))}
-            </ul>
+            </FindMe>
           </div>
-          <ul className="items">
+          <NavbarSectionList>
             {sections.map((section, key) => (
               <NavbarSectionItem
                 setActiveSection={setActiveSection}
@@ -68,49 +81,12 @@ export default function Navbar({ sections, setActiveSection }: NavbarProps) {
                 key={key}
               />
             ))}
-          </ul>
-          <div className="footer">
+          </NavbarSectionList>
+          <NavbarFooter>
             Fait avec ❤️ par <b>{name}</b>
-          </div>
-        </div>
-      </div>
+          </NavbarFooter>
+        </NavbarStyle>
+      </NavbarWrapper>
     </>
-  );
-}
-
-function NavbarSectionItem({
-  section,
-  setActiveSection,
-}: {
-  section: Section;
-  setActiveSection: (name: string) => void;
-}) {
-  const { name, label } = section;
-  return (
-    <li>
-      <Link
-        className="navbar-item"
-        activeClass="active"
-        href="#"
-        smooth
-        spy
-        to={name}
-        containerId="page-content"
-        onSetActive={setActiveSection}
-        offset={-(window.innerHeight / 2.75)}
-      >
-        {label}
-      </Link>
-    </li>
-  );
-}
-
-function NavbarSocialItem({ title, link, icon }: SocialNetwork) {
-  return (
-    <li className="item">
-      <a href={link} target="_blank" rel="noreferrer" title={title}>
-        {icon}
-      </a>
-    </li>
   );
 }

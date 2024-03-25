@@ -1,5 +1,5 @@
 export function initializeAnalytic() {
-  const umami_id = import.meta.env.VITE_UMAMI_ID;
+  const umami_id = process.env.UMAMI_ID;
   if (umami_id) {
     console.log("Setting up Umami", umami_id);
     initUmami(umami_id);

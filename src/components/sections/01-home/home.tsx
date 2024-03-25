@@ -1,68 +1,76 @@
+import styled from "@emotion/styled";
+import Avatar from "components/avatar";
+import ExternalLink from "components/externalLink";
+import ScrollMouse from "components/scrollButton";
+import { name, sections } from "config";
+import { styleVars } from "globalStyles";
 import { useMemo } from "react";
 import { Link } from "react-scroll";
-
-import Avatar from "components/avatar";
-
-import { name, SectionsProvider } from "config";
 import { Section } from "types";
 
-import "./home.scss";
+const HomeStyle = styled.div({
+  userSelect: "none",
+  position: "relative",
+  height: "100%",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+});
 
-export default function HomeWrapper() {
-  return (
-    <SectionsProvider.Consumer>
-      {(value) => <Home sections={value} />}
-    </SectionsProvider.Consumer>
-  );
-}
+const Title = styled.h1({
+  fontSize: "2.5em",
+  textAlign: "center",
+  whiteSpace: "pre-wrap",
+  margin: ".75em 0",
+  "@media (max-width: calc(768px + 2em))": {
+    fontSize: "2em",
+  },
+});
 
-interface HomeProps {
-  sections: Array<Section>;
-}
+const SubText = styled.p({
+  fontStyle: "oblique",
+  fontSize: "1.25em",
+  textAlign: "center",
+  textUnderlineOffset: ".25em",
+  marginTop: "-1em",
+  "@media (max-width: calc(768px + 2em))": {
+    fontSize: "1.15em",
+  },
+});
 
-function Home({ sections }: HomeProps): JSX.Element {
+export default function Home(): JSX.Element {
   const nextSection = useMemo<Section | undefined>(
     () => (sections.length > 1 ? sections[1] : undefined),
     [sections],
   );
 
   return (
-    <div className="home">
+    <HomeStyle className="home">
       <Avatar size={240} />
       <h2>{name} ✌️</h2>
-      <h1>
-        Développeur <span className="highlight">Fullstack</span> &{" "}
-        <span className="highlight">DevOps</span>
-      </h1>
-      <p>
+      <Title>
+        Développeur <span css={{ color: styleVars.blue }}>Fullstack</span> &{" "}
+        <span css={{ color: styleVars.blue }}>DevOps</span>
+      </Title>
+      <SubText>
         Étudiant en <u>Mastère dev bigdata & IA</u> à{" "}
-        <a
-          href="https://ecole-ipssi.com/ecole-informatique-a-paris/"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <ExternalLink href="https://ecole-ipssi.com/ecole-informatique-a-paris/">
           IPSSI Paris
-        </a>
-      </p>
+        </ExternalLink>
+      </SubText>
       {nextSection && (
-        <div className="wrapper-scroll">
-          <Link
-            href="#"
-            smooth
-            to={nextSection.name}
-            containerId="page-content"
-          >
-            <ScrollMouse />
-            <p>Défiler pour voir la suite !</p>
-          </Link>
-        </div>
+        <Link
+          className="reset"
+          href="#"
+          smooth
+          to={nextSection.name}
+          containerId="page-content"
+        >
+          <ScrollMouse />
+        </Link>
       )}
-    </div>
+    </HomeStyle>
   );
 }
-
-const ScrollMouse = (): JSX.Element => (
-  <span className="scroll-icon">
-    <span className="scroll-icon__dot"></span>
-  </span>
-);

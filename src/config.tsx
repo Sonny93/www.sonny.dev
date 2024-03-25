@@ -1,4 +1,3 @@
-import { createContext } from "react";
 import { AiFillMail } from "react-icons/ai";
 import { BsDiscord, BsGithub, BsLinkedin } from "react-icons/bs";
 
@@ -21,13 +20,13 @@ export const socialNetworks: Array<SocialNetwork> = [
     id: "github",
     link: "https://github.com/Sonny93",
     icon: <BsGithub />,
-    title: "Page Github",
+    title: "Profil Github",
   },
   {
     id: "linkedin",
     link: "https://www.linkedin.com/in/sonnylallier/",
     icon: <BsLinkedin />,
-    title: "Page Linkedin",
+    title: "Profil Linkedin",
   },
   {
     id: "discord",
@@ -75,5 +74,3 @@ export const sections: Section[] = [
     component: Contact,
   },
 ];
-
-export const SectionsProvider = createContext(sections);

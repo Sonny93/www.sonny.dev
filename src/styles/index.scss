@@ -1,42 +1,6 @@
 @import "input.scss";
 @import "app.scss";
 
-* {
-  outline: none;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100vh;
-  width: 100vw;
-  font-size: 17px;
-  font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-}
-
-a {
-  color: $main-color;
-  text-decoration: none;
-}
-
-#root {
-  height: 100%;
-  width: 100%;
-}
-
-.background {
-  height: 100%;
-  width: 100%;
-  background: #333;
-  background-size: cover;
-  transition: 0.275s;
-  transition-delay: 150ms;
-}
-
 ul.reset {
   padding-left: 0.5em;
 
