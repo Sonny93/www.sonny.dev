@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 
 import "styles/index.scss";
 
+const umamiId = process.env.UMAMI_ID;
+const umamiScriptUrl = "https://umami.sonnydata.fr/script.js";
 export default function Application({ Component, pageProps }) {
   const { locale } = useRouter();
   return (
@@ -26,6 +28,9 @@ export default function Application({ Component, pageProps }) {
       />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {umamiId && (
+          <script src={umamiScriptUrl} async defer data-website-id={umamiId} />
+        )}
       </Head>
       <Component {...pageProps} />
     </>

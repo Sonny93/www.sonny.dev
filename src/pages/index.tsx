@@ -5,10 +5,7 @@ import { sections } from "config";
 import Head from "next/head";
 import { useMemo, useState } from "react";
 import { Section } from "types";
-import { initializeAnalytic } from "utils/analytic";
 import { buildBackgroundImageUrl } from "utils/link";
-
-initializeAnalytic();
 
 const Background = styled.div({
   position: "relative",

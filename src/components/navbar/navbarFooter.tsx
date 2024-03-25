@@ -7,11 +7,11 @@ const NavbarFooter = styled.div({
   letterSpacing: "0.5px",
   fontStyle: "italic",
   padding: "20px 0",
-  borderTop: `1px solid ${styleVars.gray}`,
   display: "flex",
+  gap: "5px",
   alignItems: "center",
   justifyContent: "center",
-  gap: "0 5px",
+  flexDirection: "column",
 });
 
 export default NavbarFooter;

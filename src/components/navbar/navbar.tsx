@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import Avatar from "components/avatar";
 import { name, sections, socialNetworks } from "config";
+import { styleVars } from "globalStyles";
 import { MouseEvent, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import packageJson from "../../../package.json";
 import BtnNavbarMenu from "./btnNavbarMenu";
 import FindMe from "./findMe";
 import NavbarFooter from "./navbarFooter";
@@ -83,7 +85,12 @@ export default function Navbar({ setActiveSection }: NavbarProps) {
             ))}
           </NavbarSectionList>
           <NavbarFooter>
-            Fait avec ❤️ par <b>{name}</b>
+            <span title="Oui je l'ai fait moi-même 👀">
+              Fait avec ❤️ par {name}
+            </span>
+            <span css={{ color: styleVars.gray }}>
+              Version {packageJson.version}
+            </span>
           </NavbarFooter>
         </NavbarStyle>
       </NavbarWrapper>
