@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import Navbar from "components/navbar/navbar";
 import SectionsList from "components/sections/sectionsList";
 import { sections } from "config";
-import { useEffect, useMemo, useState } from "react";
+import Head from "next/head";
+import { useMemo, useState } from "react";
 import { Section } from "types";
 import { initializeAnalytic } from "utils/analytic";
 import { buildBackgroundImageUrl } from "utils/link";
@@ -35,8 +36,6 @@ export default function App() {
     [activeSection],
   );
 
-  useEffect(preloadBackgrounds, []);
-
   const changeActiveSection = (name: string) => {
     const section = sections.find((s) => s.name === name);
     if (section) {
@@ -52,21 +51,23 @@ export default function App() {
         backgroundImage: `url(${buildBackgroundImageUrl(background)})`,
       }}
     >
+      <PreloadBackgrounds />
       <Navbar setActiveSection={changeActiveSection} />
       <SectionsList />
     </Background>
   );
 }
 
-const preloadBackgrounds = () =>
-  sections.forEach(({ background }) => preloadImage(background));
-
-function preloadImage(image: string): void {
-  const link = document.createElement("link");
-  link.setAttribute("rel", "prefetch");
-  link.setAttribute("as", "image");
-  link.setAttribute("crossorigin", "anonymous");
-  link.setAttribute("importance", "high");
-  link.setAttribute("href", buildBackgroundImageUrl(image));
-  document.head.appendChild(link);
-}
+const PreloadBackgrounds = () => (
+  <Head>
+    {sections.map(({ background }) => (
+      <link
+        rel="prefetch"
+        as="image"
+        crossOrigin="anonymous"
+        href={buildBackgroundImageUrl(background)}
+        key={background}
+      />
+    ))}
+  </Head>
+);
