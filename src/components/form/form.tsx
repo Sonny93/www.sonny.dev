@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Form = styled.form({
-  display: "flex",
+  display: 'flex',
   flex: 1,
-  flexDirection: "column",
+  flexDirection: 'column',
 });
 
 export default Form;

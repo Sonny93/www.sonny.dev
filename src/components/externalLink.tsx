@@ -1,8 +1,8 @@
-import { Interpolation, Theme } from "@emotion/react";
-import Link, { LinkProps } from "next/link";
-import { CSSProperties, ReactNode } from "react";
+import { Interpolation, Theme } from '@emotion/react';
+import Link, { LinkProps } from 'next/link';
+import { CSSProperties, ReactNode } from 'react';
 
-export default function ExternalLink({
+const ExternalLink = ({
   children,
   title,
   ...props
@@ -11,10 +11,10 @@ export default function ExternalLink({
   style?: CSSProperties;
   css?: Interpolation<Theme>;
   title?: string;
-}) {
-  return (
-    <Link target="_blank" rel="noreferrer" title={title} {...props}>
-      {children}
-    </Link>
-  );
-}
+}) => (
+  <Link target="_blank" rel="noreferrer" title={title} {...props}>
+    {children}
+  </Link>
+);
+
+export default ExternalLink;

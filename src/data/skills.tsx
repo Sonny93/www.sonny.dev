@@ -1,4 +1,4 @@
-import { FaJava } from "react-icons/fa";
+import { FaJava } from 'react-icons/fa';
 import {
   SiAdonisjs,
   SiCsharp,
@@ -16,112 +16,113 @@ import {
   SiReact,
   SiSass,
   SiSpringboot,
-} from "react-icons/si";
-import { SkillSection } from "types";
+} from 'react-icons/si';
+import { SkillSection } from '~/types';
 
 const frontSkills: SkillSection = {
-  name: "FrontEnd",
+  name: 'FrontEnd',
   skills: [
     {
-      label: "HTML",
+      label: 'HTML',
       icon: <SiHtml5 />,
-      color: "#dd4b25",
+      color: '#dd4b25',
     },
     {
-      label: "CSS",
+      label: 'CSS',
       icon: <SiCss3 />,
-      color: "#146eb0",
+      color: '#146eb0',
     },
     {
-      label: "SASS",
+      label: 'SASS',
       icon: <SiSass />,
-      color: "#c76494",
+      color: '#c76494',
     },
     {
-      label: "JavaScript",
+      label: 'JavaScript',
       icon: <SiJavascript />,
-      color: "#efd81d",
+      color: '#efd81d',
     },
     {
-      label: "React",
+      label: 'React',
       icon: <SiReact />,
-      color: "#5ed3f3",
+      color: '#5ed3f3',
     },
   ],
 };
 
 const backendSkills: SkillSection = {
-  name: "BackEnd",
+  name: 'BackEnd',
   skills: [
     {
-      label: "Next",
+      label: 'Next',
       icon: <SiNextdotjs />,
-      color: "#000",
+      color: '#000',
     },
     {
-      label: "Fastify",
+      label: 'Fastify',
       icon: <SiFastify />,
-      color: "#fff",
+      color: '#fff',
     },
     {
-      label: "PHP",
+      label: 'PHP',
       icon: <SiPhp />,
-      color: "#777BB3",
+      color: '#777BB3',
     },
     {
-      label: "C#",
+      label: 'C#',
       icon: <SiCsharp />,
-      color: "#823085",
+      color: '#823085',
     },
     {
-      label: "Kotlin",
+      label: 'Kotlin',
       icon: <SiKotlin />,
-      color: "#B125EA",
+      color: '#B125EA',
     },
     {
-      label: "Java",
+      label: 'Java',
       icon: <FaJava />,
-      color: "#f89820",
+      color: '#f89820',
     },
     {
-      label: "Spring Boot",
+      label: 'Spring Boot',
       icon: <SiSpringboot />,
-      color: "#6cb52d",
+      color: '#6cb52d',
     },
     {
-      label: "Adonis.js",
+      label: 'Adonis.js',
       icon: <SiAdonisjs />,
-      color: "#5a45ff",
+      color: '#5a45ff',
     },
   ],
 };
 
 const dbSkill: SkillSection = {
-  name: "Base_de_données-SGBD",
+  name: 'Base_de_données-SGBD',
   skills: [
     {
-      label: "MySQL",
+      label: 'MySQL',
       icon: <SiMysql />,
-      color: "#F29111",
+      color: '#F29111',
     },
     {
-      label: "Postgres",
+      label: 'Postgres',
       icon: <SiPostgresql />,
-      color: "#699eca",
+      color: '#699eca',
     },
   ],
 };
 
 const devopsSkill: SkillSection = {
-  name: "DevOps-Admin_Sys",
+  name: 'DevOps-Admin_Sys',
   skills: [
-    { label: "Docker", icon: <SiDocker />, color: "#0fb6ec" },
+    { label: 'Docker', icon: <SiDocker />, color: '#0fb6ec' },
     {
-      label: "Kubernetes",
+      label: 'Kubernetes',
       icon: <SiKubernetes />,
-      color: "#2e6de7",
+      color: '#2e6de7',
     },
   ],
 };
 
-export default [frontSkills, backendSkills, dbSkill, devopsSkill];
+const skills = [frontSkills, backendSkills, dbSkill, devopsSkill];
+export default skills;

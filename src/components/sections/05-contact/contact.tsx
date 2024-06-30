@@ -1,14 +1,14 @@
-import styled from "@emotion/styled";
-import Form from "components/form/form";
-import FormField from "components/form/formField";
-import FormFieldLabel from "components/form/formFieldLabel";
-import FormTextarea from "components/form/formTextarea";
-import { email } from "config";
-import { FormEvent, useMemo, useState } from "react";
+import styled from '@emotion/styled';
+import Form from '~/components/form/form';
+import FormField from '~/components/form/formField';
+import FormFieldLabel from '~/components/form/formFieldLabel';
+import FormTextarea from '~/components/form/formTextarea';
+import { email } from '~/config';
+import { FormEvent, useMemo, useState } from 'react';
 
 const ContactStyle = styled.div({
-  display: "flex !important",
-  flexDirection: "column",
+  display: 'flex !important',
+  flexDirection: 'column',
 });
 
 export default function Contact() {
@@ -22,7 +22,7 @@ export default function Contact() {
   const canSend = useMemo<boolean>(() => {
     const fieldValues = Object.values(fields);
     const filledInputs = fieldValues.filter(
-      (field) => field?.value.trim() !== "" && field?.checkValidity(),
+      (field) => field?.value.trim() !== '' && field?.checkValidity()
     );
     return filledInputs.length === fieldValues.length;
   }, [fields]);
@@ -39,13 +39,13 @@ export default function Contact() {
   const handleSubmitContact = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!canSend) {
-      return alert("At least one field is missing");
+      return alert('At least one field is missing');
     }
 
     const url = `mailto:${email!}?subject=${
       fields.subject?.value
     }&body=${encodeURI(fields.body?.value!)}`;
-    window.open(url, "_blank")?.focus();
+    window.open(url, '_blank')?.focus();
   };
 
   return (
@@ -71,7 +71,7 @@ export default function Contact() {
             required
           />
         </FormField>
-        <FormField css={{ alignItems: "center" }}>
+        <FormField css={{ alignItems: 'center' }}>
           <button type="submit" disabled={!canSend}>
             Envoyer
           </button>

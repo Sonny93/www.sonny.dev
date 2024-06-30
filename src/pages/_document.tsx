@@ -1,6 +1,6 @@
-import { Global } from "@emotion/react";
-import { cssReset, htmlBodyStyle } from "globalStyles";
-import { Head, Html, Main, NextScript } from "next/document";
+import { Global } from '@emotion/react';
+import { cssReset, htmlBodyStyle } from '~/globalStyles';
+import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (

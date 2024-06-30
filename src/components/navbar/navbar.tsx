@@ -1,21 +1,22 @@
-import styled from "@emotion/styled";
-import Avatar from "components/avatar";
-import { name, sections, socialNetworks } from "config";
-import { styleVars } from "globalStyles";
-import { MouseEvent, useEffect, useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
-import packageJson from "../../../package.json";
-import BtnNavbarMenu from "./btnNavbarMenu";
-import FindMe from "./findMe";
-import NavbarFooter from "./navbarFooter";
-import NavbarSectionItem from "./navbarSectionItem";
-import NavbarSectionList from "./navbarSectionList";
-import NavbarSocialItem from "./navbarSocialItem";
-import NavbarStyle from "./navbarStyle";
-import NavbarWrapper from "./navbarWrapper";
+import packageJson from '@/package.json';
+import styled from '@emotion/styled';
+import { MouseEvent, useEffect, useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import Avatar from '~/components/avatar';
+import ExternalLink from '~/components/externalLink';
+import BtnNavbarMenu from '~/components/navbar/btnNavbarMenu';
+import FindMe from '~/components/navbar/findMe';
+import NavbarFooter from '~/components/navbar/navbarFooter';
+import NavbarSectionItem from '~/components/navbar/navbarSectionItem';
+import NavbarSectionList from '~/components/navbar/navbarSectionList';
+import NavbarSocialItem from '~/components/navbar/navbarSocialItem';
+import NavbarStyle from '~/components/navbar/navbarStyle';
+import NavbarWrapper from '~/components/navbar/navbarWrapper';
+import { name, sections, socialNetworks } from '~/config';
+import { styleVars } from '~/globalStyles';
 
 const NavbarTitle = styled.h2({
-  textAlign: "center",
+  textAlign: 'center',
 });
 
 export interface NavbarProps {
@@ -36,15 +37,15 @@ export default function Navbar({ setActiveSection }: NavbarProps) {
   };
   useEffect(() => {
     handleWindowSizeChange();
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => window.removeEventListener("resize", handleWindowSizeChange);
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => window.removeEventListener('resize', handleWindowSizeChange);
   }, []);
 
   const toggleMenu = () => setMenuOpen((state: boolean) => !state);
   const handleClickNavbarWrapper = ({
     currentTarget,
   }: MouseEvent<HTMLElement>) =>
-    currentTarget.id === "navbar-wrapper" ? setMenuOpen(false) : null;
+    currentTarget.id === 'navbar-wrapper' ? setMenuOpen(false) : null;
 
   return (
     <>
@@ -57,14 +58,14 @@ export default function Navbar({ setActiveSection }: NavbarProps) {
         id="navbar-wrapper"
       >
         <NavbarStyle>
-          <div css={{ height: "fit-content", width: "100%" }}>
+          <div css={{ height: 'fit-content', width: '100%' }}>
             <Avatar size={168} />
             <NavbarTitle>{name}</NavbarTitle>
             <p
               css={{
-                fontSize: "0.9em",
-                fontStyle: "italic",
-                margin: "5px 0",
+                fontSize: '0.9em',
+                fontStyle: 'italic',
+                margin: '5px 0',
               }}
             >
               Où me retrouver ?
@@ -88,9 +89,12 @@ export default function Navbar({ setActiveSection }: NavbarProps) {
             <span title="Oui je l'ai fait moi-même 👀">
               Fait avec ❤️ par {name}
             </span>
-            <span css={{ color: styleVars.gray }}>
+            <ExternalLink
+              href="https://github.com/Sonny93/portfolio"
+              css={{ color: styleVars.gray }}
+            >
               Version {packageJson.version}
-            </span>
+            </ExternalLink>
           </NavbarFooter>
         </NavbarStyle>
       </NavbarWrapper>

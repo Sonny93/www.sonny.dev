@@ -1,9 +1,8 @@
-import React, { ReactElement } from "react";
-
-import { CgChevronDoubleRight } from "react-icons/cg";
+import { ReactElement } from 'react';
+import { CgChevronDoubleRight } from 'react-icons/cg';
 
 export function boldFirstChar(str: string) {
-  const splitStr = str.split("");
+  const splitStr = str.split('');
   return (
     <>
       <b>{splitStr.shift()}</b>
@@ -29,7 +28,7 @@ export function List({
   itemClass,
   itemIconEnabled = true,
 }: ListProps) {
-  const className = "reset" + (listClassName ? "listClassName" : "");
+  const className = 'reset' + (listClassName ? 'listClassName' : '');
   return (
     <>
       {title && (

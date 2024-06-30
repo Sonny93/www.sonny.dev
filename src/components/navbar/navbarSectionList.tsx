@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const NavbarSectionList = styled.ul({
-  height: "fit-content",
-  width: "100%",
-  listStyle: "none",
+  height: 'fit-content',
+  width: '100%',
+  listStyle: 'none',
   padding: 0,
-  margin: "1em 0",
+  margin: '1em 0',
   flex: 1,
 });
 

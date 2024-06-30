@@ -1,31 +1,31 @@
-import styled from "@emotion/styled";
-import ExternalLink from "components/externalLink";
-import projects from "data/projects.json";
-import { styleVars } from "globalStyles";
-import { BsGithub } from "react-icons/bs";
-import { Project } from "types";
-import ProjectCard from "./projectCard";
+import styled from '@emotion/styled';
+import ExternalLink from '~/components/externalLink';
+import projects from '~/data/projects.json';
+import { styleVars } from '~/globalStyles';
+import { BsGithub } from 'react-icons/bs';
+import { Project } from '~/types';
+import ProjectCard from './projectCard';
 import {
   ProjectDescription,
   ProjectDescriptionWrapper,
-} from "./projectDescription";
-import ProjectDetails from "./projectDetails";
+} from './projectDescription';
+import ProjectDetails from './projectDetails';
 
 const SectionDescription = styled.p({
-  backdropFilter: "blur(7px)",
+  backdropFilter: 'blur(7px)',
   background: styleVars.black,
-  padding: "20px",
+  padding: '20px',
   borderRadius: styleVars.borderRadius,
 });
 
 const ProjectList = styled.ul({
   padding: 0,
-  marginTop: "1em",
-  display: "flex",
-  gap: "25px",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
+  marginTop: '1em',
+  display: 'flex',
+  gap: '25px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
 });
 
 const Projects = () => (
@@ -38,7 +38,7 @@ const Projects = () => (
       l'hébergement de ces derniers.
     </SectionDescription>
     <ProjectList>
-      {projects.map((project: Project) => (
+      {projects.map((project: any) => (
         <ProjectItemCard project={project} key={project?.name} />
       ))}
     </ProjectList>
@@ -48,7 +48,7 @@ const Projects = () => (
 const ProjectItemCard = ({ project }: { project: Project }) => (
   <ProjectCard>
     {project.url ? (
-      <ExternalLink css={{ width: "100%" }} href={project.url}>
+      <ExternalLink css={{ width: '100%' }} href={project.url}>
         <ProjectDetails project={project} />
       </ExternalLink>
     ) : (
