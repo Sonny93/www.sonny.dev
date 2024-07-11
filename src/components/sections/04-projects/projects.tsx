@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import ExternalLink from '~/components/externalLink';
 import projects from '~/data/projects.json';
 import { styleVars } from '~/globalStyles';
-import { BsGithub } from 'react-icons/bs';
 import { Project } from '~/types';
 import ProjectCard from './projectCard';
 import {
@@ -10,6 +9,7 @@ import {
   ProjectDescriptionWrapper,
 } from './projectDescription';
 import ProjectDetails from './projectDetails';
+import GitHubButton from 'react-github-btn';
 
 const SectionDescription = styled.p({
   backdropFilter: 'blur(7px)',
@@ -60,9 +60,15 @@ const ProjectItemCard = ({ project }: { project: Project }) => (
       </ProjectDescription>
       <div className="github">
         {project.github ? (
-          <ExternalLink href={project.github}>
-            <BsGithub /> Voir le repo Github
-          </ExternalLink>
+          <GitHubButton
+            href={project.github}
+            data-color-scheme="no-preference: light; light: light; dark: dark;"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Voir le repo github"
+          >
+            Voir le repo github
+          </GitHubButton>
         ) : (
           <i>Repo github non disponible</i>
         )}
