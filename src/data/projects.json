@@ -1,49 +1,74 @@
 [
   {
+    "name": "My Links",
+    "description": "MyLinks est un outil qui vous permet de gérer vos liens favoris dans une interface intuitive. Projet libre et open source, axé sur la confidentialité et l'auto-hébergement.",
+    "url": "https://www.mylinks.app/",
+    "thumbnail": "my-links.webp",
+    "languages": [
+      "HTML",
+      "Adonis.js",
+      "Emotion.JS"
+    ],
+    "github": "https://github.com/my-links/my-links"
+  },
+  {
     "name": "Installerwindows.fr",
     "description": "Guides pour (ré)installer Windows 10/11 au propre et faire des optimisations saines pour votre machine. Il s'agit de guides complets, que vous devriez pouvoir suivre quel que soit votre niveau en informatique.",
     "url": "https://www.installerwindows.fr/",
     "thumbnail": "installer-windows.webp",
-    "languages": ["HTML", "SASS", "Next.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "Next.JS"
+    ],
     "github": "https://github.com/Sonny93/installerwindows.fr"
   },
   {
-    "name": "My Links",
-    "description": "MyLinks est un outil qui vous permet de gérer vos liens favoris dans une interface intuitive. Projet libre et open source, axé sur la confidentialité et l'auto-hébergement.",
-    "url": "https://mylinks.app/",
-    "thumbnail": "my-links.webp",
-    "languages": ["HTML", "SASS", "Next.JS"],
-    "github": "https://github.com/Sonny93/my-links"
-  },
-  {
-    "name": "Next Uploader",
-    "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
-    "url": null,
-    "thumbnail": "uploader.webp",
-    "languages": ["HTML", "SASS", "Next.JS"],
-    "github": "https://github.com/Sonny93/next-uploader"
+    "name": "RTC Devices Tester",
+    "description": "Petit projet qui vous permet de tester vos périphériques de communication : webcam, haut-parleur/casque, microphone, etc. (tout fonctionne en local)",
+    "url": "https://www.sonny.dev/",
+    "thumbnail": "rtc-devices-tester.webp",
+    "languages": [
+      "HTML",
+      "React.JS",
+      "Emotion.JS"
+    ],
+    "github": "https://github.com/Sonny93/portfolio"
   },
   {
     "name": "Portfolio",
     "description": "Mon portfolio.",
     "url": "https://www.sonny.dev/",
     "thumbnail": "portfolio.webp",
-    "languages": ["HTML", "SASS", "React.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "React.JS"
+    ],
     "github": "https://github.com/Sonny93/portfolio"
   },
   {
-    "name": "CV",
-    "description": "Mon CV au format HTML.",
-    "url": "https://cv.sonny.dev/",
-    "thumbnail": "cv-html.webp",
-    "languages": ["HTML", "SASS", "React.JS"]
+    "name": "Next Uploader",
+    "description": "Next Uploader est un drive personnel permettant la mise en ligne de fichiers en tous genres.",
+    "url": null,
+    "thumbnail": "uploader.webp",
+    "languages": [
+      "HTML",
+      "SASS",
+      "Next.JS"
+    ],
+    "github": "https://github.com/Sonny93/next-uploader"
   },
   {
     "name": "Test Geoloc",
     "description": "Test d'une app de géolocalisation",
     "url": "https://test-geoloc.vercel.app/",
     "thumbnail": "test-geoloc.webp",
-    "languages": ["HTML", "SASS", "React.JS"],
+    "languages": [
+      "HTML",
+      "SASS",
+      "React.JS"
+    ],
     "github": "https://github.com/Sonny93/test-geoloc"
   }
 ]
