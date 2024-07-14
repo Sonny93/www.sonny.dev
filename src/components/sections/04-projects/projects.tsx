@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import GitHubButton from 'react-github-btn';
 import ExternalLink from '~/components/externalLink';
 import projects from '~/data/projects.json';
 import { styleVars } from '~/globalStyles';
@@ -9,7 +10,6 @@ import {
   ProjectDescriptionWrapper,
 } from './projectDescription';
 import ProjectDetails from './projectDetails';
-import GitHubButton from 'react-github-btn';
 
 const SectionDescription = styled.p({
   backdropFilter: 'blur(7px)',

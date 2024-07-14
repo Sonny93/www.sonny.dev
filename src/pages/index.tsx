@@ -22,7 +22,7 @@ const Background = styled.div({
     height: '100%',
     width: '100%',
     content: "''",
-    backdropFilter: 'brightness(0.7) blur(1em)',
+    backdropFilter: 'brightness(0.7) blur(2em)',
   },
 });
 

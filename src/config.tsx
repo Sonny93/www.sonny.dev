@@ -2,7 +2,7 @@ import { AiFillMail } from 'react-icons/ai';
 import { BsDiscord, BsGithub, BsLinkedin } from 'react-icons/bs';
 import Home from '~/components/sections/01-home/home';
 import AboutMe from '~/components/sections/02-aboutme/aboutme';
-import Experiences from '~/components/sections/03-experiences/experiences';
+import Journey from '~/components/sections/03-journey/journey';
 import Projects from '~/components/sections/04-projects/projects';
 import Contact from '~/components/sections/05-contact/contact';
 import { Section, SocialNetwork } from '~/types';
@@ -43,31 +43,31 @@ export const socialNetworks: Array<SocialNetwork> = [
 export const sections: Section[] = [
   {
     name: 'home',
-    label: 'Accueil',
+    label: 'Présentation',
     background: '1.webp',
     component: Home,
   },
   {
     name: 'aboutme',
-    label: 'À propos',
+    label: 'Compétences',
     background: '2.webp',
     component: AboutMe,
   },
   {
     name: 'experiences',
-    label: 'Mon parcours',
-    background: 'experiences.webp',
-    component: Experiences,
+    label: 'Parcours',
+    background: '3.webp',
+    component: Journey,
   },
   {
     name: 'projects',
-    label: 'Mes projets',
+    label: 'Projets',
     background: '4.webp',
     component: Projects,
   },
   {
     name: 'contact',
-    label: 'Me contacter',
+    label: 'Prendre contact',
     background: '5.webp',
     component: Contact,
   },
