@@ -91,7 +91,7 @@ export default function Navbar({ setActiveSection }: NavbarProps) {
             </span>
             <ExternalLink
               href="https://github.com/Sonny93/portfolio"
-              css={{ color: styleVars.gray }}
+              css={{ color: styleVars.blue }}
             >
               Version {packageJson.version}
             </ExternalLink>
