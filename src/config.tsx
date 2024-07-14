@@ -44,13 +44,13 @@ export const sections: Section[] = [
   {
     name: 'home',
     label: 'Accueil',
-    background: 'home.webp',
+    background: '1.webp',
     component: Home,
   },
   {
     name: 'aboutme',
     label: 'À propos',
-    background: 'aboutme.webp',
+    background: '2.webp',
     component: AboutMe,
   },
   {
@@ -62,13 +62,13 @@ export const sections: Section[] = [
   {
     name: 'projects',
     label: 'Mes projets',
-    background: 'projects.webp',
+    background: '4.webp',
     component: Projects,
   },
   {
     name: 'contact',
     label: 'Me contacter',
-    background: 'contact.webp',
+    background: '5.webp',
     component: Contact,
   },
 ];

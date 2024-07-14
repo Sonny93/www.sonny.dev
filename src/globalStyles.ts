@@ -19,10 +19,6 @@ export const cssReset = css({
     scrollBehavior: 'smooth',
   },
 
-  'ul, li': {
-    listStyle: 'none',
-  },
-
   '.reset': {
     backgroundColor: 'inherit',
     color: 'inherit',
