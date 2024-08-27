@@ -26,7 +26,7 @@
   {
     "name": "RTC Devices Tester",
     "description": "Petit projet qui vous permet de tester vos périphériques de communication : webcam, haut-parleur/casque, microphone, etc. (tout fonctionne en local)",
-    "url": "https://www.sonny.dev/",
+    "url": "https://rtc-devices-tester.vercel.app/",
     "thumbnail": "rtc-devices-tester.webp",
     "languages": [
       "HTML",
