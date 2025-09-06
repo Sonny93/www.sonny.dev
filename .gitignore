@@ -1,15 +1,25 @@
-# dependencies
+# Dependencies and AdonisJS build
 node_modules
+build
+tmp
 
-# next
-dist
-.next
+# Secrets
+.env
+.env.local
+.env.production.local
+.env.development.local
 
-# yarn
-yarn.lock
+# Frontend assets compiled code
+public/assets
+
+# Build tools specific
+npm-debug.log
 yarn-error.log
 
-# mac
-.DS_Store
+# Editors specific
+.fleet
+.idea
+.vscode
 
-.env
+# Platform specific
+.DS_Store
