@@ -1,17 +1,17 @@
 /// <reference path="../../adonisrc.ts" />
 /// <reference path="../../config/inertia.ts" />
 
-import '../css/app.css';
-import { hydrateRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
+import { PROJECT_NAME } from '#config/project';
 import { resolvePageComponent } from '@adonisjs/inertia/helpers';
-
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS';
+import { createInertiaApp } from '@inertiajs/react';
+import { hydrateRoot } from 'react-dom/client';
+import 'virtual:uno.css';
+import '../css/app.css';
 
 createInertiaApp({
   progress: { color: '#5468FF' },
 
-  title: (title) => `${title} - ${appName}`,
+  title: (title) => (title && `${title} — `) + PROJECT_NAME,
 
   resolve: (name) => {
     return resolvePageComponent(
