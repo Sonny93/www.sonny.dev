@@ -3,7 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { LocaleSelector } from '~/components/common/locale_selector';
 
 const Home = () => (
-	<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 font-sans">
+	<>
 		<div className="container mx-auto px-4 py-16">
 			{/* Header */}
 			<header className="text-center mb-16">
@@ -59,7 +59,7 @@ const Home = () => (
 				</p>
 			</footer>
 		</div>
-	</div>
+	</>
 );
 
 export default Home;
