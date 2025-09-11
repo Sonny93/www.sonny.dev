@@ -10,23 +10,23 @@ import { BaseLayout } from '~/layouts/base_layout';
 import '../css/app.css';
 
 createInertiaApp({
-  progress: { color: '#5468FF' },
+	progress: { color: '#5468FF' },
 
-  title: (title) => (title && `${title} — `) + PROJECT_NAME,
+	title: (title) => (title && `${title} — `) + PROJECT_NAME,
 
-  resolve: async (name) => {
-    const currentPage: any = await resolvePageComponent(
-      `../pages/${name}.tsx`,
-      import.meta.glob('../pages/**/*.tsx')
-    );
+	resolve: async (name) => {
+		const currentPage: any = await resolvePageComponent(
+			`../pages/${name}.tsx`,
+			import.meta.glob('../pages/**/*.tsx')
+		);
 
-    currentPage.default.layout =
-      currentPage.default.layout || ((p: any) => <BaseLayout children={p} />);
+		currentPage.default.layout =
+			currentPage.default.layout || ((p: any) => <BaseLayout children={p} />);
 
-    return currentPage;
-  },
+		return currentPage;
+	},
 
-  setup({ el, App, props }) {
-    hydrateRoot(el, <App {...props} />);
-  },
+	setup({ el, App, props }) {
+		hydrateRoot(el, <App {...props} />);
+	},
 });

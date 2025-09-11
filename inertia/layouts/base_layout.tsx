@@ -5,9 +5,9 @@ import { dynamicActivate, resolveInitialLocale } from '~/lib/i18n';
 import '../css/app.css';
 
 export function BaseLayout({ children }: PropsWithChildren) {
-  useEffect(() => {
-    const initial = resolveInitialLocale();
-    dynamicActivate(initial);
-  }, []);
-  return <I18nProvider i18n={i18n}>{children}</I18nProvider>;
+	useEffect(() => {
+		const initial = resolveInitialLocale();
+		dynamicActivate(initial);
+	}, []);
+	return <I18nProvider i18n={i18n}>{children}</I18nProvider>;
 }

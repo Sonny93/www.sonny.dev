@@ -1,6 +1,20 @@
 dev:
 	@pnpm run dev
 
-prod:
+build:
 	@pnpm run build
-	@pnpm start
+
+start:
+	@pnpm run start
+
+extract:
+	@pnpm run extract
+
+compile:
+	@pnpm run compile
+
+lint:
+	@pnpm run lint
+
+format:
+	@pnpm run format

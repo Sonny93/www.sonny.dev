@@ -7,28 +7,28 @@ import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [
-    inertia({ ssr: { enabled: true, entrypoint: 'inertia/app/ssr.tsx' } }),
-    react({
-      babel: {
-        plugins: ['@lingui/babel-plugin-lingui-macro'],
-      },
-    }),
-    lingui(),
-    adonisjs({
-      entrypoints: ['inertia/app/app.tsx'],
-      reload: ['resources/views/**/*.edge'],
-    }),
-    UnoCSS(),
-  ],
+	plugins: [
+		inertia({ ssr: { enabled: true, entrypoint: 'inertia/app/ssr.tsx' } }),
+		react({
+			babel: {
+				plugins: ['@lingui/babel-plugin-lingui-macro'],
+			},
+		}),
+		lingui(),
+		adonisjs({
+			entrypoints: ['inertia/app/app.tsx'],
+			reload: ['resources/views/**/*.edge'],
+		}),
+		UnoCSS(),
+	],
 
-  /**
-   * Define aliases for importing modules from
-   * your frontend code
-   */
-  resolve: {
-    alias: {
-      '~/': `${getDirname(import.meta.url)}/inertia/`,
-    },
-  },
+	/**
+	 * Define aliases for importing modules from
+	 * your frontend code
+	 */
+	resolve: {
+		alias: {
+			'~/': `${getDirname(import.meta.url)}/inertia/`,
+		},
+	},
 });

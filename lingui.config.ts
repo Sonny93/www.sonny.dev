@@ -1,12 +1,12 @@
 import { defineConfig } from '@lingui/cli';
 
 export default defineConfig({
-  sourceLocale: 'en',
-  locales: ['fr', 'en'],
-  catalogs: [
-    {
-      path: './locales/{locale}/messages',
-      include: ['inertia'],
-    },
-  ],
+	sourceLocale: 'en',
+	locales: ['fr', 'en'],
+	catalogs: [
+		{
+			path: './locales/{locale}/messages',
+			include: ['inertia'],
+		},
+	],
 });
