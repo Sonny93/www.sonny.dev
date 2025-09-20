@@ -3,11 +3,11 @@ import ExperienceItem from '~/components/sections/03-journey/experiences/experie
 import { experiences } from '~/data/experiences';
 
 const ExperienceList = () => (
-  <TimelineList>
-    {experiences.map((experience) => (
-      <ExperienceItem key={experience.title} {...experience} />
-    ))}
-  </TimelineList>
+	<TimelineList>
+		{experiences.map((experience) => (
+			<ExperienceItem key={experience.title} {...experience} />
+		))}
+	</TimelineList>
 );
 
 export default ExperienceList;

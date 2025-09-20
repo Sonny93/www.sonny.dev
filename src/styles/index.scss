@@ -1,41 +1,41 @@
-@import "~/styles/input.scss";
-@import "~/styles/app.scss";
+@import '~/styles/input.scss';
+@import '~/styles/app.scss';
 
 ul.reset {
-  padding-left: 0.5em;
+	padding-left: 0.5em;
 
-  & li {
-    margin-bottom: 5px;
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+	& li {
+		margin-bottom: 5px;
+		list-style-type: none;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
 }
 
 input,
 textarea,
 button {
-  border-radius: $border-radius;
+	border-radius: $border-radius;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 5px;
+	width: 10px;
+	border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $main-color;
-  border-radius: 5px;
+	background: $main-color;
+	border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba($color: $main-color, $alpha: 0.75);
+	background: rgba($color: $main-color, $alpha: 0.75);
 }
 
 h1,
@@ -44,5 +44,5 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
+	font-weight: 400;
 }

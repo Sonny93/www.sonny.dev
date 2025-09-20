@@ -2,8 +2,8 @@ import ExperienceList from '~/components/sections/03-journey/experiences/experie
 import JourneyBlock from '~/components/sections/03-journey/journey_block';
 
 const Formations = () => (
-  <JourneyBlock title="Expériences">
-    <ExperienceList />
-  </JourneyBlock>
+	<JourneyBlock title="Expériences">
+		<ExperienceList />
+	</JourneyBlock>
 );
 export default Formations;

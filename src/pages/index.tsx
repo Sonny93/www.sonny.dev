@@ -8,63 +8,63 @@ import { Section } from '~/types';
 import { buildBackgroundImageUrl } from '~/utils/link';
 
 const Background = styled.div({
-  position: 'relative',
-  height: '100%',
-  width: '100%',
-  backgroundSize: 'cover',
-  display: 'flex',
-  alignItems: 'center',
-  transition: '0.275s',
-  '&::before': {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    height: '100%',
-    width: '100%',
-    content: "''",
-    backdropFilter: 'brightness(0.7) blur(2em)',
-  },
+	position: 'relative',
+	height: '100%',
+	width: '100%',
+	backgroundSize: 'cover',
+	display: 'flex',
+	alignItems: 'center',
+	transition: '0.275s',
+	'&::before': {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		height: '100%',
+		width: '100%',
+		content: "''",
+		backdropFilter: 'brightness(0.7) blur(2em)',
+	},
 });
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState<Section>(sections[0]);
-  const background = useMemo<Section['background']>(
-    () => activeSection.background ?? '',
-    [activeSection]
-  );
+	const [activeSection, setActiveSection] = useState<Section>(sections[0]);
+	const background = useMemo<Section['background']>(
+		() => activeSection.background ?? '',
+		[activeSection]
+	);
 
-  const changeActiveSection = (name: string) => {
-    const section = sections.find((s) => s.name === name);
-    if (section) {
-      setActiveSection(section);
-    } else {
-      console.warn('Unable to find active section');
-    }
-  };
+	const changeActiveSection = (name: string) => {
+		const section = sections.find((s) => s.name === name);
+		if (section) {
+			setActiveSection(section);
+		} else {
+			console.warn('Unable to find active section');
+		}
+	};
 
-  return (
-    <Background
-      style={{
-        backgroundImage: `url(${buildBackgroundImageUrl(background)})`,
-      }}
-    >
-      <PreloadBackgrounds />
-      <Navbar setActiveSection={changeActiveSection} />
-      <SectionsList />
-    </Background>
-  );
+	return (
+		<Background
+			style={{
+				backgroundImage: `url(${buildBackgroundImageUrl(background)})`,
+			}}
+		>
+			<PreloadBackgrounds />
+			<Navbar setActiveSection={changeActiveSection} />
+			<SectionsList />
+		</Background>
+	);
 }
 
 const PreloadBackgrounds = () => (
-  <Head>
-    {sections.map(({ background }) => (
-      <link
-        rel="prefetch"
-        as="image"
-        crossOrigin="anonymous"
-        href={buildBackgroundImageUrl(background)}
-        key={background}
-      />
-    ))}
-  </Head>
+	<Head>
+		{sections.map(({ background }) => (
+			<link
+				rel="prefetch"
+				as="image"
+				crossOrigin="anonymous"
+				href={buildBackgroundImageUrl(background)}
+				key={background}
+			/>
+		))}
+	</Head>
 );

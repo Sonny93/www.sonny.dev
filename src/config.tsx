@@ -14,61 +14,61 @@ export const name: string = 'Sonny';
 export const email: string = 'sonnylallier1@gmail.com';
 
 export const socialNetworks: Array<SocialNetwork> = [
-  {
-    id: 'github',
-    link: 'https://github.com/Sonny93',
-    icon: <BsGithub />,
-    title: 'Profil Github',
-  },
-  {
-    id: 'linkedin',
-    link: 'https://www.linkedin.com/in/sonnylallier/',
-    icon: <BsLinkedin />,
-    title: 'Profil Linkedin',
-  },
-  {
-    id: 'discord',
-    link: 'https://discordapp.com/users/257285655388880896',
-    icon: <BsDiscord />,
-    title: 'Profil Discord',
-  },
-  {
-    id: 'email',
-    link: 'mailto:' + email,
-    icon: <AiFillMail />,
-    title: 'Adresse email : ' + email,
-  },
+	{
+		id: 'github',
+		link: 'https://github.com/Sonny93',
+		icon: <BsGithub />,
+		title: 'Profil Github',
+	},
+	{
+		id: 'linkedin',
+		link: 'https://www.linkedin.com/in/sonnylallier/',
+		icon: <BsLinkedin />,
+		title: 'Profil Linkedin',
+	},
+	{
+		id: 'discord',
+		link: 'https://discordapp.com/users/257285655388880896',
+		icon: <BsDiscord />,
+		title: 'Profil Discord',
+	},
+	{
+		id: 'email',
+		link: 'mailto:' + email,
+		icon: <AiFillMail />,
+		title: 'Adresse email : ' + email,
+	},
 ];
 
 export const sections: Section[] = [
-  {
-    name: 'home',
-    label: 'Présentation',
-    background: '1.webp',
-    component: Home,
-  },
-  {
-    name: 'aboutme',
-    label: 'Compétences',
-    background: '2.webp',
-    component: AboutMe,
-  },
-  {
-    name: 'experiences',
-    label: 'Parcours',
-    background: '3.webp',
-    component: Journey,
-  },
-  {
-    name: 'projects',
-    label: 'Projets',
-    background: '4.webp',
-    component: Projects,
-  },
-  {
-    name: 'contact',
-    label: 'Prendre contact',
-    background: '5.webp',
-    component: Contact,
-  },
+	{
+		name: 'home',
+		label: 'Présentation',
+		background: '1.webp',
+		component: Home,
+	},
+	{
+		name: 'aboutme',
+		label: 'Compétences',
+		background: '2.webp',
+		component: AboutMe,
+	},
+	{
+		name: 'experiences',
+		label: 'Parcours',
+		background: '3.webp',
+		component: Journey,
+	},
+	{
+		name: 'projects',
+		label: 'Projets',
+		background: '4.webp',
+		component: Projects,
+	},
+	{
+		name: 'contact',
+		label: 'Prendre contact',
+		background: '5.webp',
+		component: Contact,
+	},
 ];

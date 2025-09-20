@@ -3,11 +3,11 @@ import FormationItem from '~/components/sections/03-journey/formations/formation
 import { formations } from '~/data/formations';
 
 const FormationList = () => (
-  <TimelineList>
-    {formations.map((formation) => (
-      <FormationItem key={formation.title} {...formation} />
-    ))}
-  </TimelineList>
+	<TimelineList>
+		{formations.map((formation) => (
+			<FormationItem key={formation.title} {...formation} />
+		))}
+	</TimelineList>
 );
 
 export default FormationList;
