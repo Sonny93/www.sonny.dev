@@ -13,7 +13,8 @@
 		"compile": "lingui compile --typescript",
 		"lint": "eslint .",
 		"format": "prettier --write .",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"postinstall": "pnpm run format"
 	},
 	"imports": {
 		"#controllers/*": "./app/controllers/*.js",
