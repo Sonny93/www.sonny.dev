@@ -45,11 +45,11 @@
 		"@lingui/babel-plugin-lingui-macro": "^5.5.0",
 		"@lingui/cli": "^5.5.0",
 		"@lingui/vite-plugin": "^5.5.0",
-		"@swc/core": "1.13.5",
+		"@swc/core": "1.13.19",
 		"@types/node": "^24.5.2",
 		"@types/react": "^19.1.13",
 		"@types/react-dom": "^19.1.9",
-		"@unocss/preset-web-fonts": "^66.5.1",
+		"@unocss/preset-web-fonts": "^66.5.2",
 		"@vitejs/plugin-react": "^5.0.3",
 		"eslint": "^9.36.0",
 		"eslint-plugin-lingui": "^0.11.0",
@@ -58,11 +58,11 @@
 		"prettier": "^3.6.2",
 		"ts-node-maintained": "^10.9.6",
 		"typescript": "~5.9.2",
-		"unocss": "^66.5.1",
-		"vite": "^7.1.6"
+		"unocss": "^66.5.2",
+		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"@adonisjs/auth": "^9.4.2",
+		"@adonisjs/auth": "^9.5.0",
 		"@adonisjs/core": "^6.19.0",
 		"@adonisjs/cors": "^2.2.1",
 		"@adonisjs/inertia": "^3.1.1",
@@ -71,10 +71,10 @@
 		"@adonisjs/shield": "^8.2.0",
 		"@adonisjs/static": "^1.1.1",
 		"@adonisjs/vite": "^4.0.0",
-		"@inertiajs/react": "^2.1.7",
+		"@inertiajs/react": "^2.1.11",
 		"@lingui/core": "^5.5.0",
 		"@lingui/react": "^5.5.0",
-		"@unocss/preset-wind3": "^66.5.1",
+		"@unocss/preset-wind3": "^66.5.2",
 		"@vinejs/vine": "^3.0.1",
 		"edge.js": "^6.3.0",
 		"react": "^19.1.1",
@@ -98,6 +98,6 @@
 		"printWidth": 80
 	},
 	"volta": {
-		"node": "24.7.0"
+		"node": "24.9.0"
 	}
 }
