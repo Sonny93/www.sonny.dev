@@ -13,30 +13,24 @@ export const defaultLocale = 'en';
  */
 export async function dynamicActivate(locale: Locale) {
 	const { messages } = await import(`../../locales/${locale}/messages.po`);
-	i18n.load(locale, messages);
+	const formations = await loadFormations(locale);
+	i18n.load(locale, { messages, formations });
 	i18n.activate(locale);
 }
 
 /**
- * Persist the chosen locale for later visits
+ * Persist the chosen locale for later visits in cookie
  */
 export function persistLocale(locale: Locale) {
-	try {
-		localStorage.setItem('locale', locale);
-	} catch {}
 	try {
 		document.cookie = `locale=${locale}; path=/; max-age=${60 * 60 * 24 * 365}`;
 	} catch {}
 }
 
 /**
- * Read persisted locale from localStorage or cookie
+ * Read persisted locale from cookie
  */
 export function readPersistedLocale(): Locale | null {
-	try {
-		const fromStorage = localStorage.getItem('locale');
-		if (fromStorage && fromStorage in locales) return fromStorage as Locale;
-	} catch {}
 	try {
 		const match = document.cookie.match(/(?:^|; )locale=([^;]+)/);
 		const value = match ? decodeURIComponent(match[1]) : null;
@@ -69,4 +63,12 @@ export function detectBrowserLocale(): Locale | null {
  */
 export function resolveInitialLocale(): Locale {
 	return readPersistedLocale() || detectBrowserLocale() || defaultLocale;
+}
+
+/**
+ * Load formations from locale file
+ */
+export async function loadFormations(locale: Locale) {
+	const formations = await import(`../../locales/${locale}/formations.json`);
+	return formations.default;
 }

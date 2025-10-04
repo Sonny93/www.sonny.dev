@@ -32,7 +32,8 @@
 		"#database/*": "./database/*.js",
 		"#tests/*": "./tests/*.js",
 		"#start/*": "./start/*.js",
-		"#config/*": "./config/*.js"
+		"#config/*": "./config/*.js",
+		"#shared/*": "./shared/*.js"
 	},
 	"devDependencies": {
 		"@adonisjs/assembler": "^7.8.2",
@@ -65,6 +66,7 @@
 		"@adonisjs/auth": "^9.5.0",
 		"@adonisjs/core": "^6.19.0",
 		"@adonisjs/cors": "^2.2.1",
+		"@adonisjs/i18n": "^2.2.2",
 		"@adonisjs/inertia": "^3.1.1",
 		"@adonisjs/lucid": "^21.8.0",
 		"@adonisjs/session": "^7.5.1",
@@ -77,6 +79,7 @@
 		"@unocss/preset-wind3": "^66.5.2",
 		"@vinejs/vine": "^3.0.1",
 		"edge.js": "^6.3.0",
+		"google-translate-api-x": "^10.7.2",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"reflect-metadata": "^0.2.2"
