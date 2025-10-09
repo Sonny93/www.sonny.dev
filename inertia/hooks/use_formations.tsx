@@ -25,3 +25,14 @@ export function useFormations(): Formation[] {
 
 	return formations;
 }
+
+export const withFormations = (Component: React.ComponentType<any>) => {
+	return (props: any) => {
+		const formations = useFormations();
+		return <Component {...props} formations={formations} />;
+	};
+};
+
+export type WithFormationsProps = {
+	formations: Formation[];
+};

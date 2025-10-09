@@ -78,6 +78,7 @@
 		"@lingui/react": "^5.5.0",
 		"@unocss/preset-wind3": "^66.5.2",
 		"@vinejs/vine": "^3.0.1",
+		"clsx": "^2.1.1",
 		"edge.js": "^6.3.0",
 		"google-translate-api-x": "^10.7.2",
 		"react": "^19.1.1",
