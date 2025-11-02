@@ -1,22 +1,22 @@
 [
-  {
-    "degreeType": "bac",
-    "degreeName": "english",
-    "result": "dqsdsq",
-    "schoolName": "dsqd",
-    "startDate": "2017",
-    "endDate": "2020",
-    "url": "",
-    "location": "dsqd"
-  },
-  {
-    "degreeType": "bts",
-    "degreeName": "cuckoo",
-    "result": "dqsdsq",
-    "schoolName": "fdsjhufds",
-    "startDate": "2020",
-    "endDate": "2025",
-    "url": "",
-    "location": "fdsjifds"
-  }
+	{
+		"degreeType": "bac",
+		"degreeName": "english",
+		"result": "dqsdsq",
+		"schoolName": "dsqd",
+		"startDate": "2017",
+		"endDate": "2020",
+		"url": "",
+		"location": "dsqd"
+	},
+	{
+		"degreeType": "bts",
+		"degreeName": "cuckoo",
+		"result": "dqsdsq",
+		"schoolName": "fdsjhufds",
+		"startDate": "2020",
+		"endDate": "2025",
+		"url": "",
+		"location": "fdsjifds"
+	}
 ]
