@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { Trans } from '@lingui/react/macro';
 import { LocaleSelector } from '~/components/common/locale_selector';
+import { ThemeToggle } from '~/components/common/theme_toggle';
 
 const LINKS = [
 	{
@@ -34,6 +35,7 @@ export const Navbar = ({ width }: NavbarProps) => (
 				</div>
 				<div className="flex items-center gap-3">
 					<LocaleSelector />
+					<ThemeToggle />
 				</div>
 			</div>
 		</div>

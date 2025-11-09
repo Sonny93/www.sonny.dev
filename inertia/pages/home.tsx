@@ -1,6 +1,5 @@
 import { PROJECT_NAME } from '#config/project';
 import { Trans } from '@lingui/react';
-import { LocaleSelector } from '~/components/common/locale_selector';
 import { FormationList } from '~/components/formations/formation_list';
 
 const Home = () => (
@@ -32,22 +31,14 @@ const Home = () => (
 			</header>
 
 			{/* Main Content */}
-			<main className="max-w-xl mx-auto">
-				<div className="space-y-6">
-					<h2 className="text-3xl font-bold text-white mb-4">
-						<Trans id="About me" />
-					</h2>
-					<p className="text-gray-300 leading-relaxed">
-						<Trans id="Passionate about web development, I create modern and performant applications using the latest technologies. My expertise covers the frontend and the backend to offer complete solutions." />
-					</p>
-					<div className="flex gap-2 mt-4">
-						<button className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors border-none text-lg">
-							<Trans id="Contact me" />
-						</button>
-						<LocaleSelector />
-					</div>
-				</div>
-			</main>
+			<div className="space-y-6">
+				<h2 className="text-3xl font-bold text-white mb-4">
+					<Trans id="About me" />
+				</h2>
+				<p className="text-gray-300 leading-relaxed">
+					<Trans id="Passionate about web development, I create modern and performant applications using the latest technologies. My expertise covers the frontend and the backend to offer complete solutions." />
+				</p>
+			</div>
 
 			{/* Formations Section */}
 			<section className="max-w-4xl mx-auto mt-16">

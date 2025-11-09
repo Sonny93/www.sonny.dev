@@ -17,7 +17,7 @@ const Layout = ({ children }: PropsWithChildren) => (
 		<Navbar width={LAYOUT_WIDTH} />
 
 		{/* Page content */}
-		<div className="relative min-h-[100dvh] pt-32 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 font-sans flex-1 px-4">
+		<div className="relative min-h-[100dvh] pt-32 bg-blue-950 dark:bg-indigo-950 font-sans flex-1 px-4">
 			<div
 				className="h-full max-w-full w-full mx-auto mb-60"
 				style={{

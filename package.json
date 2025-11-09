@@ -50,6 +50,7 @@
 		"@types/node": "^24.9.2",
 		"@types/react": "^19.2.2",
 		"@types/react-dom": "^19.2.2",
+		"@unocss/preset-icons": "^66.5.4",
 		"@unocss/preset-web-fonts": "^66.5.4",
 		"@vitejs/plugin-react": "^5.1.0",
 		"eslint": "^9.39.0",
