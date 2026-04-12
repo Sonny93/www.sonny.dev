@@ -18,6 +18,3 @@ docker-compose*
 *.md
 .git
 .gitignore
-
-# App specific
-database/seeders

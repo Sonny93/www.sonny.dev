@@ -6,7 +6,6 @@ export default minimalstuffPreset({
 	ignorePatterns: [
 		...(preset.ignorePatterns ?? []),
 		'.adonisjs/**',
-		'database/schema.ts',
 		'pnpm-*.yaml',
 	],
 });
