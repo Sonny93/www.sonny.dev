@@ -17,7 +17,6 @@
 		"#providers/*": "./providers/*.js",
 		"#policies/*": "./app/policies/*.js",
 		"#abilities/*": "./app/abilities/*.js",
-		"#database/*": "./database/*.js",
 		"#tests/*": "./tests/*.js",
 		"#start/*": "./start/*.js",
 		"#config/*": "./config/*.js",
@@ -41,7 +40,6 @@
 		"@adonisjs/core": "^7.3.0",
 		"@adonisjs/cors": "^3.0.0",
 		"@adonisjs/inertia": "^4.2.0",
-		"@adonisjs/lucid": "^22.4.1",
 		"@adonisjs/session": "^8.0.0",
 		"@adonisjs/shield": "^9.0.0",
 		"@adonisjs/static": "^2.0.1",
@@ -52,7 +50,6 @@
 		"@vinejs/vine": "^4.3.0",
 		"edge.js": "^6.5.0",
 		"luxon": "^3.7.2",
-		"pg": "^8.20.0",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
 		"reflect-metadata": "^0.2.2"
