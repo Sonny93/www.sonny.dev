@@ -1,0 +1,56 @@
+name: app-prod
+services:
+  postgres:
+    restart: always
+    image: postgres:18
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    healthcheck:
+      test:
+        ['CMD-SHELL', 'pg_isready', '-U', '${DB_USER}', '-d', '${DB_DATABASE}']
+      interval: 30s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+      start_interval: 500ms
+    volumes:
+      - postgres-volume:/var/lib/postgresql
+    ports:
+      - '${DB_PORT}:5432'
+
+  # redis:
+  #   restart: always
+  #   image: redis:8
+  #   healthcheck:
+  #     test: ['CMD', 'redis-cli', 'ping']
+  #     interval: 30s
+  #     timeout: 5s
+  #     retries: 10
+  #     start_period: 10s
+  #     start_interval: 500ms
+  #   ports:
+  #     - '${REDIS_PORT}:6379'
+  #   volumes:
+  #     - redis-data:/data
+
+  app:
+    restart: always
+    build:
+      context: .
+    environment:
+      - DB_HOST=postgres
+      - HOST=0.0.0.0
+      - NODE_ENV=production
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - ${PORT}:3333
+
+volumes:
+  postgres-volume:
+  redis-data:
