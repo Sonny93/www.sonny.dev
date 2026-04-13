@@ -17,6 +17,8 @@
 		"#providers/*": "./providers/*.js",
 		"#policies/*": "./app/policies/*.js",
 		"#abilities/*": "./app/abilities/*.js",
+		"#collections/*": "./app/collections/*.js",
+		"#validator/*": "./app/validator/*.js",
 		"#tests/*": "./tests/*.js",
 		"#start/*": "./start/*.js",
 		"#config/*": "./config/*.js",
@@ -37,6 +39,7 @@
 	},
 	"dependencies": {
 		"@adonisjs/auth": "^10.0.0",
+		"@adonisjs/content": "^1.6.1",
 		"@adonisjs/core": "^7.3.0",
 		"@adonisjs/cors": "^3.0.0",
 		"@adonisjs/inertia": "^4.2.0",
