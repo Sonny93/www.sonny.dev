@@ -6,8 +6,13 @@
 /// <reference path="./manifest.d.ts" />
 import type { InferData, InferVariants } from '@adonisjs/core/types/transformers'
 import type { InferSharedProps } from '@adonisjs/inertia/types'
+import type PostTransformer from '#transformers/post_transformer'
 import type InertiaMiddleware from '#middleware/inertia_middleware'
 
 export namespace Data {
+  export type Post = InferData<PostTransformer>
+  export namespace Post {
+    export type Variants = InferVariants<PostTransformer>
+  }
   export type SharedProps = InferSharedProps<InertiaMiddleware>
 }
