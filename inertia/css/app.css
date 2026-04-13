@@ -16,6 +16,10 @@ body {
 	width: 100%;
 }
 
+.dark {
+	color: #fff;
+}
+
 *::-webkit-scrollbar {
 	width: 7px;
 	height: 7px;
