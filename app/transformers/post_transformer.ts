@@ -1,6 +1,7 @@
-import { postSchema } from '#validator/post';
-import { BaseTransformer } from '@adonisjs/core/transformers';
 import { Infer } from '@vinejs/vine/types';
+import { BaseTransformer } from '@adonisjs/core/transformers';
+
+import { postSchema } from '#validator/post';
 
 export default class PostTransformer extends BaseTransformer<
 	Infer<typeof postSchema>

@@ -1,10 +1,11 @@
-import { Collection } from '@adonisjs/content';
-import { postSchema } from '#validator/post';
 import vine from '@vinejs/vine';
-import { loaders } from '@adonisjs/content/loaders';
 import app from '@adonisjs/core/services/app';
+import { Collection } from '@adonisjs/content';
+import { loaders } from '@adonisjs/content/loaders';
 
-export const posts = new Collection({
+import { postSchema } from '#validator/post';
+
+export const postCollection = new Collection({
 	schema: vine.array(postSchema),
 	loader: loaders.jsonLoader(app.makePath('data/posts.json')),
 	cache: true,

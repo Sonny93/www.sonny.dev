@@ -1,7 +1,7 @@
 import { Link } from '@adonisjs/inertia/react';
 import { ThemeToggle } from '@minimalstuff/ui';
+
 import { Socials } from '~/constants/socials';
-import { URLs } from '~/constants/urls';
 import { getIcon, SocialIcon } from '~/lib/icons';
 import { NavigationLinks } from './navigation_links';
 

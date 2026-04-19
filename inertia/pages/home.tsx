@@ -1,6 +1,9 @@
-import { Head, Link } from '@inertiajs/react';
 import { Data } from '@generated/data';
+import { Head, Link } from '@inertiajs/react';
+
 import { URLs } from '~/constants/urls';
+import { formatStructuredPeriod } from '~/lib/format_period';
+import { VerticalTimeline } from '~/components/timeline/vertical_timeline';
 
 const TAG_LINES = [
 	'Full Stack developer and DevOps',
@@ -10,6 +13,16 @@ const TAG_LINES = [
 
 interface HomeProps {
 	posts: Data.Post[];
+	experiences: Data.Experience[];
+}
+
+function experienceBullets(description: Data.Experience['description']) {
+	if (description == null) return [];
+	if (Array.isArray(description)) return description;
+	return description
+		.split(/\r?\n/)
+		.map((line) => line.trim())
+		.filter(Boolean);
 }
 
 function asDate(value: unknown): Date | null {
@@ -35,7 +48,7 @@ function postDateIso(value: unknown) {
 	return d ? d.toISOString().slice(0, 10) : '';
 }
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ posts, experiences }: HomeProps) {
 	return (
 		<>
 			<Head title="Homepage" />
@@ -57,6 +70,31 @@ export default function Home({ posts }: HomeProps) {
 						))}
 					</ul>
 				</section>
+
+				{experiences.length > 0 && (
+					<VerticalTimeline
+						title="Expériences"
+						items={experiences.map((e, index) => ({
+							id: `experience-${index}-${String(e.beginningDate)}`,
+							title: e.title,
+							titleVariant: 'uppercase' as const,
+							meta: (
+								<>
+									{formatStructuredPeriod(e.beginningDate, e.endDate)}{' '}
+									<span>
+										(
+										<span className="font-semibold text-gray-900 dark:text-white/95">
+											{e.company}
+										</span>
+										{' – '}
+										{e.city})
+									</span>
+								</>
+							),
+							bullets: experienceBullets(e.description),
+						}))}
+					/>
+				)}
 
 				{posts.length > 0 ? (
 					<section className="flex w-full flex-col gap-4">
