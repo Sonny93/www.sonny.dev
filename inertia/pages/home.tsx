@@ -5,6 +5,7 @@ import { PostList } from '~/components/posts/post_list';
 import { SectionTitle } from '~/components/section_title';
 import { formatStructuredPeriod } from '~/lib/format_period';
 import { VerticalTimeline } from '~/components/timeline/vertical_timeline';
+import { Link } from '@adonisjs/inertia/react';
 
 const TAG_LINES = [
 	'Full Stack developer and DevOps',
@@ -51,6 +52,12 @@ export default function Home({ posts, experiences }: HomeProps) {
 			{posts.length > 0 && (
 				<section className="flex w-full flex-col gap-4">
 					<SectionTitle title="Derniers articles" />
+					<Link
+						route="show_posts"
+						className="self-end text-sm text-gray-600 dark:text-gray-400"
+					>
+						Voir tous les articles &rarr;
+					</Link>
 					<PostList posts={posts} />
 				</section>
 			)}
