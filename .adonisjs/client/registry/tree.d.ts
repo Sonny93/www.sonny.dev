@@ -3,4 +3,6 @@ import type { routes } from './index.ts'
 
 export interface ApiDefinition {
   home: typeof routes['home']
+  showPosts: typeof routes['show_posts']
+  showPost: typeof routes['show_post']
 }

@@ -12,11 +12,9 @@ export const postCollection = new Collection({
 	views: {
 		published: (posts) =>
 			[...posts]
-				.filter((p) => new Date(p.publishedAt).getTime() <= Date.now())
+				.filter((p) => p.publishedAt.toMillis() <= Date.now())
 				.sort((a, b) => {
-					const t =
-						new Date(b.publishedAt).getTime() -
-						new Date(a.publishedAt).getTime();
+					const t = b.publishedAt.toMillis() - a.publishedAt.toMillis();
 					return t !== 0 ? t : a.slug.localeCompare(b.slug);
 				}),
 		findBySlug: (posts, slug: string) => posts.find((p) => p.slug === slug),

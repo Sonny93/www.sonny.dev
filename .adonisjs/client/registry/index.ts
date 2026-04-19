@@ -12,6 +12,18 @@ const routes = {
     tokens: [{"old":"/","type":0,"val":"/","end":""}],
     types: placeholder as Registry['home']['types'],
   },
+  'show_posts': {
+    methods: ["GET","HEAD"],
+    pattern: '/blog',
+    tokens: [{"old":"/blog","type":0,"val":"blog","end":""}],
+    types: placeholder as Registry['show_posts']['types'],
+  },
+  'show_post': {
+    methods: ["GET","HEAD"],
+    pattern: '/blog/:slug',
+    tokens: [{"old":"/blog/:slug","type":0,"val":"blog","end":""},{"old":"/blog/:slug","type":1,"val":"slug","end":""}],
+    types: placeholder as Registry['show_post']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

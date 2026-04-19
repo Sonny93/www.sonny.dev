@@ -19,4 +19,28 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/home_controller').default['render']>>>
     }
   }
+  'show_posts': {
+    methods: ["GET","HEAD"]
+    pattern: '/blog'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/show_posts_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/show_posts_controller').default['render']>>>
+    }
+  }
+  'show_post': {
+    methods: ["GET","HEAD"]
+    pattern: '/blog/:slug'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { slug: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/show_post_controller').default['render']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/show_post_controller').default['render']>>>
+    }
+  }
 }
