@@ -3,6 +3,8 @@ import 'virtual:uno.css';
 import '~/css/app.css';
 
 import React from 'react';
+import { i18n } from '@lingui/core';
+import { I18nProvider } from '@lingui/react';
 import { TuyauProvider } from '@adonisjs/inertia/react';
 
 import { tuyauClient } from '~/lib/tuyau';
@@ -13,5 +15,9 @@ export function BaseLayout({ children }: Readonly<React.PropsWithChildren>) {
 		querySelector: '[data-page-transition]',
 	});
 
-	return <TuyauProvider client={tuyauClient}>{children}</TuyauProvider>;
+	return (
+		<TuyauProvider client={tuyauClient}>
+			<I18nProvider i18n={i18n}>{children}</I18nProvider>
+		</TuyauProvider>
+	);
 }
