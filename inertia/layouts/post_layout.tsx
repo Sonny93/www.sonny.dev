@@ -9,7 +9,6 @@ export const PostLayout = ({ children }: React.PropsWithChildren) => (
 				<Navbar />
 				<main
 					className="flex flex-col gap-4 py-10 sm:py-16"
-					key="main-post-layout"
 					data-page-transition
 				>
 					{children}

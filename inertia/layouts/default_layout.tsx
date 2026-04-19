@@ -9,7 +9,6 @@ export const DefaultLayout = ({ children }: React.PropsWithChildren) => (
 				<Navbar />
 				<main
 					className="flex flex-col gap-16 py-10 sm:gap-20 sm:py-16"
-					key="main-default-layout"
 					data-page-transition
 				>
 					{children}
