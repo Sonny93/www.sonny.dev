@@ -1,9 +1,8 @@
-import { readFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
-
 import vine from '@vinejs/vine';
-import type { LoaderContract } from '@adonisjs/content/types';
+import { dirname, join } from 'node:path';
+import { readFile } from 'node:fs/promises';
 import type { Infer, SchemaTypes } from '@vinejs/vine/types';
+import type { LoaderContract } from '@adonisjs/content/types';
 
 type PostSource = {
 	title: string;
@@ -27,7 +26,7 @@ export class PostMarkdownLoader<
 			posts.map(async (post) => ({
 				...post,
 				content: await readFile(join(baseDir, post.contentPath), 'utf8'),
-			})),
+			}))
 		);
 
 		return vine.validate({

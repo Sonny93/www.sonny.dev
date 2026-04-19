@@ -1,5 +1,3 @@
-a
-
 ## 1️⃣ Réseau Docker partagé
 
 Créer le réseau unique pour que tous les conteneurs puissent communiquer :
@@ -29,15 +27,15 @@ networks:
 ### Configuration :
 
 1. Identifiants :
-    - **Username** : `media`
-    - **Password** : `supersecure123`
-2. Dans *Web UI settings* :
-    - Coche **Bypass authentication for clients on localhost**
+   - **Username** : `media`
+   - **Password** : `supersecure123`
+2. Dans _Web UI settings_ :
+   - Coche **Bypass authentication for clients on localhost**
 
-        → pour que les conteneurs Docker puissent s’y connecter.
+     → pour que les conteneurs Docker puissent s’y connecter.
 
 3. Téléchargements :
-    - Dossier : `/downloads` (déjà monté sur `/srv/media/downloads`)
+   - Dossier : `/downloads` (déjà monté sur `/srv/media/downloads`)
 
 ---
 
@@ -49,21 +47,21 @@ networks:
 
 ### Configuration commune :
 
-1. Copie la **clé API** dans chaque service (*Settings → General → API Key*).
+1. Copie la **clé API** dans chaque service (_Settings → General → API Key_).
 2. Ajoute qBittorrent comme client torrent :
 
-    ```
-    Host : qbittorrent
-    Port : 8080
-    Username : media
-    Password : supersecure123
-    ```
+   ```
+   Host : qbittorrent
+   Port : 8080
+   Username : media
+   Password : supersecure123
+   ```
 
-    → “Connection succeeded”.
+   → “Connection succeeded”.
 
 3. Dossiers :
-    - Radarr → `/movies`
-    - Sonarr → `/tv`
+   - Radarr → `/movies`
+   - Sonarr → `/tv`
 4. (Optionnel) Active l’authentification HTTP basique si tu exposes les services.
 
 ---
@@ -88,39 +86,37 @@ Vérifie seulement qu’il est bien dans le réseau `media_net`.
 
 ### Configuration :
 
-1. Copie la **clé API** (*Settings → General*).
-2. Va dans *Settings → Indexers → Indexer Proxies → + Add Proxy*
+1. Copie la **clé API** (_Settings → General_).
+2. Va dans _Settings → Indexers → Indexer Proxies → + Add Proxy_
 
-    → choisis **FlareSolverr**
+   → choisis **FlareSolverr**
 
-    ```
-    Host : http://flaresolverr:8191
-    ```
+   ```
+   Host : http://flaresolverr:8191
+   ```
 
-    → “Connection succeeded” puis **Save**.
+   → “Connection succeeded” puis **Save**.
 
-3. Va dans *Settings → Apps → + Add Application*
-    - **Radarr**
+3. Va dans _Settings → Apps → + Add Application_
+   - **Radarr**
 
-        ```
-        URL : http://radarr:7878
-        API Key : <clé radarr>
-        Server URL : http://prowlarr:9696
-        Sync Level : Full Sync
-        ```
+     ```
+     URL : http://radarr:7878
+     API Key : <clé radarr>
+     Server URL : http://prowlarr:9696
+     Sync Level : Full Sync
+     ```
 
-    - **Sonarr**
+   - **Sonarr**
 
-        ```
-        URL : http://sonarr:8989
-        API Key : <clé sonarr>
-        Server URL : http://prowlarr:9696
-        Sync Level : Full Sync
-        ```
+     ```
+     URL : http://sonarr:8989
+     API Key : <clé sonarr>
+     Server URL : http://prowlarr:9696
+     Sync Level : Full Sync
+     ```
 
-
-    → Tests ✅ “Success”.
-
+   → Tests ✅ “Success”.
 
 ---
 
@@ -133,19 +129,19 @@ Vérifie seulement qu’il est bien dans le réseau `media_net`.
 ### Configuration :
 
 1. Ajoute FlareSolverr dans Jackett pour YGG :
-    - *Settings → Configuration → Advanced*
+   - _Settings → Configuration → Advanced_
 
-        ```
-        Proxy Type : HTTP
-        Proxy Host : flaresolverr
-        Proxy Port : 8191
-        ```
+     ```
+     Proxy Type : HTTP
+     Proxy Host : flaresolverr
+     Proxy Port : 8191
+     ```
 
-        → Save.
+     → Save.
 
 2. Ajoute le tracker **YGGtorrent** :
-    - Configure ton compte ou cookies.
-    - Test → ✅ OK.
+   - Configure ton compte ou cookies.
+   - Test → ✅ OK.
 3. Copie la **clé API Jackett** (haut de page d’accueil).
 4. Dans Jackett → vérifie que YGG donne bien des résultats de recherche.
 
@@ -155,16 +151,16 @@ Vérifie seulement qu’il est bien dans le réseau `media_net`.
 
 ### Ajout de Jackett comme indexeur Torznab :
 
-1. *Settings → Indexers → + Add Indexer → Torznab → Custom*
+1. _Settings → Indexers → + Add Indexer → Torznab → Custom_
 2. Renseigne :
 
-    ```
-    Name : Jackett-YGG
-    URL : http://jackett:9117/api/v2.0/indexers/yggtorrent/results/torznab/
-    API Key : <clé API Jackett>
-    ```
+   ```
+   Name : Jackett-YGG
+   URL : http://jackett:9117/api/v2.0/indexers/yggtorrent/results/torznab/
+   API Key : <clé API Jackett>
+   ```
 
-    ⚠️ Note bien le `/torznab/` **avec le slash final**.
+   ⚠️ Note bien le `/torznab/` **avec le slash final**.
 
 3. Test → ✅ “Connection succeeded”.
 4. Sauvegarde.
@@ -181,8 +177,8 @@ Vérifie seulement qu’il est bien dans le réseau `media_net`.
 ### Étapes :
 
 1. Connecte-toi en admin.
-2. *Dashboard → Avancé → Clés API → + Créer une clé*
-    - Nom : `Jellyseer`
+2. _Dashboard → Avancé → Clés API → + Créer une clé_
+   - Nom : `Jellyseer`
 3. Copie cette **clé API** (tu en auras besoin dans Jellyseer).
 
 ---
@@ -197,14 +193,14 @@ Vérifie seulement qu’il est bien dans le réseau `media_net`.
 
 Dans le setup :
 
-| Champ | Valeur |
-| --- | --- |
-| Jellyfin URL | `http://jellyfin` |
-| Port | `8096` |
-| Use SSL | ❌ |
-| URL Base | *(laisser vide)* |
-| Username | ton utilisateur Jellyfin |
-| Password | mot de passe Jellyfin |
+| Champ        | Valeur                   |
+| ------------ | ------------------------ |
+| Jellyfin URL | `http://jellyfin`        |
+| Port         | `8096`                   |
+| Use SSL      | ❌                       |
+| URL Base     | _(laisser vide)_         |
+| Username     | ton utilisateur Jellyfin |
+| Password     | mot de passe Jellyfin    |
 
 → Clique **Sign In** → passe à l’étape suivante.
 
@@ -252,16 +248,16 @@ Déjà connecté précédemment (via login ou API key).
 
 # ✅ Résumé global
 
-| Service | URL interne Docker | Port | Clé API utilisée | Note |
-| --- | --- | --- | --- | --- |
-| qBittorrent | qbittorrent | 8080 | — | Bypass local auth |
-| Radarr | radarr | 7878 | Radarr | Films |
-| Sonarr | sonarr | 8989 | Sonarr | Séries |
-| FlareSolverr | flaresolverr | 8191 | — | Proxy Cloudflare |
-| Prowlarr | prowlarr | 9696 | Prowlarr | Centralise indexeurs |
-| Jackett | jackett | 9117 | Jackett | Fournit YGG |
-| Jellyfin | jellyfin | 8096 | Jellyfin | Serveur média |
-| Jellyseer | jellyseer | 5055 | — | Interface utilisateur |
+| Service      | URL interne Docker | Port | Clé API utilisée | Note                  |
+| ------------ | ------------------ | ---- | ---------------- | --------------------- |
+| qBittorrent  | qbittorrent        | 8080 | —                | Bypass local auth     |
+| Radarr       | radarr             | 7878 | Radarr           | Films                 |
+| Sonarr       | sonarr             | 8989 | Sonarr           | Séries                |
+| FlareSolverr | flaresolverr       | 8191 | —                | Proxy Cloudflare      |
+| Prowlarr     | prowlarr           | 9696 | Prowlarr         | Centralise indexeurs  |
+| Jackett      | jackett            | 9117 | Jackett          | Fournit YGG           |
+| Jellyfin     | jellyfin           | 8096 | Jellyfin         | Serveur média         |
+| Jellyseer    | jellyseer          | 5055 | —                | Interface utilisateur |
 
 ---
 

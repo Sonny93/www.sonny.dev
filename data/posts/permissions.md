@@ -8,11 +8,12 @@ Les droits linux sont divisés en 3 parties :
 
 Pour définir les permissions d'un fichier ou d'un dossier, on utilise la commande `chmod` (exemple : `chmod <valeur> <nom_du_fichier>`)
 
-La `valeur` correspond aux droits que l'on souhaite attribuer pour : **U**ser (*propriétaire*) / **G**roup / **O**ther (*le reste du monde*)
+La `valeur` correspond aux droits que l'on souhaite attribuer pour : **U**ser (_propriétaire_) / **G**roup / **O**ther (_le reste du monde_)
 
 Si je souhaite donner **tous les doits** à l'**auteur** du fichier, les droits de **lecture** et d'**exécution** au **groupe** de l'auteur et uniquement le droit de **lecture** pour les **autres utilisateurs**, on peut s'y prendre de deux façons :
 
 Via la valeur binaire des droits : `chmod 755 <nom_du_fichier>` -> 755 correspond à :
+
 - User : tous les droits (4 + 2 + 1)
 - Group : droits de lecture et d'exécution (4 + 0 + 1)
 - Other : droits de lecture et d'exécution (4 + 0 + 1)
@@ -20,9 +21,10 @@ Via la valeur binaire des droits : `chmod 755 <nom_du_fichier>` -> 755 correspon
 Cette écriture peut poser problème, il est donc préférable d'utiliser la version "littérale".
 
 La deuxième écriture est la suivante : `chmod u+rwx,g+wx,o+w` :
-- `u+rwx` correspond aux droits de **lecture**, **écriture** et d'**exécution** pour le ***USER***
-- `g+rx` correspond aux droits de **lecture** et d'**exécution** pour le ***GROUP***
-- `o+rx` correspond aux droits de **lecture** et d'**exécution** pour le ***GROUP***
+
+- `u+rwx` correspond aux droits de **lecture**, **écriture** et d'**exécution** pour le **_USER_**
+- `g+rx` correspond aux droits de **lecture** et d'**exécution** pour le **_GROUP_**
+- `o+rx` correspond aux droits de **lecture** et d'**exécution** pour le **_GROUP_**
 
 ### Changement récursif
 
@@ -33,7 +35,6 @@ Pour cela il vous suffit de faire comme cela : `chmod -r u+rwx,g+wx,o+w <nom_du_
 ### Sticky bit
 
 > À venir
-
 
 Dans certains cas lorsque vous vérifiez les permissions d'un fichier, vous voyez parfois ceci `1755`. Le `1` au début correspond au sticky bit, c'est à dire
 
@@ -55,7 +56,7 @@ getent
 
 root sans password `su -` ça marche po, `sudo su -` ça marche si mon user est dans le fichier /etc/sudoers
 
-touch pour créer un fichier ___ou___ mettre à jour la date du fichier
+touch pour créer un fichier **_ou_** mettre à jour la date du fichier
 
 umask -> permission par défaut d'un répertoire (pour la session en cours)
 

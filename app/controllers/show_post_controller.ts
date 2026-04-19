@@ -2,6 +2,7 @@ import vine from '@vinejs/vine';
 import { inject } from '@adonisjs/core';
 import type { HttpContext } from '@adonisjs/core/http';
 
+import { md } from '#lib/markdown';
 import { PostService } from '#services/post_service';
 import { POST_SLUG_PARAM_VALIDATOR } from '#validator/post';
 import PostTransformer from '#transformers/post_transformer';
@@ -17,8 +18,11 @@ export default class ShowPostController {
 	async render({ request, inertia }: HttpContext) {
 		const { params } = await request.validateUsing(this.#validator);
 		const posts = await this.postService.getPostBySlug(params.slug);
+		const mdContent = md.render(posts.content);
+
 		return inertia.render('posts/show_post', {
 			post: PostTransformer.transform(posts),
+			content: mdContent,
 		});
 	}
 }

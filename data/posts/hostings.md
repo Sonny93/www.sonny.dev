@@ -11,7 +11,7 @@ Il parait évident de commencer ce guide par le critère le plus important : **l
 
 ## Le budget est présent !
 
-Je **recommande** en priorité les *hébergeurs "payants"* qui, comme vous vous en doutez, *offrent* en général une ***qualité de service*** et un ***temps de disponibilité*** nettement ***supérieur*** comparé aux hébergeurs gratuits.
+Je **recommande** en priorité les _hébergeurs "payants"_ qui, comme vous vous en doutez, _offrent_ en général une **_qualité de service_** et un **_temps de disponibilité_** nettement **_supérieur_** comparé aux hébergeurs gratuits.
 
 - [Contabo](https://contabo.com/en)
 - [Hetzner](https://www.hetzner.com/)
