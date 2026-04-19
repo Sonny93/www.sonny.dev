@@ -39,7 +39,6 @@
 		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck"
 	},
 	"dependencies": {
-		"@adonisjs/auth": "^10.0.0",
 		"@adonisjs/content": "^1.6.1",
 		"@adonisjs/core": "^7.3.0",
 		"@adonisjs/cors": "^3.0.0",

@@ -53,7 +53,6 @@ export default defineConfig({
 		() => import('@adonisjs/shield/shield_provider'),
 		() => import('@adonisjs/static/static_provider'),
 		() => import('@adonisjs/cors/cors_provider'),
-		() => import('@adonisjs/auth/auth_provider'),
 		() => import('@adonisjs/inertia/inertia_provider'),
 		() => import('@adonisjs/content/content_provider'),
 	],
