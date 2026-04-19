@@ -16,7 +16,7 @@ export function Footer() {
 	return (
 		<footer
 			className={clsx(
-				'sticky bottom-0 z-[9] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-white px-4 py-2 text-gray-500 transition-[transform,opacity] duration-300 ease-out dark:bg-gray-800 dark:text-gray-400',
+				'sticky bottom-0 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-white px-4 py-2 text-gray-500 transition-[transform,opacity] duration-300 ease-out dark:bg-gray-800 dark:text-gray-400',
 				footerStateClass
 			)}
 		>
