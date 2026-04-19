@@ -12,7 +12,7 @@ export function Navbar() {
 	return (
 		<nav
 			className={clsx(
-				'sticky top-0 z-[9] flex w-full justify-center rounded-md bg-white px-6 py-2 transition-[transform,opacity] duration-300 ease-out dark:bg-gray-800',
+				'sticky top-0 z-[99] flex w-full justify-center rounded-md bg-white px-6 py-2 transition-[transform,opacity] duration-300 ease-out dark:bg-gray-800',
 				navbarStateClass
 			)}
 		>
