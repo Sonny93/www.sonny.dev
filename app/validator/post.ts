@@ -11,6 +11,7 @@ export const postSchema = vine.object({
 	description: vine.string(),
 	tags: vine.array(vine.string()),
 	...POST_SLUG_PARAM_VALIDATOR.getProperties(),
+	contentPath: vine.string(),
 	content: vine.string(),
 	publishedAt: STRUCTURED_DATE_VALIDATOR,
 });
