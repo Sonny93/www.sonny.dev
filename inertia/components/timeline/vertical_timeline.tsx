@@ -12,7 +12,7 @@ export type VerticalTimelineItem = {
 };
 
 export type VerticalTimelineProps = {
-	title: string;
+	title: ReactNode;
 	items: readonly VerticalTimelineItem[];
 	className?: string;
 };

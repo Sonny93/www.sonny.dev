@@ -1,6 +1,10 @@
+import { Trans } from '@lingui/react/macro';
+
 const ServerError = ({ error }: { error: any }) => (
 	<div className="container">
-		<div className="title">Server Error</div>
+		<div className="title">
+			<Trans>Server Error</Trans>
+		</div>
 		<span>{error.message}</span>
 	</div>
 );

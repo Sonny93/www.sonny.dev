@@ -21,6 +21,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
+RUN pnpm run compile
 RUN node ace build
 
 # Production stage

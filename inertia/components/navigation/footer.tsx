@@ -5,7 +5,7 @@ import { ThemeToggle } from '@minimalstuff/ui';
 import { Socials } from '~/constants/socials';
 import { getIcon, SocialIcon } from '~/lib/icons';
 import { useHeadroom } from '~/hooks/use_headroom';
-import { NavigationLinks } from './navigation_links';
+import { LocaleSwitcher } from '../locale_switcher';
 
 export function Footer() {
 	const pinned = useHeadroom({ fixedAt: 120 });
@@ -21,7 +21,6 @@ export function Footer() {
 			)}
 		>
 			<p>© 2026 Sonny</p>
-			<NavigationLinks />
 			<div className="flex min-w-0 items-center justify-end justify-self-end gap-2">
 				{Object.entries(Socials).map(([key, value]) => (
 					<Link
@@ -36,7 +35,10 @@ export function Footer() {
 							aria-hidden
 						/>
 					</Link>
-				))}{' '}
+				))}
+			</div>
+			<div className="flex min-w-0 items-center justify-end justify-self-end gap-2">
+				<LocaleSwitcher />
 				<ThemeToggle />
 			</div>
 		</footer>

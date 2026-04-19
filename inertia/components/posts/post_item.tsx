@@ -1,4 +1,5 @@
 import { Data } from '@generated/data';
+import { Trans } from '@lingui/react/macro';
 import { Link } from '@adonisjs/inertia/react';
 
 import { URLs } from '~/constants/urls';
@@ -25,7 +26,7 @@ export const PostItem = ({ post }: Readonly<PostProps>) => (
 				</time>
 			</div>
 			<p className="text-xs text-gray-600 dark:text-gray-400">
-				{post.estimatedReadTime} min read
+				{post.estimatedReadTime} <Trans>min read</Trans>
 			</p>
 			<p className="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-gray-600 dark:text-gray-400">
 				{post.description}

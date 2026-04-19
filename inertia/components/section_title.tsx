@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 interface SectionTitleProps {
-	title: string;
+	title: ReactNode;
 }
 
 export const SectionTitle = ({ title }: Readonly<SectionTitleProps>) => (
