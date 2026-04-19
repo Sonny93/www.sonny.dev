@@ -10,4 +10,7 @@ export default defineConfig({
 			react: true,
 		}),
 	],
+	rules: {
+		'no-unused-vars': 'error',
+	},
 });

@@ -1,5 +1,3 @@
-import { Link } from '@adonisjs/inertia/react';
-import { URLs } from '~/constants/urls';
 import { NavigationLinks } from './navigation_links';
 
 export const Navbar = () => (
