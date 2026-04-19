@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { SectionTitle } from '../section_title';
+
 export type VerticalTimelineItem = {
 	id: string;
 	title: string;
@@ -24,15 +26,7 @@ export function VerticalTimeline({
 
 	return (
 		<section className={className}>
-			<div className="mb-8 grid grid-cols-[auto_1fr] items-center gap-3 sm:gap-4">
-				<span
-					className="h-0.5 w-8 rounded-full bg-gray-900 dark:bg-white/90"
-					aria-hidden
-				/>
-				<h2 className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-gray-900 sm:text-sm dark:text-white/95">
-					{title}
-				</h2>
-			</div>
+			<SectionTitle title={title} />
 			<ul className="relative ml-0.5 space-y-10 border-l border-gray-300 pl-6 sm:ml-1 sm:pl-8 dark:border-white/18">
 				{items.map((item) => (
 					<li key={item.id} className="relative">
