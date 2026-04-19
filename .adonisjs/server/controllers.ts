@@ -5,4 +5,6 @@
 
 export const controllers = {
   Home: () => import('#controllers/home_controller'),
+  ShowPost: () => import('#controllers/show_post_controller'),
+  ShowPosts: () => import('#controllers/show_posts_controller'),
 }
