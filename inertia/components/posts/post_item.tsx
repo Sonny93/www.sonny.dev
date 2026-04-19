@@ -24,6 +24,9 @@ export const PostItem = ({ post }: Readonly<PostProps>) => (
 					{post.publishedAt}
 				</time>
 			</div>
+			<p className="text-xs text-gray-600 dark:text-gray-400">
+				{post.estimatedReadTime} min read
+			</p>
 			<p className="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-gray-600 dark:text-gray-400">
 				{post.description}
 			</p>
