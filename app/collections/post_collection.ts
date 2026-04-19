@@ -1,10 +1,10 @@
 import vine from '@vinejs/vine';
+import { DateTime } from 'luxon';
 import app from '@adonisjs/core/services/app';
 import { Collection } from '@adonisjs/content';
 
-import { PostMarkdownLoader } from '../loaders/post_markdown_loader.js';
 import { postSchema } from '#validator/post';
-import { DateTime } from 'luxon';
+import { PostMarkdownLoader } from '../loaders/post_markdown_loader.js';
 
 export const postCollection = new Collection({
 	schema: vine.array(postSchema),
