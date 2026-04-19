@@ -32,8 +32,8 @@
 		"dev": "node ace serve --hmr",
 		"test": "node ace test",
 		"lint": "oxlint .",
-		"lint:fix": "oxlint . --fix",
-		"format": "oxlint . --fix; oxfmt .",
+		"lint:fix": "oxlint . --fix --fix-suggestions",
+		"format": "pnpm lint:fix; oxfmt .",
 		"format:check": "oxfmt . --check",
 		"typecheck": "tsc --noEmit",
 		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck"
