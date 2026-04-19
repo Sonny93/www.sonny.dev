@@ -1,5 +1,5 @@
 {
-	"name": "adonis-unocss-docker-template",
+	"name": "portfolio",
 	"version": "0.0.0",
 	"private": true,
 	"license": "UNLICENSED",
@@ -19,6 +19,7 @@
 		"#abilities/*": "./app/abilities/*.js",
 		"#collections/*": "./app/collections/*.js",
 		"#validator/*": "./app/validator/*.js",
+		"#lib/*": "./app/lib/*.js",
 		"#tests/*": "./tests/*.js",
 		"#start/*": "./start/*.js",
 		"#config/*": "./config/*.js",
@@ -32,7 +33,7 @@
 		"test": "node ace test",
 		"lint": "oxlint .",
 		"lint:fix": "oxlint . --fix",
-		"format": "oxfmt .",
+		"format": "oxlint . --fix; oxfmt .",
 		"format:check": "oxfmt . --check",
 		"typecheck": "tsc --noEmit",
 		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck"

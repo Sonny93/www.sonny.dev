@@ -1,4 +1,5 @@
 import app from '@adonisjs/core/services/app';
+import { ValidationError } from '@vinejs/vine';
 import { type HttpContext, ExceptionHandler } from '@adonisjs/core/http';
 import type {
 	StatusPageRange,
@@ -35,6 +36,10 @@ export default class HttpExceptionHandler extends ExceptionHandler {
 	 * response to the client
 	 */
 	async handle(error: unknown, ctx: HttpContext) {
+		if (error instanceof ValidationError) {
+			console.log(error);
+		}
+
 		return super.handle(error, ctx);
 	}
 

@@ -1,5 +1,5 @@
-import { defineConfig, presetIcons, presetWind4 } from 'unocss';
 import presetWebFonts from '@unocss/preset-web-fonts';
+import { defineConfig, presetIcons, presetWind4 } from 'unocss';
 
 export default defineConfig({
 	presets: [
