@@ -10,6 +10,9 @@ export default function ShowPost({ post }: Readonly<ShowPostProps>) {
 	return (
 		<div>
 			<SectionTitle title={post.title} />
-		</div>
+			<div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+				{post.publishedAt} &middot; {post.estimatedReadTime} min read
+			</div>
+		</>
 	);
 }
