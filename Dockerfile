@@ -12,7 +12,7 @@ RUN pnpm install --ignore-scripts
 # Production only deps stage
 FROM base AS production-deps
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml data ./
 RUN pnpm install --ignore-scripts --prod
 
 # Build stage
@@ -35,6 +35,7 @@ ENV PORT=$PORT
 WORKDIR /app
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
+COPY --from=build /app/data /app/data
 
 # Expose port
 EXPOSE $PORT
