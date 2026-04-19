@@ -67,3 +67,19 @@ html.dark .shiki span {
 ::view-transition {
 	pointer-events: none;
 }
+
+.page-transition-enter {
+	animation: pageFadeIn 250ms ease forwards;
+	will-change: opacity, filter;
+}
+
+@keyframes pageFadeIn {
+	from {
+		opacity: 0;
+		filter: blur(0.44rem);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+	}
+}

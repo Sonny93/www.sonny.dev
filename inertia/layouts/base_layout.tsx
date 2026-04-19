@@ -6,7 +6,12 @@ import React from 'react';
 import { TuyauProvider } from '@adonisjs/inertia/react';
 
 import { tuyauClient } from '~/lib/tuyau';
+import { usePageTransition } from '~/hooks/use_page_transition';
 
-export const BaseLayout = ({ children }: React.PropsWithChildren) => (
-	<TuyauProvider client={tuyauClient}>{children}</TuyauProvider>
-);
+export function BaseLayout({ children }: Readonly<React.PropsWithChildren>) {
+	usePageTransition({
+		querySelector: '[data-page-transition]',
+	});
+
+	return <TuyauProvider client={tuyauClient}>{children}</TuyauProvider>;
+}
