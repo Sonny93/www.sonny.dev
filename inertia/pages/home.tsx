@@ -1,11 +1,11 @@
 import { Data } from '@generated/data';
 import { Head } from '@inertiajs/react';
+import { Link } from '@adonisjs/inertia/react';
 
 import { PostList } from '~/components/posts/post_list';
 import { SectionTitle } from '~/components/section_title';
 import { formatStructuredPeriod } from '~/lib/format_period';
 import { VerticalTimeline } from '~/components/timeline/vertical_timeline';
-import { Link } from '@adonisjs/inertia/react';
 
 const TAG_LINES = [
 	'Full Stack developer and DevOps',
