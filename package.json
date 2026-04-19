@@ -24,7 +24,10 @@
 		"#start/*": "./start/*.js",
 		"#config/*": "./config/*.js",
 		"#generated/*": "./.adonisjs/server/*.js",
-		"#transformers/*": "./app/transformers/*.js"
+		"#transformers/*": "./app/transformers/*.js",
+		"#shared/consts/*": "./shared/consts/*.js",
+		"#shared/types/*": "./shared/types/*.js",
+		"#shared/*": "./shared/*.js"
 	},
 	"scripts": {
 		"start": "node bin/server.js",
@@ -36,6 +39,8 @@
 		"format": "pnpm lint:fix; oxfmt .",
 		"format:check": "oxfmt . --check",
 		"typecheck": "tsc --noEmit",
+		"extract": "lingui extract --clean",
+		"compile": "lingui compile --typescript",
 		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck"
 	},
 	"dependencies": {
@@ -48,6 +53,8 @@
 		"@adonisjs/static": "^2.0.1",
 		"@adonisjs/vite": "^5.1.0",
 		"@inertiajs/react": "^2.3.18",
+		"@lingui/core": "^5.9.5",
+		"@lingui/react": "^5.9.5",
 		"@minimalstuff/ui": "^1.2.1",
 		"@shikijs/markdown-it": "^4.0.2",
 		"@tuyau/core": "^1.2.2",
@@ -66,6 +73,9 @@
 		"@japa/assert": "^4.2.0",
 		"@japa/plugin-adonisjs": "^5.2.0",
 		"@japa/runner": "^5.3.0",
+		"@lingui/cli": "^5.9.5",
+		"@lingui/swc-plugin": "^5.11.0",
+		"@lingui/vite-plugin": "^5.9.5",
 		"@minimalstuff/tooling": "^0.1.3",
 		"@poppinss/ts-exec": "^1.4.4",
 		"@types/luxon": "^3.7.1",
@@ -75,7 +85,7 @@
 		"@types/react-dom": "^19.2.3",
 		"@unocss/preset-typography": "^66.6.8",
 		"@unocss/preset-web-fonts": "^66.6.7",
-		"@vitejs/plugin-react": "^6.0.1",
+		"@vitejs/plugin-react-swc": "^4.3.0",
 		"hot-hook": "^1.0.0",
 		"oxfmt": "^0.43.0",
 		"oxlint": "^1.58.0",
