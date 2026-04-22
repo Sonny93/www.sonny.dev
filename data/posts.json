@@ -8,10 +8,10 @@
 		"publishedAt": "2025-11-05"
 	},
 	{
-		"title": "Formation Kube",
+		"title": "Quelques pro tips pour kubernetes",
 		"slug": "kubernetes",
 		"contentPath": "posts/kubernetes.md",
-		"description": "Résumé formation Kubernetes : pods, déploiements, services, Helm.",
+		"description": "Quelques astuces pour mieux utiliser kubernetes : kubectl, helm, best practices, etc.",
 		"tags": ["kubernetes", "devops", "linux"],
 		"publishedAt": "2024-02-29"
 	},
