@@ -1,65 +1,279 @@
-Attention : ne faites pas n'importe quoi avec les permissions de vos fichiers, une personne malveillante pourrait accèder, modifier ou exécuter des fichiers sans votre autorisation ! Donc on évite les chmod 777 et compagnie :)
+# Gestion des permissions sous Linux
 
-Les droits linux sont divisés en 3 parties :
+⚠️ **Attention** : une mauvaise gestion des permissions peut exposer vos fichiers à des accès non autorisés. Évitez les permissions trop permissives comme `chmod 777`.
 
-- **Read** - valeur binaire : **4** -> droit de lecture
-- **Write** - valeur binaire : **2** -> droit d'écriture
-- **X'ecution** - valeur binaire : **1** -> droit d'exécution
+---
 
-Pour définir les permissions d'un fichier ou d'un dossier, on utilise la commande `chmod` (exemple : `chmod <valeur> <nom_du_fichier>`)
+## 1. Types de permissions
 
-La `valeur` correspond aux droits que l'on souhaite attribuer pour : **U**ser (_propriétaire_) / **G**roup / **O**ther (_le reste du monde_)
+Les permissions Linux sont basées sur trois droits fondamentaux :
 
-Si je souhaite donner **tous les doits** à l'**auteur** du fichier, les droits de **lecture** et d'**exécution** au **groupe** de l'auteur et uniquement le droit de **lecture** pour les **autres utilisateurs**, on peut s'y prendre de deux façons :
+- **Read (r)** → valeur **4** : lecture du fichier
+- **Write (w)** → valeur **2** : modification du fichier
+- **Execute (x)** → valeur **1** : exécution du fichier
 
-Via la valeur binaire des droits : `chmod 755 <nom_du_fichier>` -> 755 correspond à :
+---
 
-- User : tous les droits (4 + 2 + 1)
-- Group : droits de lecture et d'exécution (4 + 0 + 1)
-- Other : droits de lecture et d'exécution (4 + 0 + 1)
+## 2. Catégories d’utilisateurs
 
-Cette écriture peut poser problème, il est donc préférable d'utiliser la version "littérale".
+Les permissions sont attribuées à trois types d’utilisateurs :
 
-La deuxième écriture est la suivante : `chmod u+rwx,g+wx,o+w` :
+- **User (u)** : propriétaire du fichier
+- **Group (g)** : groupe associé
+- **Other (o)** : tous les autres utilisateurs
 
-- `u+rwx` correspond aux droits de **lecture**, **écriture** et d'**exécution** pour le **_USER_**
-- `g+rx` correspond aux droits de **lecture** et d'**exécution** pour le **_GROUP_**
-- `o+rx` correspond aux droits de **lecture** et d'**exécution** pour le **_GROUP_**
+---
 
-### Changement récursif
+## 3. Modifier les permissions avec `chmod`
 
-Plutôt que de modifier les permissions des fichiers et dossiers contenus dans un même dossier, vous pouvez effectuer ce changement de façon récursif.
+### Syntaxe générale
 
-Pour cela il vous suffit de faire comme cela : `chmod -r u+rwx,g+wx,o+w <nom_du_dossier>`
+```bash
+chmod <valeur> <fichier>
+```
 
-### Sticky bit
+### Exemple en notation numérique
 
-> À venir
+```bash
+chmod 755 fichier.sh
+```
 
-Dans certains cas lorsque vous vérifiez les permissions d'un fichier, vous voyez parfois ceci `1755`. Le `1` au début correspond au sticky bit, c'est à dire
+Correspondance :
 
-man **number** commande : number -> version différente (permet d'avoir plusieurs descriptions d'une (sub)commande pour dev/admin-sys/etc.
+- **User** : 7 → (4+2+1) → lecture, écriture, exécution
+- **Group** : 5 → (4+1) → lecture, exécution
+- **Other** : 5 → (4+1) → lecture, exécution
 
-**type** pour l'occaliser un binaire
+---
 
-`chmod 1755` ou U+S -> sticky bit -> le propriétaire du fichier se fait passer pour root (c'est dangereux)
+## 4. Notation littérale (symbolique)
 
-mot de passes stockés dans `/etc/shadow` (y'a que root qui peut lire)
+Syntaxe :
 
-`ls -l <nom du fichier>` pour avoir toutes les infos, human friendly, d'un fichier
+```bash
+chmod [ugoa][+-=][rwx] <fichier>
+```
 
-par défaut un lien symbolique à tous les droits
+Exemple équivalent à `755` :
 
-ls -ltr
+```bash
+chmod u+rwx,g+rx,o+rx fichier.sh
+```
 
-getent
+Explication :
 
-root sans password `su -` ça marche po, `sudo su -` ça marche si mon user est dans le fichier /etc/sudoers
+- `u+rwx` : tous les droits pour le propriétaire
+- `g+rx` : lecture + exécution pour le groupe
+- `o+rx` : lecture + exécution pour les autres
 
-touch pour créer un fichier **_ou_** mettre à jour la date du fichier
+💡 Contrairement à l’exemple initial, `g+wx` et `o+w` étaient incorrects.
 
-umask -> permission par défaut d'un répertoire (pour la session en cours)
+---
 
-dossier tmp -> les fichiers créés sont protégés, seul l'auteur peut modifier, supprimer un fichier/dossier RWX**T**
+## 5. Modification récursive
 
-mémoire swap -> stocké sur le DD
+Pour appliquer des permissions à un dossier et tout son contenu :
+
+```bash
+chmod -R u+rwx,g+rx,o+rx dossier/
+```
+
+⚠️ Utiliser `-R` (majuscule), pas `-r`.
+
+---
+
+## 6. Sticky Bit
+
+Le **sticky bit** limite la suppression des fichiers dans un dossier partagé.
+
+### Exemple :
+
+```bash
+chmod 1777 /tmp
+```
+
+- Le `1` en début = sticky bit
+- Les fichiers peuvent être créés par tous
+- **Seul le propriétaire peut supprimer ses fichiers**
+
+C’est le cas du dossier `/tmp`.
+
+---
+
+## 7. Setuid et Setgid
+
+⚠️ À ne pas confondre avec le sticky bit.
+
+### Setuid (SUID)
+
+```bash
+chmod u+s fichier
+```
+
+- Le programme s’exécute avec les droits du propriétaire (souvent root)
+- Exemple : `/usr/bin/passwd`
+
+### Setgid (SGID)
+
+```bash
+chmod g+s dossier
+```
+
+- Les fichiers créés héritent du groupe du dossier
+
+---
+
+## 8. Afficher les permissions
+
+```bash
+ls -l fichier
+```
+
+Exemple :
+
+```
+-rwxr-xr-x 1 user group 1234 fichier
+```
+
+Lecture :
+
+- `-` : type (fichier)
+- `rwx` : user
+- `r-x` : group
+- `r-x` : other
+
+---
+
+## 9. Commandes utiles
+
+### `type`
+
+Permet de localiser une commande :
+
+```bash
+type ls
+```
+
+---
+
+### `man`
+
+Documentation des commandes :
+
+```bash
+man 5 passwd
+```
+
+Le chiffre correspond à une section :
+
+- 1 : commandes utilisateur
+- 5 : formats de fichiers
+- 8 : administration système
+
+---
+
+### `touch`
+
+```bash
+touch fichier.txt
+```
+
+- Crée un fichier s’il n’existe pas
+- Met à jour la date sinon
+
+---
+
+### `ls -ltr`
+
+Liste les fichiers :
+
+- `-l` : détails
+- `-t` : tri par date
+- `-r` : ordre inversé
+
+---
+
+### `getent`
+
+Récupère des informations système :
+
+```bash
+getent passwd
+```
+
+---
+
+## 10. Fichiers sensibles
+
+### `/etc/shadow`
+
+- Contient les mots de passe hashés
+- Accessible uniquement par **root**
+
+---
+
+## 11. Gestion des droits administrateur
+
+### `su`
+
+```bash
+su -
+```
+
+- Permet de devenir root
+- Nécessite le mot de passe root
+
+### `sudo`
+
+```bash
+sudo su -
+```
+
+- Fonctionne si l’utilisateur est dans `/etc/sudoers`
+
+---
+
+## 12. Permissions par défaut : `umask`
+
+Définit les permissions par défaut lors de la création :
+
+```bash
+umask
+```
+
+Exemple :
+
+- `022` → fichiers en `644`, dossiers en `755`
+
+---
+
+## 13. Lien symbolique
+
+- Un lien symbolique a généralement **tous les droits affichés**
+- Mais les permissions réelles dépendent du fichier cible
+
+---
+
+## 14. Cas particulier : `/tmp`
+
+- Permissions : `drwxrwxrwt`
+- Le `t` indique le sticky bit
+- Tous peuvent écrire, mais pas supprimer les fichiers des autres
+
+---
+
+## 15. Mémoire swap
+
+- Zone disque utilisée comme extension de la RAM
+- Située sur le disque dur
+- Gérée automatiquement par le système
+
+---
+
+## Conclusion
+
+Une bonne gestion des permissions repose sur :
+
+- Donner **le minimum nécessaire**
+- Éviter `777`
+- Comprendre les bits spéciaux (SUID, SGID, sticky)
