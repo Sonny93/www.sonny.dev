@@ -9,7 +9,7 @@ import { PostMarkdownLoader } from '../loaders/post_markdown_loader.js';
 export const postCollection = new Collection({
 	schema: vine.array(postSchema),
 	loader: new PostMarkdownLoader(app.makePath('data/posts.json')),
-	cache: true,
+	cache: app.inProduction,
 	views: {
 		published: (posts) => {
 			const now = DateTime.now().toMillis();
