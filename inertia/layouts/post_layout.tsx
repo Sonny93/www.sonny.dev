@@ -5,7 +5,7 @@ import { Navbar } from '~/components/navigation/navbar';
 export const PostLayout = ({ children }: React.PropsWithChildren) => (
 	<BaseLayout>
 		<div className="flex min-h-dvh flex-col bg-gray-50 dark:bg-gray-900">
-			<div className="max-w-3xl mx-auto flex flex-1 flex-col gap-6 p-4">
+			<div className="w-3xl mx-auto flex flex-1 flex-col gap-6 p-4">
 				<Navbar />
 				<main
 					className="flex flex-col gap-4 py-10 sm:py-16"

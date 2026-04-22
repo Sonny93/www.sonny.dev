@@ -19,7 +19,7 @@ function ShowPost({ post, content }: Readonly<ShowPostProps>) {
 				<Trans>min read</Trans>
 			</div>
 			<div
-				className="prose dark:prose-invert [&>:first-child]:"
+				className="prose dark:prose-invert min-w-full"
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
 		</>
