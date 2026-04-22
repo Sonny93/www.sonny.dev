@@ -8,5 +8,5 @@ import { experienceSchema } from '#validator/experience';
 export const experienceCollection = new Collection({
 	schema: vine.array(experienceSchema),
 	loader: loaders.jsonLoader(app.makePath('data/experiences.json')),
-	cache: true,
+	cache: app.inProduction,
 });

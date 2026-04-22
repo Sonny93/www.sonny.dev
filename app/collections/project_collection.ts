@@ -8,5 +8,5 @@ import { projectSchema } from '#validator/project';
 export const projectCollection = new Collection({
 	schema: vine.array(projectSchema),
 	loader: loaders.jsonLoader(app.makePath('data/projects.json')),
-	cache: true,
+	cache: app.inProduction,
 });
