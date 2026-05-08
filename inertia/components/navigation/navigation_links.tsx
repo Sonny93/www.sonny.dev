@@ -18,7 +18,7 @@ export const NavigationLinks = () => (
 export const NavigationLink = ({ href, label }: NavigationLinkProps) => (
 	<Link
 		href={href}
-		className="text-gray-500 dark:text-gray-400 whitespace-nowrap"
+		className="text-gray-400 whitespace-nowrap"
 	>
 		{label}
 	</Link>

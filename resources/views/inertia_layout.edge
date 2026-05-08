@@ -7,30 +7,7 @@
 
   <title inertia>App</title>
 
-  <script>
-    (function() {
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      let theme = 'system';
-
-      if (savedTheme) {
-        theme = savedTheme;
-      }
-
-      if (theme === 'system') {
-        if (systemPrefersDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      } else if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    })();
-  </script>
+  <script>document.documentElement.classList.add('dark');</script>
 
   @stack('dumper')
   @viteReactRefresh()

@@ -55,7 +55,7 @@
 		"@inertiajs/react": "^2.3.18",
 		"@lingui/core": "^5.9.5",
 		"@lingui/react": "^5.9.5",
-		"@minimalstuff/ui": "^1.2.1",
+		"@minimalstuff/ui": "^1.4.0",
 		"@shikijs/markdown-it": "^4.0.2",
 		"@tuyau/core": "^1.2.2",
 		"@vinejs/vine": "^4.3.0",
@@ -65,7 +65,8 @@
 		"markdown-it": "^14.1.1",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
-		"reflect-metadata": "^0.2.2"
+		"reflect-metadata": "^0.2.2",
+		"three": "^0.184.0"
 	},
 	"devDependencies": {
 		"@adonisjs/assembler": "^8.4.0",
@@ -83,6 +84,7 @@
 		"@types/node": "^24.10.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
+		"@types/three": "^0.184.0",
 		"@unocss/preset-typography": "^66.6.8",
 		"@unocss/preset-web-fonts": "^66.6.7",
 		"@vitejs/plugin-react-swc": "^4.3.0",
