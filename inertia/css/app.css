@@ -15,6 +15,7 @@ body {
 	min-height: 100dvh;
 	width: 100%;
 	margin: 0;
+	background-color: #030b1a;
 }
 
 .dark {
@@ -69,17 +70,23 @@ html.dark .shiki span {
 }
 
 .page-transition-enter {
-	animation: pageFadeIn 250ms ease forwards;
-	will-change: opacity, filter;
+	animation: pageFadeIn 400ms ease-out forwards;
+	will-change: opacity, filter, transform;
 }
 
 @keyframes pageFadeIn {
-	from {
+	0% {
 		opacity: 0;
-		filter: blur(0.44rem);
+		transform: scale(1.04);
+		filter: blur(1rem) brightness(2.5);
 	}
-	to {
+	45% {
+		opacity: 0.75;
+		filter: blur(0.15rem) brightness(1.2);
+	}
+	100% {
 		opacity: 1;
-		filter: blur(0);
+		transform: scale(1);
+		filter: blur(0) brightness(1);
 	}
 }

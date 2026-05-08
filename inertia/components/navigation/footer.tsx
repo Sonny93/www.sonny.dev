@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { Link } from '@adonisjs/inertia/react';
-import { ThemeToggle } from '@minimalstuff/ui';
 
 import { Socials } from '~/constants/socials';
 import { getIcon, SocialIcon } from '~/lib/icons';
@@ -16,7 +15,7 @@ export function Footer() {
 	return (
 		<footer
 			className={clsx(
-				'sticky bottom-0 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-white px-4 py-2 text-gray-500 transition-[transform,opacity] duration-300 ease-out dark:bg-gray-800 dark:text-gray-400',
+				'sticky bottom-0 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-gray-800 px-4 py-2 text-gray-400 transition-[transform,opacity] duration-300 ease-out',
 				footerStateClass
 			)}
 		>
@@ -31,7 +30,7 @@ export function Footer() {
 						aria-label={key}
 					>
 						<span
-							className={`${getIcon(key as SocialIcon)} text-gray-500 dark:text-gray-400 size-6`}
+							className={`${getIcon(key as SocialIcon)} text-gray-400 size-6`}
 							aria-hidden
 						/>
 					</Link>
@@ -39,7 +38,6 @@ export function Footer() {
 			</div>
 			<div className="flex min-w-0 items-center justify-end justify-self-end gap-2">
 				<LocaleSwitcher />
-				<ThemeToggle />
 			</div>
 		</footer>
 	);

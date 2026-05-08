@@ -27,15 +27,15 @@ export function VerticalTimeline({
 	return (
 		<section className={className}>
 			<SectionTitle title={title} />
-			<ul className="relative ml-0.5 space-y-10 border-l border-gray-300 pl-6 sm:ml-1 sm:pl-8 dark:border-white/18">
+			<ul className="relative ml-0.5 space-y-10 border-l border-white/18 pl-6 sm:ml-1 sm:pl-8">
 				{items.map((item) => (
 					<li key={item.id} className="relative">
 						<span
-							className="absolute right-full top-[0.65em] mr-3 h-px w-5 rounded-full bg-gray-400 dark:bg-white/28 sm:w-6"
+							className="absolute right-full top-[0.65em] mr-3 h-px w-5 rounded-full bg-white/28 sm:w-6"
 							aria-hidden
 						/>
 						<div className="min-w-0">
-							<p className="text-pretty text-[0.95rem] leading-snug text-gray-900 sm:text-base dark:text-white/95">
+							<p className="text-pretty text-[0.95rem] leading-snug text-white/95 sm:text-base">
 								<span
 									className={
 										item.titleVariant === 'uppercase'
@@ -48,13 +48,13 @@ export function VerticalTimeline({
 								{item.subtitle ? (
 									<>
 										{' '}
-										<span className="font-normal text-gray-700 dark:text-white/85">
+										<span className="font-normal text-white/85">
 											{item.subtitle}
 										</span>
 									</>
 								) : null}
 							</p>
-							<div className="mt-1.5 text-pretty text-sm leading-relaxed text-gray-600 dark:text-white/65">
+							<div className="mt-1.5 text-pretty text-sm leading-relaxed text-white/65">
 								{item.meta}
 							</div>
 							{item.bullets && item.bullets.length > 0 ? (
@@ -62,7 +62,7 @@ export function VerticalTimeline({
 									{item.bullets.map((line) => (
 										<li
 											key={line}
-											className="flex gap-2.5 text-sm leading-relaxed text-gray-700 dark:text-white/75"
+											className="flex gap-2.5 text-sm leading-relaxed text-white/75"
 										>
 											<span
 												className="mt-2 size-1.5 shrink-0 rounded-full border border-current opacity-70"

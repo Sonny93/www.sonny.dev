@@ -27,47 +27,47 @@ export default function Home({ posts, experiences }: HomeProps) {
 	return (
 		<>
 			<Head title={t`Homepage`} />
-			<section className="relative overflow-hidden rounded-3xl border border-sky-100/70 bg-linear-to-br from-white via-sky-50/70 to-cyan-100/70 px-6 py-10 shadow-xl shadow-sky-100/40 sm:px-10 sm:py-12 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 dark:shadow-none">
-				<div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sky-300/25 blur-3xl dark:bg-sky-500/15" />
-				<div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-cyan-300/20 blur-3xl dark:bg-cyan-500/15" />
+			<section className="relative overflow-hidden rounded-3xl border border-slate-700 bg-linear-to-br from-slate-900 via-slate-900 to-slate-800 px-6 py-10 sm:px-10 sm:py-12">
+				<div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sky-500/15 blur-3xl" />
+				<div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
 
 				<div className="relative">
 					<div className="space-y-6">
-						<span className="inline-flex w-fit items-center rounded-full border border-sky-200 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-700 backdrop-blur dark:border-slate-600 dark:bg-slate-900/75 dark:text-sky-300">
+						<span className="inline-flex w-fit items-center rounded-full border border-slate-600 bg-slate-900/75 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-300 backdrop-blur">
 							<Trans>Based in France · Open to remote opportunities</Trans>
 						</span>
 
-						<h1 className="max-w-3xl text-balance text-4xl font-black tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-white">
+						<h1 className="max-w-3xl text-balance text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl">
 							<Trans>
 								I build reliable web platforms and developer-focused systems.
 							</Trans>
 						</h1>
 
-						<p className="max-w-2xl text-pretty text-base leading-relaxed text-slate-700 sm:text-lg dark:text-slate-300">
+						<p className="max-w-2xl text-pretty text-base leading-relaxed text-slate-300 sm:text-lg">
 							<Trans>
 								Hi, I&apos;m Sonny. I design and ship maintainable products with
 								clear architecture, thoughtful DX, and practical automation.
 							</Trans>
 						</p>
 
-						<ul className="grid gap-2.5 text-sm text-slate-700 sm:grid-cols-2 sm:text-base dark:text-slate-300">
-							<li className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 backdrop-blur dark:bg-slate-800/70">
+						<ul className="grid gap-2.5 text-sm text-slate-300 sm:grid-cols-2 sm:text-base">
+							<li className="flex items-center gap-2 rounded-xl bg-slate-800/70 px-3 py-2 backdrop-blur">
 								<span
-									className="h-2 w-2 rounded-full bg-sky-500 dark:bg-sky-400"
+									className="h-2 w-2 rounded-full bg-sky-400"
 									aria-hidden
 								/>
 								<Trans>Full-stack engineering and DevOps</Trans>
 							</li>
-							<li className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 backdrop-blur dark:bg-slate-800/70">
+							<li className="flex items-center gap-2 rounded-xl bg-slate-800/70 px-3 py-2 backdrop-blur">
 								<span
-									className="h-2 w-2 rounded-full bg-sky-500 dark:bg-sky-400"
+									className="h-2 w-2 rounded-full bg-sky-400"
 									aria-hidden
 								/>
 								<Trans>Automation-first mindset</Trans>
 							</li>
-							<li className="flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 backdrop-blur dark:bg-slate-800/70">
+							<li className="flex items-center gap-2 rounded-xl bg-slate-800/70 px-3 py-2 backdrop-blur">
 								<span
-									className="h-2 w-2 rounded-full bg-sky-500 dark:bg-sky-400"
+									className="h-2 w-2 rounded-full bg-sky-400"
 									aria-hidden
 								/>
 								<Trans>Productive tooling across domains</Trans>
@@ -76,7 +76,7 @@ export default function Home({ posts, experiences }: HomeProps) {
 
 						<Link
 							route="show_posts"
-							className="inline-flex items-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+							className="inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200"
 						>
 							<Trans>Read my latest posts</Trans>
 						</Link>
@@ -89,7 +89,7 @@ export default function Home({ posts, experiences }: HomeProps) {
 					<SectionTitle title={<Trans>Latest articles</Trans>} />
 					<Link
 						route="show_posts"
-						className="self-end text-sm text-gray-600 dark:text-gray-400"
+						className="self-end text-sm text-gray-400"
 					>
 						<Trans>View all articles</Trans> &rarr;
 					</Link>
@@ -109,7 +109,7 @@ export default function Home({ posts, experiences }: HomeProps) {
 								{formatStructuredPeriod(e.beginningDate, e.endDate)}{' '}
 								<span>
 									(
-									<span className="font-semibold text-gray-900 dark:text-white/95">
+									<span className="font-semibold text-white/95">
 										{e.company}
 									</span>
 									{' – '}
