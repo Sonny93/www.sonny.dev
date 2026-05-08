@@ -16,12 +16,12 @@ function ShowPost({ post, content }: Readonly<ShowPostProps>) {
 		<>
 			<Head title={post.title} />
 			<SectionTitle title={post.title} />
-			<div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+			<div className="flex items-center gap-4 text-sm text-gray-400">
 				{post.publishedAt} &middot; {post.estimatedReadTime}{' '}
 				<Trans>min read</Trans>
 			</div>
 			<div
-				className="prose dark:prose-invert min-w-full"
+				className="prose prose-invert min-w-full"
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
 		</>

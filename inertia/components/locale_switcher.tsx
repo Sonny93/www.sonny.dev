@@ -25,7 +25,7 @@ export function LocaleSwitcher() {
 	};
 
 	return (
-		<div className="flex items-center gap-1 p-1 rounded-lg bg-gray-100 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600">
+		<div className="flex items-center gap-1 p-1 rounded-lg bg-gray-700/50 border border-gray-600">
 			{SUPPORTED_LOCALES.map((locale) => (
 				<button
 					key={locale}
@@ -33,7 +33,7 @@ export function LocaleSwitcher() {
 					className={clsx(
 						'px-2.5 py-1.5 rounded-md transition-all duration-200 cursor-pointer flex items-center justify-center',
 						i18n.locale === locale
-							? 'bg-white dark:bg-gray-600 shadow-sm'
+							? 'bg-gray-600 shadow-sm'
 							: 'opacity-60 hover:opacity-100'
 					)}
 					aria-label={`Switch to ${LOCALE_LABELS[locale]}`}

@@ -9,6 +9,7 @@ import { TuyauProvider } from '@adonisjs/inertia/react';
 
 import { tuyauClient } from '~/lib/tuyau';
 import { usePageTransition } from '~/hooks/use_page_transition';
+import { SpaceBackground } from '~/components/space_background';
 
 export function BaseLayout({ children }: Readonly<React.PropsWithChildren>) {
 	usePageTransition({
@@ -17,7 +18,10 @@ export function BaseLayout({ children }: Readonly<React.PropsWithChildren>) {
 
 	return (
 		<TuyauProvider client={tuyauClient}>
-			<I18nProvider i18n={i18n}>{children}</I18nProvider>
+			<I18nProvider i18n={i18n}>
+				<SpaceBackground />
+				{children}
+			</I18nProvider>
 		</TuyauProvider>
 	);
 }
