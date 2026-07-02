@@ -1,11 +1,12 @@
 ---
-title: "Les droits linux — comment ça marche ?"
-description: "Fonctionnement des droits sur les systèmes de fichiers Linux (chmod, sticky bit, etc.)."
-tags: ["linux","chmod","security"]
+title: 'Les droits linux — comment ça marche ?'
+description: 'Fonctionnement des droits sur les systèmes de fichiers Linux (chmod, sticky bit, etc.).'
+tags: ['linux', 'chmod', 'security']
 publishedAt: 2024-02-16
-lang: "fr"
-urlSlug: "permissions"
+lang: 'fr'
+urlSlug: 'permissions'
 ---
+
 # Gestion des permissions sous Linux
 
 ⚠️ **Attention** : une mauvaise gestion des permissions peut exposer vos fichiers à des accès non autorisés. Évitez les permissions trop permissives comme `chmod 777`.

@@ -1,11 +1,12 @@
 ---
-title: "Basic ZSH installation and configuration"
-description: "Install and configure ZSH with oh-my-zsh, autosuggestions and Tabby."
-tags: ["zsh","linux","terminal"]
+title: 'Basic ZSH installation and configuration'
+description: 'Install and configure ZSH with oh-my-zsh, autosuggestions and Tabby.'
+tags: ['zsh', 'linux', 'terminal']
 publishedAt: 2024-02-27
-lang: "en"
-urlSlug: "setup-zsh"
+lang: 'en'
+urlSlug: 'setup-zsh'
 ---
+
 ## Git
 
 To download and install ZSH, we first need to install git and curl

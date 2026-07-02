@@ -66,8 +66,6 @@ export function resolveLocale(candidate: string | undefined): Locale {
 	return DEFAULT_LOCALE;
 }
 
-export function useTranslations(
-	locale: Locale
-): (key: UiStringKey) => string {
+export function useTranslations(locale: Locale): (key: UiStringKey) => string {
 	return (key) => UI_STRINGS[locale][key];
 }

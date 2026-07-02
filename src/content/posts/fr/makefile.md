@@ -1,11 +1,12 @@
 ---
-title: "Makefile à quoi ça sert ?"
-description: "Pourquoi utiliser un Makefile (ou just) pour centraliser les commandes de projet."
-tags: ["makefile","tooling","devops"]
+title: 'Makefile à quoi ça sert ?'
+description: 'Pourquoi utiliser un Makefile (ou just) pour centraliser les commandes de projet.'
+tags: ['makefile', 'tooling', 'devops']
 publishedAt: 2024-02-15
-lang: "fr"
-urlSlug: "makefile"
+lang: 'fr'
+urlSlug: 'makefile'
 ---
+
 À mesure que nos projets informatique grossissent, il devient rapidement complexe de se souvenir de toutes les commandes que l'on peut utiliser.
 
 Par exemple pour un projet web basique, on retrouve généralement des commandes pour :

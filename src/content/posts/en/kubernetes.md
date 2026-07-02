@@ -1,11 +1,12 @@
 ---
-title: "A few Kubernetes pro tips"
-description: "A few tips to get more out of Kubernetes: kubectl, helm, best practices, etc."
-tags: ["kubernetes","devops","linux"]
+title: 'A few Kubernetes pro tips'
+description: 'A few tips to get more out of Kubernetes: kubectl, helm, best practices, etc.'
+tags: ['kubernetes', 'devops', 'linux']
 publishedAt: 2024-02-29
-lang: "en"
-urlSlug: "kubernetes"
+lang: 'en'
+urlSlug: 'kubernetes'
 ---
+
 # Kubernetes & Minikube
 
 ## 1. CLI tools

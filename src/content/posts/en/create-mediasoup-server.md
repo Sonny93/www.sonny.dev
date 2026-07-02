@@ -1,11 +1,12 @@
 ---
-title: "How to build a Mediasoup server"
-description: "Steps to build a Mediasoup server: device, produce/consume transports."
-tags: ["webrtc","mediasoup","nodejs"]
+title: 'How to build a Mediasoup server'
+description: 'Steps to build a Mediasoup server: device, produce/consume transports.'
+tags: ['webrtc', 'mediasoup', 'nodejs']
 publishedAt: 2024-02-24
-lang: "en"
-urlSlug: "create-mediasoup-server"
+lang: 'en'
+urlSlug: 'create-mediasoup-server'
 ---
+
 ### To build a mediasoup server, follow these steps
 
 - _Detailed steps below_
