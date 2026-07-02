@@ -1,4 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
 ---
 
 <html lang="en">
@@ -9,5 +12,8 @@
 	</head>
 	<body>
 		<h1>Astro scaffold placeholder (en)</h1>
+		<ul>
+			{posts.map((post) => <li>{post.data.title}</li>)}
+		</ul>
 	</body>
 </html>
