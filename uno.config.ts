@@ -6,6 +6,8 @@ import {
 	presetWind4,
 } from 'unocss';
 
+import { socialLinks } from './src/constants/socials.js';
+
 const titleCommonStyles = {
 	'font-weight': 'unset',
 	'line-height': '1.2',
@@ -91,6 +93,7 @@ export default defineConfig({
 			},
 		}),
 	],
+	safelist: socialLinks.map((socialLink) => socialLink.iconClass),
 	shortcuts: {
 		'min-h-dvh': 'min-h-[100dvh]',
 		'min-h-svh': 'min-h-[100svh]',

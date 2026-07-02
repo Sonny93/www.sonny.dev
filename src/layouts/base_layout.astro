@@ -1,8 +1,9 @@
 ---
-import '@minimalstuff/ui/style.css';
 import '../styles/global.css';
 
 import { ClientRouter } from 'astro:transitions';
+
+import { DEFAULT_LOCALE, LOCALES } from '../i18n/ui';
 
 export type OpenGraphType = 'website' | 'article';
 
@@ -24,6 +25,24 @@ const openGraphUrl =
 	Astro.site === undefined
 		? undefined
 		: new URL(Astro.url.pathname, Astro.site).toString();
+
+const LOCALIZED_PATH_PATTERN = new RegExp(`^/(${LOCALES.join('|')})(/.*)?$`);
+const localizedPathMatch = Astro.url.pathname.match(LOCALIZED_PATH_PATTERN);
+const alternatePathSuffix = localizedPathMatch?.[2] ?? '/';
+const alternateLinks =
+	Astro.site === undefined || localizedPathMatch === null
+		? []
+		: LOCALES.map((alternateLocale) => ({
+				hreflang: alternateLocale,
+				href: new URL(
+					`/${alternateLocale}${alternatePathSuffix}`,
+					Astro.site
+				).toString(),
+			}));
+const defaultAlternateUrl =
+	Astro.site === undefined || localizedPathMatch === null
+		? undefined
+		: new URL(`/${DEFAULT_LOCALE}${alternatePathSuffix}`, Astro.site).toString();
 ---
 
 <html lang={locale} class="dark">
@@ -47,6 +66,14 @@ const openGraphUrl =
 		{
 			openGraphUrl !== undefined && (
 				<meta property="og:url" content={openGraphUrl} />
+			)
+		}
+		{alternateLinks.map(({ hreflang, href }) => (
+			<link rel="alternate" hreflang={hreflang} href={href} />
+		))}
+		{
+			defaultAlternateUrl !== undefined && (
+				<link rel="alternate" hreflang="x-default" href={defaultAlternateUrl} />
 			)
 		}
 
