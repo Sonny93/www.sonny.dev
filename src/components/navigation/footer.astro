@@ -1,5 +1,6 @@
 ---
 import { socialLinks } from '../../constants/socials';
+import LocaleSwitcher from '../locale_switcher.astro';
 ---
 
 <footer
@@ -26,7 +27,7 @@ import { socialLinks } from '../../constants/socials';
 		}
 	</div>
 	<div class="flex min-w-0 items-center justify-end justify-self-end gap-2">
-		<slot name="locale-switcher" />
+		<LocaleSwitcher />
 	</div>
 </footer>
 

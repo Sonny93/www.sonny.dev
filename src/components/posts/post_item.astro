@@ -1,19 +1,22 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { CollectionEntry } from 'astro:content';
 
+import { ROUTES } from '../../constants/routes';
+import { localizedUrl } from '../../lib/localized_url';
 import { formatPublishedDate } from '../../lib/format_date';
+import { resolveLocale, useTranslations } from '../../i18n/ui';
 import { estimateReadingTimeMinutes } from '../../lib/reading_time';
 
 type Props = {
 	post: CollectionEntry<'posts'>;
-	readTimeLabel?: string;
 };
 
-const { post, readTimeLabel = 'min read' } = Astro.props;
+const { post } = Astro.props;
 
-const locale = Astro.currentLocale ?? 'en';
-const postUrl = getRelativeLocaleUrl(locale, `blog/${post.id}`);
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+const readTimeLabel = translate('post.readTimeUnit');
+const postUrl = localizedUrl(locale, ROUTES.post(post.id));
 const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
 const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 ---

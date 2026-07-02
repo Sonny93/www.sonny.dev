@@ -1,0 +1,43 @@
+---
+import { switchedLocaleUrl } from '../lib/localized_url';
+import { LOCALES, resolveLocale, type Locale } from '../i18n/ui';
+
+const LOCALE_LABELS: Readonly<Record<Locale, string>> = {
+	en: 'EN',
+	fr: 'FR',
+};
+
+const LOCALE_FLAG_CLASSES: Readonly<Record<Locale, string>> = {
+	en: 'i-twemoji:flag-united-kingdom',
+	fr: 'i-twemoji:flag-france',
+};
+
+const activeLocale = resolveLocale(Astro.currentLocale);
+
+const localeLinks = LOCALES.map((locale) => ({
+	label: LOCALE_LABELS[locale],
+	flagClass: LOCALE_FLAG_CLASSES[locale],
+	href: switchedLocaleUrl(locale, Astro.url.pathname),
+	isActive: locale === activeLocale,
+}));
+---
+
+<div
+	class="flex items-center gap-1 p-1 rounded-lg bg-gray-700/50 border border-gray-600"
+>
+	{
+		localeLinks.map((localeLink) => (
+			<a
+				href={localeLink.href}
+				aria-current={localeLink.isActive ? 'true' : undefined}
+				aria-label={`Switch to ${localeLink.label}`}
+				class="px-2.5 py-1.5 rounded-md transition-all duration-200 flex items-center justify-center opacity-60 hover:opacity-100 aria-[current=true]:opacity-100 aria-[current=true]:bg-gray-600 aria-[current=true]:shadow-sm"
+			>
+				<span
+					class={`${localeLink.flagClass} w-5 h-5`}
+					aria-hidden="true"
+				/>
+			</a>
+		))
+	}
+</div>
