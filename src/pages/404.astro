@@ -1,0 +1,13 @@
+---
+import DefaultLayout from '../layouts/default_layout.astro';
+import { DEFAULT_LOCALE, useTranslations } from '../i18n/ui';
+
+const translate = useTranslations(DEFAULT_LOCALE);
+---
+
+<DefaultLayout title={translate('notFound.title')}>
+	<div class="container">
+		<div class="title">{translate('notFound.title')}</div>
+		<span>{translate('notFound.description')}</span>
+	</div>
+</DefaultLayout>

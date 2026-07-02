@@ -1,0 +1,23 @@
+---
+import { getPublishedPosts } from '../../../lib/posts';
+import PostList from '../../../components/posts/post_list.astro';
+import DefaultLayout from '../../../layouts/default_layout.astro';
+import SectionTitle from '../../../components/section_title.astro';
+import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+	return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+
+const posts = await getPublishedPosts();
+---
+
+<DefaultLayout title={translate('blog.pageTitle')}>
+	<div>
+		<SectionTitle title={translate('blog.pageTitle')} />
+		<PostList posts={posts} />
+	</div>
+</DefaultLayout>
