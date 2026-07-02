@@ -1,4 +1,5 @@
 import unocss from 'unocss/astro';
+import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 import { DEFAULT_LOCALE, LOCALES } from './src/i18n/ui.js';
@@ -22,5 +23,13 @@ export default defineConfig({
 			},
 		},
 	},
-	integrations: [unocss()],
+	integrations: [
+		unocss(),
+		sitemap({
+			i18n: {
+				defaultLocale: DEFAULT_LOCALE,
+				locales: Object.fromEntries(LOCALES.map((locale) => [locale, locale])),
+			},
+		}),
+	],
 });
