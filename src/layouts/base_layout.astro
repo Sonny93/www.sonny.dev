@@ -1,0 +1,34 @@
+---
+import '@minimalstuff/ui/style.css';
+import '../styles/global.css';
+
+import { ClientRouter } from 'astro:transitions';
+
+type Props = {
+	title?: string;
+};
+
+const DEFAULT_TITLE = 'App';
+
+const { title = DEFAULT_TITLE } = Astro.props;
+const locale = Astro.currentLocale ?? 'en';
+---
+
+<html lang={locale} class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>{title}</title>
+
+		<ClientRouter />
+	</head>
+
+	<body>
+		<canvas
+			id="space-background"
+			style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"
+			aria-hidden="true"></canvas>
+		<slot />
+	</body>
+</html>

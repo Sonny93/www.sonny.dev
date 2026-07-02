@@ -1,0 +1,33 @@
+---
+import { socialLinks } from '../../constants/socials';
+---
+
+<footer
+	data-headroom
+	data-pinned="true"
+	class="sticky bottom-0 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-gray-800 px-4 py-2 text-gray-400 transition-[transform,opacity] duration-300 ease-out translate-y-0 opacity-100 data-[pinned=false]:translate-y-2 data-[pinned=false]:pointer-events-none data-[pinned=false]:opacity-0"
+>
+	<p>© 2026 Sonny</p>
+	<div class="flex min-w-0 items-center justify-end justify-self-end gap-2">
+		{
+			socialLinks.map((socialLink) => (
+				<a
+					href={socialLink.url}
+					target="_blank"
+					rel="noreferrer"
+					aria-label={socialLink.name}
+				>
+					<span
+						class={`${socialLink.iconClass} text-gray-400 size-6`}
+						aria-hidden="true"
+					/>
+				</a>
+			))
+		}
+	</div>
+	<div class="flex min-w-0 items-center justify-end justify-self-end gap-2">
+		<slot name="locale-switcher" />
+	</div>
+</footer>
+
+<script src="../../scripts/headroom.ts"></script>
