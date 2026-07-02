@@ -1,14 +1,8 @@
 dev:
-	@-docker compose down
 	@pnpm run dev
 
-prod:
-	@docker compose pull
-	@docker compose up -d --build --wait
-
-down:
-	@-docker compose down
-	@-docker compose -f dev.compose.yml down
+build:
+	@pnpm run build
 
 release:
 	@npx release-it
