@@ -1,0 +1,31 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const NAVIGATION_TARGETS = {
+	Home: '',
+	Blog: 'blog',
+	Projects: 'projects',
+} as const;
+
+const locale = Astro.currentLocale ?? 'en';
+
+const navigationLinks = Object.entries(NAVIGATION_TARGETS).map(
+	([label, path]) => ({
+		label,
+		href: getRelativeLocaleUrl(locale, path),
+	})
+);
+---
+
+<div class="flex gap-4">
+	{
+		navigationLinks.map((navigationLink) => (
+			<a
+				href={navigationLink.href}
+				class="text-gray-400 whitespace-nowrap"
+			>
+				{navigationLink.label}
+			</a>
+		))
+	}
+</div>

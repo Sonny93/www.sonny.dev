@@ -1,0 +1,74 @@
+---
+import SectionTitle from '../section_title.astro';
+
+export type VerticalTimelineItem = {
+	id: string;
+	title: string;
+	titleVariant?: 'default' | 'uppercase';
+	subtitle?: string;
+	metaHtml: string;
+	bullets?: readonly string[];
+};
+
+type Props = {
+	title: string;
+	items: readonly VerticalTimelineItem[];
+	class?: string;
+};
+
+const { title, items, class: className = '' } = Astro.props;
+---
+
+{
+	items.length > 0 && (
+		<section class={className}>
+			<SectionTitle title={title} />
+			<ul class="relative ml-0.5 space-y-10 border-l border-white/18 pl-6 sm:ml-1 sm:pl-8">
+				{items.map((item) => (
+					<li class="relative">
+						<span
+							class="absolute right-full top-[0.65em] mr-3 h-px w-5 rounded-full bg-white/28 sm:w-6"
+							aria-hidden="true"
+						/>
+						<div class="min-w-0">
+							<p class="text-pretty text-[0.95rem] leading-snug text-white/95 sm:text-base">
+								<span
+									class={
+										item.titleVariant === 'uppercase'
+											? 'font-bold uppercase tracking-wide'
+											: 'font-bold'
+									}
+								>
+									{item.title}
+								</span>
+								{item.subtitle && (
+									<span class="font-normal text-white/85">
+										{' '}
+										{item.subtitle}
+									</span>
+								)}
+							</p>
+							<div
+								class="mt-1.5 text-pretty text-sm leading-relaxed text-white/65"
+								set:html={item.metaHtml}
+							/>
+							{item.bullets && item.bullets.length > 0 && (
+								<ul class="mt-3 list-none space-y-2 pl-0.5">
+									{item.bullets.map((bulletLine) => (
+										<li class="flex gap-2.5 text-sm leading-relaxed text-white/75">
+											<span
+												class="mt-2 size-1.5 shrink-0 rounded-full border border-current opacity-70"
+												aria-hidden="true"
+											/>
+											<span>{bulletLine}</span>
+										</li>
+									))}
+								</ul>
+							)}
+						</div>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}

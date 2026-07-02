@@ -1,0 +1,26 @@
+---
+import BaseLayout from './base_layout.astro';
+import Footer from '../components/navigation/footer.astro';
+import Navbar from '../components/navigation/navbar.astro';
+
+type Props = {
+	title?: string;
+};
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+	<div class="relative z-1 flex min-h-dvh flex-col">
+		<div class="w-3xl mx-auto flex flex-1 flex-col gap-6 p-4">
+			<Navbar />
+			<main
+				class="flex flex-col gap-4 py-10 sm:py-16"
+				data-page-transition
+			>
+				<slot />
+			</main>
+			<Footer />
+		</div>
+	</div>
+</BaseLayout>

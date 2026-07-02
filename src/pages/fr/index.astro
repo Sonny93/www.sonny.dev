@@ -1,19 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 
+import PostList from '../../components/posts/post_list.astro';
+import DefaultLayout from '../../layouts/default_layout.astro';
+
 const posts = await getCollection('posts');
 ---
 
-<html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Sonny — placeholder</title>
-	</head>
-	<body>
-		<h1>Astro scaffold placeholder (fr)</h1>
-		<ul>
-			{posts.map((post) => <li>{post.data.title}</li>)}
-		</ul>
-	</body>
-</html>
+<DefaultLayout title="Sonny — placeholder">
+	<h1>Astro scaffold placeholder (fr)</h1>
+	<PostList posts={posts} />
+</DefaultLayout>
