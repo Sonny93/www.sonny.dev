@@ -4,9 +4,14 @@ import { defineConfig } from 'astro/config';
 
 import { DEFAULT_LOCALE, LOCALES } from './src/i18n/ui.js';
 
+const DEV_SERVER_PORT = 3333;
+
 export default defineConfig({
 	output: 'static',
 	site: 'https://www.sonny.dev',
+	server: {
+		port: DEV_SERVER_PORT,
+	},
 	i18n: {
 		locales: [...LOCALES],
 		defaultLocale: DEFAULT_LOCALE,
