@@ -1,11 +1,12 @@
 ---
-title: "Build your own Netflix at home"
-description: "Very simple guide to build your own Netflix at home. Docker, Jellyfin, Prowlarr, Jackett, Radarr, Sonarr, Jellyseer."
-tags: ["docker","jellyfin","homelab","medias"]
+title: 'Build your own Netflix at home'
+description: 'Very simple guide to build your own Netflix at home. Docker, Jellyfin, Prowlarr, Jackett, Radarr, Sonarr, Jellyseer.'
+tags: ['docker', 'jellyfin', 'homelab', 'medias']
 publishedAt: 2025-11-05
-lang: "en"
-urlSlug: "homeflix"
+lang: 'en'
+urlSlug: 'homeflix'
 ---
+
 ## 1️⃣ Shared Docker network
 
 Create the single network so all containers can talk to each other:
@@ -201,14 +202,14 @@ Just check it's on the `media_net` network.
 
 In the setup wizard:
 
-| Field        | Value                    |
-| ------------ | ------------------------ |
-| Jellyfin URL | `http://jellyfin`        |
-| Port         | `8096`                   |
-| Use SSL      | ❌                       |
-| Base URL     | _(leave blank)_          |
-| Username     | your Jellyfin user       |
-| Password     | your Jellyfin password   |
+| Field        | Value                  |
+| ------------ | ---------------------- |
+| Jellyfin URL | `http://jellyfin`      |
+| Port         | `8096`                 |
+| Use SSL      | ❌                     |
+| Base URL     | _(leave blank)_        |
+| Username     | your Jellyfin user     |
+| Password     | your Jellyfin password |
 
 → Click **Sign In** → move to the next step.
 
@@ -256,16 +257,16 @@ Already connected earlier (via login or API key).
 
 # ✅ Overall summary
 
-| Service      | Internal Docker URL | Port | API key used | Note                   |
-| ------------ | -------------------- | ---- | ------------- | ----------------------- |
-| qBittorrent  | qbittorrent           | 8080 | —             | Bypass local auth       |
-| Radarr       | radarr                | 7878 | Radarr        | Movies                  |
-| Sonarr       | sonarr                | 8989 | Sonarr        | TV shows                |
-| FlareSolverr | flaresolverr          | 8191 | —             | Cloudflare proxy        |
-| Prowlarr     | prowlarr              | 9696 | Prowlarr      | Centralizes indexers    |
-| Jackett      | jackett               | 9117 | Jackett       | Provides YGG            |
-| Jellyfin     | jellyfin              | 8096 | Jellyfin      | Media server            |
-| Jellyseer    | jellyseer             | 5055 | —             | User interface          |
+| Service      | Internal Docker URL | Port | API key used | Note                 |
+| ------------ | ------------------- | ---- | ------------ | -------------------- |
+| qBittorrent  | qbittorrent         | 8080 | —            | Bypass local auth    |
+| Radarr       | radarr              | 7878 | Radarr       | Movies               |
+| Sonarr       | sonarr              | 8989 | Sonarr       | TV shows             |
+| FlareSolverr | flaresolverr        | 8191 | —            | Cloudflare proxy     |
+| Prowlarr     | prowlarr            | 9696 | Prowlarr     | Centralizes indexers |
+| Jackett      | jackett             | 9117 | Jackett      | Provides YGG         |
+| Jellyfin     | jellyfin            | 8096 | Jellyfin     | Media server         |
+| Jellyseer    | jellyseer           | 5055 | —            | User interface       |
 
 ---
 
