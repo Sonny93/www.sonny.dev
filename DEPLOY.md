@@ -1,7 +1,7 @@
 # Deploy: GitHub Pages
 
 Static Astro build, deployed by `.github/workflows/deploy.yml` on every push to
-`main` (or manually via *Actions → Deploy to GitHub Pages → Run workflow*).
+`main` (or manually via _Actions → Deploy to GitHub Pages → Run workflow_).
 First deploy happens when this branch is merged into `main`.
 
 ## One-time repository settings
@@ -18,8 +18,8 @@ First deploy happens when this branch is merged into `main`.
 
 At the DNS provider for `sonny.dev`:
 
-| Type | Name | Value |
-|---|---|---|
+| Type    | Name  | Value                         |
+| ------- | ----- | ----------------------------- |
 | `CNAME` | `www` | `<github-username>.github.io` |
 
 Optional, to make the apex `sonny.dev` reach GitHub Pages too (it will redirect
@@ -33,9 +33,7 @@ to `www.sonny.dev` since that is the configured custom domain):
 ## What the workflow does
 
 - **build**: `withastro/action@v6` — installs pnpm 11 + Node 24.14.1, runs
-  `pnpm run astro:build` (explicit `build-cmd`, because the default would run the
-  package `build` script, which is still the AdonisJS build until phase 9), then
-  uploads `dist/` as the Pages artifact.
+  `pnpm run build`, then uploads `dist/` as the Pages artifact.
 - **deploy**: `actions/deploy-pages@v4` into the `github-pages` environment.
 
 `dist/` contains `CNAME`, `favicon.svg`, `robots.txt` and
