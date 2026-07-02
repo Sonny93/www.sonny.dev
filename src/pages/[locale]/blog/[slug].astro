@@ -9,10 +9,15 @@ import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
-	const publishedPosts = await getPublishedPosts();
-	return LOCALES.flatMap((locale) =>
-		publishedPosts.map((post) => ({
-			params: { locale, slug: post.id },
+	const postsByLocale = await Promise.all(
+		LOCALES.map(async (locale) => ({
+			locale,
+			posts: await getPublishedPosts(locale),
+		}))
+	);
+	return postsByLocale.flatMap(({ locale, posts }) =>
+		posts.map((post) => ({
+			params: { locale, slug: post.data.urlSlug },
 			props: { post },
 		}))
 	);

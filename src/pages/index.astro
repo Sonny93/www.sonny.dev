@@ -1,5 +1,5 @@
 ---
-import { DEFAULT_LOCALE } from '../i18n/ui';
+import { DEFAULT_LOCALE, LOCALES } from '../i18n/ui';
 import { ROUTES } from '../constants/routes';
 import { localizedUrl } from '../lib/localized_url';
 
@@ -8,11 +8,43 @@ const canonicalUrl =
 	Astro.site === undefined
 		? undefined
 		: new URL(defaultLocaleHomeUrl, Astro.site).toString();
+
+const localeHomeUrls = Object.fromEntries(
+	LOCALES.map((locale) => [locale, localizedUrl(locale, ROUTES.home)])
+);
 ---
 
 <html lang={DEFAULT_LOCALE}>
 	<head>
 		<meta charset="utf-8" />
+		<script
+			is:inline
+			data-locale-urls={JSON.stringify(localeHomeUrls)}
+			data-locales={JSON.stringify(LOCALES)}
+		>
+			(function () {
+				const script = document.currentScript;
+				const localeUrls = JSON.parse(script.dataset.localeUrls);
+				const locales = JSON.parse(script.dataset.locales);
+
+				function firstSupportedLocale(candidates) {
+					for (const candidate of candidates) {
+						const code = candidate.slice(0, 2).toLowerCase();
+						if (locales.includes(code)) return code;
+					}
+					return undefined;
+				}
+
+				const storedLocale = localStorage.getItem('preferred-locale');
+				const detectedLocale =
+					storedLocale !== null && locales.includes(storedLocale)
+						? storedLocale
+						: firstSupportedLocale(navigator.languages ?? [navigator.language]);
+
+				if (detectedLocale !== undefined && localeUrls[detectedLocale] !== undefined)
+					location.replace(localeUrls[detectedLocale]);
+			})();
+		</script>
 		<title>Redirecting to {defaultLocaleHomeUrl}</title>
 		<meta http-equiv="refresh" content={`0;url=${defaultLocaleHomeUrl}`} />
 		<meta name="robots" content="noindex" />

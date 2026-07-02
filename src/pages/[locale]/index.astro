@@ -41,7 +41,10 @@ function buildExperienceMetaHtml(experience: Experience): string {
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 
-const latestPosts = (await getPublishedPosts()).slice(0, LATEST_POSTS_COUNT);
+const latestPosts = (await getPublishedPosts(locale)).slice(
+	0,
+	LATEST_POSTS_COUNT
+);
 const blogUrl = localizedUrl(locale, ROUTES.blog);
 const skillLabels = SKILL_KEYS.map(translate);
 

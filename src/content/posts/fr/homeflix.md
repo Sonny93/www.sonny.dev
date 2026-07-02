@@ -3,6 +3,8 @@ title: "Créer son propre netflix à la maison"
 description: "Guide très simple pour créer son propre netflix à la maison. Docker, Jellyfin, Prowlarr, Jackett, Radarr, Sonarr, Jellyseer."
 tags: ["docker","jellyfin","homelab","medias"]
 publishedAt: 2025-11-05
+lang: "fr"
+urlSlug: "homeflix"
 ---
 ## 1️⃣ Réseau Docker partagé
 

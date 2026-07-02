@@ -29,6 +29,7 @@ const localeLinks = LOCALES.map((locale) => ({
 		localeLinks.map((localeLink) => (
 			<a
 				href={localeLink.href}
+				data-locale={localeLink.label.toLowerCase()}
 				aria-current={localeLink.isActive ? 'true' : undefined}
 				aria-label={`Switch to ${localeLink.label}`}
 				class="px-2.5 py-1.5 rounded-md transition-all duration-200 flex items-center justify-center opacity-60 hover:opacity-100 aria-[current=true]:opacity-100 aria-[current=true]:bg-gray-600 aria-[current=true]:shadow-sm"
@@ -41,3 +42,15 @@ const localeLinks = LOCALES.map((locale) => ({
 		))
 	}
 </div>
+
+<script>
+	document
+		.querySelectorAll<HTMLAnchorElement>('a[data-locale]')
+		.forEach((link) => {
+			link.addEventListener('click', () => {
+				const locale = link.dataset.locale;
+				if (locale !== undefined)
+					localStorage.setItem('preferred-locale', locale);
+			});
+		});
+</script>
