@@ -1,33 +1,35 @@
 ---
-title: "Quelques pro tips pour kubernetes"
-description: "Quelques astuces pour mieux utiliser kubernetes : kubectl, helm, best practices, etc."
+title: "A few Kubernetes pro tips"
+description: "A few tips to get more out of Kubernetes: kubectl, helm, best practices, etc."
 tags: ["kubernetes","devops","linux"]
 publishedAt: 2024-02-29
+lang: "en"
+urlSlug: "kubernetes"
 ---
 # Kubernetes & Minikube
 
-## 1. Outils CLI
+## 1. CLI tools
 
-### kubectl (alias recommandé)
+### kubectl (recommended alias)
 
 ```bash
 alias k='kubectl'
 ```
 
-### Gestion des contextes
+### Context management
 
 ```bash
 kubectl config use-context <context>
 ```
 
-Outils utiles :
+Useful tools:
 
-- `kubectx` : changer de cluster rapidement
-- `kubens` : changer de namespace courant
+- `kubectx`: quickly switch clusters
+- `kubens`: switch current namespace
 
 ## 2. Minikube (local)
 
-### Activer les metrics
+### Enable metrics
 
 ```bash
 minikube addons enable metrics-server
@@ -45,7 +47,7 @@ minikube dashboard
 minikube addons enable ingress
 ```
 
-Vérification :
+Verify:
 
 ```bash
 kubectl -n ingress-nginx get pods,svc
@@ -53,13 +55,13 @@ kubectl -n ingress-nginx get pods,svc
 
 ## 3. Exploration & Debug
 
-### Documentation interne
+### Built-in documentation
 
 ```bash
 k explain pod.spec.containers
 ```
 
-### Commandes utiles
+### Useful commands
 
 ```bash
 k get all
@@ -68,14 +70,14 @@ k logs <pod>
 k exec -it <pod> -- sh
 ```
 
-## 4. Objets principaux
+## 4. Core objects
 
 ### 4.1 Pods
 
-- Plus petite unité Kubernetes
-- Contient un ou plusieurs containers
-- Éphémère
-- Rarement manipulé directement
+- Smallest Kubernetes unit
+- Contains one or more containers
+- Ephemeral
+- Rarely handled directly
 
 ```bash
 k get pods
@@ -84,19 +86,19 @@ k get pods -l app=mailpit
 
 ### 4.2 Deployment
 
-#### Rôle
+#### Role
 
-- Gérer les pods
-- Assurer la haute dispo
+- Manage pods
+- Ensure high availability
 - Rolling updates
 
-#### Création
+#### Creation
 
 ```bash
 k create deployment mailpit --image=docker.io/axllent/mailpit:v1.14.0
 ```
 
-#### Générer YAML
+#### Generate YAML
 
 ```bash
 k create deployment mailpit \
@@ -116,7 +118,7 @@ k scale deployment mailpit --replicas=5
 k rollout undo deployment mailpit --to-revision=1
 ```
 
-#### Historique
+#### History
 
 ```bash
 k rollout history deployment mailpit
@@ -124,25 +126,25 @@ k rollout history deployment mailpit
 
 ### 4.3 Namespace
 
-#### Lister
+#### List
 
 ```bash
 k get ns
 ```
 
-#### Créer
+#### Create
 
 ```bash
-k create ns mon-namespace
+k create ns my-namespace
 ```
 
-#### Utilisation
+#### Usage
 
 ```bash
-k -n mon-namespace get pods
+k -n my-namespace get pods
 ```
 
-#### Tous les namespaces
+#### All namespaces
 
 ```bash
 k get pods --all-namespaces
@@ -150,17 +152,17 @@ k get pods --all-namespaces
 
 ### 4.4 Service
 
-#### Rôle
+#### Role
 
-Expose les pods
+Exposes pods
 
-Types principaux :
+Main types:
 
-- ClusterIP (interne)
+- ClusterIP (internal)
 - NodePort
 - LoadBalancer
 
-#### Génération
+#### Generation
 
 ```bash
 k expose deployment/mailpit \
@@ -168,7 +170,7 @@ k expose deployment/mailpit \
   --dry-run=client -o yaml > service.yaml
 ```
 
-#### Lister
+#### List
 
 ```bash
 k get svc
@@ -182,13 +184,13 @@ k port-forward service/mailpit 8025:8025
 
 ### 4.5 Ingress
 
-#### Rôle
+#### Role
 
-- Reverse proxy HTTP/HTTPS
-- Routage par domaine / path
+- HTTP/HTTPS reverse proxy
+- Routing by domain / path
 - TLS
 
-#### Lister
+#### List
 
 ```bash
 k get ingress
@@ -196,13 +198,13 @@ k get ingress
 
 ### 4.6 ConfigMap
 
-- Stockage de configuration
-- Non chiffré
+- Configuration storage
+- Not encrypted
 
 ### 4.7 Secret
 
-- Données sensibles
-- Encodées en base64 (⚠️ pas du chiffrement)
+- Sensitive data
+- Base64 encoded (⚠️ not encryption)
 
 ```yaml
 apiVersion: v1
@@ -213,13 +215,13 @@ stringData:
   MP_UI_AUTH: user:password
 ```
 
-#### Appliquer
+#### Apply
 
 ```bash
 k apply -f secret.yaml
 ```
 
-#### Lire
+#### Read
 
 ```bash
 k get secret mailpit-secret -o yaml
@@ -229,17 +231,17 @@ k get secret mailpit-secret -o yaml
 
 #### Usage
 
-- Bases de données
-- Applications avec état
+- Databases
+- Stateful applications
 
-#### Caractéristiques
+#### Characteristics
 
-- Identité stable
-- Stockage persistant
-- Déploiement ordonné
-- Pas équivalent à Deployment
+- Stable identity
+- Persistent storage
+- Ordered deployment
+- Not a Deployment equivalent
 
-#### Appliquer
+#### Apply
 
 ```bash
 k apply -f statefulset.yaml
@@ -253,16 +255,16 @@ k rollout restart statefulset postgres
 
 ### 4.9 Volumes & PVC
 
-#### Problème
+#### Problem
 
-Les pods perdent leurs données
+Pods lose their data
 
 #### Solution
 
 - PersistentVolume (PV)
 - PersistentVolumeClaim (PVC)
 
-#### Exemple (structure)
+#### Example (structure)
 
 ```yaml
 kind: PersistentVolumeClaim
@@ -272,34 +274,34 @@ kind: PersistentVolumeClaim
 
 ### startupProbe
 
-- Vérifie le démarrage
-- Bloque les autres probes
+- Checks startup
+- Blocks other probes
 
 ### livenessProbe
 
-- Vérifie que l’app tourne
-- Redémarre si nécessaire
+- Checks the app is running
+- Restarts if needed
 
 ### readinessProbe
 
-- Vérifie si l’app peut recevoir du trafic
-- Retire du service si KO
+- Checks if the app can receive traffic
+- Removed from service if failing
 
-## 6. Opérations courantes
+## 6. Common operations
 
-### Appliquer une config
+### Apply a config
 
 ```bash
 k apply -f file.yaml
 ```
 
-### Supprimer
+### Delete
 
 ```bash
 k delete -f file.yaml
 ```
 
-### Supprimer une ressource
+### Delete a resource
 
 ```bash
 k delete pod <pod>
@@ -307,46 +309,46 @@ k delete pod <pod>
 
 ## 7. Helm
 
-### Rôle
+### Role
 
-Gestionnaire de packages Kubernetes
+Kubernetes package manager
 
-### Créer un chart
+### Create a chart
 
 ```bash
-helm create mon-chart
+helm create my-chart
 ```
 
-### Installer
+### Install
 
 ```bash
-helm install mon-app mon-chart
+helm install my-app my-chart
 ```
 
 ### Upgrade
 
 ```bash
-helm upgrade mon-app mon-chart
+helm upgrade my-app my-chart
 ```
 
-### Diff (plugin helm-diff)
+### Diff (helm-diff plugin)
 
 ```bash
-helm diff upgrade mon-app mon-chart -f values.yaml
+helm diff upgrade my-app my-chart -f values.yaml
 ```
 
-### Désinstaller
+### Uninstall
 
 ```bash
-helm uninstall mon-app
+helm uninstall my-app
 ```
 
-## 8. Bonnes pratiques
+## 8. Best practices
 
-- Versionner tous les YAML
-- Ne jamais utiliser `latest`
-- Définir `requests` et `limits`
-- Utiliser des probes correctement
-- Séparer les environnements via namespaces
-- Externaliser la config (ConfigMap / Secret)
-- Utiliser Helm ou Kustomize pour industrialiser
+- Version all YAML files
+- Never use `latest`
+- Define `requests` and `limits`
+- Use probes correctly
+- Separate environments via namespaces
+- Externalize config (ConfigMap / Secret)
+- Use Helm or Kustomize to industrialize

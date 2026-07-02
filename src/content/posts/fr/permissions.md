@@ -3,6 +3,8 @@ title: "Les droits linux — comment ça marche ?"
 description: "Fonctionnement des droits sur les systèmes de fichiers Linux (chmod, sticky bit, etc.)."
 tags: ["linux","chmod","security"]
 publishedAt: 2024-02-16
+lang: "fr"
+urlSlug: "permissions"
 ---
 # Gestion des permissions sous Linux
 

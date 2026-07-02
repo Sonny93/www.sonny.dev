@@ -7,6 +7,7 @@ import {
 } from 'unocss';
 
 import { socialLinks } from './src/constants/socials.js';
+import { TAG_COLOR_PALETTE } from './src/lib/tag_colors.js';
 
 const titleCommonStyles = {
 	'font-weight': 'unset',
@@ -93,7 +94,10 @@ export default defineConfig({
 			},
 		}),
 	],
-	safelist: socialLinks.map((socialLink) => socialLink.iconClass),
+	safelist: [
+		...socialLinks.map((socialLink) => socialLink.iconClass),
+		...TAG_COLOR_PALETTE.flatMap((classes) => classes.split(' ')),
+	],
 	shortcuts: {
 		'min-h-dvh': 'min-h-[100dvh]',
 		'min-h-svh': 'min-h-[100svh]',

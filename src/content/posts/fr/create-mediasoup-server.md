@@ -3,6 +3,8 @@ title: "Comment créer un serveur Mediasoup"
 description: "Étapes pour créer un serveur Mediasoup : device, transports produce/consume."
 tags: ["webrtc","mediasoup","nodejs"]
 publishedAt: 2024-02-24
+lang: "fr"
+urlSlug: "create-mediasoup-server"
 ---
 ### Pour créer un serveur mediasoup il faut suivre ces étapes
 

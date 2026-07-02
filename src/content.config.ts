@@ -9,6 +9,8 @@ const posts = defineCollection({
 		description: z.string(),
 		tags: z.array(z.string()),
 		publishedAt: z.coerce.date(),
+		lang: z.enum(['en', 'fr']).default('fr'),
+		urlSlug: z.string(),
 	}),
 });
 
