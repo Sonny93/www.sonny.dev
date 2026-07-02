@@ -4,14 +4,26 @@ import '../styles/global.css';
 
 import { ClientRouter } from 'astro:transitions';
 
+export type OpenGraphType = 'website' | 'article';
+
 type Props = {
 	title?: string;
+	description?: string;
+	openGraphType?: OpenGraphType;
 };
 
 const DEFAULT_TITLE = 'App';
 
-const { title = DEFAULT_TITLE } = Astro.props;
+const {
+	title = DEFAULT_TITLE,
+	description,
+	openGraphType = 'website',
+} = Astro.props;
 const locale = Astro.currentLocale ?? 'en';
+const openGraphUrl =
+	Astro.site === undefined
+		? undefined
+		: new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <html lang={locale} class="dark">
@@ -20,6 +32,23 @@ const locale = Astro.currentLocale ?? 'en';
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<title>{title}</title>
+		{
+			description !== undefined && (
+				<meta name="description" content={description} />
+			)
+		}
+		<meta property="og:title" content={title} />
+		{
+			description !== undefined && (
+				<meta property="og:description" content={description} />
+			)
+		}
+		<meta property="og:type" content={openGraphType} />
+		{
+			openGraphUrl !== undefined && (
+				<meta property="og:url" content={openGraphUrl} />
+			)
+		}
 
 		<ClientRouter />
 	</head>

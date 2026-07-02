@@ -14,5 +14,13 @@ export default defineConfig({
 			redirectToDefaultLocale: false,
 		},
 	},
+	markdown: {
+		shikiConfig: {
+			themes: {
+				light: 'vitesse-light',
+				dark: 'vitesse-dark',
+			},
+		},
+	},
 	integrations: [unocss()],
 });

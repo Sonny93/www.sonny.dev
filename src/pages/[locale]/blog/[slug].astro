@@ -1,0 +1,48 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+import { getPublishedPosts } from '../../../lib/posts';
+import PostLayout from '../../../layouts/post_layout.astro';
+import { formatPublishedDate } from '../../../lib/format_date';
+import SectionTitle from '../../../components/section_title.astro';
+import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
+import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+
+export async function getStaticPaths() {
+	const publishedPosts = await getPublishedPosts();
+	return LOCALES.flatMap((locale) =>
+		publishedPosts.map((post) => ({
+			params: { locale, slug: post.id },
+			props: { post },
+		}))
+	);
+}
+
+type Props = {
+	post: CollectionEntry<'posts'>;
+};
+
+const { post } = Astro.props;
+
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+
+const { Content } = await render(post);
+const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
+const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
+const readTimeLabel = `${estimatedReadTime} ${translate('post.readTimeUnit')}`;
+---
+
+<PostLayout
+	title={post.data.title}
+	description={post.data.description}
+	openGraphType="article"
+>
+	<SectionTitle title={post.data.title} />
+	<div class="flex items-center gap-4 text-sm text-gray-400">
+		{publishedAtLabel} &middot; {readTimeLabel}
+	</div>
+	<div class="prose prose-invert min-w-full">
+		<Content />
+	</div>
+</PostLayout>
