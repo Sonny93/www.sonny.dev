@@ -1,20 +1,30 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { localizedUrl } from '../../lib/localized_url';
+import { ROUTES, type RoutePath } from '../../constants/routes';
+import {
+	resolveLocale,
+	useTranslations,
+	type UiStringKey,
+} from '../../i18n/ui';
 
-const NAVIGATION_TARGETS = {
-	Home: '',
-	Blog: 'blog',
-	Projects: 'projects',
-} as const;
+type NavigationTarget = {
+	labelKey: UiStringKey;
+	routePath: RoutePath;
+};
 
-const locale = Astro.currentLocale ?? 'en';
+const NAVIGATION_TARGETS: readonly NavigationTarget[] = [
+	{ labelKey: 'navigation.home', routePath: ROUTES.home },
+	{ labelKey: 'navigation.blog', routePath: ROUTES.blog },
+	{ labelKey: 'navigation.projects', routePath: ROUTES.projects },
+];
 
-const navigationLinks = Object.entries(NAVIGATION_TARGETS).map(
-	([label, path]) => ({
-		label,
-		href: getRelativeLocaleUrl(locale, path),
-	})
-);
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+
+const navigationLinks = NAVIGATION_TARGETS.map((navigationTarget) => ({
+	label: translate(navigationTarget.labelKey),
+	href: localizedUrl(locale, navigationTarget.routePath),
+}));
 ---
 
 <div class="flex gap-4">

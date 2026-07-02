@@ -1,0 +1,24 @@
+---
+import { DEFAULT_LOCALE } from '../i18n/ui';
+import { ROUTES } from '../constants/routes';
+import { localizedUrl } from '../lib/localized_url';
+
+const defaultLocaleHomeUrl = localizedUrl(DEFAULT_LOCALE, ROUTES.home);
+const canonicalUrl =
+	Astro.site === undefined
+		? undefined
+		: new URL(defaultLocaleHomeUrl, Astro.site).toString();
+---
+
+<html lang={DEFAULT_LOCALE}>
+	<head>
+		<meta charset="utf-8" />
+		<title>Redirecting to {defaultLocaleHomeUrl}</title>
+		<meta http-equiv="refresh" content={`0;url=${defaultLocaleHomeUrl}`} />
+		<meta name="robots" content="noindex" />
+		{canonicalUrl !== undefined && <link rel="canonical" href={canonicalUrl} />}
+	</head>
+	<body>
+		<a href={defaultLocaleHomeUrl}>Redirecting to {defaultLocaleHomeUrl}</a>
+	</body>
+</html>
