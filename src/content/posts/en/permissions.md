@@ -1,11 +1,12 @@
 ---
-title: "Linux permissions — how do they work?"
-description: "How permissions work on Linux filesystems (chmod, sticky bit, etc.)."
-tags: ["linux","chmod","security"]
+title: 'Linux permissions — how do they work?'
+description: 'How permissions work on Linux filesystems (chmod, sticky bit, etc.).'
+tags: ['linux', 'chmod', 'security']
 publishedAt: 2024-02-16
-lang: "en"
-urlSlug: "permissions"
+lang: 'en'
+urlSlug: 'permissions'
 ---
+
 # Managing permissions on Linux
 
 ⚠️ **Warning**: poorly managed permissions can expose your files to unauthorized access. Avoid overly permissive settings like `chmod 777`.

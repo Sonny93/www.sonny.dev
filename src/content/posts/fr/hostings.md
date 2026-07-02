@@ -1,11 +1,12 @@
 ---
-title: "Quel hébergeur choisir pour son projet ?"
-description: "Critères pour choisir un hébergeur : budget, offres payantes et gratuites."
-tags: ["hosting","web","cloud"]
+title: 'Quel hébergeur choisir pour son projet ?'
+description: 'Critères pour choisir un hébergeur : budget, offres payantes et gratuites.'
+tags: ['hosting', 'web', 'cloud']
 publishedAt: 2024-02-15
-lang: "fr"
-urlSlug: "hostings"
+lang: 'fr'
+urlSlug: 'hostings'
 ---
+
 Il est parfois compliqué de trouver le bon hébergeur adapté aux besoins de son projet, voici un guide très simple pour vous aider à faire ce choix.
 
 ## Par où commencer ?

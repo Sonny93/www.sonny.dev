@@ -49,11 +49,11 @@ unless a future feature genuinely requires interactivity.
 
 ## Content mapping
 
-| Current | New |
-|---|---|
-| `data/posts.json` + `data/posts/*.md` | `src/content/posts/*.md` (frontmatter: title, slug from filename, description, tags, publishedAt) |
-| `data/experiences.json` | `src/content/experiences/*.json` or single `src/data/experiences.ts` (no per-item routing needed, plain data import is fine) |
-| `data/projects.json` | same treatment as experiences |
+| Current                               | New                                                                                                                                                               |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data/posts.json` + `data/posts/*.md` | `src/content/posts/*.md` (frontmatter: title, slug from filename, description, tags, publishedAt)                                                                 |
+| `data/experiences.json`               | `src/content/experiences/*.json` or single `src/data/experiences.ts` (no per-item routing needed, plain data import is fine)                                      |
+| `data/projects.json`                  | same treatment as experiences                                                                                                                                     |
 | `inertia/locales/{fr,en}/messages.po` | Astro i18n: either per-locale content collections (`posts/fr/`, `posts/en/`) or a small `src/i18n/ui.ts` dictionary for UI strings (nav labels, "min read", etc.) |
 
 ## Component/page mapping
@@ -61,23 +61,23 @@ unless a future feature genuinely requires interactivity.
 All filenames snake_case (matches current codebase convention — no PascalCase files,
 including `.astro` files).
 
-| Current | New |
-|---|---|
-| `inertia/layouts/base_layout.tsx` | `src/layouts/base_layout.astro` |
-| `inertia/layouts/default_layout.tsx`, `post_layout.tsx` | `src/layouts/default_layout.astro`, `post_layout.astro` (or merge into one with a slot) |
-| `inertia/pages/home.tsx` | `src/pages/[locale]/index.astro` |
-| `inertia/pages/posts/show_posts.tsx` | `src/pages/[locale]/blog/index.astro` |
-| `inertia/pages/posts/show_post.tsx` | `src/pages/[locale]/blog/[slug].astro` (`getStaticPaths` over content collection) |
-| `inertia/components/navigation/navbar.tsx`, `footer.tsx`, `navigation_links.tsx` | `src/components/navigation/navbar.astro`, `footer.astro`, `navigation_links.astro` |
-| `inertia/components/posts/post_item.tsx`, `post_list.tsx` | `src/components/posts/post_item.astro`, `post_list.astro` |
-| `inertia/components/section_title.tsx` | `src/components/section_title.astro` |
-| `inertia/components/timeline/vertical_timeline.tsx` | `src/components/timeline/vertical_timeline.astro` |
-| `inertia/components/locale_switcher.tsx` | `src/components/locale_switcher.astro` (static links, no JS) |
-| `inertia/components/space_background.tsx` | `src/scripts/space_background.ts` (three.js logic, framework-stripped) + `<canvas>` in `base_layout.astro`, loaded via `<script>` |
-| `inertia/components/starfield.tsx` | dropped — superseded by `space_background.tsx`, was already dead code (see last commit analysis) |
-| `inertia/hooks/use_headroom.tsx` | small vanilla scroll listener script (`src/scripts/use_headroom.ts`), or drop if not essential |
-| `inertia/css/app.css` | `src/styles/global.css` (unchanged content, just moved) |
-| `resources/views/inertia_layout.edge` | folded into `base_layout.astro` `<head>` |
+| Current                                                                          | New                                                                                                                               |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `inertia/layouts/base_layout.tsx`                                                | `src/layouts/base_layout.astro`                                                                                                   |
+| `inertia/layouts/default_layout.tsx`, `post_layout.tsx`                          | `src/layouts/default_layout.astro`, `post_layout.astro` (or merge into one with a slot)                                           |
+| `inertia/pages/home.tsx`                                                         | `src/pages/[locale]/index.astro`                                                                                                  |
+| `inertia/pages/posts/show_posts.tsx`                                             | `src/pages/[locale]/blog/index.astro`                                                                                             |
+| `inertia/pages/posts/show_post.tsx`                                              | `src/pages/[locale]/blog/[slug].astro` (`getStaticPaths` over content collection)                                                 |
+| `inertia/components/navigation/navbar.tsx`, `footer.tsx`, `navigation_links.tsx` | `src/components/navigation/navbar.astro`, `footer.astro`, `navigation_links.astro`                                                |
+| `inertia/components/posts/post_item.tsx`, `post_list.tsx`                        | `src/components/posts/post_item.astro`, `post_list.astro`                                                                         |
+| `inertia/components/section_title.tsx`                                           | `src/components/section_title.astro`                                                                                              |
+| `inertia/components/timeline/vertical_timeline.tsx`                              | `src/components/timeline/vertical_timeline.astro`                                                                                 |
+| `inertia/components/locale_switcher.tsx`                                         | `src/components/locale_switcher.astro` (static links, no JS)                                                                      |
+| `inertia/components/space_background.tsx`                                        | `src/scripts/space_background.ts` (three.js logic, framework-stripped) + `<canvas>` in `base_layout.astro`, loaded via `<script>` |
+| `inertia/components/starfield.tsx`                                               | dropped — superseded by `space_background.tsx`, was already dead code (see last commit analysis)                                  |
+| `inertia/hooks/use_headroom.tsx`                                                 | small vanilla scroll listener script (`src/scripts/use_headroom.ts`), or drop if not essential                                    |
+| `inertia/css/app.css`                                                            | `src/styles/global.css` (unchanged content, just moved)                                                                           |
+| `resources/views/inertia_layout.edge`                                            | folded into `base_layout.astro` `<head>`                                                                                          |
 
 ## Phases
 
@@ -118,21 +118,23 @@ and only 404s at runtime. To close this gap:
   current codebase's `inertia/constants/urls.ts`), e.g. `src/constants/routes.ts`:
   ```ts
   export const ROUTES = {
-    home: '',
-    blog: 'blog',
-    post: (slug: string) => `blog/${slug}`,
+  	home: '',
+  	blog: 'blog',
+  	post: (slug: string) => `blog/${slug}`,
   } as const;
   ```
 - Wrap `getRelativeLocaleUrl` in a small helper, e.g. `src/lib/localized_url.ts`, that
   takes a `ROUTES` value (not a raw string) so callers can't pass an arbitrary path:
+
   ```ts
   import { getRelativeLocaleUrl } from 'astro:i18n';
   import type { ROUTES } from '~/constants/routes';
 
   export function localizedUrl(locale: string, route: string) {
-    return getRelativeLocaleUrl(locale, route);
+  	return getRelativeLocaleUrl(locale, route);
   }
   ```
+
 - Every internal link goes through `localizedUrl(locale, ROUTES.blog)` etc. — never a
   hardcoded string. This doesn't give full compile-time route-existence checking, but
   it does eliminate typos and centralizes any future route renames to one file.

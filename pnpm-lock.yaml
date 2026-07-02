@@ -16,8 +16,8 @@ importers:
         specifier: ^3.7.3
         version: 3.7.3
       '@minimalstuff/tooling':
-        specifier: ^0.1.3
-        version: 0.1.3(eslint@10.1.0(jiti@2.6.1))(oxfmt@0.43.0)(oxlint@1.58.0)(typescript@6.0.2)
+        specifier: ^0.6.0
+        version: 0.6.0(eslint@10.1.0(jiti@2.6.1))(oxfmt@0.43.0)(oxlint-tsgolint@0.24.0)(oxlint@1.58.0(oxlint-tsgolint@0.24.0))(typescript@6.0.2)
       '@types/node':
         specifier: ^24.10.0
         version: 24.10.13
@@ -41,7 +41,10 @@ importers:
         version: 0.43.0
       oxlint:
         specifier: ^1.58.0
-        version: 1.58.0
+        version: 1.58.0(oxlint-tsgolint@0.24.0)
+      oxlint-tsgolint:
+        specifier: ^0.24.0
+        version: 0.24.0
       release-it:
         specifier: ^19.2.4
         version: 19.2.4(@types/node@24.10.13)(magicast@0.5.3)
@@ -769,16 +772,19 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@minimalstuff/tooling@0.1.3':
-    resolution: {integrity: sha512-uahMKsYBxJ9VSG8BbItMUwLoQaHgYtz7CGMZ7g++pH1KJ9aQQP7tebxfFuP25nix8hHYo1PfWt+Ms4F22gwpSQ==}
+  '@minimalstuff/tooling@0.6.0':
+    resolution: {integrity: sha512-Od4PWTbcaJ6ug68Y+uu9zRIUNqHeuCAM8ljUf4A5OSxK0M2PXC2b0rpZ/BKJVh23P9lDXzzugEjlw+k5dekjzw==}
     hasBin: true
     peerDependencies:
       oxfmt: '>=0.40.0'
       oxlint: '>=1.55.0'
+      oxlint-tsgolint: '>=0.20.0'
     peerDependenciesMeta:
       oxfmt:
         optional: true
       oxlint:
+        optional: true
+      oxlint-tsgolint:
         optional: true
 
   '@napi-rs/wasm-runtime@1.1.2':
@@ -1103,6 +1109,36 @@ packages:
   '@oxfmt/binding-win32-x64-msvc@0.43.0':
     resolution: {integrity: sha512-4bPgdQux2ZLWn3bf2TTXXMHcJB4lenmuxrLqygPmvCJ104Yqzj1UctxSRzR31TiJ4MLaG22RK8dUsVpJtrCz5g==}
     engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
+  '@oxlint-tsgolint/darwin-arm64@0.24.0':
+    resolution: {integrity: sha512-C2uMmwK5Bc4ri4ysZ6sA8Rcu+A5zBQTp6ml2u0CLLbRZp4kMFPV3yWk8B5DK9Aw7y9bbjogIm75tUwGLFzlsYQ==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@oxlint-tsgolint/darwin-x64@0.24.0':
+    resolution: {integrity: sha512-Wgvt/1lRbDxmoNqWQKKcL+UIiqLmdJ+EWLpQa1qzoNVAfNB0PJpa82/8dH1twT/3rSs4zrP5TXPWl4juB71WuQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxlint-tsgolint/linux-arm64@0.24.0':
+    resolution: {integrity: sha512-PB1rxII7KV83+ASY4sSkXtqvpij6ME66+QCRL49uksi/ofs2Rf/UVboYr095n0Rkbl2wgvlsHGl6DHC361jQUQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@oxlint-tsgolint/linux-x64@0.24.0':
+    resolution: {integrity: sha512-xcz3CxKmjTQLREtE/UShh+ruWmm9nAb7UM9zKcD65BStiuYgOakAKkPHl4YS5DztpVcDrE0+HqbOolTlRKYWmw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@oxlint-tsgolint/win32-arm64@0.24.0':
+    resolution: {integrity: sha512-A2i6ZGBec3i20S7RaxkgHc6r3HYtD5Mn7j/mb22NkTz14u0JuudvTu6JggAnbGMcv8+dBKQI//EasxSPJLD8pw==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@oxlint-tsgolint/win32-x64@0.24.0':
+    resolution: {integrity: sha512-0ZbGd9qRB6zs82moekaKdEvncRANq49EAwfNX62JpTS46feXUhKAuoyVDvZMj6Rywejylrmmu79Wo6faYCo4Ew==}
     cpu: [x64]
     os: [win32]
 
@@ -1665,10 +1701,6 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
-
-  brace-expansion@5.0.3:
-    resolution: {integrity: sha512-fy6KJm2RawA5RcHkLa1z/ScpBeA762UF9KmZQxwIbDtRJrgLzM10depAiEQ+CXYcoiqW1/m96OAAoke2nE9EeA==}
-    engines: {node: 18 || 20 || >=22}
 
   brace-expansion@5.0.5:
     resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
@@ -2375,10 +2407,6 @@ packages:
     resolution: {integrity: sha512-ja1E3yCr9i/0hmBVaM0bfwDjnGy8I/s6PP4DFp+yP+a+mrHO4Rm7DtmnqROTUkHIkqffC84YY7AeqX6oFk0WFg==}
     engines: {node: '>=18'}
 
-  lru-cache@11.2.6:
-    resolution: {integrity: sha512-ESL2CrkS/2wTPfuend7Zhkzo2u0daGJ/A2VucJOgQ/C48S/zB8MMeMHSGKYpXhIjbPxfuezITkaBH1wqv00DDQ==}
-    engines: {node: 20 || >=22}
-
   lru-cache@11.5.1:
     resolution: {integrity: sha512-RPimw/7aMdv2oqRrxKwvZXcPfwBrn/JZ2xYcY9Hus/6LaS3VOAKVWKWgNLCFSiOm1ESXinjsDlidVU7JlnCN2A==}
     engines: {node: 20 || >=22}
@@ -2449,10 +2477,6 @@ packages:
   mimic-function@5.0.1:
     resolution: {integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==}
     engines: {node: '>=18'}
-
-  minimatch@10.2.3:
-    resolution: {integrity: sha512-Rwi3pnapEqirPSbWbrZaa6N3nmqq4Xer/2XooiOKyV3q12ML06f7MOuc5DVH8ONZIFhwIYQ3yzPH4nt7iWHaTg==}
-    engines: {node: 18 || 20 || >=22}
 
   minimatch@10.2.5:
     resolution: {integrity: sha512-MULkVLfKGYDFYejP07QOurDLLQpcjk7Fw+7jXS2R2czRQzR56yHRveU5NDJEOviH+hETZKSkIk5c+T23GjFUMg==}
@@ -2577,6 +2601,10 @@ packages:
   oxfmt@0.43.0:
     resolution: {integrity: sha512-KTYNG5ISfHSdmeZ25Xzb3qgz9EmQvkaGAxgBY/p38+ZiAet3uZeu7FnMwcSQJg152Qwl0wnYAxDc+Z/H6cvrwA==}
     engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+
+  oxlint-tsgolint@0.24.0:
+    resolution: {integrity: sha512-giCk5sEvG02d5tzPmFMX3hem8ndzEEu1xvGYS5OwNfO2WGl6ZVxt5LjE0yiMDoz94INI7XkXwgFAQiydPvVHDw==}
     hasBin: true
 
   oxlint@1.58.0:
@@ -2937,10 +2965,6 @@ packages:
     resolution: {integrity: sha512-uo33abH+Ays0xYaDysoBt494Hb3hsEczMpcC0MwFl773pazORx4fmvKhclhR1wonUbB6vvpRsvVMwnhfqeMc+A==}
     engines: {node: ^16.14.0 || >= 17.3.0}
 
-  tinyexec@1.0.2:
-    resolution: {integrity: sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg==}
-    engines: {node: '>=18'}
-
   tinyexec@1.2.4:
     resolution: {integrity: sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg==}
     engines: {node: '>=18'}
@@ -3291,7 +3315,7 @@ snapshots:
   '@antfu/install-pkg@1.1.0':
     dependencies:
       package-manager-detector: 1.6.0
-      tinyexec: 1.0.2
+      tinyexec: 1.2.4
 
   '@astrojs/compiler-binding-darwin-arm64@0.3.0':
     optional: true
@@ -3385,7 +3409,7 @@ snapshots:
 
   '@babel/code-frame@7.29.0':
     dependencies:
-      '@babel/helper-validator-identifier': 7.28.5
+      '@babel/helper-validator-identifier': 7.29.7
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
@@ -3854,16 +3878,18 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@minimalstuff/tooling@0.1.3(eslint@10.1.0(jiti@2.6.1))(oxfmt@0.43.0)(oxlint@1.58.0)(typescript@6.0.2)':
+  '@minimalstuff/tooling@0.6.0(eslint@10.1.0(jiti@2.6.1))(oxfmt@0.43.0)(oxlint-tsgolint@0.24.0)(oxlint@1.58.0(oxlint-tsgolint@0.24.0))(typescript@6.0.2)':
     dependencies:
       '@adonisjs/eslint-plugin': 2.2.2(eslint@10.1.0(jiti@2.6.1))(typescript@6.0.2)
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 1.2.0
       eslint-plugin-perfectionist: 5.8.0(eslint@10.1.0(jiti@2.6.1))(typescript@6.0.2)
+      jsonc-parser: 3.3.1
       picocolors: 1.1.1
     optionalDependencies:
       oxfmt: 0.43.0
-      oxlint: 1.58.0
+      oxlint: 1.58.0(oxlint-tsgolint@0.24.0)
+      oxlint-tsgolint: 0.24.0
     transitivePeerDependencies:
       - eslint
       - supports-color
@@ -4076,6 +4102,24 @@ snapshots:
     optional: true
 
   '@oxfmt/binding-win32-x64-msvc@0.43.0':
+    optional: true
+
+  '@oxlint-tsgolint/darwin-arm64@0.24.0':
+    optional: true
+
+  '@oxlint-tsgolint/darwin-x64@0.24.0':
+    optional: true
+
+  '@oxlint-tsgolint/linux-arm64@0.24.0':
+    optional: true
+
+  '@oxlint-tsgolint/linux-x64@0.24.0':
+    optional: true
+
+  '@oxlint-tsgolint/win32-arm64@0.24.0':
+    optional: true
+
+  '@oxlint-tsgolint/win32-x64@0.24.0':
     optional: true
 
   '@oxlint/binding-android-arm-eabi@1.58.0':
@@ -4332,9 +4376,9 @@ snapshots:
       '@typescript-eslint/types': 8.58.0
       '@typescript-eslint/visitor-keys': 8.58.0
       debug: 4.4.3
-      minimatch: 10.2.3
-      semver: 7.7.4
-      tinyglobby: 0.2.15
+      minimatch: 10.2.5
+      semver: 7.8.5
+      tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.2)
       typescript: 6.0.2
     transitivePeerDependencies:
@@ -4699,10 +4743,6 @@ snapshots:
   before-after-hook@4.0.0: {}
 
   boolbase@1.0.0: {}
-
-  brace-expansion@5.0.3:
-    dependencies:
-      balanced-match: 4.0.4
 
   brace-expansion@5.0.5:
     dependencies:
@@ -5207,7 +5247,7 @@ snapshots:
 
   hosted-git-info@9.0.2:
     dependencies:
-      lru-cache: 11.2.6
+      lru-cache: 11.5.1
 
   html-escaper@3.0.3: {}
 
@@ -5400,8 +5440,6 @@ snapshots:
       is-unicode-supported: 2.1.0
       yoctocolors: 2.1.2
 
-  lru-cache@11.2.6: {}
-
   lru-cache@11.5.1: {}
 
   lru-cache@7.18.3: {}
@@ -5480,10 +5518,6 @@ snapshots:
 
   mimic-function@5.0.1: {}
 
-  minimatch@10.2.3:
-    dependencies:
-      brace-expansion: 5.0.3
-
   minimatch@10.2.5:
     dependencies:
       brace-expansion: 5.0.5
@@ -5526,7 +5560,7 @@ snapshots:
   normalize-package-data@8.0.0:
     dependencies:
       hosted-git-info: 9.0.2
-      semver: 7.7.4
+      semver: 7.8.5
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -5543,7 +5577,7 @@ snapshots:
     dependencies:
       citty: 0.2.1
       pathe: 2.0.3
-      tinyexec: 1.0.2
+      tinyexec: 1.2.4
 
   obug@2.1.3: {}
 
@@ -5661,7 +5695,16 @@ snapshots:
       '@oxfmt/binding-win32-ia32-msvc': 0.43.0
       '@oxfmt/binding-win32-x64-msvc': 0.43.0
 
-  oxlint@1.58.0:
+  oxlint-tsgolint@0.24.0:
+    optionalDependencies:
+      '@oxlint-tsgolint/darwin-arm64': 0.24.0
+      '@oxlint-tsgolint/darwin-x64': 0.24.0
+      '@oxlint-tsgolint/linux-arm64': 0.24.0
+      '@oxlint-tsgolint/linux-x64': 0.24.0
+      '@oxlint-tsgolint/win32-arm64': 0.24.0
+      '@oxlint-tsgolint/win32-x64': 0.24.0
+
+  oxlint@1.58.0(oxlint-tsgolint@0.24.0):
     optionalDependencies:
       '@oxlint/binding-android-arm-eabi': 1.58.0
       '@oxlint/binding-android-arm64': 1.58.0
@@ -5682,6 +5725,7 @@ snapshots:
       '@oxlint/binding-win32-arm64-msvc': 1.58.0
       '@oxlint/binding-win32-ia32-msvc': 1.58.0
       '@oxlint/binding-win32-x64-msvc': 1.58.0
+      oxlint-tsgolint: 0.24.0
 
   p-limit@3.1.0:
     dependencies:
@@ -5961,8 +6005,7 @@ snapshots:
 
   semver@7.7.4: {}
 
-  semver@7.8.5:
-    optional: true
+  semver@7.8.5: {}
 
   sharp@0.35.3(@types/node@24.10.13):
     dependencies:
@@ -6118,8 +6161,6 @@ snapshots:
 
   tinyclip@0.1.15: {}
 
-  tinyexec@1.0.2: {}
-
   tinyexec@1.2.4: {}
 
   tinyglobby@0.2.15:
@@ -6267,7 +6308,7 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       acorn: 8.16.0
-      picomatch: 4.0.3
+      picomatch: 4.0.4
       webpack-virtual-modules: 0.6.2
 
   unstorage@1.17.5:

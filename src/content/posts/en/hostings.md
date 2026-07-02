@@ -1,11 +1,12 @@
 ---
-title: "Which host should you choose for your project?"
-description: "Criteria for choosing a host: budget, paid and free offerings."
-tags: ["hosting","web","cloud"]
+title: 'Which host should you choose for your project?'
+description: 'Criteria for choosing a host: budget, paid and free offerings.'
+tags: ['hosting', 'web', 'cloud']
 publishedAt: 2024-02-15
-lang: "en"
-urlSlug: "hostings"
+lang: 'en'
+urlSlug: 'hostings'
 ---
+
 Finding the right host for your project's needs can sometimes be tricky, so here's a very simple guide to help you make that choice.
 
 ## Where to start?

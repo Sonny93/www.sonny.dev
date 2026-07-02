@@ -1,11 +1,12 @@
 ---
 title: "What's a Makefile for?"
 description: "Why use a Makefile (or just) to centralize your project's commands."
-tags: ["makefile","tooling","devops"]
+tags: ['makefile', 'tooling', 'devops']
 publishedAt: 2024-02-15
-lang: "en"
-urlSlug: "makefile"
+lang: 'en'
+urlSlug: 'makefile'
 ---
+
 As our software projects grow, it quickly becomes hard to remember every command you can run.
 
 For example, a basic web project usually has commands for:
@@ -24,7 +25,7 @@ A slightly more technical solution would be writing small scripts to run our com
 
 Imagine creating a bash file just to run a `docker compose up -d` — feels slightly overkill, right?
 
-The solution to all our problems is [Makefile](https://en.wikipedia.org/wiki/Make_(software))!
+The solution to all our problems is [Makefile](<https://en.wikipedia.org/wiki/Make_(software)>)!
 
 That's all well and good, but what does it actually look like?<br />
 Let's take the [Makefile](https://github.com/Sonny93/my-links/blob/main/Makefile) from my project [MyLinks](https://www.mylinks.app/) as an example.
