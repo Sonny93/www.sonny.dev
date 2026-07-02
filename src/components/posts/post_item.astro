@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 
 import { ROUTES } from '../../constants/routes';
+import { getTagColorClasses } from '../../lib/tag_colors';
 import { localizedUrl } from '../../lib/localized_url';
 import { formatPublishedDate } from '../../lib/format_date';
 import { resolveLocale, useTranslations } from '../../i18n/ui';
@@ -16,7 +17,7 @@ const { post } = Astro.props;
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 const readTimeLabel = translate('post.readTimeUnit');
-const postUrl = localizedUrl(locale, ROUTES.post(post.id));
+const postUrl = localizedUrl(locale, ROUTES.post(post.data.urlSlug));
 const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
 const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 ---
@@ -51,7 +52,9 @@ const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 			post.data.tags.length > 0 && (
 				<ul class="mt-3 flex list-none flex-wrap gap-2">
 					{post.data.tags.map((tag) => (
-						<li class="rounded-md bg-gray-700/90 px-2 py-0.5 text-xs font-medium text-gray-300 capitalize">
+						<li
+							class={`rounded-md px-2 py-0.5 text-xs font-medium capitalize ${getTagColorClasses(tag)}`}
+						>
 							{tag}
 						</li>
 					))}

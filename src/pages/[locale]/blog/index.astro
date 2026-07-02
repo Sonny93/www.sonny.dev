@@ -12,7 +12,7 @@ export function getStaticPaths() {
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 
-const posts = await getPublishedPosts();
+const posts = await getPublishedPosts(locale);
 ---
 
 <DefaultLayout title={translate('blog.pageTitle')}>
