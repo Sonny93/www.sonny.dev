@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import PostItem from './post_item.astro';
+
+type Props = {
+	posts: readonly CollectionEntry<'posts'>[];
+};
+
+const { posts } = Astro.props;
+---
+
+<ul class="flex flex-col gap-4">
+	{posts.map((post) => <PostItem post={post} />)}
+</ul>

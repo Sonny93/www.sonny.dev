@@ -1,0 +1,59 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { CollectionEntry } from 'astro:content';
+
+import { formatPublishedDate } from '../../lib/format_date';
+import { estimateReadingTimeMinutes } from '../../lib/reading_time';
+
+type Props = {
+	post: CollectionEntry<'posts'>;
+	readTimeLabel?: string;
+};
+
+const { post, readTimeLabel = 'min read' } = Astro.props;
+
+const locale = Astro.currentLocale ?? 'en';
+const postUrl = getRelativeLocaleUrl(locale, `blog/${post.id}`);
+const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
+const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
+---
+
+<li>
+	<a
+		href={postUrl}
+		class="group block rounded-lg border border-gray-700 bg-gray-800/70 p-5 shadow-sm transition-colors duration-100 hover:border-sky-500/35 hover:shadow-md"
+	>
+		<div class="flex flex-wrap items-baseline justify-between gap-2 gap-y-1">
+			<h3
+				class="text-lg font-semibold text-white transition-colors group-hover:text-sky-300"
+			>
+				{post.data.title}
+			</h3>
+			<time
+				class="shrink-0 text-xs tabular-nums text-gray-500 text-gray-400"
+				datetime={post.data.publishedAt.toISOString()}
+			>
+				{publishedAtLabel}
+			</time>
+		</div>
+		<p class="text-xs text-gray-600 text-gray-400">
+			{estimatedReadTime} {readTimeLabel}
+		</p>
+		<p
+			class="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-gray-600 text-gray-400"
+		>
+			{post.data.description}
+		</p>
+		{
+			post.data.tags.length > 0 && (
+				<ul class="mt-3 flex list-none flex-wrap gap-2">
+					{post.data.tags.map((tag) => (
+						<li class="rounded-md bg-gray-700/90 px-2 py-0.5 text-xs font-medium text-gray-300 capitalize">
+							{tag}
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</a>
+</li>
