@@ -3,6 +3,10 @@ node_modules
 build
 tmp
 
+# Astro generated
+.astro
+dist
+
 # Secrets
 .env
 .env.local
