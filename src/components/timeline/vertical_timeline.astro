@@ -1,4 +1,6 @@
 ---
+import clsx from 'clsx';
+
 import SectionTitle from '../section_title.astro';
 
 export type VerticalTimelineItem = {
@@ -45,9 +47,7 @@ const { title, items, class: className = '' } = Astro.props;
 							<p class="text-pretty text-[0.95rem] leading-snug text-white/95 sm:text-base">
 								<span
 									class={
-										item.titleVariant === 'uppercase'
-											? 'font-bold uppercase tracking-wide'
-											: 'font-bold'
+										clsx(item.titleVariant === 'uppercase' && 'uppercase tracking-wide')
 									}
 								>
 									{item.title}
