@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="No preview available">
+	<defs>
+		<radialGradient id="glow" cx="50%" cy="40%" r="75%">
+			<stop offset="0%" stop-color="#0f172a" />
+			<stop offset="100%" stop-color="#030b1a" />
+		</radialGradient>
+		<pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+			<path d="M 32 0 L 0 0 0 32" fill="none" stroke="#38bdf8" stroke-opacity="0.08" stroke-width="1" />
+		</pattern>
+	</defs>
+
+	<rect width="640" height="360" fill="url(#glow)" />
+	<rect width="640" height="360" fill="url(#grid)" />
+
+	<g stroke="#38bdf8" stroke-opacity="0.9" stroke-width="1.5" fill="none">
+		<path d="M20 20 L20 44 M20 20 L44 20" />
+		<path d="M620 20 L620 44 M620 20 L596 20" />
+		<path d="M20 340 L20 316 M20 340 L44 340" />
+		<path d="M620 340 L620 316 M620 340 L596 340" />
+	</g>
+
+	<g transform="translate(320 170)" text-anchor="middle">
+		<circle r="26" fill="none" stroke="#38bdf8" stroke-opacity="0.6" stroke-width="1.5" />
+		<circle r="3" fill="#38bdf8">
+			<animate attributeName="opacity" values="1;0.35;1" dur="2.4s" repeatCount="indefinite" />
+		</circle>
+	</g>
+
+	<text x="320" y="228" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="3" fill="#7dd3fc" fill-opacity="0.85">NO SIGNAL</text>
+	<text x="320" y="250" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="2" fill="#94a3b8">PREVIEW UNAVAILABLE</text>
+</svg>

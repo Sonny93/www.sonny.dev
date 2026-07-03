@@ -13,7 +13,9 @@
 		"format": "pnpm lint:fix; oxfmt .",
 		"format:check": "oxfmt . --check",
 		"typecheck": "tsc --noEmit",
-		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck"
+		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck",
+		"screenshots:install-browser": "playwright install --with-deps chromium",
+		"screenshots:generate": "node scripts/generate-project-screenshots.ts"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
@@ -31,7 +33,9 @@
 		"oxfmt": "^0.43.0",
 		"oxlint": "^1.58.0",
 		"oxlint-tsgolint": "^0.24.0",
+		"playwright": "^1.61.1",
 		"release-it": "^19.2.4",
+		"sharp": "^0.35.3",
 		"typescript": "~6.0.2",
 		"unocss": "^66.6.7"
 	},
