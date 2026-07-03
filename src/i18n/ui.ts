@@ -16,9 +16,10 @@ const EN_UI_STRINGS = {
 	'locale.switchToFrench': 'Switch to French',
 	'home.pageTitle': 'Homepage',
 	'home.availability': 'Based in France · Open to remote opportunities',
-	'home.headline': 'I build web platforms — then automate everything else.',
+	'home.headline':
+		'I engineer resilient web platforms — then automate everything else.',
 	'home.introduction':
-		"Hi, I'm Sonny. Clear architecture, sane developer experience, and systems that don't need babysitting after ship.",
+		"Hi, I'm Sonny. Rigorous architecture, clean developer experience, and systems built to run unattended in production.",
 	'home.skillFullStack': 'Full-stack engineering and DevOps',
 	'home.skillAutomation': 'Automation-first mindset',
 	'home.skillHomelab': 'Homelab tinkering and self-hosting',
@@ -61,9 +62,9 @@ const UI_STRINGS = {
 		'home.pageTitle': "Page d'accueil",
 		'home.availability': 'Basé en France · Ouvert aux opportunités à distance',
 		'home.headline':
-			"Je construis des plateformes web — et j'automatise le reste.",
+			"Je conçois des plateformes web robustes — et j'automatise tout ce qui peut l'être.",
 		'home.introduction':
-			"Bonjour, je suis Sonny. Architecture claire, expérience développeur soignée, et des systèmes qui n'ont pas besoin d'être maternés après la mise en prod.",
+			"Bonjour, je suis Sonny. Architecture rigoureuse, expérience développeur soignée, et des systèmes conçus pour tourner de façon autonome en production.",
 		'home.skillFullStack': 'Ingénierie full-stack et DevOps',
 		'home.skillAutomation': "Esprit axé sur l'automatisation",
 		'home.skillHomelab': 'Bidouille homelab et auto-hébergement',
