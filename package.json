@@ -15,6 +15,7 @@
 		"typecheck": "tsc --noEmit",
 		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck",
 		"knip": "knip",
+		"release": "release-it --only-version",
 		"screenshots:install-browser": "playwright install --with-deps chromium",
 		"screenshots:generate": "node scripts/generate-project-screenshots.ts"
 	},
