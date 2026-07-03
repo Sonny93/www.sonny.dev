@@ -50,4 +50,5 @@ changes.
 
 ## Deploy
 
-Deployed to GitHub Pages on every push to `main` — see [DEPLOY.md](./DEPLOY.md).
+Deployed to GitHub Pages on every published release (or manually via
+_workflow_dispatch_) — see [DEPLOY.md](./DEPLOY.md).

@@ -1,7 +1,7 @@
 # Deploy: GitHub Pages
 
-Static Astro build, deployed by `.github/workflows/deploy.yml` on every push to
-`main` (or manually via _Actions → Deploy to GitHub Pages → Run workflow_).
+Static Astro build, deployed by `.github/workflows/deploy.yml` on every
+published release (or manually via _Actions → Deploy to GitHub Pages → Run workflow_).
 First deploy happens when this branch is merged into `main`.
 
 ## One-time repository settings
@@ -32,9 +32,10 @@ to `www.sonny.dev` since that is the configured custom domain):
 
 ## What the workflow does
 
-- **build**: `withastro/action@v6` — installs pnpm 11 + Node 24.14.1, runs
-  `pnpm run build`, then uploads `dist/` as the Pages artifact.
-- **deploy**: `actions/deploy-pages@v4` into the `github-pages` environment.
+- **build**: `withastro/action@v6` — installs pnpm 11 + Node 24 (pinned in
+  `.mise.toml`), runs `pnpm run build`, then uploads `dist/` as the Pages
+  artifact.
+- **deploy**: `actions/deploy-pages@v5` into the `github-pages` environment.
 
 `dist/` contains `CNAME`, `favicon.svg`, `robots.txt` and
 `sitemap-index.xml` alongside the pages.
