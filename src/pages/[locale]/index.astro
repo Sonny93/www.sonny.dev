@@ -45,10 +45,12 @@ const backgroundUrl = localizedUrl(locale, ROUTES.background);
 const skillLabels = SKILL_KEYS.map(translate);
 
 const experienceTimelineItems = buildExperienceTimelineItems(
-	experiences.slice(0, HOME_EXPERIENCES_COUNT)
+	experiences.slice(0, HOME_EXPERIENCES_COUNT),
+	locale
 );
 const formationTimelineItems = buildFormationTimelineItems(
-	formations.slice(0, HOME_FORMATIONS_COUNT)
+	formations.slice(0, HOME_FORMATIONS_COUNT),
+	locale
 );
 ---
 
