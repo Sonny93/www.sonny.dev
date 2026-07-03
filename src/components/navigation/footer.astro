@@ -1,15 +1,22 @@
 ---
 import { socialLinks } from '../../constants/socials';
 import LocaleSwitcher from '../locale_switcher.astro';
+
+const CURRENT_YEAR = new Date().getFullYear();
 ---
 
 <footer
 	data-headroom
 	data-pinned="true"
-	class="sticky bottom-0 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-md bg-gray-800 px-4 py-2 text-gray-400 transition-[transform,opacity] duration-300 ease-out translate-y-0 opacity-100 data-[pinned=false]:translate-y-2 data-[pinned=false]:pointer-events-none data-[pinned=false]:opacity-0"
+	class="hud-bar sticky bottom-2 z-[99] grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-t-xl border border-sky-500/20 bg-slate-900/70 px-4 py-2 text-gray-300 backdrop-blur-xl transition-[transform,opacity] duration-300 ease-out translate-y-0 opacity-100 data-[pinned=false]:translate-y-2 data-[pinned=false]:opacity-0"
 >
-	<p>© 2026 Sonny</p>
-	<div class="flex min-w-0 items-center justify-end justify-self-end gap-2">
+	<span class="hud-corner hud-corner--bl" aria-hidden="true"></span>
+	<span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+
+	<p class="min-w-0 truncate text-xs sm:text-sm">
+		© {CURRENT_YEAR} Sonny
+	</p>
+	<div class="flex min-w-0 items-center justify-end justify-self-end gap-1">
 		{
 			socialLinks.map((socialLink) => (
 				<a
@@ -17,11 +24,9 @@ import LocaleSwitcher from '../locale_switcher.astro';
 					target="_blank"
 					rel="noreferrer"
 					aria-label={socialLink.name}
+					class="rounded-md p-1.5 text-gray-300 transition-colors duration-150 hover:bg-sky-500/10 hover:text-sky-300"
 				>
-					<span
-						class={`${socialLink.iconClass} text-gray-400 size-6`}
-						aria-hidden="true"
-					/>
+					<span class={`${socialLink.iconClass} size-5`} aria-hidden="true" />
 				</a>
 			))
 		}
@@ -32,3 +37,29 @@ import LocaleSwitcher from '../locale_switcher.astro';
 </footer>
 
 <script src="../../scripts/headroom.ts"></script>
+
+<style>
+	.hud-corner {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		pointer-events: none;
+		opacity: 0.7;
+	}
+
+	.hud-corner--bl {
+		bottom: -1px;
+		left: -1px;
+		border-bottom: 1px solid rgb(56 189 248 / 0.9);
+		border-left: 1px solid rgb(56 189 248 / 0.9);
+		border-bottom-left-radius: 4px;
+	}
+
+	.hud-corner--br {
+		bottom: -1px;
+		right: -1px;
+		border-bottom: 1px solid rgb(56 189 248 / 0.9);
+		border-right: 1px solid rgb(56 189 248 / 0.9);
+		border-bottom-right-radius: 4px;
+	}
+</style>

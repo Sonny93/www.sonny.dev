@@ -17,7 +17,7 @@ const posts = await getPublishedPosts(locale);
 
 <DefaultLayout title={translate('blog.pageTitle')}>
 	<div>
-		<SectionTitle title={translate('blog.pageTitle')} />
+		<SectionTitle title={translate('blog.pageTitle')} level="h1" />
 		<PostList posts={posts} />
 	</div>
 </DefaultLayout>
