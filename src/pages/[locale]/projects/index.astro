@@ -1,0 +1,21 @@
+---
+import { projects } from '../../../data/projects';
+import DefaultLayout from '../../../layouts/default_layout.astro';
+import SectionTitle from '../../../components/section_title.astro';
+import ProjectList from '../../../components/projects/project_list.astro';
+import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+	return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+---
+
+<DefaultLayout title={translate('projects.pageTitle')}>
+	<section class="flex w-full flex-col gap-8">
+		<SectionTitle title={translate('projects.pageTitle')} level="h1" />
+		<ProjectList projects={projects} locale={locale} />
+	</section>
+</DefaultLayout>

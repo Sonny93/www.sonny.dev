@@ -1,4 +1,5 @@
 ---
+import { projects } from '../../data/projects';
 import { ROUTES } from '../../constants/routes';
 import { formations } from '../../data/formations';
 import { getPublishedPosts } from '../../lib/posts';
@@ -7,6 +8,7 @@ import { localizedUrl } from '../../lib/localized_url';
 import PostList from '../../components/posts/post_list.astro';
 import DefaultLayout from '../../layouts/default_layout.astro';
 import SectionTitle from '../../components/section_title.astro';
+import ProjectList from '../../components/projects/project_list.astro';
 import VerticalTimeline from '../../components/timeline/vertical_timeline.astro';
 import {
 	LOCALES,
@@ -24,6 +26,7 @@ export function getStaticPaths() {
 }
 
 const LATEST_POSTS_COUNT = 3;
+const HOME_PROJECTS_COUNT = 2;
 const HOME_EXPERIENCES_COUNT = 2;
 const HOME_FORMATIONS_COUNT = 2;
 
@@ -41,8 +44,11 @@ const latestPosts = (await getPublishedPosts(locale)).slice(
 	LATEST_POSTS_COUNT
 );
 const blogUrl = localizedUrl(locale, ROUTES.blog);
+const projectsUrl = localizedUrl(locale, ROUTES.projects);
 const backgroundUrl = localizedUrl(locale, ROUTES.background);
 const skillLabels = SKILL_KEYS.map(translate);
+
+const featuredProjects = projects.slice(0, HOME_PROJECTS_COUNT);
 
 const experienceTimelineItems = buildExperienceTimelineItems(
 	experiences.slice(0, HOME_EXPERIENCES_COUNT),
@@ -124,6 +130,18 @@ const formationTimelineItems = buildFormationTimelineItems(
 					{translate('home.viewAllArticles')} &rarr;
 				</a>
 				<PostList posts={latestPosts} />
+			</section>
+		)
+	}
+
+	{
+		featuredProjects.length > 0 && (
+			<section class="flex w-full flex-col gap-4">
+				<SectionTitle title={translate('home.featuredProjects')} />
+				<a href={projectsUrl} class="self-end text-sm text-gray-400">
+					{translate('home.viewAllProjects')} &rarr;
+				</a>
+				<ProjectList projects={featuredProjects} locale={locale} />
 			</section>
 		)
 	}
