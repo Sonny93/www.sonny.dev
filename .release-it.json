@@ -1,8 +1,5 @@
 {
 	"$schema": "https://unpkg.com/release-it@19/schema/release-it.json",
-	"hooks": {
-		"before:init": ["pnpm run check", "pnpm run build"]
-	},
 	"git": {
 		"requireCleanWorkingDir": true,
 		"commitMessage": "chore: release v${version}",
@@ -20,6 +17,7 @@
 	"plugins": {
 		"@release-it/conventional-changelog": {
 			"infile": "CHANGELOG.md",
+			"ignoreRecommendedBump": true,
 			"preset": {
 				"name": "conventionalcommits"
 			}
