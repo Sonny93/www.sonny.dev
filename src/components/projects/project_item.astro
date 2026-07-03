@@ -1,0 +1,102 @@
+---
+import type { Locale } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/ui';
+import type { Project } from '../../data/projects';
+import { getTagColorClasses } from '../../lib/tag_colors';
+import { resolveProjectThumbnail } from '../../lib/resolve_project_thumbnail';
+
+type Props = {
+	project: Project;
+	locale: Locale;
+};
+
+const { project, locale } = Astro.props;
+const translate = useTranslations(locale);
+const thumbnailSrc = resolveProjectThumbnail(project.thumbnailUrl);
+const description = project.content[locale].description;
+---
+
+<li>
+	<div
+		class="group relative flex h-full flex-col rounded-lg border border-gray-700 bg-gray-800/70 shadow-sm transition duration-150 ease-out hover:rounded-none hover:border-sky-500/35 hover:shadow-md"
+	>
+		<div
+			class="pointer-events-none absolute inset-0 z-1 opacity-0 transition-opacity duration-200 group-hover:opacity-70"
+			aria-hidden="true"
+		>
+			<span class="hud-corner hud-corner--tl"></span>
+			<span class="hud-corner hud-corner--tr"></span>
+			<span class="hud-corner hud-corner--bl"></span>
+			<span class="hud-corner hud-corner--br"></span>
+		</div>
+
+		<div
+			class="aspect-video w-full overflow-hidden rounded-t-lg bg-[#030b1a] transition-[border-radius] duration-150 ease-out group-hover:rounded-none"
+		>
+			<img
+				src={thumbnailSrc}
+				alt=""
+				loading="lazy"
+				class="h-full w-full object-cover"
+			/>
+		</div>
+
+		<div class="flex flex-1 flex-col gap-2 p-5">
+			<h3 class="text-lg text-white transition-colors group-hover:text-sky-300">
+				{project.name}
+			</h3>
+			<p class="line-clamp-3 text-left text-sm leading-relaxed text-gray-300">
+				{description}
+			</p>
+
+			{
+				project.languages.length > 0 && (
+					<ul class="mt-1 flex list-none flex-wrap gap-2">
+						{project.languages.map((language) => (
+							<li
+								class={`rounded-md px-2 py-0.5 text-xs font-medium ${getTagColorClasses(language)}`}
+							>
+								{language}
+							</li>
+						))}
+					</ul>
+				)
+			}
+
+			<div class="mt-auto flex flex-wrap gap-4 pt-3 text-xs uppercase tracking-[0.1em]">
+				{
+					project.url ? (
+						<a
+							href={project.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="relative z-1 text-sky-300 transition-colors hover:text-sky-200"
+						>
+							{translate('projects.viewLiveSite')} &rarr;
+						</a>
+					) : (
+						<span class="text-gray-500">
+							{translate('projects.noLiveDemo')}
+						</span>
+					)
+				}
+				{
+					project.githubUrl ? (
+						<a
+							href={project.githubUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="relative z-1 text-gray-300 transition-colors hover:text-white"
+						>
+							{translate('projects.viewSourceCode')} &rarr;
+						</a>
+					) : (
+						<span class="text-gray-500">
+							{translate('projects.noSourceCode')}
+						</span>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</li>
