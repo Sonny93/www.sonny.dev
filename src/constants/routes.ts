@@ -4,6 +4,7 @@ export const ROUTES = {
 	home: '',
 	blog: 'blog',
 	projects: 'projects',
+	background: 'background',
 	post: (slug: string): PostRoutePath => `blog/${slug}`,
 } as const;
 
