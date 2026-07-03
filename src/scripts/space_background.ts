@@ -1,15 +1,19 @@
-import * as THREE from 'three';
-
 const CANVAS_SELECTOR = '#space-background';
 const STAR_COUNT = 700;
-const DEPTH = 2000.0;
+const DEPTH = 2000;
 const TARGET_FRAMES_PER_SECOND = 24;
 const FRAME_INTERVAL_MS = 1000 / TARGET_FRAMES_PER_SECOND;
 const MAX_STAR_RADIUS = 500;
 const FULL_TURN_RADIANS = Math.PI * 2;
-const CLEAR_COLOR = 0x030b1a;
+const BACKGROUND_COLOR = '#030b1a';
+const STAR_COLOR_RGB = '224, 234, 255';
 const CAMERA_FIELD_OF_VIEW_DEGREES = 75;
-const CAMERA_NEAR_PLANE = 0.1;
+const NEAR_DISTANCE = 0.5;
+const POINT_RADIUS_FALLOFF = 300;
+const MIN_POINT_RADIUS = 0.5;
+const MAX_POINT_RADIUS = 3;
+const MIN_ALPHA = 0.08;
+const MAX_ALPHA = 0.95;
 const IDLE_WARP_SPEED = 20;
 const NAVIGATION_WARP_SPEED = 400;
 const WARP_RESET_DELAY_MS = 850;
@@ -18,46 +22,16 @@ const MAX_DELTA_SECONDS = 0.1;
 const MILLISECONDS_PER_SECOND = 1000;
 
 /**
- * Star positions encode polar coordinates instead of world coordinates:
- * position.x = radius from center, position.y = angle (radians),
- * position.z = z-phase offset (0..DEPTH). All animation is computed on
- * the GPU — zero CPU array writes per frame.
+ * Star positions encode polar coordinates instead of screen coordinates:
+ * radius from center, angle, and a z-phase offset (0..DEPTH). Screen
+ * position and size are re-derived from these every frame, so animating
+ * a star is just advancing its z-phase — no per-star state mutation.
  */
-const VERTEX_SHADER = /* glsl */ `
-  uniform float uTime;
-
-  varying float vAlpha;
-
-  void main() {
-    float z = -mod(position.z + uTime, ${DEPTH.toFixed(1)});
-    z = min(z, -0.5);
-
-    float r = position.x;
-    float a = position.y;
-    vec3 pos = vec3(cos(a) * r, sin(a) * r, z);
-
-    vec4 mv = modelViewMatrix * vec4(pos, 1.0);
-    float dist = -mv.z;
-
-    gl_PointSize = clamp(600.0 / dist, 1.0, 6.0);
-    vAlpha = clamp(1.0 - dist / ${DEPTH.toFixed(1)}, 0.08, 0.95);
-
-    gl_Position = projectionMatrix * mv;
-  }
-`;
-
-const FRAGMENT_SHADER = /* glsl */ `
-  varying float vAlpha;
-
-  void main() {
-    vec2 cxy = gl_PointCoord - 0.5;
-    float dist = length(cxy);
-    if (dist > 0.5) discard;
-
-    float alpha = vAlpha * (1.0 - dist * 1.8);
-    gl_FragColor = vec4(0.878, 0.918, 1.0, alpha);
-  }
-`;
+type Star = {
+	radius: number;
+	angle: number;
+	zPhase: number;
+};
 
 type WarpState = {
 	currentSpeed: number;
@@ -66,60 +40,12 @@ type WarpState = {
 	lastRenderTimestamp: number;
 };
 
-function createRenderer(
-	canvas: HTMLCanvasElement
-): THREE.WebGLRenderer | undefined {
-	try {
-		const renderer = new THREE.WebGLRenderer({
-			canvas,
-			antialias: false,
-			powerPreference: 'low-power',
-		});
-		renderer.setPixelRatio(1);
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(CLEAR_COLOR);
-		return renderer;
-	} catch {
-		return undefined;
-	}
-}
-
-/**
- * Builds a single-draw-call geometry whose position attribute encodes
- * (radius, angle, zOffset) per star.
- */
-function createStarGeometry(): THREE.BufferGeometry {
-	const positions = new Float32Array(STAR_COUNT * 3);
-	for (let starIndex = 0; starIndex < STAR_COUNT; starIndex++) {
-		positions[starIndex * 3] = Math.sqrt(Math.random()) * MAX_STAR_RADIUS;
-		positions[starIndex * 3 + 1] = Math.random() * FULL_TURN_RADIANS;
-		positions[starIndex * 3 + 2] = Math.random() * DEPTH;
-	}
-
-	const geometry = new THREE.BufferGeometry();
-	geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-	return geometry;
-}
-
-function createStarMaterial(
-	timeUniform: THREE.IUniform<number>
-): THREE.ShaderMaterial {
-	return new THREE.ShaderMaterial({
-		vertexShader: VERTEX_SHADER,
-		fragmentShader: FRAGMENT_SHADER,
-		uniforms: { uTime: timeUniform },
-		transparent: true,
-		depthWrite: false,
-	});
-}
-
-function createStarField(timeUniform: THREE.IUniform<number>): THREE.Points {
-	const starField = new THREE.Points(
-		createStarGeometry(),
-		createStarMaterial(timeUniform)
-	);
-	starField.frustumCulled = false;
-	return starField;
+function createStars(): readonly Star[] {
+	return Array.from({ length: STAR_COUNT }, () => ({
+		radius: Math.sqrt(Math.random()) * MAX_STAR_RADIUS,
+		angle: Math.random() * FULL_TURN_RADIANS,
+		zPhase: Math.random() * DEPTH,
+	}));
 }
 
 /**
@@ -136,24 +62,61 @@ function listenForNavigationWarp(warpState: WarpState): void {
 	});
 }
 
-function listenForResize(
-	camera: THREE.PerspectiveCamera,
-	renderer: THREE.WebGLRenderer
-): void {
+function listenForResize(canvas: HTMLCanvasElement): void {
 	window.addEventListener('resize', () => {
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 	});
 }
 
+function clamp(value: number, min: number, max: number): number {
+	return Math.min(Math.max(value, min), max);
+}
+
+function drawStar(
+	context: CanvasRenderingContext2D,
+	star: Star,
+	uTime: number,
+	focalLength: number,
+	centerX: number,
+	centerY: number,
+	halfHeight: number
+): void {
+	const depthPosition = Math.min(
+		-((star.zPhase + uTime) % DEPTH),
+		-NEAR_DISTANCE
+	);
+	const distance = -depthPosition;
+	const scale = (focalLength / distance) * halfHeight;
+
+	const screenX = centerX + Math.cos(star.angle) * star.radius * scale;
+	const screenY = centerY - Math.sin(star.angle) * star.radius * scale;
+	const pointRadius = clamp(
+		POINT_RADIUS_FALLOFF / distance,
+		MIN_POINT_RADIUS,
+		MAX_POINT_RADIUS
+	);
+	const alpha = clamp(1 - distance / DEPTH, MIN_ALPHA, MAX_ALPHA);
+
+	context.beginPath();
+	context.fillStyle = `rgba(${STAR_COLOR_RGB}, ${alpha})`;
+	context.arc(screenX, screenY, pointRadius, 0, FULL_TURN_RADIANS);
+	context.fill();
+}
+
 function runAnimationLoop(
-	renderer: THREE.WebGLRenderer,
-	scene: THREE.Scene,
-	camera: THREE.PerspectiveCamera,
-	timeUniform: THREE.IUniform<number>,
+	context: CanvasRenderingContext2D,
+	canvas: HTMLCanvasElement,
+	stars: readonly Star[],
 	warpState: WarpState
 ): void {
+	const focalLength =
+		1 / Math.tan((CAMERA_FIELD_OF_VIEW_DEGREES * Math.PI) / 360);
+	// Fixed at init so window resizes reframe the field (recentering) instead
+	// of rescaling it — a live canvas.height would otherwise make every star
+	// jump the instant the viewport height changes.
+	const scaleReferenceHalfHeight = canvas.height / 2;
+
 	function renderFrame(timestamp: number): void {
 		requestAnimationFrame(renderFrame);
 
@@ -169,30 +132,36 @@ function runAnimationLoop(
 		warpState.currentSpeed +=
 			(warpState.targetSpeed - warpState.currentSpeed) * WARP_EASING_FACTOR;
 		warpState.accumulatedTime += warpState.currentSpeed * deltaSeconds;
-		timeUniform.value = warpState.accumulatedTime;
 
-		renderer.render(scene, camera);
+		context.fillStyle = BACKGROUND_COLOR;
+		context.fillRect(0, 0, canvas.width, canvas.height);
+
+		const centerX = canvas.width / 2;
+		const centerY = canvas.height / 2;
+
+		for (const star of stars) {
+			drawStar(
+				context,
+				star,
+				warpState.accumulatedTime,
+				focalLength,
+				centerX,
+				centerY,
+				scaleReferenceHalfHeight
+			);
+		}
 	}
 
 	renderFrame(0);
-}
-
-function createCamera(): THREE.PerspectiveCamera {
-	return new THREE.PerspectiveCamera(
-		CAMERA_FIELD_OF_VIEW_DEGREES,
-		window.innerWidth / window.innerHeight,
-		CAMERA_NEAR_PLANE,
-		DEPTH
-	);
 }
 
 let isInitialized = false;
 
 /**
  * Initializes the starfield exactly once per full page load. The canvas is
- * marked `transition:persist`, so the element — and its WebGL context, the
- * animation loop, and every listener — survives view-transition navigations;
- * only the warp trigger reacts to them.
+ * marked `transition:persist`, so the element — and its animation loop and
+ * every listener — survives view-transition navigations; only the warp
+ * trigger reacts to them.
  */
 function initializeSpaceBackground(): void {
 	if (isInitialized) return;
@@ -200,16 +169,15 @@ function initializeSpaceBackground(): void {
 	const canvas = document.querySelector<HTMLCanvasElement>(CANVAS_SELECTOR);
 	if (!canvas) return;
 
-	const renderer = createRenderer(canvas);
-	if (!renderer) return;
+	const context = canvas.getContext('2d');
+	if (!context) return;
 
 	isInitialized = true;
 
-	const scene = new THREE.Scene();
-	const camera = createCamera();
-	const timeUniform: THREE.IUniform<number> = { value: 0 };
-	scene.add(createStarField(timeUniform));
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 
+	const stars = createStars();
 	const warpState: WarpState = {
 		currentSpeed: IDLE_WARP_SPEED,
 		targetSpeed: IDLE_WARP_SPEED,
@@ -218,8 +186,8 @@ function initializeSpaceBackground(): void {
 	};
 
 	listenForNavigationWarp(warpState);
-	listenForResize(camera, renderer);
-	runAnimationLoop(renderer, scene, camera, timeUniform, warpState);
+	listenForResize(canvas);
+	runAnimationLoop(context, canvas, stars, warpState);
 }
 
 document.addEventListener('astro:page-load', initializeSpaceBackground);
