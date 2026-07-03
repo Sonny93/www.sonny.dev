@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1](https://github.com/Sonny93/portfolio/compare/3.0.0...3.0.1) (2026-07-03)
+
+### Bug Fixes
+
+* **layout:** fix mobile overflow from fixed-width page wrapper ([300b655](https://github.com/Sonny93/portfolio/commit/300b6551e06ad11d4a5a0d23ed9a9622a6816e01))
+
 ## 3.0.0 (2026-07-03)
 
 ### Features
