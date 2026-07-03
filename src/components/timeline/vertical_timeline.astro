@@ -23,13 +23,24 @@ const { title, items, class: className = '' } = Astro.props;
 	items.length > 0 && (
 		<section class={className}>
 			<SectionTitle title={title} />
-			<ul class="relative ml-0.5 space-y-10 border-l border-white/18 pl-6 sm:ml-1 sm:pl-8">
-				{items.map((item) => (
+			<ul class="relative ml-0.5 space-y-10 pl-6 sm:ml-1 sm:pl-8">
+				<span
+					class="pointer-events-none absolute inset-y-3.5 left-0 w-px bg-gradient-to-b from-sky-400/60 via-sky-500/20 to-transparent"
+					aria-hidden="true"
+				/>
+				{items.map((item, itemIndex) => (
 					<li class="relative">
-						<span
-							class="absolute right-full top-[0.65em] mr-3 h-px w-5 rounded-full bg-white/28 sm:w-6"
-							aria-hidden="true"
-						/>
+						{itemIndex === 0 ? (
+							<span
+								class="hud-dot absolute right-full top-[0.5em] mr-[1.275rem] sm:mr-[1.8rem]"
+								aria-hidden="true"
+							/>
+						) : (
+							<span
+								class="absolute right-full top-[0.5em] mr-[1.275rem] h-1.5 w-1.5 rounded-full bg-sky-400/50 sm:mr-[1.8rem]"
+								aria-hidden="true"
+							/>
+						)}
 						<div class="min-w-0">
 							<p class="text-pretty text-[0.95rem] leading-snug text-white/95 sm:text-base">
 								<span
