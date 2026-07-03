@@ -15,13 +15,12 @@ const EN_UI_STRINGS = {
 	'locale.switchToFrench': 'Switch to French',
 	'home.pageTitle': 'Homepage',
 	'home.availability': 'Based in France · Open to remote opportunities',
-	'home.headline':
-		'I build reliable web platforms and developer-focused systems.',
+	'home.headline': 'I build web platforms — then automate everything else.',
 	'home.introduction':
-		"Hi, I'm Sonny. I design and ship maintainable products with clear architecture, thoughtful DX, and practical automation.",
+		"Hi, I'm Sonny. Clear architecture, sane developer experience, and systems that don't need babysitting after ship.",
 	'home.skillFullStack': 'Full-stack engineering and DevOps',
 	'home.skillAutomation': 'Automation-first mindset',
-	'home.skillTooling': 'Productive tooling across domains',
+	'home.skillHomelab': 'Homelab tinkering and self-hosting',
 	'home.readLatestPosts': 'Read my latest posts',
 	'home.latestArticles': 'Latest articles',
 	'home.viewAllArticles': 'View all articles',
@@ -50,12 +49,12 @@ const UI_STRINGS = {
 		'home.pageTitle': "Page d'accueil",
 		'home.availability': 'Basé en France · Ouvert aux opportunités à distance',
 		'home.headline':
-			'Je construis des plateformes web fiables et des systèmes axés sur les développeurs.',
+			"Je construis des plateformes web — et j'automatise le reste.",
 		'home.introduction':
-			'Bonjour, je suis Sonny. Je conçois et livre des produits maintenables avec une architecture claire, une expérience développeur réfléchie et une automatisation pratique.',
+			"Bonjour, je suis Sonny. Architecture claire, expérience développeur soignée, et des systèmes qui n'ont pas besoin d'être maternés après la mise en prod.",
 		'home.skillFullStack': 'Ingénierie full-stack et DevOps',
 		'home.skillAutomation': "Esprit axé sur l'automatisation",
-		'home.skillTooling': 'Outils productifs à travers les domaines',
+		'home.skillHomelab': 'Bidouille homelab et auto-hébergement',
 		'home.readLatestPosts': 'Lire mes derniers articles',
 		'home.latestArticles': 'Derniers articles',
 		'home.viewAllArticles': 'Voir tous les articles',
