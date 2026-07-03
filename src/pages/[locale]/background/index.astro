@@ -16,8 +16,14 @@ export function getStaticPaths() {
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 
-const experienceTimelineItems = buildExperienceTimelineItems(experiences);
-const formationTimelineItems = buildFormationTimelineItems(formations);
+const experienceTimelineItems = buildExperienceTimelineItems(
+	experiences,
+	locale
+);
+const formationTimelineItems = buildFormationTimelineItems(
+	formations,
+	locale
+);
 ---
 
 <DefaultLayout title={translate('background.pageTitle')}>
