@@ -34,18 +34,16 @@ const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 				{post.data.title}
 			</h3>
 			<time
-				class="shrink-0 text-xs tabular-nums text-gray-500 text-gray-400"
+				class="shrink-0 text-xs tabular-nums text-gray-300"
 				datetime={post.data.publishedAt.toISOString()}
 			>
 				{publishedAtLabel}
 			</time>
 		</div>
-		<p class="text-xs text-gray-600 text-gray-400">
+		<p class="text-xs text-gray-300">
 			{estimatedReadTime} {readTimeLabel}
 		</p>
-		<p
-			class="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-gray-600 text-gray-400"
-		>
+		<p class="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-gray-300">
 			{post.data.description}
 		</p>
 		{
