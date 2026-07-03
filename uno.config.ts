@@ -69,6 +69,11 @@ const markdownTypographyExtend = {
 		'border-style': 'solid',
 		'border-color': 'var(--un-prose-td-borders)',
 		'box-shadow': '0 1px 2px 0 rgb(0 0 0 / 0.04)',
+		'overflow-x': 'auto',
+	},
+	table: {
+		display: 'block',
+		'overflow-x': 'auto',
 	},
 };
 
