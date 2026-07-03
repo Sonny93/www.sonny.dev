@@ -25,8 +25,18 @@ const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 <li>
 	<a
 		href={postUrl}
-		class="group block rounded-lg border border-gray-700 bg-gray-800/70 p-5 shadow-sm transition-colors duration-100 hover:border-sky-500/35 hover:shadow-md"
+		class="group relative block rounded-lg border border-gray-700 bg-gray-800/70 p-5 shadow-sm transition duration-150 ease-out hover:rounded-none hover:border-sky-500/35 hover:shadow-md focus-visible:rounded-none"
 	>
+		<div
+			class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-70 group-focus-visible:opacity-70"
+			aria-hidden="true"
+		>
+			<span class="hud-corner hud-corner--tl"></span>
+			<span class="hud-corner hud-corner--tr"></span>
+			<span class="hud-corner hud-corner--bl"></span>
+			<span class="hud-corner hud-corner--br"></span>
+		</div>
+
 		<div class="flex flex-wrap items-baseline justify-between gap-2 gap-y-1">
 			<h3
 				class="text-lg font-semibold text-white transition-colors group-hover:text-sky-300"

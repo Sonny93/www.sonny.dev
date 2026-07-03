@@ -29,16 +29,16 @@ const mobileNavigationLinks = [
 	id="site-nav"
 	data-headroom
 	data-pinned="true"
-	class="hud-bar sticky top-2 z-[99] flex w-full items-center justify-between gap-2 rounded-b-xl border border-sky-500/20 bg-slate-900/70 px-4 py-2 backdrop-blur-xl transition-[transform,opacity] duration-300 ease-out translate-y-0 opacity-100 data-[pinned=false]:-translate-y-2 data-[pinned=false]:opacity-0"
+	class="hud-panel sticky top-2 z-[99] flex w-full items-center justify-between gap-2 rounded-b-xl px-4 py-2 transition-[transform,opacity] duration-300 ease-out translate-y-0 opacity-100 data-[pinned=false]:-translate-y-2 data-[pinned=false]:opacity-0"
 >
-	<span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
-	<span class="hud-corner hud-corner--tr" aria-hidden="true"></span>
+	<span class="hud-corner hud-corner--tl opacity-70" aria-hidden="true"></span>
+	<span class="hud-corner hud-corner--tr opacity-70" aria-hidden="true"></span>
 
 	<a
 		href={homeUrl}
 		class="flex items-center gap-2 rounded-md px-1.5 py-1 text-sm font-black tracking-[0.2em] text-white"
 	>
-		<span class="hud-brand-dot" aria-hidden="true"></span>
+		<span class="hud-dot" aria-hidden="true"></span>
 		Sonny
 	</a>
 
@@ -88,50 +88,6 @@ const mobileNavigationLinks = [
 <script src="../../scripts/nav_menu.ts"></script>
 
 <style>
-	.hud-corner {
-		position: absolute;
-		width: 10px;
-		height: 10px;
-		pointer-events: none;
-		opacity: 0.7;
-	}
-
-	.hud-corner--tl {
-		top: -1px;
-		left: -1px;
-		border-top: 1px solid rgb(56 189 248 / 0.9);
-		border-left: 1px solid rgb(56 189 248 / 0.9);
-		border-top-left-radius: 4px;
-	}
-
-	.hud-corner--tr {
-		top: -1px;
-		right: -1px;
-		border-top: 1px solid rgb(56 189 248 / 0.9);
-		border-right: 1px solid rgb(56 189 248 / 0.9);
-		border-top-right-radius: 4px;
-	}
-
-	.hud-brand-dot {
-		display: inline-block;
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: #38bdf8;
-		box-shadow: 0 0 8px 2px rgb(56 189 248 / 0.8);
-		animation: hud-pulse 2.4s ease-in-out infinite;
-	}
-
-	@keyframes hud-pulse {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.4;
-		}
-	}
-
 	.menu-toggle-bar {
 		transition: transform 0.2s ease;
 	}

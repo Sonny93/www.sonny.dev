@@ -113,3 +113,74 @@ html.dark .astro-code span {
 		filter: blur(0) brightness(1);
 	}
 }
+
+/*
+ * HUD design tokens: shared across navbar, footer, hero and post
+ * cards to read as one console-style system rather than one-off nav
+ * decoration.
+ */
+
+.hud-panel {
+	border: 1px solid rgb(56 189 248 / 0.2);
+	background-color: rgb(15 23 42 / 0.7);
+	backdrop-filter: blur(24px);
+}
+
+.hud-corner {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	pointer-events: none;
+}
+
+.hud-corner--tl {
+	top: -1px;
+	left: -1px;
+	border-top: 1px solid rgb(56 189 248 / 0.9);
+	border-left: 1px solid rgb(56 189 248 / 0.9);
+	border-top-left-radius: 4px;
+}
+
+.hud-corner--tr {
+	top: -1px;
+	right: -1px;
+	border-top: 1px solid rgb(56 189 248 / 0.9);
+	border-right: 1px solid rgb(56 189 248 / 0.9);
+	border-top-right-radius: 4px;
+}
+
+.hud-corner--bl {
+	bottom: -1px;
+	left: -1px;
+	border-bottom: 1px solid rgb(56 189 248 / 0.9);
+	border-left: 1px solid rgb(56 189 248 / 0.9);
+	border-bottom-left-radius: 4px;
+}
+
+.hud-corner--br {
+	bottom: -1px;
+	right: -1px;
+	border-bottom: 1px solid rgb(56 189 248 / 0.9);
+	border-right: 1px solid rgb(56 189 248 / 0.9);
+	border-bottom-right-radius: 4px;
+}
+
+.hud-dot {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #38bdf8;
+	box-shadow: 0 0 8px 2px rgb(56 189 248 / 0.8);
+	animation: hud-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes hud-pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.4;
+	}
+}
