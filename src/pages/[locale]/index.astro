@@ -1,13 +1,12 @@
 ---
 import { ROUTES } from '../../constants/routes';
-import { escapeHtml } from '../../lib/escape_html';
+import { formations } from '../../data/formations';
 import { getPublishedPosts } from '../../lib/posts';
-import { formatPeriod } from '../../lib/format_period';
+import { experiences } from '../../data/experiences';
 import { localizedUrl } from '../../lib/localized_url';
 import PostList from '../../components/posts/post_list.astro';
 import DefaultLayout from '../../layouts/default_layout.astro';
 import SectionTitle from '../../components/section_title.astro';
-import { experiences, type Experience } from '../../data/experiences';
 import VerticalTimeline from '../../components/timeline/vertical_timeline.astro';
 import {
 	LOCALES,
@@ -15,28 +14,24 @@ import {
 	useTranslations,
 	type UiStringKey,
 } from '../../i18n/ui';
+import {
+	buildExperienceTimelineItems,
+	buildFormationTimelineItems,
+} from '../../lib/timeline_items';
 
 export function getStaticPaths() {
 	return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const LATEST_POSTS_COUNT = 3;
+const HOME_EXPERIENCES_COUNT = 2;
+const HOME_FORMATIONS_COUNT = 2;
 
 const SKILL_KEYS: readonly UiStringKey[] = [
 	'home.skillFullStack',
 	'home.skillAutomation',
 	'home.skillHomelab',
 ];
-
-function buildExperienceMetaHtml(experience: Experience): string {
-	const periodLabel = formatPeriod(
-		experience.beginningDate,
-		experience.endDate
-	);
-	const companyLabel = escapeHtml(experience.company);
-	const cityLabel = escapeHtml(experience.city);
-	return `${periodLabel} <span>(<span class="text-white/95">${companyLabel}</span> – ${cityLabel})</span>`;
-}
 
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
@@ -46,16 +41,14 @@ const latestPosts = (await getPublishedPosts(locale)).slice(
 	LATEST_POSTS_COUNT
 );
 const blogUrl = localizedUrl(locale, ROUTES.blog);
+const backgroundUrl = localizedUrl(locale, ROUTES.background);
 const skillLabels = SKILL_KEYS.map(translate);
 
-const experienceTimelineItems = experiences.map(
-	(experience, experienceIndex) => ({
-		id: `experience-${experienceIndex}-${experience.beginningDate}`,
-		title: experience.title,
-		titleVariant: 'uppercase' as const,
-		metaHtml: buildExperienceMetaHtml(experience),
-		bullets: experience.description,
-	})
+const experienceTimelineItems = buildExperienceTimelineItems(
+	experiences.slice(0, HOME_EXPERIENCES_COUNT)
+);
+const formationTimelineItems = buildFormationTimelineItems(
+	formations.slice(0, HOME_FORMATIONS_COUNT)
 );
 ---
 
@@ -133,8 +126,20 @@ const experienceTimelineItems = experiences.map(
 		)
 	}
 
-	<VerticalTimeline
-		title={translate('home.experiences')}
-		items={experienceTimelineItems}
-	/>
+		<div class="flex w-full flex-col gap-10">
+			<a
+				href={backgroundUrl}
+				class="self-end text-sm text-gray-400 hover:text-white"
+			>
+				{translate('home.viewFullBackground')} &rarr;
+			</a>
+			<VerticalTimeline
+				title={translate('home.experiences')}
+				items={experienceTimelineItems}
+			/>
+			<VerticalTimeline
+				title={translate('home.formations')}
+				items={formationTimelineItems}
+			/>
+		</div>
 </DefaultLayout>

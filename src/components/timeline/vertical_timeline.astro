@@ -2,15 +2,9 @@
 import clsx from 'clsx';
 
 import SectionTitle from '../section_title.astro';
+import type { VerticalTimelineItem } from './vertical_timeline_item';
 
-export type VerticalTimelineItem = {
-	id: string;
-	title: string;
-	titleVariant?: 'default' | 'uppercase';
-	subtitle?: string;
-	metaHtml: string;
-	bullets?: readonly string[];
-};
+export type { VerticalTimelineItem } from './vertical_timeline_item';
 
 type Props = {
 	title: string;
