@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.0",
+	"version": "2.1.1",
 	"private": true,
 	"license": "UNLICENSED",
 	"type": "module",
@@ -24,6 +24,7 @@
 	"devDependencies": {
 		"@astrojs/sitemap": "^3.7.3",
 		"@minimalstuff/tooling": "^0.6.0",
+		"@release-it/conventional-changelog": "^11.0.1",
 		"@types/node": "^24.10.0",
 		"@unocss/astro": "^66.7.4",
 		"@unocss/preset-web-fonts": "^66.6.7",
