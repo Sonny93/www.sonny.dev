@@ -3,7 +3,7 @@ import '../styles/global.css';
 
 import { ClientRouter } from 'astro:transitions';
 
-import { DEFAULT_LOCALE, LOCALES } from '../i18n/ui';
+import { DEFAULT_LOCALE, LOCALES, resolveLocale, useTranslations } from '../i18n/ui';
 
 export type OpenGraphType = 'website' | 'article';
 
@@ -21,6 +21,7 @@ const {
 	openGraphType = 'website',
 } = Astro.props;
 const locale = Astro.currentLocale ?? 'en';
+const translate = useTranslations(resolveLocale(Astro.currentLocale));
 const openGraphUrl =
 	Astro.site === undefined
 		? undefined
@@ -82,6 +83,9 @@ const defaultAlternateUrl =
 	</head>
 
 	<body>
+		<a href="#main-content" class="skip-link">
+			{translate('navigation.skipToContent')}
+		</a>
 		<canvas
 			id="space-background"
 			style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"
@@ -92,3 +96,31 @@ const defaultAlternateUrl =
 		<script src="../scripts/space_background.ts"></script>
 	</body>
 </html>
+
+<style>
+	.skip-link {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+	}
+
+	.skip-link:focus {
+		z-index: 999;
+		width: auto;
+		height: auto;
+		overflow: visible;
+		clip: auto;
+		top: 1rem;
+		left: 1rem;
+		padding: 0.5rem 1rem;
+		border-radius: 0.375rem;
+		background-color: #38bdf8;
+		color: #020617;
+		font-size: 0.875rem;
+		font-weight: 600;
+		white-space: normal;
+	}
+</style>

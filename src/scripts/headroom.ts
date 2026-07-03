@@ -24,7 +24,9 @@ function initializeHeadroom(): void {
 
 	const applyPinnedState = (isPinned: boolean): void => {
 		for (const headroomElement of headroomElements) {
+			if (headroomElement.dataset.menuOpen === 'true') continue;
 			headroomElement.dataset.pinned = String(isPinned);
+			headroomElement.inert = !isPinned;
 		}
 	};
 

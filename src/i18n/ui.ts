@@ -8,6 +8,11 @@ const EN_UI_STRINGS = {
 	'navigation.home': 'Home',
 	'navigation.blog': 'Blog',
 	'navigation.projects': 'Projects',
+	'navigation.skipToContent': 'Skip to content',
+	'navigation.openMenu': 'Open menu',
+	'navigation.closeMenu': 'Close menu',
+	'locale.switchToEnglish': 'Switch to English',
+	'locale.switchToFrench': 'Switch to French',
 	'home.pageTitle': 'Homepage',
 	'home.availability': 'Based in France · Open to remote opportunities',
 	'home.headline':
@@ -34,9 +39,14 @@ type UiStrings = Readonly<Record<UiStringKey, string>>;
 const UI_STRINGS = {
 	en: EN_UI_STRINGS,
 	fr: {
-		'navigation.home': 'Home',
+		'navigation.home': 'Accueil',
 		'navigation.blog': 'Blog',
-		'navigation.projects': 'Projects',
+		'navigation.projects': 'Projets',
+		'navigation.skipToContent': 'Aller au contenu',
+		'navigation.openMenu': 'Ouvrir le menu',
+		'navigation.closeMenu': 'Fermer le menu',
+		'locale.switchToEnglish': 'Passer en anglais',
+		'locale.switchToFrench': 'Passer en français',
 		'home.pageTitle': "Page d'accueil",
 		'home.availability': 'Basé en France · Ouvert aux opportunités à distance',
 		'home.headline':

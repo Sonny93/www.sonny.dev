@@ -18,6 +18,8 @@ const { title, description, openGraphType } = Astro.props;
 		<div class="w-3xl mx-auto flex flex-1 flex-col gap-6 p-4">
 			<Navbar />
 			<main
+				id="main-content"
+				tabindex="-1"
 				class="flex flex-col gap-16 py-10 sm:gap-20 sm:py-16"
 				data-page-transition
 			>
