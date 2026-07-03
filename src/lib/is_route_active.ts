@@ -1,6 +1,6 @@
 import { ROUTES, type RoutePath } from '../constants/routes';
 
-export function withoutTrailingSlash(pathname: string): string {
+function withoutTrailingSlash(pathname: string): string {
 	return pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
 }
 
