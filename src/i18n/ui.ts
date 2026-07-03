@@ -88,7 +88,7 @@ const UI_STRINGS = {
 	},
 } as const satisfies Readonly<Record<Locale, UiStrings>>;
 
-export function isLocale(candidate: string): candidate is Locale {
+function isLocale(candidate: string): candidate is Locale {
 	return LOCALES.some((locale) => locale === candidate);
 }
 
