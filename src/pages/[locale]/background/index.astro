@@ -1,0 +1,34 @@
+---
+import { formations } from '../../../data/formations';
+import { experiences } from '../../../data/experiences';
+import DefaultLayout from '../../../layouts/default_layout.astro';
+import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+import VerticalTimeline from '../../../components/timeline/vertical_timeline.astro';
+import {
+	buildExperienceTimelineItems,
+	buildFormationTimelineItems,
+} from '../../../lib/timeline_items';
+
+export function getStaticPaths() {
+	return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+
+const experienceTimelineItems = buildExperienceTimelineItems(experiences);
+const formationTimelineItems = buildFormationTimelineItems(formations);
+---
+
+<DefaultLayout title={translate('background.pageTitle')}>
+	<div class="space-y-16">
+		<VerticalTimeline
+			title={translate('home.experiences')}
+			items={experienceTimelineItems}
+		/>
+		<VerticalTimeline
+			title={translate('home.formations')}
+			items={formationTimelineItems}
+		/>
+	</div>
+</DefaultLayout>
