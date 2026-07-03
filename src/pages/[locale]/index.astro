@@ -35,7 +35,7 @@ function buildExperienceMetaHtml(experience: Experience): string {
 	);
 	const companyLabel = escapeHtml(experience.company);
 	const cityLabel = escapeHtml(experience.city);
-	return `${periodLabel} <span>(<span class="font-semibold text-white/95">${companyLabel}</span> – ${cityLabel})</span>`;
+	return `${periodLabel} <span>(<span class="text-white/95">${companyLabel}</span> – ${cityLabel})</span>`;
 }
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -81,7 +81,7 @@ const experienceTimelineItems = experiences.map(
 
 		<div class="relative space-y-6">
 			<span
-				class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-600 bg-slate-900/75 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-300 backdrop-blur"
+				class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-600 bg-slate-900/75 px-4 py-1 text-xs uppercase tracking-[0.14em] text-sky-300 backdrop-blur"
 			>
 				<span class="hud-dot" aria-hidden="true"></span>
 				{translate('home.availability')}
@@ -114,7 +114,7 @@ const experienceTimelineItems = experiences.map(
 
 			<a
 				href={blogUrl}
-				class="inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200"
+				class="inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm text-slate-900 transition hover:bg-slate-200"
 			>
 				{translate('home.readLatestPosts')}
 			</a>
