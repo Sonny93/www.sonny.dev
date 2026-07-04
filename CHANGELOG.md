@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/Sonny93/portfolio/compare/3.0.1...3.0.2) (2026-07-04)
+
+### Bug Fixes
+
+* homepage hero top margin ([f3cee5c](https://github.com/Sonny93/portfolio/commit/f3cee5cd30a0ea1341c884219794a3fad815e405))
+* **i18n:** rewrite homepage hero presentations ([3b7e63f](https://github.com/Sonny93/portfolio/commit/3b7e63fc0238993511f5255c175c9b6c89f488ec))
+
 ## [3.0.1](https://github.com/Sonny93/portfolio/compare/3.0.0...3.0.1) (2026-07-03)
 
 ### Bug Fixes
