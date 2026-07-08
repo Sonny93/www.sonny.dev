@@ -64,7 +64,7 @@ const UI_STRINGS = {
 		'home.headline':
 			"Je conçois des plateformes web robustes — et j'automatise tout ce qui peut l'être.",
 		'home.introduction':
-			"Bonjour, je suis Sonny. Architecture rigoureuse, expérience développeur soignée, et des systèmes conçus pour tourner de façon autonome en production.",
+			'Bonjour, je suis Sonny. Architecture rigoureuse, expérience développeur soignée, et des systèmes conçus pour tourner de façon autonome en production.',
 		'home.skillFullStack': 'Ingénierie full-stack et DevOps',
 		'home.skillAutomation': "Esprit axé sur l'automatisation",
 		'home.skillHomelab': 'Bidouille homelab et auto-hébergement',
