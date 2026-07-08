@@ -24,7 +24,7 @@ jobs:
       - name: Build Astro site
         uses: withastro/action@v6
         with:
-          node-version: 24
+          node-version: 26
           package-manager: pnpm@11
           build-cmd: pnpm run build
 
