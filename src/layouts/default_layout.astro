@@ -8,12 +8,20 @@ type Props = {
 	title?: string;
 	description?: string;
 	openGraphType?: OpenGraphType;
+	image?: string;
+	imageAlt?: string;
 };
 
-const { title, description, openGraphType } = Astro.props;
+const { title, description, openGraphType, image, imageAlt } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} openGraphType={openGraphType}>
+<BaseLayout
+	title={title}
+	description={description}
+	openGraphType={openGraphType}
+	image={image}
+	imageAlt={imageAlt}
+>
 	<div class="relative z-1 flex min-h-dvh flex-col">
 		<div class="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 p-4">
 			<Navbar />

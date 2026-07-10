@@ -26,7 +26,10 @@ const formationTimelineItems = buildFormationTimelineItems(
 );
 ---
 
-<DefaultLayout title={translate('background.pageTitle')}>
+<DefaultLayout
+	title={translate('background.pageTitle')}
+	description={translate('background.pageDescription')}
+>
 	<div class="space-y-16">
 		<VerticalTimeline
 			title={translate('home.experiences')}
