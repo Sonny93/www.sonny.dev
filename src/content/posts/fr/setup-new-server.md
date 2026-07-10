@@ -147,7 +147,64 @@ sudo systemctl restart sshd
 
 Et surtout : j'ouvre une **nouvelle** session SSH sans fermer celle en cours, pour vérifier que tout va bien avant de couper le fil qui me relie encore au serveur.
 
-## Étape 6 : fail2ban, parce que les bots ne se fatiguent jamais
+## Étape 6 : ufw, le firewall qu'on oublie trop souvent
+
+Un serveur tout juste durci côté SSH, mais sans aucun firewall actif, ça reste une machine qui écoute sur tous les ports que les paquets installés ouvrent sans prévenir. `ufw` (Uncomplicated Firewall) fait l'essentiel : une surface d'attaque réduite au strict nécessaire.
+
+```bash
+sudo apt install -y ufw
+```
+
+**Point critique, à ne surtout pas inverser** : j'autorise SSH *avant* d'activer ufw, sinon je me coupe moi-même l'accès à la machine.
+
+```bash
+sudo ufw allow OpenSSH
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
+```
+
+Vérification :
+
+```bash
+sudo ufw status verbose
+```
+
+Ensuite, j'ouvre au cas par cas selon ce qui tourne sur la machine, jamais plus large que nécessaire :
+
+```bash
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+```
+
+### Le piège Docker : ufw ne voit rien passer
+
+C'est le genre de détail qui donne un faux sentiment de sécurité. Docker ne respecte pas les règles ufw : il manipule directement les chaînes iptables (via sa propre chaîne `DOCKER-USER`), et le fait *après* que ufw ait posé les siennes. Résultat concret : un conteneur lancé avec `-p 8080:8080` reste joignable depuis l'extérieur **même si ufw bloque le port 8080**, parce que Docker insère ses propres règles NAT en amont des règles ufw.
+
+Deux façons de s'en sortir :
+
+- **Ne pas publier ce qui n'a pas besoin de l'être.** Si un service ne doit être accessible que depuis un reverse proxy sur la même machine, je le bind sur `127.0.0.1` plutôt que sur toutes les interfaces :
+
+```bash
+# Accessible uniquement en local, ufw n'a même pas besoin d'intervenir
+ports:
+  - "127.0.0.1:8080:8080"
+```
+
+- **Forcer Docker à respecter ufw**, avec [ufw-docker](https://github.com/chaifeng/ufw-docker), qui ajoute les règles nécessaires dans `DOCKER-USER` pour que les ports publiés passent bien par le filtrage ufw. Utile si je dois vraiment exposer des ports directement.
+
+Dans tous les cas, le réflexe à avoir : après chaque `docker compose up` avec des ports publiés, je vérifie ce qui est réellement exposé avec `sudo iptables -L DOCKER-USER -n` ou simplement en scannant le serveur depuis l'extérieur.
+
+### Le firewall de l'hébergeur, une couche à part
+
+Sur un serveur loué chez un hébergeur type Contabo, OVH ou Hetzner, il y a souvent un firewall réseau géré depuis le panel, complètement indépendant d'ufw. Deux pièges symétriques :
+
+- s'il est configuré en mode "tout ouvert" par défaut, ufw redevient ma seule vraie ligne de défense, donc autant ne pas se rater dessus ;
+- s'il est mal configuré côté hébergeur (règle qui bloque un port dont j'ai besoin), je peux passer un temps fou à débugger côté serveur alors que le blocage vient du panel, en amont de la machine elle-même.
+
+Réflexe utile en cas de port qui ne répond pas comme attendu : vérifier `ufw status`, vérifier les règles Docker/iptables, **et** vérifier le firewall du panel hébergeur avant de conclure à un bug applicatif.
+
+## Étape 7 : fail2ban, parce que les bots ne se fatiguent jamais
 
 Dès qu'un serveur est exposé sur Internet, les tentatives de connexion SSH commencent en quelques minutes. Fail2ban ne remplace pas une bonne configuration, mais il bannit automatiquement les IP trop insistantes.
 
@@ -183,7 +240,7 @@ Pour vérifier que ça tourne et voir les bans en cours :
 sudo fail2ban-client status sshd
 ```
 
-## Étape 7 : un MOTD qui sert vraiment à quelque chose
+## Étape 8 : un MOTD qui sert vraiment à quelque chose
 
 Le MOTD par défaut d'Ubuntu, avec ses pubs pour ESM et ses infos génériques, ne m'apprend rien. J'ai fini par écrire le mien, qui affiche d'un coup d'œil la dernière connexion, l'état de la RAM, du disque, et l'uptime.
 
@@ -221,7 +278,7 @@ Pas besoin de se reconnecter pour voir le résultat :
 run-parts /etc/update-motd.d/
 ```
 
-## Étape 8 : les mises à jour de sécurité, sans y penser
+## Étape 9 : les mises à jour de sécurité, sans y penser
 
 C'est probablement l'étape la plus sous-estimée. Un serveur qu'on oublie de mettre à jour finit tôt ou tard par traîner une faille connue. `unattended-upgrades` applique automatiquement les correctifs de sécurité, sans intervention manuelle.
 
@@ -267,12 +324,13 @@ sudo unattended-upgrade --dry-run --debug
 
 ## Ce que ça donne au final
 
-Une fois ces huit étapes passées, j'ai un serveur qui :
+Une fois ces neuf étapes passées, j'ai un serveur qui :
 
 - n'accepte plus de connexion en root ni par mot de passe,
+- ne laisse passer que le strict nécessaire grâce à ufw,
 - bannit automatiquement les IP qui insistent trop sur SSH,
 - applique ses correctifs de sécurité sans que j'aie à y penser,
 - m'affiche un vrai résumé de son état à chaque connexion,
-- et fait tourner Docker proprement, prêt à accueillir les projets.
+- et fait tourner Docker proprement, prêt à accueillir les projets — sans que les ports publiés ne contournent le firewall dans mon dos.
 
-C'est loin d'être exhaustif niveau sécurité (il reste encore le firewall, le monitoring, les backups à ajouter), mais c'est la base sur laquelle je construis maintenant tous mes serveurs, et elle me fait gagner un temps fou à chaque nouvelle machine.
+C'est loin d'être exhaustif niveau sécurité (il reste encore le monitoring et les backups à ajouter), mais c'est la base sur laquelle je construis maintenant tous mes serveurs, et elle me fait gagner un temps fou à chaque nouvelle machine.

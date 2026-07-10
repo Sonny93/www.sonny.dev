@@ -147,7 +147,64 @@ sudo systemctl restart sshd
 
 And above all: I open a **new** SSH session without closing the current one, to make sure everything is fine before cutting the thread still connecting me to the server.
 
-## Step 6: fail2ban, because bots never get tired
+## Step 6: ufw, the firewall that too often gets skipped
+
+A server that's freshly hardened on the SSH side but has no active firewall is still a machine listening on every port that installed packages decide to open without asking. `ufw` (Uncomplicated Firewall) covers the essentials: keeping the attack surface down to what's strictly necessary.
+
+```bash
+sudo apt install -y ufw
+```
+
+**Critical point, don't get this order backwards**: I allow SSH *before* enabling ufw, otherwise I lock myself out of the machine.
+
+```bash
+sudo ufw allow OpenSSH
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
+```
+
+Check:
+
+```bash
+sudo ufw status verbose
+```
+
+From there, I open ports case by case depending on what's running on the machine, never wider than necessary:
+
+```bash
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+```
+
+### The Docker trap: ufw doesn't see any of it
+
+This is the kind of detail that gives a false sense of security. Docker doesn't respect ufw rules: it manipulates iptables chains directly (through its own `DOCKER-USER` chain), and it does so *after* ufw has already laid down its own rules. Concrete result: a container started with `-p 8080:8080` stays reachable from the outside **even if ufw is blocking port 8080**, because Docker inserts its own NAT rules ahead of ufw's.
+
+Two ways around it:
+
+- **Don't publish what doesn't need to be published.** If a service only needs to be reachable from a reverse proxy on the same machine, I bind it to `127.0.0.1` instead of all interfaces:
+
+```bash
+# Only reachable locally, ufw doesn't even need to get involved
+ports:
+  - "127.0.0.1:8080:8080"
+```
+
+- **Force Docker to respect ufw**, with [ufw-docker](https://github.com/chaifeng/ufw-docker), which adds the necessary rules to `DOCKER-USER` so published ports actually go through ufw's filtering. Useful when I genuinely need to expose ports directly.
+
+Either way, the habit worth building: after every `docker compose up` with published ports, check what's actually exposed with `sudo iptables -L DOCKER-USER -n`, or just scan the server from the outside.
+
+### The hosting provider's firewall, a separate layer
+
+On a server rented from a provider like Contabo, OVH, or Hetzner, there's often a network firewall managed from the control panel, completely independent from ufw. Two symmetrical traps here:
+
+- if it's configured wide-open by default, ufw becomes my only real line of defense, so it better not have gaps;
+- if it's misconfigured on the provider's side (a rule blocking a port I actually need), I can burn a lot of time debugging on the server while the block is happening upstream, in the panel, before traffic ever reaches the machine.
+
+Useful habit when a port doesn't respond as expected: check `ufw status`, check the Docker/iptables rules, **and** check the hosting provider's panel firewall before assuming it's an application bug.
+
+## Step 7: fail2ban, because bots never get tired
 
 As soon as a server is exposed to the Internet, SSH login attempts start within minutes. Fail2ban doesn't replace a good configuration, but it automatically bans IPs that get too insistent.
 
@@ -183,7 +240,7 @@ To verify it's running and see current bans:
 sudo fail2ban-client status sshd
 ```
 
-## Step 7: a MOTD that's actually useful
+## Step 8: a MOTD that's actually useful
 
 Ubuntu's default MOTD, with its ESM ads and generic info, doesn't tell me anything. I ended up writing my own, which shows at a glance the last login, RAM state, disk usage, and uptime.
 
@@ -221,7 +278,7 @@ No need to reconnect to see the result:
 run-parts /etc/update-motd.d/
 ```
 
-## Step 8: security updates, without thinking about it
+## Step 9: security updates, without thinking about it
 
 This is probably the most underestimated step. A server you forget to update sooner or later ends up dragging along a known vulnerability. `unattended-upgrades` automatically applies security patches, with no manual intervention.
 
@@ -267,12 +324,13 @@ sudo unattended-upgrade --dry-run --debug
 
 ## The end result
 
-Once these eight steps are done, I have a server that:
+Once these nine steps are done, I have a server that:
 
 - no longer accepts root or password-based login,
+- only lets through what's strictly needed, thanks to ufw,
 - automatically bans IPs that get too pushy on SSH,
 - applies its security patches without me having to think about it,
 - shows me a real summary of its state on every connection,
-- and runs Docker cleanly, ready to host projects.
+- and runs Docker cleanly, ready to host projects — without published ports quietly bypassing the firewall.
 
-It's far from exhaustive on the security front (firewall, monitoring, and backups are still missing), but it's the baseline I now build every server on, and it saves me a huge amount of time on every new machine.
+It's far from exhaustive on the security front (monitoring and backups are still missing), but it's the baseline I now build every server on, and it saves me a huge amount of time on every new machine.
