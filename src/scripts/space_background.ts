@@ -1,8 +1,12 @@
 const CANVAS_SELECTOR = '#space-background';
 const STAR_COUNT = 700;
 const DEPTH = 2000;
-const TARGET_FRAMES_PER_SECOND = 24;
-const FRAME_INTERVAL_MS = 1000 / TARGET_FRAMES_PER_SECOND;
+const REFRESH_SAMPLE_FRAME_COUNT = 10;
+const HIGH_REFRESH_HZ_THRESHOLD = 90;
+const MID_REFRESH_HZ_THRESHOLD = 50;
+const HIGH_TIER_FRAMES_PER_SECOND = 60;
+const MID_TIER_FRAMES_PER_SECOND = 30;
+const LOW_TIER_FRAMES_PER_SECOND = 24;
 const MAX_STAR_RADIUS = 500;
 const FULL_TURN_RADIANS = Math.PI * 2;
 const BACKGROUND_COLOR = '#030b1a';
@@ -73,6 +77,42 @@ function clamp(value: number, min: number, max: number): number {
 	return Math.min(Math.max(value, min), max);
 }
 
+/**
+ * Samples raw `requestAnimationFrame` deltas (no throttling) to estimate the
+ * device's real refresh rate, so the render loop can target it instead of a
+ * single fixed rate for every device.
+ */
+function measureRefreshRate(onMeasured: (measuredHz: number) => void): void {
+	let sampledFrameCount = 0;
+	let firstSampleTimestamp = 0;
+
+	function sampleFrame(timestamp: number): void {
+		if (sampledFrameCount === 0) {
+			firstSampleTimestamp = timestamp;
+		}
+		sampledFrameCount += 1;
+
+		if (sampledFrameCount < REFRESH_SAMPLE_FRAME_COUNT) {
+			requestAnimationFrame(sampleFrame);
+			return;
+		}
+
+		const elapsedMs = timestamp - firstSampleTimestamp;
+		const measuredHz =
+			(MILLISECONDS_PER_SECOND * (REFRESH_SAMPLE_FRAME_COUNT - 1)) /
+			elapsedMs;
+		onMeasured(measuredHz);
+	}
+
+	requestAnimationFrame(sampleFrame);
+}
+
+function pickTargetFramesPerSecond(measuredHz: number): number {
+	if (measuredHz >= HIGH_REFRESH_HZ_THRESHOLD) return HIGH_TIER_FRAMES_PER_SECOND;
+	if (measuredHz >= MID_REFRESH_HZ_THRESHOLD) return MID_TIER_FRAMES_PER_SECOND;
+	return LOW_TIER_FRAMES_PER_SECOND;
+}
+
 function drawStar(
 	context: CanvasRenderingContext2D,
 	star: Star,
@@ -108,7 +148,8 @@ function runAnimationLoop(
 	context: CanvasRenderingContext2D,
 	canvas: HTMLCanvasElement,
 	stars: readonly Star[],
-	warpState: WarpState
+	warpState: WarpState,
+	frameIntervalMs: number
 ): void {
 	const focalLength =
 		1 / Math.tan((CAMERA_FIELD_OF_VIEW_DEGREES * Math.PI) / 360);
@@ -121,7 +162,7 @@ function runAnimationLoop(
 		requestAnimationFrame(renderFrame);
 
 		const elapsedMs = timestamp - warpState.lastRenderTimestamp;
-		if (elapsedMs < FRAME_INTERVAL_MS) return;
+		if (elapsedMs < frameIntervalMs) return;
 
 		const deltaSeconds = Math.min(
 			elapsedMs / MILLISECONDS_PER_SECOND,
@@ -187,7 +228,17 @@ function initializeSpaceBackground(): void {
 
 	listenForNavigationWarp(warpState);
 	listenForResize(canvas);
-	runAnimationLoop(context, canvas, stars, warpState);
+
+	const measurementStartTime = performance.now();
+	measureRefreshRate((measuredHz) => {
+		const measurementDurationMs = performance.now() - measurementStartTime;
+		const targetFramesPerSecond = pickTargetFramesPerSecond(measuredHz);
+		console.log(
+			`[space-background] refresh rate measured: ${measuredHz.toFixed(1)}Hz, target: ${targetFramesPerSecond}fps, took: ${measurementDurationMs.toFixed(1)}ms`
+		);
+		const frameIntervalMs = MILLISECONDS_PER_SECOND / targetFramesPerSecond;
+		runAnimationLoop(context, canvas, stars, warpState, frameIntervalMs);
+	});
 }
 
 document.addEventListener('astro:page-load', initializeSpaceBackground);
