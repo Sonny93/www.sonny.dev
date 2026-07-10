@@ -20,8 +20,20 @@ const MIN_ALPHA = 0.08;
 const MAX_ALPHA = 0.95;
 const IDLE_WARP_SPEED = 20;
 const NAVIGATION_WARP_SPEED = 400;
-const WARP_RESET_DELAY_MS = 850;
-const WARP_EASING_FACTOR = 0.12;
+const WARP_ACCELERATION_DURATION_MS = 450;
+const WARP_DECELERATION_DURATION_MS = 900;
+// Floor on how long the warp stays up before decelerating, so a fast page
+// load (astro:page-load firing almost immediately) still shows the effect.
+const WARP_MIN_VISIBLE_DURATION_MS = 500;
+const ARRIVAL_WARP_SPEED = 600;
+const ARRIVAL_EASE_DURATION_MS = 1800;
+const STREAK_DURATION_SECONDS = 0.05;
+const STREAK_ALPHA_FACTOR = 0.6;
+const STREAK_WIDTH_FACTOR = 1.5;
+const STREAK_MAX_LENGTH_PX = 120;
+// Below this, only idle drift is happening — draw plain dots so streaks
+// only appear during an actual warp transition (nav or arrival dive).
+const STREAK_VISIBILITY_SPEED_THRESHOLD = IDLE_WARP_SPEED * 2;
 const MAX_DELTA_SECONDS = 0.1;
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -37,9 +49,18 @@ type Star = {
 	zPhase: number;
 };
 
+/**
+ * `currentSpeed` is derived each frame by easing from `easeStartSpeed` to
+ * `easeTargetSpeed` over `easeDurationMs`, starting at `easeStartTimestamp` —
+ * a time-based ease (see `easeInOutCubic`) rather than a per-frame lerp, so
+ * the curve looks the same regardless of the device's render fps tier.
+ */
 type WarpState = {
 	currentSpeed: number;
-	targetSpeed: number;
+	easeStartSpeed: number;
+	easeTargetSpeed: number;
+	easeStartTimestamp: number;
+	easeDurationMs: number;
 	accumulatedTime: number;
 	lastRenderTimestamp: number;
 };
@@ -52,17 +73,77 @@ function createStars(): readonly Star[] {
 	}));
 }
 
+function lerp(start: number, end: number, progress: number): number {
+	return start + (end - start) * progress;
+}
+
+function easeInOutCubic(progress: number): number {
+	return progress < 0.5
+		? 4 * progress ** 3
+		: 1 - (-2 * progress + 2) ** 3 / 2;
+}
+
+function wrapDepth(value: number): number {
+	return ((value % DEPTH) + DEPTH) % DEPTH;
+}
+
 /**
- * Ramps the warp speed up when a view-transition navigation starts
- * (`astro:before-preparation` fires before any request is made), then
- * eases back to idle after the same fixed delay the Inertia version used.
+ * Starts (or redirects, mid-flight) a timed ease of the warp speed toward
+ * `targetSpeed`. Snapshotting the current interpolated speed as the new
+ * ease's start means back-to-back triggers (e.g. rapid navigation) never
+ * jump — they just redirect smoothly from wherever the curve currently is.
+ */
+function setWarpTarget(
+	warpState: WarpState,
+	targetSpeed: number,
+	durationMs: number,
+	timestamp: number
+): void {
+	warpState.easeStartSpeed = warpState.currentSpeed;
+	warpState.easeTargetSpeed = targetSpeed;
+	warpState.easeStartTimestamp = timestamp;
+	warpState.easeDurationMs = durationMs;
+}
+
+/**
+ * Ramps the warp speed up as soon as a view-transition navigation starts
+ * (`astro:before-preparation` fires before any request is made), and eases
+ * back to idle on `astro:page-load` — the event Astro dispatches once the
+ * new page has actually finished loading, so the effect stays in sync with
+ * real load time instead of guessing a fixed duration. A fast load is
+ * topped up to `WARP_MIN_VISIBLE_DURATION_MS` so the effect is never too
+ * brief to notice.
  */
 function listenForNavigationWarp(warpState: WarpState): void {
+	let isNavigating = false;
+	let navigationStartTimestamp = 0;
+
 	document.addEventListener('astro:before-preparation', () => {
-		warpState.targetSpeed = NAVIGATION_WARP_SPEED;
+		isNavigating = true;
+		navigationStartTimestamp = performance.now();
+		setWarpTarget(
+			warpState,
+			NAVIGATION_WARP_SPEED,
+			WARP_ACCELERATION_DURATION_MS,
+			navigationStartTimestamp
+		);
+	});
+
+	document.addEventListener('astro:page-load', () => {
+		if (!isNavigating) return;
+		isNavigating = false;
+
+		const elapsedMs = performance.now() - navigationStartTimestamp;
+		const remainingMs = Math.max(WARP_MIN_VISIBLE_DURATION_MS - elapsedMs, 0);
+
 		setTimeout(() => {
-			warpState.targetSpeed = IDLE_WARP_SPEED;
-		}, WARP_RESET_DELAY_MS);
+			setWarpTarget(
+				warpState,
+				IDLE_WARP_SPEED,
+				WARP_DECELERATION_DURATION_MS,
+				performance.now()
+			);
+		}, remainingMs);
 	});
 }
 
@@ -113,17 +194,23 @@ function pickTargetFramesPerSecond(measuredHz: number): number {
 	return LOW_TIER_FRAMES_PER_SECOND;
 }
 
-function drawStar(
-	context: CanvasRenderingContext2D,
+type StarProjection = {
+	screenX: number;
+	screenY: number;
+	pointRadius: number;
+	alpha: number;
+};
+
+function projectStar(
 	star: Star,
 	uTime: number,
 	focalLength: number,
 	centerX: number,
 	centerY: number,
 	halfHeight: number
-): void {
+): StarProjection {
 	const depthPosition = Math.min(
-		-((star.zPhase + uTime) % DEPTH),
+		-wrapDepth(star.zPhase + uTime),
 		-NEAR_DISTANCE
 	);
 	const distance = -depthPosition;
@@ -138,9 +225,70 @@ function drawStar(
 	);
 	const alpha = clamp(1 - distance / DEPTH, MIN_ALPHA, MAX_ALPHA);
 
+	return { screenX, screenY, pointRadius, alpha };
+}
+
+/**
+ * Clamps how far the tail can sit from the head in screen space. Without
+ * this, stars near the vanishing point (tiny distance, huge scale) draw
+ * streaks far longer than everything else on screen — capping the length
+ * keeps every streak reading at the same intensity regardless of depth.
+ */
+function clampStreakTail(
+	head: StarProjection,
+	tail: StarProjection
+): { screenX: number; screenY: number } {
+	const deltaX = head.screenX - tail.screenX;
+	const deltaY = head.screenY - tail.screenY;
+	const length = Math.hypot(deltaX, deltaY);
+	if (length <= STREAK_MAX_LENGTH_PX) {
+		return tail;
+	}
+
+	const lengthScale = STREAK_MAX_LENGTH_PX / length;
+	return {
+		screenX: head.screenX - deltaX * lengthScale,
+		screenY: head.screenY - deltaY * lengthScale,
+	};
+}
+
+/**
+ * Draws each star as a bright head, plus — only while warp speed is above
+ * idle cruising (i.e. during a nav transition or the arrival dive) — a dim
+ * comet streak trailing back to where it was `STREAK_DURATION_SECONDS` ago.
+ * At idle speed it's always a plain dot.
+ */
+function drawStar(
+	context: CanvasRenderingContext2D,
+	star: Star,
+	uTime: number,
+	warpSpeed: number,
+	focalLength: number,
+	centerX: number,
+	centerY: number,
+	halfHeight: number
+): void {
+	const head = projectStar(star, uTime, focalLength, centerX, centerY, halfHeight);
+
+	if (warpSpeed > STREAK_VISIBILITY_SPEED_THRESHOLD) {
+		const trailUTime = uTime - warpSpeed * STREAK_DURATION_SECONDS;
+		const tail = clampStreakTail(
+			head,
+			projectStar(star, trailUTime, focalLength, centerX, centerY, halfHeight)
+		);
+
+		context.beginPath();
+		context.moveTo(tail.screenX, tail.screenY);
+		context.lineTo(head.screenX, head.screenY);
+		context.lineWidth = head.pointRadius * STREAK_WIDTH_FACTOR;
+		context.lineCap = 'round';
+		context.strokeStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha * STREAK_ALPHA_FACTOR})`;
+		context.stroke();
+	}
+
 	context.beginPath();
-	context.fillStyle = `rgba(${STAR_COLOR_RGB}, ${alpha})`;
-	context.arc(screenX, screenY, pointRadius, 0, FULL_TURN_RADIANS);
+	context.fillStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha})`;
+	context.arc(head.screenX, head.screenY, head.pointRadius, 0, FULL_TURN_RADIANS);
 	context.fill();
 }
 
@@ -158,6 +306,14 @@ function runAnimationLoop(
 	// jump the instant the viewport height changes.
 	const scaleReferenceHalfHeight = canvas.height / 2;
 
+	// Kick off the "arrival" dive: starts at warp speed and eases down to
+	// idle, so streaks are long on load and shrink to dots as it settles.
+	warpState.currentSpeed = ARRIVAL_WARP_SPEED;
+	warpState.easeStartSpeed = ARRIVAL_WARP_SPEED;
+	warpState.easeTargetSpeed = IDLE_WARP_SPEED;
+	warpState.easeStartTimestamp = performance.now();
+	warpState.easeDurationMs = ARRIVAL_EASE_DURATION_MS;
+
 	function renderFrame(timestamp: number): void {
 		requestAnimationFrame(renderFrame);
 
@@ -170,8 +326,16 @@ function runAnimationLoop(
 		);
 		warpState.lastRenderTimestamp = timestamp;
 
-		warpState.currentSpeed +=
-			(warpState.targetSpeed - warpState.currentSpeed) * WARP_EASING_FACTOR;
+		const easeProgress = clamp(
+			(timestamp - warpState.easeStartTimestamp) / warpState.easeDurationMs,
+			0,
+			1
+		);
+		warpState.currentSpeed = lerp(
+			warpState.easeStartSpeed,
+			warpState.easeTargetSpeed,
+			easeInOutCubic(easeProgress)
+		);
 		warpState.accumulatedTime += warpState.currentSpeed * deltaSeconds;
 
 		context.fillStyle = BACKGROUND_COLOR;
@@ -185,6 +349,7 @@ function runAnimationLoop(
 				context,
 				star,
 				warpState.accumulatedTime,
+				warpState.currentSpeed,
 				focalLength,
 				centerX,
 				centerY,
@@ -221,7 +386,10 @@ function initializeSpaceBackground(): void {
 	const stars = createStars();
 	const warpState: WarpState = {
 		currentSpeed: IDLE_WARP_SPEED,
-		targetSpeed: IDLE_WARP_SPEED,
+		easeStartSpeed: IDLE_WARP_SPEED,
+		easeTargetSpeed: IDLE_WARP_SPEED,
+		easeStartTimestamp: 0,
+		easeDurationMs: 1,
 		accumulatedTime: 0,
 		lastRenderTimestamp: 0,
 	};
