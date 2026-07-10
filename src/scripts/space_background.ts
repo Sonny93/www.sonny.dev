@@ -36,6 +36,7 @@ const STREAK_MAX_LENGTH_PX = 120;
 const STREAK_VISIBILITY_SPEED_THRESHOLD = IDLE_WARP_SPEED * 2;
 const MAX_DELTA_SECONDS = 0.1;
 const MILLISECONDS_PER_SECOND = 1000;
+const DEGREES_PER_HALF_TURN = 180;
 
 /**
  * Star positions encode polar coordinates instead of screen coordinates:
@@ -65,6 +66,25 @@ type WarpState = {
 	lastRenderTimestamp: number;
 };
 
+/**
+ * Camera + canvas framing needed to project a star to screen space.
+ * `halfHeight` is fixed at animation start (see `runAnimationLoop`) so
+ * resizes reframe the field instead of rescaling it.
+ */
+type Viewport = {
+	focalLength: number;
+	centerX: number;
+	centerY: number;
+	halfHeight: number;
+};
+
+type StarProjection = {
+	screenX: number;
+	screenY: number;
+	pointRadius: number;
+	alpha: number;
+};
+
 function createStars(): readonly Star[] {
 	return Array.from({ length: STAR_COUNT }, () => ({
 		radius: Math.sqrt(Math.random()) * MAX_STAR_RADIUS,
@@ -78,13 +98,27 @@ function lerp(start: number, end: number, progress: number): number {
 }
 
 function easeInOutCubic(progress: number): number {
-	return progress < 0.5
-		? 4 * progress ** 3
-		: 1 - (-2 * progress + 2) ** 3 / 2;
+	return progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
 }
 
 function wrapDepth(value: number): number {
 	return ((value % DEPTH) + DEPTH) % DEPTH;
+}
+
+function clamp(value: number, min: number, max: number): number {
+	return Math.min(Math.max(value, min), max);
+}
+
+function createIdleWarpState(): WarpState {
+	return {
+		currentSpeed: IDLE_WARP_SPEED,
+		easeStartSpeed: IDLE_WARP_SPEED,
+		easeTargetSpeed: IDLE_WARP_SPEED,
+		easeStartTimestamp: 0,
+		easeDurationMs: 1,
+		accumulatedTime: 0,
+		lastRenderTimestamp: 0,
+	};
 }
 
 /**
@@ -103,6 +137,18 @@ function setWarpTarget(
 	warpState.easeTargetSpeed = targetSpeed;
 	warpState.easeStartTimestamp = timestamp;
 	warpState.easeDurationMs = durationMs;
+}
+
+/**
+ * Kicks off the "arrival" dive: starts at warp speed and eases down to
+ * idle, so streaks are long on load and shrink to dots as it settles.
+ */
+function startArrivalDive(warpState: WarpState): void {
+	warpState.currentSpeed = ARRIVAL_WARP_SPEED;
+	warpState.easeStartSpeed = ARRIVAL_WARP_SPEED;
+	warpState.easeTargetSpeed = IDLE_WARP_SPEED;
+	warpState.easeStartTimestamp = performance.now();
+	warpState.easeDurationMs = ARRIVAL_EASE_DURATION_MS;
 }
 
 /**
@@ -154,10 +200,6 @@ function listenForResize(canvas: HTMLCanvasElement): void {
 	});
 }
 
-function clamp(value: number, min: number, max: number): number {
-	return Math.min(Math.max(value, min), max);
-}
-
 /**
  * Samples raw `requestAnimationFrame` deltas (no throttling) to estimate the
  * device's real refresh rate, so the render loop can target it instead of a
@@ -180,8 +222,7 @@ function measureRefreshRate(onMeasured: (measuredHz: number) => void): void {
 
 		const elapsedMs = timestamp - firstSampleTimestamp;
 		const measuredHz =
-			(MILLISECONDS_PER_SECOND * (REFRESH_SAMPLE_FRAME_COUNT - 1)) /
-			elapsedMs;
+			(MILLISECONDS_PER_SECOND * (REFRESH_SAMPLE_FRAME_COUNT - 1)) / elapsedMs;
 		onMeasured(measuredHz);
 	}
 
@@ -189,35 +230,42 @@ function measureRefreshRate(onMeasured: (measuredHz: number) => void): void {
 }
 
 function pickTargetFramesPerSecond(measuredHz: number): number {
-	if (measuredHz >= HIGH_REFRESH_HZ_THRESHOLD) return HIGH_TIER_FRAMES_PER_SECOND;
+	if (measuredHz >= HIGH_REFRESH_HZ_THRESHOLD)
+		return HIGH_TIER_FRAMES_PER_SECOND;
 	if (measuredHz >= MID_REFRESH_HZ_THRESHOLD) return MID_TIER_FRAMES_PER_SECOND;
 	return LOW_TIER_FRAMES_PER_SECOND;
 }
 
-type StarProjection = {
-	screenX: number;
-	screenY: number;
-	pointRadius: number;
-	alpha: number;
-};
+function logRefreshRateMeasurement(
+	measuredHz: number,
+	targetFramesPerSecond: number,
+	measurementDurationMs: number
+): void {
+	console.log(
+		`[space-background] refresh rate measured: ${measuredHz.toFixed(1)}Hz, target: ${targetFramesPerSecond}fps, took: ${measurementDurationMs.toFixed(1)}ms`
+	);
+}
+
+function computeFocalLength(fieldOfViewDegrees: number): number {
+	return (
+		1 / Math.tan((fieldOfViewDegrees * Math.PI) / (2 * DEGREES_PER_HALF_TURN))
+	);
+}
 
 function projectStar(
 	star: Star,
 	uTime: number,
-	focalLength: number,
-	centerX: number,
-	centerY: number,
-	halfHeight: number
+	viewport: Viewport
 ): StarProjection {
 	const depthPosition = Math.min(
 		-wrapDepth(star.zPhase + uTime),
 		-NEAR_DISTANCE
 	);
 	const distance = -depthPosition;
-	const scale = (focalLength / distance) * halfHeight;
+	const scale = (viewport.focalLength / distance) * viewport.halfHeight;
 
-	const screenX = centerX + Math.cos(star.angle) * star.radius * scale;
-	const screenY = centerY - Math.sin(star.angle) * star.radius * scale;
+	const screenX = viewport.centerX + Math.cos(star.angle) * star.radius * scale;
+	const screenY = viewport.centerY - Math.sin(star.angle) * star.radius * scale;
 	const pointRadius = clamp(
 		POINT_RADIUS_FALLOFF / distance,
 		MIN_POINT_RADIUS,
@@ -252,6 +300,42 @@ function clampStreakTail(
 	};
 }
 
+function drawStreak(
+	context: CanvasRenderingContext2D,
+	star: Star,
+	head: StarProjection,
+	uTime: number,
+	warpSpeed: number,
+	viewport: Viewport
+): void {
+	const trailUTime = uTime - warpSpeed * STREAK_DURATION_SECONDS;
+	const tail = clampStreakTail(head, projectStar(star, trailUTime, viewport));
+
+	context.beginPath();
+	context.moveTo(tail.screenX, tail.screenY);
+	context.lineTo(head.screenX, head.screenY);
+	context.lineWidth = head.pointRadius * STREAK_WIDTH_FACTOR;
+	context.lineCap = 'round';
+	context.strokeStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha * STREAK_ALPHA_FACTOR})`;
+	context.stroke();
+}
+
+function drawStarHead(
+	context: CanvasRenderingContext2D,
+	head: StarProjection
+): void {
+	context.beginPath();
+	context.fillStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha})`;
+	context.arc(
+		head.screenX,
+		head.screenY,
+		head.pointRadius,
+		0,
+		FULL_TURN_RADIANS
+	);
+	context.fill();
+}
+
 /**
  * Draws each star as a bright head, plus — only while warp speed is above
  * idle cruising (i.e. during a nav transition or the arrival dive) — a dim
@@ -263,33 +347,79 @@ function drawStar(
 	star: Star,
 	uTime: number,
 	warpSpeed: number,
-	focalLength: number,
-	centerX: number,
-	centerY: number,
-	halfHeight: number
+	viewport: Viewport
 ): void {
-	const head = projectStar(star, uTime, focalLength, centerX, centerY, halfHeight);
+	const head = projectStar(star, uTime, viewport);
 
 	if (warpSpeed > STREAK_VISIBILITY_SPEED_THRESHOLD) {
-		const trailUTime = uTime - warpSpeed * STREAK_DURATION_SECONDS;
-		const tail = clampStreakTail(
-			head,
-			projectStar(star, trailUTime, focalLength, centerX, centerY, halfHeight)
-		);
-
-		context.beginPath();
-		context.moveTo(tail.screenX, tail.screenY);
-		context.lineTo(head.screenX, head.screenY);
-		context.lineWidth = head.pointRadius * STREAK_WIDTH_FACTOR;
-		context.lineCap = 'round';
-		context.strokeStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha * STREAK_ALPHA_FACTOR})`;
-		context.stroke();
+		drawStreak(context, star, head, uTime, warpSpeed, viewport);
 	}
 
-	context.beginPath();
-	context.fillStyle = `rgba(${STAR_COLOR_RGB}, ${head.alpha})`;
-	context.arc(head.screenX, head.screenY, head.pointRadius, 0, FULL_TURN_RADIANS);
-	context.fill();
+	drawStarHead(context, head);
+}
+
+function clearCanvas(
+	context: CanvasRenderingContext2D,
+	canvas: HTMLCanvasElement
+): void {
+	context.fillStyle = BACKGROUND_COLOR;
+	context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawFrame(
+	context: CanvasRenderingContext2D,
+	canvas: HTMLCanvasElement,
+	stars: readonly Star[],
+	warpState: WarpState,
+	viewport: Viewport
+): void {
+	clearCanvas(context, canvas);
+
+	for (const star of stars) {
+		drawStar(
+			context,
+			star,
+			warpState.accumulatedTime,
+			warpState.currentSpeed,
+			viewport
+		);
+	}
+}
+
+function isFrameTooSoon(
+	timestamp: number,
+	lastRenderTimestamp: number,
+	frameIntervalMs: number
+): boolean {
+	return timestamp - lastRenderTimestamp < frameIntervalMs;
+}
+
+function computeDeltaSeconds(
+	timestamp: number,
+	lastRenderTimestamp: number
+): number {
+	return Math.min(
+		(timestamp - lastRenderTimestamp) / MILLISECONDS_PER_SECOND,
+		MAX_DELTA_SECONDS
+	);
+}
+
+function advanceWarpState(
+	warpState: WarpState,
+	timestamp: number,
+	deltaSeconds: number
+): void {
+	const easeProgress = clamp(
+		(timestamp - warpState.easeStartTimestamp) / warpState.easeDurationMs,
+		0,
+		1
+	);
+	warpState.currentSpeed = lerp(
+		warpState.easeStartSpeed,
+		warpState.easeTargetSpeed,
+		easeInOutCubic(easeProgress)
+	);
+	warpState.accumulatedTime += warpState.currentSpeed * deltaSeconds;
 }
 
 function runAnimationLoop(
@@ -299,63 +429,37 @@ function runAnimationLoop(
 	warpState: WarpState,
 	frameIntervalMs: number
 ): void {
-	const focalLength =
-		1 / Math.tan((CAMERA_FIELD_OF_VIEW_DEGREES * Math.PI) / 360);
+	const focalLength = computeFocalLength(CAMERA_FIELD_OF_VIEW_DEGREES);
 	// Fixed at init so window resizes reframe the field (recentering) instead
 	// of rescaling it — a live canvas.height would otherwise make every star
 	// jump the instant the viewport height changes.
 	const scaleReferenceHalfHeight = canvas.height / 2;
 
-	// Kick off the "arrival" dive: starts at warp speed and eases down to
-	// idle, so streaks are long on load and shrink to dots as it settles.
-	warpState.currentSpeed = ARRIVAL_WARP_SPEED;
-	warpState.easeStartSpeed = ARRIVAL_WARP_SPEED;
-	warpState.easeTargetSpeed = IDLE_WARP_SPEED;
-	warpState.easeStartTimestamp = performance.now();
-	warpState.easeDurationMs = ARRIVAL_EASE_DURATION_MS;
+	startArrivalDive(warpState);
 
 	function renderFrame(timestamp: number): void {
 		requestAnimationFrame(renderFrame);
 
-		const elapsedMs = timestamp - warpState.lastRenderTimestamp;
-		if (elapsedMs < frameIntervalMs) return;
+		if (
+			isFrameTooSoon(timestamp, warpState.lastRenderTimestamp, frameIntervalMs)
+		)
+			return;
 
-		const deltaSeconds = Math.min(
-			elapsedMs / MILLISECONDS_PER_SECOND,
-			MAX_DELTA_SECONDS
+		const deltaSeconds = computeDeltaSeconds(
+			timestamp,
+			warpState.lastRenderTimestamp
 		);
 		warpState.lastRenderTimestamp = timestamp;
+		advanceWarpState(warpState, timestamp, deltaSeconds);
 
-		const easeProgress = clamp(
-			(timestamp - warpState.easeStartTimestamp) / warpState.easeDurationMs,
-			0,
-			1
-		);
-		warpState.currentSpeed = lerp(
-			warpState.easeStartSpeed,
-			warpState.easeTargetSpeed,
-			easeInOutCubic(easeProgress)
-		);
-		warpState.accumulatedTime += warpState.currentSpeed * deltaSeconds;
+		const viewport: Viewport = {
+			focalLength,
+			centerX: canvas.width / 2,
+			centerY: canvas.height / 2,
+			halfHeight: scaleReferenceHalfHeight,
+		};
 
-		context.fillStyle = BACKGROUND_COLOR;
-		context.fillRect(0, 0, canvas.width, canvas.height);
-
-		const centerX = canvas.width / 2;
-		const centerY = canvas.height / 2;
-
-		for (const star of stars) {
-			drawStar(
-				context,
-				star,
-				warpState.accumulatedTime,
-				warpState.currentSpeed,
-				focalLength,
-				centerX,
-				centerY,
-				scaleReferenceHalfHeight
-			);
-		}
+		drawFrame(context, canvas, stars, warpState, viewport);
 	}
 
 	renderFrame(0);
@@ -384,15 +488,7 @@ function initializeSpaceBackground(): void {
 	canvas.height = window.innerHeight;
 
 	const stars = createStars();
-	const warpState: WarpState = {
-		currentSpeed: IDLE_WARP_SPEED,
-		easeStartSpeed: IDLE_WARP_SPEED,
-		easeTargetSpeed: IDLE_WARP_SPEED,
-		easeStartTimestamp: 0,
-		easeDurationMs: 1,
-		accumulatedTime: 0,
-		lastRenderTimestamp: 0,
-	};
+	const warpState = createIdleWarpState();
 
 	listenForNavigationWarp(warpState);
 	listenForResize(canvas);
@@ -401,9 +497,12 @@ function initializeSpaceBackground(): void {
 	measureRefreshRate((measuredHz) => {
 		const measurementDurationMs = performance.now() - measurementStartTime;
 		const targetFramesPerSecond = pickTargetFramesPerSecond(measuredHz);
-		console.log(
-			`[space-background] refresh rate measured: ${measuredHz.toFixed(1)}Hz, target: ${targetFramesPerSecond}fps, took: ${measurementDurationMs.toFixed(1)}ms`
+		logRefreshRateMeasurement(
+			measuredHz,
+			targetFramesPerSecond,
+			measurementDurationMs
 		);
+
 		const frameIntervalMs = MILLISECONDS_PER_SECOND / targetFramesPerSecond;
 		runAnimationLoop(context, canvas, stars, warpState, frameIntervalMs);
 	});
