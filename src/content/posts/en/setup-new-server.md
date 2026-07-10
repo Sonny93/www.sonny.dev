@@ -255,8 +255,9 @@ sudo apt install -y figlet
 
 sudo tee /etc/update-motd.d/99-custom > /dev/null <<'EOF'
 #!/bin/bash
-LAST_IP=$(last -n 2 $USER | awk 'NR==2{print $3}')
-LAST_DATE=$(last -n 2 $USER | awk 'NR==2{print $4, $5, $6, $7}')
+LOGIN_USER=$(logname)
+LAST_IP=$(last -n 2 "$LOGIN_USER" | awk 'NR==2{print $3}')
+LAST_DATE=$(last -n 2 "$LOGIN_USER" | awk 'NR==2{print $4, $5, $6, $7}')
 echo "$(figlet $(logname | sed 's/./\u&/'))"
 echo -e "\e[44m\e[97m  🔐 Last login: $LAST_DATE from $LAST_IP  \e[0m"
 echo ""
@@ -276,6 +277,22 @@ If I want a truly minimal display, without Ubuntu's default scripts adding to mi
 sudo chmod -x /etc/update-motd.d/10-help-text
 sudo chmod -x /etc/update-motd.d/50-motd-news
 sudo chmod -x /etc/update-motd.d/91-release-upgrade
+```
+
+On a VPS, the base image often ships with even more scripts (`50-landscape-sysinfo`, `80-esm`, `95-hwe-eol` on Ubuntu cloud images, or a provider-specific one). To list everything running and disable all but mine:
+
+```bash
+ls /etc/update-motd.d/
+
+for f in /etc/update-motd.d/*; do
+  [[ "$f" == */99-custom ]] || sudo chmod -x "$f"
+done
+```
+
+Some providers (OVH, DigitalOcean, etc.) don't use `update-motd.d` at all but a static `/etc/motd` file, shown in addition to the dynamic one. Clear it if needed:
+
+```bash
+sudo truncate -s 0 /etc/motd
 ```
 
 No need to reconnect to see the result:

@@ -255,8 +255,9 @@ sudo apt install -y figlet
 
 sudo tee /etc/update-motd.d/99-custom > /dev/null <<'EOF'
 #!/bin/bash
-LAST_IP=$(last -n 2 $USER | awk 'NR==2{print $3}')
-LAST_DATE=$(last -n 2 $USER | awk 'NR==2{print $4, $5, $6, $7}')
+LOGIN_USER=$(logname)
+LAST_IP=$(last -n 2 "$LOGIN_USER" | awk 'NR==2{print $3}')
+LAST_DATE=$(last -n 2 "$LOGIN_USER" | awk 'NR==2{print $4, $5, $6, $7}')
 echo "$(figlet $(logname | sed 's/./\u&/'))"
 echo -e "\e[44m\e[97m  🔐 Dernière connexion : $LAST_DATE depuis $LAST_IP  \e[0m"
 echo ""
@@ -276,6 +277,22 @@ Si je veux un affichage vraiment épuré, sans les scripts par défaut d'Ubuntu 
 sudo chmod -x /etc/update-motd.d/10-help-text
 sudo chmod -x /etc/update-motd.d/50-motd-news
 sudo chmod -x /etc/update-motd.d/91-release-upgrade
+```
+
+Sur un VPS, l'image de base embarque souvent d'autres scripts encore (`50-landscape-sysinfo`, `80-esm`, `95-hwe-eol` chez les images Ubuntu cloud, ou un script maison propre au provider). Pour lister tout ce qui tourne et couper ce qui traîne, sauf le mien :
+
+```bash
+ls /etc/update-motd.d/
+
+for f in /etc/update-motd.d/*; do
+  [[ "$f" == */99-custom ]] || sudo chmod -x "$f"
+done
+```
+
+Certains providers (OVH, DigitalOcean, etc.) n'utilisent pas `update-motd.d` du tout mais un fichier statique `/etc/motd`, affiché en plus du dynamique. À vider si besoin :
+
+```bash
+sudo truncate -s 0 /etc/motd
 ```
 
 Pas besoin de se reconnecter pour voir le résultat :
