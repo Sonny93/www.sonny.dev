@@ -201,6 +201,74 @@ ports:
 
 Dans tous les cas, le réflexe à avoir : après chaque `docker compose up` avec des ports publiés, je vérifie ce qui est réellement exposé avec `sudo iptables -L DOCKER-USER -n` ou simplement en scannant le serveur depuis l'extérieur.
 
+### Mettre en place ufw-docker
+
+Concrètement, voici comment j'installe [ufw-docker](https://github.com/chaifeng/ufw-docker) sur un serveur qui a déjà ufw d'actif (étape 6 plus haut) :
+
+```bash
+sudo curl -fsSL -o /usr/local/bin/ufw-docker \
+  https://raw.githubusercontent.com/chaifeng/ufw-docker/master/ufw-docker
+sudo chmod +x /usr/local/bin/ufw-docker
+
+sudo ufw-docker install
+sudo ufw reload
+```
+
+Le `ufw reload` n'est pas optionnel : `ufw-docker install` écrit les nouvelles règles dans `/etc/ufw/after.rules` (et `after6.rules` pour l'IPv6), mais elles ne sont chargées dans iptables qu'au reload. Un simple `systemctl restart ufw` ne suffit pas toujours à les faire apparaître.
+
+Je vérifie que la chaîne `DOCKER-USER` est bien peuplée :
+
+```bash
+sudo iptables -L DOCKER-USER -n --line-numbers
+```
+
+Si elle est vide après le reload, `sudo ufw-docker check` donne un diagnostic plus précis que de fouiller iptables à la main.
+
+**Comportement une fois installé** : n'importe quel conteneur publié en `0.0.0.0:PORT:PORT` devient injoignable depuis l'extérieur par défaut, sans rien changer au mapping. Je le vérifie avec un conteneur jetable :
+
+```bash
+docker run -d --name test-nginx -p 80:80 nginx
+```
+
+```bash
+# depuis une AUTRE machine, pas le serveur
+curl -m 3 http://IP_DU_SERVEUR/
+# curl: (28) Connection timed out
+```
+
+Le port reste "publié" au sens Docker (`docker ps` l'affiche), mais le trafic externe se fait bloquer par la chaîne `DOCKER-USER` avant même d'atteindre le conteneur. Utile pour des services que je veux garder joignables uniquement depuis d'autres conteneurs sur le même réseau Docker, sans toucher au `docker-compose.yml`.
+
+**Pour exposer un conteneur précis au monde**, il faut un allow explicite :
+
+```bash
+sudo ufw-docker allow test-nginx 80
+```
+
+Et pour revenir en arrière :
+
+```bash
+sudo ufw-docker delete allow test-nginx 80
+```
+
+Point d'attention : `ufw-docker allow` ouvre le port à **tout Internet**, pas seulement à une IP de confiance. Pour restreindre l'accès à une source précise plutôt qu'au monde entier, je préfère une règle `ufw route` ciblée à la place :
+
+```bash
+sudo ufw route allow proto tcp from IP_DE_CONFIANCE to any port 80
+```
+
+Nettoyage du conteneur de test une fois la vérification faite :
+
+```bash
+docker rm -f test-nginx
+```
+
+Et si un jour je veux tout désinstaller et revenir au comportement Docker natif (donc au piège du départ, ports publiés exposés sans filtrage) :
+
+```bash
+sudo ufw-docker uninstall
+sudo ufw reload
+```
+
 ### Le firewall de l'hébergeur, une couche à part
 
 Sur un serveur loué chez un hébergeur type Contabo, OVH ou Hetzner, il y a souvent un firewall réseau géré depuis le panel, complètement indépendant d'ufw. Deux pièges symétriques :
