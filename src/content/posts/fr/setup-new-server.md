@@ -251,7 +251,7 @@ sudo fail2ban-client status sshd
 Le MOTD par défaut d'Ubuntu, avec ses pubs pour ESM et ses infos génériques, ne m'apprend rien. J'ai fini par écrire le mien, qui affiche d'un coup d'œil la dernière connexion, l'état de la RAM, du disque, et l'uptime.
 
 ```bash
-sudo apt install -y figlet
+sudo apt install -y figlet wtmpdb
 
 sudo tee /etc/update-motd.d/99-custom > /dev/null <<'EOF'
 #!/bin/bash
@@ -271,15 +271,7 @@ EOF
 sudo chmod +x /etc/update-motd.d/99-custom
 ```
 
-Si je veux un affichage vraiment épuré, sans les scripts par défaut d'Ubuntu qui s'ajoutent au mien :
-
-```bash
-sudo chmod -x /etc/update-motd.d/10-help-text
-sudo chmod -x /etc/update-motd.d/50-motd-news
-sudo chmod -x /etc/update-motd.d/91-release-upgrade
-```
-
-Sur un VPS, l'image de base embarque souvent d'autres scripts encore (`50-landscape-sysinfo`, `80-esm`, `95-hwe-eol` chez les images Ubuntu cloud, ou un script maison propre au provider). Pour lister tout ce qui tourne et couper ce qui traîne, sauf le mien :
+Si je veux un affichage vraiment épuré, sans les scripts par défaut de la distro qui s'ajoutent au mien : selon l'image (Ubuntu, Debian, provider), les noms changent (`10-help-text`, `50-motd-news`, `10-uname`, `92-unattended-upgrades`...). Le plus simple est de lister ce qui tourne et de couper tout sauf le mien :
 
 ```bash
 ls /etc/update-motd.d/

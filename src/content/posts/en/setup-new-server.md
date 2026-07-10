@@ -251,7 +251,7 @@ sudo fail2ban-client status sshd
 Ubuntu's default MOTD, with its ESM ads and generic info, doesn't tell me anything. I ended up writing my own, which shows at a glance the last login, RAM state, disk usage, and uptime.
 
 ```bash
-sudo apt install -y figlet
+sudo apt install -y figlet wtmpdb
 
 sudo tee /etc/update-motd.d/99-custom > /dev/null <<'EOF'
 #!/bin/bash
@@ -271,15 +271,7 @@ EOF
 sudo chmod +x /etc/update-motd.d/99-custom
 ```
 
-If I want a truly minimal display, without Ubuntu's default scripts adding to mine:
-
-```bash
-sudo chmod -x /etc/update-motd.d/10-help-text
-sudo chmod -x /etc/update-motd.d/50-motd-news
-sudo chmod -x /etc/update-motd.d/91-release-upgrade
-```
-
-On a VPS, the base image often ships with even more scripts (`50-landscape-sysinfo`, `80-esm`, `95-hwe-eol` on Ubuntu cloud images, or a provider-specific one). To list everything running and disable all but mine:
+If I want a truly minimal display, without the distro's default scripts adding to mine: script names vary by image (Ubuntu, Debian, provider) — `10-help-text`, `50-motd-news`, `10-uname`, `92-unattended-upgrades`, etc. Easiest is to list what's running and disable everything but mine:
 
 ```bash
 ls /etc/update-motd.d/
