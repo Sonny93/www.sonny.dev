@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.3](https://github.com/Sonny93/portfolio/compare/3.0.2...3.0.3) (2026-07-10)
+
+### Features
+
+* **posts:** add setup-new-server guide (en/fr) ([97f1b9f](https://github.com/Sonny93/portfolio/commit/97f1b9f746d7fbf7929c57f96aec944081e91fb3))
+* **seo:** add missing Open Graph and Twitter Card tags ([36265da](https://github.com/Sonny93/portfolio/commit/36265daa685b7c8b229b179c86ffbce5695668c8))
+
+### Bug Fixes
+
+* code tag white space ([9802c41](https://github.com/Sonny93/portfolio/commit/9802c41c628368ebc28ae4723b928ad2c8dc19b2))
+
 ## [3.0.2](https://github.com/Sonny93/portfolio/compare/3.0.1...3.0.2) (2026-07-04)
 
 ### Bug Fixes
