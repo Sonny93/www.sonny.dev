@@ -5,7 +5,10 @@ import { DEFAULT_LOCALE, useTranslations } from '../i18n/ui';
 const translate = useTranslations(DEFAULT_LOCALE);
 ---
 
-<DefaultLayout title={translate('notFound.title')}>
+<DefaultLayout
+	title={translate('notFound.title')}
+	description={translate('notFound.description')}
+>
 	<div class="flex flex-col items-center gap-3 py-16 text-center">
 		<h1 class="text-2xl text-white sm:text-3xl">
 			{translate('notFound.title')}

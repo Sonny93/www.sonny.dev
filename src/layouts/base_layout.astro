@@ -11,21 +11,41 @@ type Props = {
 	title?: string;
 	description?: string;
 	openGraphType?: OpenGraphType;
+	image?: string;
+	imageAlt?: string;
 };
 
 const DEFAULT_TITLE = 'App';
+const SITE_NAME = 'Sonny';
+const OG_IMAGE_WIDTH = 1280;
+const OG_IMAGE_HEIGHT = 720;
+const OG_LOCALE_BY_LOCALE: Record<(typeof LOCALES)[number], string> = {
+	en: 'en_US',
+	fr: 'fr_FR',
+};
 
 const {
 	title = DEFAULT_TITLE,
 	description,
 	openGraphType = 'website',
+	image,
+	imageAlt = title,
 } = Astro.props;
-const locale = Astro.currentLocale ?? 'en';
-const translate = useTranslations(resolveLocale(Astro.currentLocale));
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
 const openGraphUrl =
 	Astro.site === undefined
 		? undefined
 		: new URL(Astro.url.pathname, Astro.site).toString();
+const openGraphImagePath = image ?? `/og/default-${locale}.png`;
+const openGraphImageUrl =
+	Astro.site === undefined
+		? openGraphImagePath
+		: new URL(openGraphImagePath, Astro.site).toString();
+const openGraphLocale = OG_LOCALE_BY_LOCALE[locale];
+const openGraphAlternateLocales = LOCALES.filter(
+	(alternateLocale) => alternateLocale !== locale
+).map((alternateLocale) => OG_LOCALE_BY_LOCALE[alternateLocale]);
 
 const LOCALIZED_PATH_PATTERN = new RegExp(`^/(${LOCALES.join('|')})(/.*)?$`);
 const localizedPathMatch = Astro.url.pathname.match(LOCALIZED_PATH_PATTERN);
@@ -58,6 +78,9 @@ const defaultAlternateUrl =
 				<meta name="description" content={description} />
 			)
 		}
+		{openGraphUrl !== undefined && <link rel="canonical" href={openGraphUrl} />}
+
+		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />
 		{
 			description !== undefined && (
@@ -70,6 +93,25 @@ const defaultAlternateUrl =
 				<meta property="og:url" content={openGraphUrl} />
 			)
 		}
+		<meta property="og:locale" content={openGraphLocale} />
+		{openGraphAlternateLocales.map((alternateLocale) => (
+			<meta property="og:locale:alternate" content={alternateLocale} />
+		))}
+		<meta property="og:image" content={openGraphImageUrl} />
+		<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+		<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+		<meta property="og:image:alt" content={imageAlt} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		{
+			description !== undefined && (
+				<meta name="twitter:description" content={description} />
+			)
+		}
+		<meta name="twitter:image" content={openGraphImageUrl} />
+		<meta name="twitter:image:alt" content={imageAlt} />
+
 		{alternateLinks.map(({ hreflang, href }) => (
 			<link rel="alternate" hreflang={hreflang} href={href} />
 		))}

@@ -32,8 +32,14 @@ const EN_UI_STRINGS = {
 	'home.featuredProjects': 'Featured projects',
 	'home.viewAllProjects': 'View all projects',
 	'background.pageTitle': 'Background',
+	'background.pageDescription':
+		"Sonny's professional experience and education background.",
 	'blog.pageTitle': 'Blog articles',
+	'blog.pageDescription':
+		'Articles on full-stack engineering, DevOps, and self-hosting by Sonny.',
 	'projects.pageTitle': 'Projects',
+	'projects.pageDescription':
+		'A selection of projects built by Sonny, from open-source tools to production apps.',
 	'projects.viewLiveSite': 'View live site',
 	'projects.noLiveDemo': 'No live demo',
 	'projects.viewSourceCode': 'View source code',
@@ -77,8 +83,14 @@ const UI_STRINGS = {
 		'home.featuredProjects': 'Projets phares',
 		'home.viewAllProjects': 'Voir tous les projets',
 		'background.pageTitle': 'Parcours',
+		'background.pageDescription':
+			'Le parcours professionnel et la formation de Sonny.',
 		'blog.pageTitle': 'Articles de blog',
+		'blog.pageDescription':
+			"Articles sur l'ingénierie full-stack, le DevOps et l'auto-hébergement, par Sonny.",
 		'projects.pageTitle': 'Projets',
+		'projects.pageDescription':
+			'Une sélection de projets réalisés par Sonny, entre outils open source et applications en production.',
 		'projects.viewLiveSite': 'Voir le site',
 		'projects.noLiveDemo': 'Pas de démo',
 		'projects.viewSourceCode': 'Voir le code source',

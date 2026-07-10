@@ -15,7 +15,10 @@ const translate = useTranslations(locale);
 const posts = await getPublishedPosts(locale);
 ---
 
-<DefaultLayout title={translate('blog.pageTitle')}>
+<DefaultLayout
+	title={translate('blog.pageTitle')}
+	description={translate('blog.pageDescription')}
+>
 	<div>
 		<SectionTitle title={translate('blog.pageTitle')} level="h1" />
 		<PostList posts={posts} />

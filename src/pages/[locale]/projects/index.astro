@@ -13,7 +13,10 @@ const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 ---
 
-<DefaultLayout title={translate('projects.pageTitle')}>
+<DefaultLayout
+	title={translate('projects.pageTitle')}
+	description={translate('projects.pageDescription')}
+>
 	<section class="flex w-full flex-col gap-8">
 		<SectionTitle title={translate('projects.pageTitle')} level="h1" />
 		<ProjectList projects={projects} locale={locale} />
