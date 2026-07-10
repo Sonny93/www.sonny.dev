@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/Sonny93/portfolio/compare/3.0.3...3.1.0) (2026-07-10)
+
+### Features
+
+* **posts:** add ufw firewall section to setup-new-server ([df7efea](https://github.com/Sonny93/portfolio/commit/df7efeac19372de3bbe09e90fcdbcd03f5cbef63))
+* **space-background:** adapt render fps to device refresh rate ([ce6ea5b](https://github.com/Sonny93/portfolio/commit/ce6ea5bb314ba45fe0dffdcbadbd18b2d80199de))
+* **space-background:** ease warp transitions and add comet streaks ([ce41d89](https://github.com/Sonny93/portfolio/commit/ce41d899a03901fdc501421fd1832541334c6f44))
+
 ## [3.0.3](https://github.com/Sonny93/portfolio/compare/3.0.2...3.0.3) (2026-07-10)
 
 ### Features
