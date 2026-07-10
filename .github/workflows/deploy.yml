@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   release:
     types: [published]
+  push:
+    branches: [main]
+    paths:
+      - "src/content/posts/**/*.md"
   workflow_dispatch:
 
 permissions:
