@@ -77,6 +77,12 @@ Si `ssh-copy-id` n'est pas disponible, la version manuelle fait exactement la m�
 cat ~/.ssh/id_ed25519.pub | ssh sonny@IP_DU_SERVEUR "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
 
+Sous PowerShell, `ssh-copy-id` n'existe tout simplement pas. L'équivalent :
+
+```powershell
+Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub | ssh sonny@IP_DU_SERVEUR "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+```
+
 Et surtout : je teste la connexion par clé **avant** de toucher à quoi que ce soit d'autre.
 
 ```bash
