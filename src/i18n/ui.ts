@@ -17,7 +17,7 @@ const EN_UI_STRINGS = {
 	'home.pageTitle': 'Homepage',
 	'home.availability': 'Based in France · Open to remote opportunities',
 	'home.headline':
-		'I engineer resilient web platforms — then automate everything else.',
+		'I engineer resilient web platforms and automate everything else.',
 	'home.introduction':
 		"Hi, I'm Sonny. Rigorous architecture, clean developer experience, and systems built to run unattended in production.",
 	'home.skillFullStack': 'Full-stack engineering and DevOps',
@@ -68,7 +68,7 @@ const UI_STRINGS = {
 		'home.pageTitle': "Page d'accueil",
 		'home.availability': 'Basé en France · Ouvert aux opportunités à distance',
 		'home.headline':
-			"Je conçois des plateformes web robustes — et j'automatise tout ce qui peut l'être.",
+			"Je conçois des plateformes web robustes et j'automatise tout ce qui peut l'être.",
 		'home.introduction':
 			'Bonjour, je suis Sonny. Architecture rigoureuse, expérience développeur soignée, et des systèmes conçus pour tourner de façon autonome en production.',
 		'home.skillFullStack': 'Ingénierie full-stack et DevOps',
