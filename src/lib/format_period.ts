@@ -23,5 +23,5 @@ export function formatPeriod(
 	);
 	const beginningLabel = periodFormatter.format(parseIsoDate(beginningIsoDate));
 	const endLabel = periodFormatter.format(parseIsoDate(endIsoDate));
-	return `${beginningLabel} – ${endLabel}`;
+	return `${beginningLabel} - ${endLabel}`;
 }

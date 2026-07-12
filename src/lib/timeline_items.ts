@@ -15,7 +15,7 @@ function buildExperienceMetaHtml(
 	);
 	const companyLabel = escapeHtml(experience.company);
 	const cityLabel = escapeHtml(experience.content[locale].city);
-	return `${periodLabel} <span>(<span class="text-white/95">${companyLabel}</span> – ${cityLabel})</span>`;
+	return `${periodLabel} <span>(<span class="text-white/95">${companyLabel}</span> - ${cityLabel})</span>`;
 }
 
 export function buildExperienceTimelineItems(
@@ -36,7 +36,7 @@ function buildFormationMetaHtml(formation: Formation, locale: Locale): string {
 	const degreeLabel = escapeHtml(formation.content[locale].degree);
 	const schoolLabel = escapeHtml(formation.school);
 	const cityLabel = escapeHtml(formation.city);
-	return `${degreeLabel} · ${periodLabel} <span>(<span class="text-white/95">${schoolLabel}</span> – ${cityLabel})</span>`;
+	return `${degreeLabel} · ${periodLabel} <span>(<span class="text-white/95">${schoolLabel}</span> - ${cityLabel})</span>`;
 }
 
 export function buildFormationTimelineItems(
