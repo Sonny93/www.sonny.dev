@@ -18,7 +18,7 @@ const titleCommonStyles = {
 const markdownTypographyExtend = {
 	a: {
 		'text-decoration': 'none',
-		color: 'var(--colors-blue-400)',
+		color: '#38bdf8',
 	},
 	h1: {
 		'font-size': '2rem',
