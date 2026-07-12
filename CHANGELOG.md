@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.1.1](https://github.com/Sonny93/www/compare/3.1.0...3.1.1) (2026-07-12)
+
+### Features
+
+* **cloudflare-proxy-vps:** add guide to hide VPS IP behind Cloudflare proxy ([387328a](https://github.com/Sonny93/www/commit/387328a625ba57060c4e04fee8c88d9dc7e3b000))
+* **setup-new-server:** add PowerShell equivalent for ssh-copy-id ([9d4b9cc](https://github.com/Sonny93/www/commit/9d4b9cc831adc9788dad15926f76cfa1e4a98804))
+* **setup-new-server:** document ufw-docker setup and testing workflow ([007ca33](https://github.com/Sonny93/www/commit/007ca333206c342d173dacea3ddfb1a47b676c40))
+
+### Bug Fixes
+
+* **background:** correct latest experience employer name ([e99e5b0](https://github.com/Sonny93/www/commit/e99e5b0cbce63493024206ac57194945e369fca1))
+* **background:** remove em dash from timeline labels ([e4ef8e7](https://github.com/Sonny93/www/commit/e4ef8e774ae969385b87f092f1a346235f79417e))
+* **cards:** give post/project titles distinct link color ([1bbb7af](https://github.com/Sonny93/www/commit/1bbb7afbde5e6487969b28c255fa28d7d86b5255))
+* **i18n:** remove em dash from home hero headline ([cd2a30f](https://github.com/Sonny93/www/commit/cd2a30f0084b5d6cf44f9e5b574a80f6683b005e))
+* **setup-new-server:** correct MOTD script deps and generalize cleanup ([c1d733e](https://github.com/Sonny93/www/commit/c1d733eefac4ed81b0b48b01f25c232d29359942))
+* **setup-new-server:** cross-link Cloudflare guide, fix wtmpdb/em dash nits ([2af87e1](https://github.com/Sonny93/www/commit/2af87e16ef4b2d99b9e07e03276f5cde5f18a01d))
+* **setup-new-server:** use logname instead of $USER in MOTD script ([c06d4a8](https://github.com/Sonny93/www/commit/c06d4a8462909bc591af109d2005dc687ce85a1e))
+
 ## [3.1.0](https://github.com/Sonny93/portfolio/compare/3.0.3...3.1.0) (2026-07-10)
 
 ### Features
