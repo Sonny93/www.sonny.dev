@@ -18,7 +18,7 @@ export type Experience = {
 
 export const experiences: readonly Experience[] = [
 	{
-		company: 'Ville de Paris',
+		company: 'N/A',
 		beginningDate: '2024-10-01',
 		endDate: '2025-08-31',
 		content: {
