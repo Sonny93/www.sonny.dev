@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.2](https://github.com/Sonny93/www/compare/3.1.1...3.1.2) (2026-07-12)
+
+### Features
+
+* **markdown:** add hover animation to article links ([03ef20e](https://github.com/Sonny93/www/commit/03ef20e5946219060dd306b1ff765e9e1fee76c8))
+
+### Bug Fixes
+
+* **markdown:** repair broken article link color ([3077b77](https://github.com/Sonny93/www/commit/3077b77d352b5c8cbcf785c61be7d52a7d178d81))
+
 ## [3.1.1](https://github.com/Sonny93/www/compare/3.1.0...3.1.1) (2026-07-12)
 
 ### Features
