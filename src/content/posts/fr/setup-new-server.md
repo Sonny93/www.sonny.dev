@@ -256,6 +256,8 @@ Point d'attention : `ufw-docker allow` ouvre le port à **tout Internet**, pas s
 sudo ufw route allow proto tcp from IP_DE_CONFIANCE to any port 80
 ```
 
+Cette restriction par IP de confiance marche bien pour un accès perso ou une poignée de clients connus. Pour un service public (site web, API ouverte à tout le monde), impossible de lister des IP à l'avance : soit on ouvre `ufw-docker allow` au monde entier et l'IP du VPS devient directement visible et scannable par n'importe qui, soit on met un proxy devant qui masque cette IP. C'est exactement ce que je détaille dans [Cacher l'IP de mon VPS derrière Cloudflare](/fr/blog/cloudflare-proxy-vps) : le trafic public passe par Cloudflare, et ufw ne laisse entrer que les plages IP de Cloudflare plutôt que tout Internet, avec la même logique `ufw route allow` que ci-dessus mais appliquée à leurs plages au lieu d'une IP unique.
+
 Nettoyage du conteneur de test une fois la vérification faite :
 
 ```bash
@@ -318,6 +320,8 @@ sudo fail2ban-client status sshd
 
 Le MOTD par défaut d'Ubuntu, avec ses pubs pour ESM et ses infos génériques, ne m'apprend rien. J'ai fini par écrire le mien, qui affiche d'un coup d'œil la dernière connexion, l'état de la RAM, du disque, et l'uptime.
 
+`figlet` sert juste pour la bannière ASCII. `wtmpdb` compte plus qu'il n'y paraît : à partir d'`util-linux` 2.40 (Ubuntu 24.04+, Debian 13+), le logging `wtmp` classique a disparu et la commande `last` ne fonctionne plus du tout sans ce paquet, qui fournit le shim de compatibilité qui la garde opérationnelle (utilisée plus bas).
+
 ```bash
 sudo apt install -y figlet wtmpdb
 
@@ -330,7 +334,7 @@ echo "$(figlet $(logname | sed 's/./\u&/'))"
 echo -e "\e[44m\e[97m  🔐 Dernière connexion : $LAST_DATE depuis $LAST_IP  \e[0m"
 echo ""
 echo "📅 $(date)"
-echo "🖥️  $(hostname | sed 's/./\u&/') — Linux $(uname -r)"
+echo "🖥️  $(hostname | sed 's/./\u&/') - Linux $(uname -r)"
 echo "💾 RAM : $(free -h | awk '/Mem/{print $3"/"$2}') ($(free | awk '/Mem/{printf "%.0f%%", $3/$2*100}'))"
 echo "💿 Disque : $(df -h / | awk 'NR==2{print $3"/"$2" ("$5")"}')"
 echo "🌡️  Uptime : $(uptime -p)"
@@ -414,6 +418,6 @@ Une fois ces neuf étapes passées, j'ai un serveur qui :
 - bannit automatiquement les IP qui insistent trop sur SSH,
 - applique ses correctifs de sécurité sans que j'aie à y penser,
 - m'affiche un vrai résumé de son état à chaque connexion,
-- et fait tourner Docker proprement, prêt à accueillir les projets — sans que les ports publiés ne contournent le firewall dans mon dos.
+- et fait tourner Docker proprement, prêt à accueillir les projets, sans que les ports publiés ne contournent le firewall dans mon dos.
 
 C'est loin d'être exhaustif niveau sécurité (il reste encore le monitoring et les backups à ajouter), mais c'est la base sur laquelle je construis maintenant tous mes serveurs, et elle me fait gagner un temps fou à chaque nouvelle machine.

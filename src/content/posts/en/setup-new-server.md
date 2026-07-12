@@ -9,7 +9,7 @@ urlSlug: 'setup-new-server'
 
 # Cleaning up my tech lab: the server setup I use now
 
-After going through one throwaway, badly configured server too many, reinstalled in a hurry after a botched first `sudo apt install`, I finally sat down and wrote out, once and for all, the procedure I now follow for every new server. Nothing groundbreaking, but it's exactly the kind of "clean" baseline that always gets pushed to later — until the day a slightly-too-simple password ends up giving way.
+After going through one throwaway, badly configured server too many, reinstalled in a hurry after a botched first `sudo apt install`, I finally sat down and wrote out, once and for all, the procedure I now follow for every new server. Nothing groundbreaking, but it's exactly the kind of "clean" baseline that always gets pushed to later, until the day a slightly-too-simple password ends up giving way.
 
 So here's how I go from a freshly installed Ubuntu, reachable as root with a password, to something sane: SSH-key-only access, a dedicated user, a working Docker setup, and a minimum amount of hardening (fail2ban, automatic security updates, and a MOTD that actually gives a real glance at the machine's state).
 
@@ -144,7 +144,7 @@ I also check that no file in `/etc/ssh/sshd_config.d/` overrides this:
 grep -r "PasswordAuthentication\|PermitRootLogin" /etc/ssh/sshd_config.d/ 2>/dev/null
 ```
 
-Before restarting the service, I test the syntax — it saves a lot of cold sweat:
+Before restarting the service, I test the syntax (it saves a lot of cold sweat):
 
 ```bash
 sudo sshd -t
@@ -256,13 +256,15 @@ One thing to watch: `ufw-docker allow` opens the port to **all of the Internet**
 sudo ufw route allow proto tcp from TRUSTED_IP to any port 80
 ```
 
+This trusted-IP restriction works fine for personal access or a handful of known clients. For a public-facing service (website, open API), there's no fixed list of IPs to allow ahead of time: either `ufw-docker allow` opens up to the whole world and the VPS's IP becomes directly visible and scannable by anyone, or a proxy sits in front to mask that IP. That's exactly what I cover in [Hiding my VPS's IP behind Cloudflare](/en/blog/cloudflare-proxy-vps): public traffic goes through Cloudflare, and ufw only lets in Cloudflare's IP ranges instead of the whole Internet, using the same `ufw route allow` logic as above but applied to their ranges instead of a single IP.
+
 Cleaning up the test container once the check is done:
 
 ```bash
 docker rm -f test-nginx
 ```
 
-And if I ever want to uninstall everything and go back to Docker's native behavior (so, back to the original trap — published ports exposed with no filtering):
+And if I ever want to uninstall everything and go back to Docker's native behavior (so, back to the original trap: published ports exposed with no filtering):
 
 ```bash
 sudo ufw-docker uninstall
@@ -318,6 +320,8 @@ sudo fail2ban-client status sshd
 
 Ubuntu's default MOTD, with its ESM ads and generic info, doesn't tell me anything. I ended up writing my own, which shows at a glance the last login, RAM state, disk usage, and uptime.
 
+`figlet` is just for the ASCII banner. `wtmpdb` matters more than it looks: starting with `util-linux` 2.40 (Ubuntu 24.04+, Debian 13+), plain `wtmp` logging is gone and the classic `last` command doesn't work at all without it. This package provides the compatibility shim that keeps `last` functional (used below).
+
 ```bash
 sudo apt install -y figlet wtmpdb
 
@@ -330,7 +334,7 @@ echo "$(figlet $(logname | sed 's/./\u&/'))"
 echo -e "\e[44m\e[97m  🔐 Last login: $LAST_DATE from $LAST_IP  \e[0m"
 echo ""
 echo "📅 $(date)"
-echo "🖥️  $(hostname | sed 's/./\u&/') — Linux $(uname -r)"
+echo "🖥️  $(hostname | sed 's/./\u&/') - Linux $(uname -r)"
 echo "💾 RAM: $(free -h | awk '/Mem/{print $3"/"$2}') ($(free | awk '/Mem/{printf "%.0f%%", $3/$2*100}'))"
 echo "💿 Disk: $(df -h / | awk 'NR==2{print $3"/"$2" ("$5")"}')"
 echo "🌡️  Uptime: $(uptime -p)"
@@ -339,7 +343,7 @@ EOF
 sudo chmod +x /etc/update-motd.d/99-custom
 ```
 
-If I want a truly minimal display, without the distro's default scripts adding to mine: script names vary by image (Ubuntu, Debian, provider) — `10-help-text`, `50-motd-news`, `10-uname`, `92-unattended-upgrades`, etc. Easiest is to list what's running and disable everything but mine:
+If I want a truly minimal display, without the distro's default scripts adding to mine: script names vary by image (Ubuntu, Debian, provider), for example `10-help-text`, `50-motd-news`, `10-uname`, `92-unattended-upgrades`. Easiest is to list what's running and disable everything but mine:
 
 ```bash
 ls /etc/update-motd.d/
@@ -414,6 +418,6 @@ Once these nine steps are done, I have a server that:
 - automatically bans IPs that get too pushy on SSH,
 - applies its security patches without me having to think about it,
 - shows me a real summary of its state on every connection,
-- and runs Docker cleanly, ready to host projects — without published ports quietly bypassing the firewall.
+- and runs Docker cleanly, ready to host projects, without published ports quietly bypassing the firewall.
 
 It's far from exhaustive on the security front (monitoring and backups are still missing), but it's the baseline I now build every server on, and it saves me a huge amount of time on every new machine.
