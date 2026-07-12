@@ -19,6 +19,10 @@ const markdownTypographyExtend = {
 	a: {
 		'text-decoration': 'none',
 		color: '#38bdf8',
+		transition: 'color 0.15s ease-out',
+	},
+	'a:hover': {
+		color: '#7dd3fc',
 	},
 	h1: {
 		'font-size': '2rem',
