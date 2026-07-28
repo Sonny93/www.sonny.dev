@@ -3,3 +3,5 @@ allowBuilds:
   esbuild: true
 onlyBuiltDependencies:
   - esbuild
+overrides:
+  '@types/node': '24'
