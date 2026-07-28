@@ -1,8 +1,12 @@
 ---
+import clsx from 'clsx';
+
 import BaseLayout from './base_layout.astro';
 import type { OpenGraphType } from './base_layout.astro';
 import Footer from '../components/navigation/footer.astro';
 import Navbar from '../components/navigation/navbar.astro';
+
+type ContentFlow = 'sections' | 'article';
 
 type Props = {
 	title: string;
@@ -10,9 +14,22 @@ type Props = {
 	openGraphType?: OpenGraphType;
 	image?: string;
 	imageAlt?: string;
+	contentFlow?: ContentFlow;
 };
 
-const { title, description, openGraphType, image, imageAlt } = Astro.props;
+const CONTENT_GAP_BY_FLOW: Record<ContentFlow, string> = {
+	sections: 'gap-16 sm:gap-20',
+	article: 'gap-4',
+};
+
+const {
+	title,
+	description,
+	openGraphType,
+	image,
+	imageAlt,
+	contentFlow = 'sections',
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -29,7 +46,10 @@ const { title, description, openGraphType, image, imageAlt } = Astro.props;
 			<main
 				id="main-content"
 				tabindex="-1"
-				class="flex flex-col gap-4 py-10 sm:py-16"
+				class={clsx(
+					'flex flex-col py-10 sm:py-16',
+					CONTENT_GAP_BY_FLOW[contentFlow]
+				)}
 				data-page-transition
 			>
 				<slot />

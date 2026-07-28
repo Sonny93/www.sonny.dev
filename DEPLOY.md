@@ -37,5 +37,5 @@ to `www.sonny.dev` since that is the configured custom domain):
   artifact.
 - **deploy**: `actions/deploy-pages@v5` into the `github-pages` environment.
 
-`dist/` contains `CNAME`, `favicon.svg`, `robots.txt` and
-`sitemap-index.xml` alongside the pages.
+`dist/` contains `CNAME`, `favicon.svg`, `robots.txt`, `sitemap-index.xml` and
+one `rss.xml` per locale alongside the pages.

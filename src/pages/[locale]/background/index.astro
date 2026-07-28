@@ -1,7 +1,7 @@
 ---
 import { formations } from '../../../data/formations';
 import { experiences } from '../../../data/experiences';
-import DefaultLayout from '../../../layouts/default_layout.astro';
+import PageLayout from '../../../layouts/page_layout.astro';
 import SectionTitle from '../../../components/section_title.astro';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
 import VerticalTimeline from '../../../components/timeline/vertical_timeline.astro';
@@ -27,7 +27,7 @@ const formationTimelineItems = buildFormationTimelineItems(
 );
 ---
 
-<DefaultLayout
+<PageLayout
 	title={translate('background.pageTitle')}
 	description={translate('background.pageDescription')}
 >
@@ -42,4 +42,4 @@ const formationTimelineItems = buildFormationTimelineItems(
 			items={formationTimelineItems}
 		/>
 	</div>
-</DefaultLayout>
+</PageLayout>

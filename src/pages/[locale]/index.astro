@@ -6,9 +6,9 @@ import { getPublishedPosts } from '../../lib/posts';
 import { experiences } from '../../data/experiences';
 import { localizedUrl } from '../../lib/localized_url';
 import JsonLd from '../../components/seo/json_ld.astro';
+import PageLayout from '../../layouts/page_layout.astro';
 import { buildHomeSchema } from '../../lib/structured_data';
 import PostList from '../../components/posts/post_list.astro';
-import DefaultLayout from '../../layouts/default_layout.astro';
 import SectionTitle from '../../components/section_title.astro';
 import ProjectList from '../../components/projects/project_list.astro';
 import VerticalTimeline from '../../components/timeline/vertical_timeline.astro';
@@ -73,7 +73,7 @@ const homeSchema =
 			});
 ---
 
-<DefaultLayout
+<PageLayout
 	title={translate('home.pageTitle')}
 	description={translate('home.introduction')}
 >
@@ -174,4 +174,4 @@ const homeSchema =
 				items={formationTimelineItems}
 			/>
 		</div>
-</DefaultLayout>
+</PageLayout>

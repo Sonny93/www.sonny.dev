@@ -1,7 +1,7 @@
 ---
 import { getPublishedPosts } from '../../../lib/posts';
+import PageLayout from '../../../layouts/page_layout.astro';
 import PostList from '../../../components/posts/post_list.astro';
-import DefaultLayout from '../../../layouts/default_layout.astro';
 import SectionTitle from '../../../components/section_title.astro';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
 
@@ -15,7 +15,7 @@ const translate = useTranslations(locale);
 const posts = await getPublishedPosts(locale);
 ---
 
-<DefaultLayout
+<PageLayout
 	title={translate('blog.pageTitle')}
 	description={translate('blog.pageDescription')}
 >
@@ -23,4 +23,4 @@ const posts = await getPublishedPosts(locale);
 		<SectionTitle title={translate('blog.pageTitle')} level="h1" />
 		<PostList posts={posts} />
 	</div>
-</DefaultLayout>
+</PageLayout>

@@ -3,7 +3,7 @@ import { render, type CollectionEntry } from 'astro:content';
 
 import { getPublishedPosts } from '../../../lib/posts';
 import JsonLd from '../../../components/seo/json_ld.astro';
-import PostLayout from '../../../layouts/post_layout.astro';
+import PageLayout from '../../../layouts/page_layout.astro';
 import { formatPublishedDate } from '../../../lib/format_date';
 import { buildArticleSchema } from '../../../lib/structured_data';
 import SectionTitle from '../../../components/section_title.astro';
@@ -59,10 +59,11 @@ const articleSchema =
 			});
 ---
 
-<PostLayout
+<PageLayout
 	title={post.data.title}
 	description={post.data.description}
 	openGraphType="article"
+	contentFlow="article"
 >
 	<Fragment slot="head">
 		<ArticleMeta publishedAt={post.data.publishedAt} tags={post.data.tags} />
@@ -75,4 +76,4 @@ const articleSchema =
 	<div class="prose prose-invert min-w-full">
 		<Content />
 	</div>
-</PostLayout>
+</PageLayout>

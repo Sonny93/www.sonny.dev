@@ -1,6 +1,6 @@
 ---
 import { projects } from '../../../data/projects';
-import DefaultLayout from '../../../layouts/default_layout.astro';
+import PageLayout from '../../../layouts/page_layout.astro';
 import SectionTitle from '../../../components/section_title.astro';
 import ProjectList from '../../../components/projects/project_list.astro';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
@@ -13,7 +13,7 @@ const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 ---
 
-<DefaultLayout
+<PageLayout
 	title={translate('projects.pageTitle')}
 	description={translate('projects.pageDescription')}
 >
@@ -21,4 +21,4 @@ const translate = useTranslations(locale);
 		<SectionTitle title={translate('projects.pageTitle')} level="h1" />
 		<ProjectList projects={projects} locale={locale} />
 	</section>
-</DefaultLayout>
+</PageLayout>
