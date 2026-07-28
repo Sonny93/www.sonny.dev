@@ -3,20 +3,20 @@ import '../styles/global.css';
 
 import { ClientRouter } from 'astro:transitions';
 
+import { SITE_NAME } from '../constants/site';
+import { formatDocumentTitle } from '../lib/format_document_title';
 import { DEFAULT_LOCALE, LOCALES, resolveLocale, useTranslations } from '../i18n/ui';
 
 export type OpenGraphType = 'website' | 'article';
 
 type Props = {
-	title?: string;
+	title: string;
 	description?: string;
 	openGraphType?: OpenGraphType;
 	image?: string;
 	imageAlt?: string;
 };
 
-const DEFAULT_TITLE = 'App';
-const SITE_NAME = 'Sonny';
 const OG_IMAGE_WIDTH = 1280;
 const OG_IMAGE_HEIGHT = 720;
 const OG_LOCALE_BY_LOCALE: Record<(typeof LOCALES)[number], string> = {
@@ -25,12 +25,13 @@ const OG_LOCALE_BY_LOCALE: Record<(typeof LOCALES)[number], string> = {
 };
 
 const {
-	title = DEFAULT_TITLE,
+	title,
 	description,
 	openGraphType = 'website',
 	image,
 	imageAlt = title,
 } = Astro.props;
+const documentTitle = formatDocumentTitle(title);
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 const openGraphUrl =
@@ -72,7 +73,7 @@ const defaultAlternateUrl =
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-		<title>{title}</title>
+		<title>{documentTitle}</title>
 		{
 			description !== undefined && (
 				<meta name="description" content={description} />

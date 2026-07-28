@@ -14,7 +14,7 @@ const EN_UI_STRINGS = {
 	'navigation.closeMenu': 'Close menu',
 	'locale.switchToEnglish': 'Switch to English',
 	'locale.switchToFrench': 'Switch to French',
-	'home.pageTitle': 'Homepage',
+	'home.pageTitle': 'Full-stack & DevOps engineer',
 	'home.availability': 'Based in France · Open to remote opportunities',
 	'home.headline':
 		'I engineer resilient web platforms and automate everything else.',
@@ -65,7 +65,7 @@ const UI_STRINGS = {
 		'navigation.closeMenu': 'Fermer le menu',
 		'locale.switchToEnglish': 'Passer en anglais',
 		'locale.switchToFrench': 'Passer en français',
-		'home.pageTitle': "Page d'accueil",
+		'home.pageTitle': 'Ingénieur full-stack & DevOps',
 		'home.availability': 'Basé en France · Ouvert aux opportunités à distance',
 		'home.headline':
 			"Je conçois des plateformes web robustes et j'automatise tout ce qui peut l'être.",
