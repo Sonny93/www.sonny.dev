@@ -255,7 +255,7 @@ Already connected earlier (via login or API key).
 
 ---
 
-# ✅ Overall summary
+## ✅ Overall summary
 
 | Service      | Internal Docker URL | Port | API key used | Note                 |
 | ------------ | ------------------- | ---- | ------------ | -------------------- |

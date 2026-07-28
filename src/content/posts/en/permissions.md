@@ -7,7 +7,7 @@ lang: 'en'
 urlSlug: 'permissions'
 ---
 
-# Managing permissions on Linux
+## Managing permissions on Linux
 
 ⚠️ **Warning**: poorly managed permissions can expose your files to unauthorized access. Avoid overly permissive settings like `chmod 777`.
 

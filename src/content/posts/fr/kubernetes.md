@@ -7,7 +7,7 @@ lang: 'fr'
 urlSlug: 'kubernetes'
 ---
 
-# Kubernetes & Minikube
+## Kubernetes & Minikube
 
 ## 1. Outils CLI
 

@@ -7,8 +7,6 @@ lang: 'fr'
 urlSlug: 'cloudflare-proxy-vps'
 ---
 
-# Cacher l'IP de mon VPS derrière Cloudflare, sans changer d'hébergeur DNS
-
 Objectif simple : mon domaine reste enregistré chez mon registrar habituel, mais personne ne doit tomber sur l'IP réelle de mon VPS en résolvant `mondomaine.fr`. Pas besoin d'un tunnel sortant façon Cloudflare Tunnel ici, juste le proxy Cloudflare classique, le petit nuage orange, qui s'intercale entre le monde et mon serveur.
 
 Un point à clarifier avant de commencer : le proxy Cloudflare n'est pas une option qu'on active sur une zone DNS restée chez le registrar d'origine. C'est une fonctionnalité propre aux zones **actives** sur Cloudflare, ce qui veut dire déléguer les nameservers du domaine à Cloudflare. Le domaine reste acheté et enregistré là où il l'était (OVH, Gandi, Namecheap, peu importe), seule la gestion de la zone DNS change de mains. La démarche est identique quel que soit le registrar, seul l'écran où on va modifier les nameservers change.

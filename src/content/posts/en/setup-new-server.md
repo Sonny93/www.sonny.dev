@@ -7,7 +7,7 @@ lang: 'en'
 urlSlug: 'setup-new-server'
 ---
 
-# Cleaning up my tech lab: the server setup I use now
+## Cleaning up my tech lab: the server setup I use now
 
 After going through one throwaway, badly configured server too many, reinstalled in a hurry after a botched first `sudo apt install`, I finally sat down and wrote out, once and for all, the procedure I now follow for every new server. Nothing groundbreaking, but it's exactly the kind of "clean" baseline that always gets pushed to later, until the day a slightly-too-simple password ends up giving way.
 

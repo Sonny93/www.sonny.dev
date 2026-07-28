@@ -7,7 +7,7 @@ lang: 'fr'
 urlSlug: 'setup-new-server'
 ---
 
-# Remettre son tech lab au propre : le setup serveur que j'utilise maintenant
+## Remettre son tech lab au propre : le setup serveur que j'utilise maintenant
 
 Après avoir enchaîné les serveurs jetables, mal configurés, réinstallés à la va-vite après un premier `sudo apt install` foireux, j'ai fini par écrire une bonne fois pour toutes la procédure que je suis à chaque nouveau serveur. Rien de révolutionnaire, mais c'est exactement ce genre de base "propre" qu'on repousse toujours à plus tard, jusqu'au jour où un mot de passe un peu trop simple finit par céder.
 

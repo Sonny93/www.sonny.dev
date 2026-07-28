@@ -7,8 +7,6 @@ lang: 'en'
 urlSlug: 'cloudflare-proxy-vps'
 ---
 
-# Hiding my VPS's IP behind Cloudflare, without switching DNS providers
-
 Simple goal: my domain stays registered with my usual registrar, but nobody should land on my VPS's real IP by resolving `mydomain.com`. No need for an outbound tunnel like Cloudflare Tunnel here, just the classic Cloudflare proxy, the little orange cloud, sitting between the world and my server.
 
 One thing to clarify before starting: the Cloudflare proxy isn't something you can turn on for a DNS zone that stays with the original registrar. It's a feature tied to zones that are **active** on Cloudflare, which means delegating the domain's nameservers to Cloudflare. The domain stays bought and registered wherever it already was (OVH, Gandi, Namecheap, whatever), only the DNS zone management changes hands. The process is the same regardless of registrar, only the screen where you edit the nameservers changes.
