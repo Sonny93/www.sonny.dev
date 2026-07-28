@@ -62,6 +62,7 @@ type ArticleSchemaParams = {
 	readonly headline: string;
 	readonly description: string;
 	readonly publishedAt: Date;
+	readonly updatedAt: Date | undefined;
 	readonly tags: readonly string[];
 	readonly imageUrl: string;
 	readonly locale: Locale;
@@ -73,6 +74,7 @@ export function buildArticleSchema({
 	headline,
 	description,
 	publishedAt,
+	updatedAt,
 	tags,
 	imageUrl,
 	locale,
@@ -85,6 +87,7 @@ export function buildArticleSchema({
 		headline,
 		description,
 		datePublished: publishedAt.toISOString(),
+		dateModified: (updatedAt ?? publishedAt).toISOString(),
 		inLanguage: locale,
 		keywords: tags,
 		image: imageUrl,

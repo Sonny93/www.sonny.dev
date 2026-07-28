@@ -45,6 +45,7 @@ const EN_UI_STRINGS = {
 	'projects.viewSourceCode': 'View source code',
 	'projects.noSourceCode': 'No source code available',
 	'post.readTimeUnit': 'min read',
+	'post.updatedOn': 'Updated on',
 	'notFound.title': 'Page not found',
 	'notFound.description': 'This page does not exist.',
 } as const;
@@ -96,6 +97,7 @@ const UI_STRINGS = {
 		'projects.viewSourceCode': 'Voir le code source',
 		'projects.noSourceCode': 'Code source indisponible',
 		'post.readTimeUnit': 'min de lecture',
+		'post.updatedOn': 'Mis à jour le',
 		'notFound.title': 'Page non trouvée',
 		'notFound.description': "Cette page n'existe pas.",
 	},

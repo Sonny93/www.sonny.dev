@@ -10,6 +10,7 @@ const FRONTMATTER_PATTERN = /^---\r?\n([\s\S]*?)\r?\n---/;
 
 const postFrontmatterSchema = z.object({
 	publishedAt: z.coerce.date(),
+	updatedAt: z.coerce.date().optional(),
 	lang: z.enum(['en', 'fr']).default('fr'),
 	urlSlug: z.string(),
 });
@@ -54,25 +55,26 @@ function mostRecent(firstDate: Date, secondDate: Date): Date {
  * the sitemap can advertise an honest `lastmod`. Pages without a reliable
  * change signal are deliberately left out.
  */
-export async function readPostPublicationDates(
+export async function readPostLastModifiedDates(
 	siteUrl: string
 ): Promise<ReadonlyMap<string, Date>> {
 	const frontmatters = await readAllPostFrontmatters();
-	const publicationDates = new Map<string, Date>();
+	const lastModifiedDates = new Map<string, Date>();
 
-	for (const { lang, urlSlug, publishedAt } of frontmatters) {
+	for (const { lang, urlSlug, publishedAt, updatedAt } of frontmatters) {
 		const articleUrl = new URL(`/${lang}/blog/${urlSlug}/`, siteUrl).toString();
 		const blogIndexUrl = new URL(`/${lang}/blog/`, siteUrl).toString();
-		const knownIndexDate = publicationDates.get(blogIndexUrl);
+		const lastModifiedAt = updatedAt ?? publishedAt;
+		const knownIndexDate = lastModifiedDates.get(blogIndexUrl);
 
-		publicationDates.set(articleUrl, publishedAt);
-		publicationDates.set(
+		lastModifiedDates.set(articleUrl, lastModifiedAt);
+		lastModifiedDates.set(
 			blogIndexUrl,
 			knownIndexDate === undefined
-				? publishedAt
-				: mostRecent(knownIndexDate, publishedAt)
+				? lastModifiedAt
+				: mostRecent(knownIndexDate, lastModifiedAt)
 		);
 	}
 
-	return publicationDates;
+	return lastModifiedDates;
 }

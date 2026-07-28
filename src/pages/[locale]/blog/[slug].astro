@@ -36,10 +36,20 @@ const { post } = Astro.props;
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
 
+const META_SEPARATOR = ' · ';
+
+const { publishedAt, updatedAt } = post.data;
 const { Content } = await render(post);
-const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
+const publishedAtLabel = formatPublishedDate(publishedAt, locale);
+const updatedAtLabel =
+	updatedAt === undefined || updatedAt.getTime() === publishedAt.getTime()
+		? undefined
+		: `${translate('post.updatedOn')} ${formatPublishedDate(updatedAt, locale)}`;
 const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 const readTimeLabel = `${estimatedReadTime} ${translate('post.readTimeUnit')}`;
+const metaLine = [publishedAtLabel, updatedAtLabel, readTimeLabel]
+	.filter((segment) => segment !== undefined)
+	.join(META_SEPARATOR);
 
 const articleSchema =
 	Astro.site === undefined
@@ -50,6 +60,7 @@ const articleSchema =
 				headline: post.data.title,
 				description: post.data.description,
 				publishedAt: post.data.publishedAt,
+				updatedAt: post.data.updatedAt,
 				tags: post.data.tags,
 				imageUrl: new URL(
 					resolveOpenGraphImagePath(locale, undefined),
@@ -66,13 +77,15 @@ const articleSchema =
 	contentFlow="article"
 >
 	<Fragment slot="head">
-		<ArticleMeta publishedAt={post.data.publishedAt} tags={post.data.tags} />
+		<ArticleMeta
+			publishedAt={post.data.publishedAt}
+			updatedAt={post.data.updatedAt}
+			tags={post.data.tags}
+		/>
 		{articleSchema !== undefined && <JsonLd schema={articleSchema} />}
 	</Fragment>
 	<SectionTitle title={post.data.title} level="h1" />
-	<div class="flex items-center gap-4 text-sm text-gray-400">
-		{publishedAtLabel} &middot; {readTimeLabel}
-	</div>
+	<div class="flex items-center gap-4 text-sm text-gray-400">{metaLine}</div>
 	<div class="prose prose-invert min-w-full">
 		<Content />
 	</div>
