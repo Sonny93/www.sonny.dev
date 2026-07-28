@@ -39,7 +39,8 @@
 		"release-it": "^20.2.1",
 		"sharp": "^0.35.3",
 		"typescript": "~6.0.3",
-		"unocss": "^66.7.5"
+		"unocss": "^66.7.5",
+		"yaml": "^2.9.0"
 	},
 	"volta": {
 		"node": "24.14.1"
