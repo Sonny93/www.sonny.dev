@@ -32,10 +32,15 @@ to `www.sonny.dev` since that is the configured custom domain):
 
 ## What the workflow does
 
-- **build**: `withastro/action@v6` — installs pnpm 11 + Node 24 (pinned in
-  `.mise.toml`), runs `pnpm run build`, then uploads `dist/` as the Pages
-  artifact.
+- **check**: installs pnpm 11 + Node 24 (pinned in `.mise.toml`) and runs
+  `pnpm run check` — lint, formatting, typecheck and tests. The next job waits
+  on it, so a red suite never reaches production.
+- **build**: `withastro/action@v6` runs `pnpm run build`, then uploads `dist/`
+  as the Pages artifact.
 - **deploy**: `actions/deploy-pages@v5` into the `github-pages` environment.
+
+`.github/workflows/ci.yml` runs the same checks on every push and pull request,
+and `pnpm release` runs them before cutting a version.
 
 `dist/` contains `CNAME`, `favicon.svg`, `robots.txt`, `sitemap-index.xml` and
 one `rss.xml` per locale alongside the pages.
