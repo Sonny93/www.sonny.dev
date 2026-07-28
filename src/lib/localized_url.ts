@@ -4,9 +4,14 @@ import { LOCALES, type Locale } from '../i18n/ui';
 import type { RoutePath } from '../constants/routes';
 
 const LOCALE_PREFIX_PATTERN = new RegExp(`^/(?:${LOCALES.join('|')})(?=/|$)`);
+const TRAILING_SLASH_PATTERN = /\/$/;
 
 export function localizedUrl(locale: Locale, routePath: RoutePath): string {
 	return getRelativeLocaleUrl(locale, routePath);
+}
+
+export function localizedFileUrl(locale: Locale, routePath: RoutePath): string {
+	return localizedUrl(locale, routePath).replace(TRAILING_SLASH_PATTERN, '');
 }
 
 export function switchedLocaleUrl(

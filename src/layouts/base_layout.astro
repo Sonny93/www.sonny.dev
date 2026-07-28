@@ -3,7 +3,9 @@ import '../styles/global.css';
 
 import { ClientRouter } from 'astro:transitions';
 
+import { ROUTES } from '../constants/routes';
 import { SITE_NAME } from '../constants/site';
+import { localizedFileUrl } from '../lib/localized_url';
 import { formatDocumentTitle } from '../lib/format_document_title';
 import { resolveOpenGraphImagePath } from '../lib/open_graph_image';
 import { DEFAULT_LOCALE, LOCALES, resolveLocale, useTranslations } from '../i18n/ui';
@@ -44,6 +46,8 @@ const openGraphImageUrl =
 	Astro.site === undefined
 		? openGraphImagePath
 		: new URL(openGraphImagePath, Astro.site).toString();
+const feedUrl = localizedFileUrl(locale, ROUTES.feed);
+const feedTitle = formatDocumentTitle(translate('blog.pageTitle'));
 const openGraphLocale = OG_LOCALE_BY_LOCALE[locale];
 const openGraphAlternateLocales = LOCALES.filter(
 	(alternateLocale) => alternateLocale !== locale
@@ -81,6 +85,12 @@ const defaultAlternateUrl =
 			)
 		}
 		{openGraphUrl !== undefined && <link rel="canonical" href={openGraphUrl} />}
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={feedTitle}
+			href={feedUrl}
+		/>
 
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:title" content={title} />

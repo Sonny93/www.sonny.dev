@@ -5,6 +5,7 @@ export const ROUTES = {
 	blog: 'blog',
 	projects: 'projects',
 	background: 'background',
+	feed: 'rss.xml',
 	post: (slug: string): PostRoutePath => `blog/${slug}`,
 } as const;
 
