@@ -1,0 +1,15 @@
+---
+import { SITE_NAME } from '../../constants/site';
+
+type Props = {
+	publishedAt: Date;
+	tags: readonly string[];
+};
+
+const { publishedAt, tags } = Astro.props;
+const publishedTime = publishedAt.toISOString();
+---
+
+<meta property="article:published_time" content={publishedTime} />
+<meta property="article:author" content={SITE_NAME} />
+{tags.map((tag) => <meta property="article:tag" content={tag} />)}

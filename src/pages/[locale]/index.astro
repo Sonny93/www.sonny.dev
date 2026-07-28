@@ -77,7 +77,9 @@ const homeSchema =
 	title={translate('home.pageTitle')}
 	description={translate('home.introduction')}
 >
-	{homeSchema !== undefined && <JsonLd slot="head" schema={homeSchema} />}
+	<Fragment slot="head">
+		{homeSchema !== undefined && <JsonLd schema={homeSchema} />}
+	</Fragment>
 
 	<section class="relative overflow-hidden px-2">
 		<span class="hud-corner hud-corner--tl opacity-40" aria-hidden="true" />

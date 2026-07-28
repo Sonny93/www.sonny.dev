@@ -7,6 +7,7 @@ import PostLayout from '../../../layouts/post_layout.astro';
 import { formatPublishedDate } from '../../../lib/format_date';
 import { buildArticleSchema } from '../../../lib/structured_data';
 import SectionTitle from '../../../components/section_title.astro';
+import ArticleMeta from '../../../components/seo/article_meta.astro';
 import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
 import { resolveOpenGraphImagePath } from '../../../lib/open_graph_image';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
@@ -63,7 +64,10 @@ const articleSchema =
 	description={post.data.description}
 	openGraphType="article"
 >
-	{articleSchema !== undefined && <JsonLd slot="head" schema={articleSchema} />}
+	<Fragment slot="head">
+		<ArticleMeta publishedAt={post.data.publishedAt} tags={post.data.tags} />
+		{articleSchema !== undefined && <JsonLd schema={articleSchema} />}
+	</Fragment>
 	<SectionTitle title={post.data.title} level="h1" />
 	<div class="flex items-center gap-4 text-sm text-gray-400">
 		{publishedAtLabel} &middot; {readTimeLabel}
