@@ -1,16 +1,24 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 
+import { ROUTES } from '../../../constants/routes';
 import { getPublishedPosts } from '../../../lib/posts';
+import { localizedUrl } from '../../../lib/localized_url';
 import JsonLd from '../../../components/seo/json_ld.astro';
 import PageLayout from '../../../layouts/page_layout.astro';
 import { formatPublishedDate } from '../../../lib/format_date';
-import { buildArticleSchema } from '../../../lib/structured_data';
 import SectionTitle from '../../../components/section_title.astro';
 import ArticleMeta from '../../../components/seo/article_meta.astro';
 import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
+import Breadcrumb from '../../../components/navigation/breadcrumb.astro';
 import { resolveOpenGraphImagePath } from '../../../lib/open_graph_image';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+import {
+	buildArticleSchema,
+	buildBreadcrumbSchema,
+	type BreadcrumbTrailItem,
+	type JsonLdSchema,
+} from '../../../lib/structured_data';
 
 export async function getStaticPaths() {
 	const postsByLocale = await Promise.all(
@@ -51,23 +59,42 @@ const metaLine = [publishedAtLabel, updatedAtLabel, readTimeLabel]
 	.filter((segment) => segment !== undefined)
 	.join(META_SEPARATOR);
 
-const articleSchema =
-	Astro.site === undefined
-		? undefined
-		: buildArticleSchema({
-				siteUrl: Astro.site,
-				articleUrl: new URL(Astro.url.pathname, Astro.site).toString(),
-				headline: post.data.title,
-				description: post.data.description,
-				publishedAt: post.data.publishedAt,
-				updatedAt: post.data.updatedAt,
-				tags: post.data.tags,
-				imageUrl: new URL(
-					resolveOpenGraphImagePath(locale, undefined),
-					Astro.site
-				).toString(),
-				locale,
-			});
+const breadcrumbTrail: readonly BreadcrumbTrailItem[] = [
+	{
+		kind: 'ancestor',
+		name: translate('navigation.home'),
+		url: localizedUrl(locale, ROUTES.home),
+	},
+	{
+		kind: 'ancestor',
+		name: translate('navigation.blog'),
+		url: localizedUrl(locale, ROUTES.blog),
+	},
+	{ kind: 'current', name: post.data.title },
+];
+
+function buildStructuredData(siteUrl: URL): readonly JsonLdSchema[] {
+	return [
+		buildArticleSchema({
+			siteUrl,
+			articleUrl: new URL(Astro.url.pathname, siteUrl).toString(),
+			headline: post.data.title,
+			description: post.data.description,
+			publishedAt,
+			updatedAt,
+			tags: post.data.tags,
+			imageUrl: new URL(
+				resolveOpenGraphImagePath(locale, undefined),
+				siteUrl
+			).toString(),
+			locale,
+		}),
+		buildBreadcrumbSchema(breadcrumbTrail, siteUrl),
+	];
+}
+
+const structuredDataSchemas =
+	Astro.site === undefined ? [] : buildStructuredData(Astro.site);
 ---
 
 <PageLayout
@@ -82,8 +109,9 @@ const articleSchema =
 			updatedAt={post.data.updatedAt}
 			tags={post.data.tags}
 		/>
-		{articleSchema !== undefined && <JsonLd schema={articleSchema} />}
+		{structuredDataSchemas.map((schema) => <JsonLd schema={schema} />)}
 	</Fragment>
+	<Breadcrumb trail={breadcrumbTrail} />
 	<SectionTitle title={post.data.title} level="h1" />
 	<div class="flex items-center gap-4 text-sm text-gray-400">{metaLine}</div>
 	<div class="prose prose-invert min-w-full">

@@ -1,0 +1,35 @@
+---
+import { resolveLocale, useTranslations } from '../../i18n/ui';
+import type { BreadcrumbTrailItem } from '../../lib/structured_data';
+
+type Props = {
+	trail: readonly BreadcrumbTrailItem[];
+};
+
+const SEPARATOR = '›';
+
+const { trail } = Astro.props;
+const locale = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(locale);
+const ancestors = trail.filter((trailItem) => trailItem.kind === 'ancestor');
+---
+
+{
+	ancestors.length > 0 && (
+		<nav aria-label={translate('navigation.breadcrumb')}>
+			<ol class="flex flex-wrap items-center gap-2 text-sm text-gray-400">
+				{ancestors.map((ancestor, ancestorIndex) => (
+					<li class="flex items-center gap-2">
+						{ancestorIndex > 0 && <span aria-hidden="true">{SEPARATOR}</span>}
+						<a
+							href={ancestor.url}
+							class="transition-colors hover:text-sky-300"
+						>
+							{ancestor.name}
+						</a>
+					</li>
+				))}
+			</ol>
+		</nav>
+	)
+}

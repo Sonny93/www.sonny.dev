@@ -7,6 +7,7 @@ export type JsonLdSchema = Readonly<Record<string, unknown>>;
 const SCHEMA_CONTEXT = 'https://schema.org';
 const PERSON_ANCHOR = '#person';
 const WEBSITE_ANCHOR = '#website';
+const FIRST_BREADCRUMB_POSITION = 1;
 
 function buildPersonId(siteUrl: URL): string {
 	return new URL(PERSON_ANCHOR, siteUrl).toString();
@@ -96,5 +97,38 @@ export function buildArticleSchema({
 			'@id': buildPersonId(siteUrl),
 			name: SITE_NAME,
 		},
+	};
+}
+
+export type BreadcrumbTrailItem =
+	| { readonly kind: 'ancestor'; readonly name: string; readonly url: string }
+	| { readonly kind: 'current'; readonly name: string };
+
+function buildBreadcrumbItem(
+	trailItem: BreadcrumbTrailItem,
+	index: number,
+	siteUrl: URL
+): JsonLdSchema {
+	const position = index + FIRST_BREADCRUMB_POSITION;
+	if (trailItem.kind === 'current')
+		return { '@type': 'ListItem', position, name: trailItem.name };
+	return {
+		'@type': 'ListItem',
+		position,
+		name: trailItem.name,
+		item: new URL(trailItem.url, siteUrl).toString(),
+	};
+}
+
+export function buildBreadcrumbSchema(
+	trail: readonly BreadcrumbTrailItem[],
+	siteUrl: URL
+): JsonLdSchema {
+	return {
+		'@context': SCHEMA_CONTEXT,
+		'@type': 'BreadcrumbList',
+		itemListElement: trail.map((trailItem, index) =>
+			buildBreadcrumbItem(trailItem, index, siteUrl)
+		),
 	};
 }
