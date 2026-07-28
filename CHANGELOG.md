@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.2.0](https://github.com/Sonny93/www/compare/3.1.2...3.2.0) (2026-07-28)
+
+### Features
+
+* **blog:** add a breadcrumb trail to articles ([3329b1c](https://github.com/Sonny93/www/commit/3329b1c6e24b154a83e88ca5db56ee9e8e8fc24d))
+* **blog:** publish a per-locale RSS feed ([c06af7d](https://github.com/Sonny93/www/commit/c06af7d2b4d56bf61b25ff7f1b1af617d5270121))
+* **blog:** track and surface article revisions ([7cb2897](https://github.com/Sonny93/www/commit/7cb2897908064e32acd1c23a1b55056536f6f4d4))
+* **seo:** brand page titles with the site name ([14ad85f](https://github.com/Sonny93/www/commit/14ad85f4a7ca2bc5559c7b820b2f933ecd8cce47))
+* **seo:** declare the page author ([23efb6b](https://github.com/Sonny93/www/commit/23efb6b44a9cdde23c920672eee80c55cab6dff4))
+* **seo:** describe the site with JSON-LD ([6c10cfa](https://github.com/Sonny93/www/commit/6c10cfa5692220bbc37196686d4bf42a5784a195))
+* **seo:** expose article metadata to social crawlers ([d9b97aa](https://github.com/Sonny93/www/commit/d9b97aafa585d286ea880f442064c07e4f280bf8))
+* **seo:** give each article its own OpenGraph card ([113b4cd](https://github.com/Sonny93/www/commit/113b4cd235cb548b06e83f53d222447c801bc790))
+* **sitemap:** advertise article publication dates ([757c4e4](https://github.com/Sonny93/www/commit/757c4e4423b083f176a25275af37349fe416e830))
+
+### Bug Fixes
+
+* **a11y:** keep a single h1 per page ([90cf47e](https://github.com/Sonny93/www/commit/90cf47e0bc1ffaefbc3c1c911e1c6a60f34b1775))
+* **deps:** restore the ignored pnpm settings ([cb68ae8](https://github.com/Sonny93/www/commit/cb68ae871030da9c94003fe636f6e82579a8936c))
+* **deps:** step back from versions the release delay blocks ([420cfe6](https://github.com/Sonny93/www/commit/420cfe64f8ea00646fc83684dd919128c1d4dd81))
+* **seo:** allow root page indexing ([e91afe3](https://github.com/Sonny93/www/commit/e91afe3f7adf0a4b9eb7f8b4332348ec969c6a81))
+* **sitemap:** drop duplicate hreflang on homepage ([98bbf6d](https://github.com/Sonny93/www/commit/98bbf6dab4d679e614d7b2eb0932a5add6117f61))
+
 ## [3.1.2](https://github.com/Sonny93/www/compare/3.1.1...3.1.2) (2026-07-12)
 
 ### Features
