@@ -17,7 +17,8 @@
 		"knip": "knip",
 		"release": "release-it --only-version",
 		"screenshots:install-browser": "playwright install --with-deps chromium",
-		"screenshots:generate": "node scripts/generate-project-screenshots.ts"
+		"screenshots:generate": "node scripts/generate-project-screenshots.ts",
+		"og:generate": "node scripts/generate-og-images.ts"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1"

@@ -11,8 +11,12 @@ import SectionTitle from '../../../components/section_title.astro';
 import ArticleMeta from '../../../components/seo/article_meta.astro';
 import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
 import Breadcrumb from '../../../components/navigation/breadcrumb.astro';
-import { resolveOpenGraphImagePath } from '../../../lib/open_graph_image';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
+import { readGeneratedOgImageNames } from '../../../../scripts/read_generated_og_image_names';
+import {
+	resolveOpenGraphImagePath,
+	resolvePostOpenGraphImagePath,
+} from '../../../lib/open_graph_image';
 import {
 	buildArticleSchema,
 	buildBreadcrumbSchema,
@@ -21,25 +25,36 @@ import {
 } from '../../../lib/structured_data';
 
 export async function getStaticPaths() {
-	const postsByLocale = await Promise.all(
-		LOCALES.map(async (locale) => ({
-			locale,
-			posts: await getPublishedPosts(locale),
-		}))
-	);
+	const [postsByLocale, generatedImageNames] = await Promise.all([
+		Promise.all(
+			LOCALES.map(async (locale) => ({
+				locale,
+				posts: await getPublishedPosts(locale),
+			}))
+		),
+		readGeneratedOgImageNames(),
+	]);
 	return postsByLocale.flatMap(({ locale, posts }) =>
 		posts.map((post) => ({
 			params: { locale, slug: post.data.urlSlug },
-			props: { post },
+			props: {
+				post,
+				openGraphImagePath: resolvePostOpenGraphImagePath(
+					locale,
+					post.data.urlSlug,
+					generatedImageNames
+				),
+			},
 		}))
 	);
 }
 
 type Props = {
 	post: CollectionEntry<'posts'>;
+	openGraphImagePath: string | undefined;
 };
 
-const { post } = Astro.props;
+const { post, openGraphImagePath } = Astro.props;
 
 const locale = resolveLocale(Astro.currentLocale);
 const translate = useTranslations(locale);
@@ -84,7 +99,7 @@ function buildStructuredData(siteUrl: URL): readonly JsonLdSchema[] {
 			updatedAt,
 			tags: post.data.tags,
 			imageUrl: new URL(
-				resolveOpenGraphImagePath(locale, undefined),
+				resolveOpenGraphImagePath(locale, openGraphImagePath),
 				siteUrl
 			).toString(),
 			locale,
@@ -102,6 +117,7 @@ const structuredDataSchemas =
 	description={post.data.description}
 	openGraphType="article"
 	contentFlow="article"
+	image={openGraphImagePath}
 >
 	<Fragment slot="head">
 		<ArticleMeta
