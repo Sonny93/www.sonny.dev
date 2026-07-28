@@ -1,4 +1,7 @@
-import { readPostFrontmatters } from './read_post_frontmatters.js';
+import {
+	readPostFrontmatters,
+	type PostFrontmatter,
+} from './read_post_frontmatters.js';
 
 function mostRecent(firstDate: Date, secondDate: Date): Date {
 	return firstDate > secondDate ? firstDate : secondDate;
@@ -9,10 +12,10 @@ function mostRecent(firstDate: Date, secondDate: Date): Date {
  * the sitemap can advertise an honest `lastmod`. Pages without a reliable
  * change signal are deliberately left out.
  */
-export async function readPostLastModifiedDates(
+export function buildLastModifiedDates(
+	frontmatters: readonly PostFrontmatter[],
 	siteUrl: string
-): Promise<ReadonlyMap<string, Date>> {
-	const frontmatters = await readPostFrontmatters();
+): ReadonlyMap<string, Date> {
 	const lastModifiedDates = new Map<string, Date>();
 
 	for (const { lang, urlSlug, publishedAt, updatedAt } of frontmatters) {
@@ -31,4 +34,10 @@ export async function readPostLastModifiedDates(
 	}
 
 	return lastModifiedDates;
+}
+
+export async function readPostLastModifiedDates(
+	siteUrl: string
+): Promise<ReadonlyMap<string, Date>> {
+	return buildLastModifiedDates(await readPostFrontmatters(), siteUrl);
 }

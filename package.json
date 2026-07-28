@@ -12,8 +12,11 @@
 		"lint:fix": "oxlint . --fix --fix-suggestions --fix-dangerously",
 		"format": "pnpm lint:fix; oxfmt .",
 		"format:check": "oxfmt . --check",
+		"sync": "astro sync",
 		"typecheck": "tsc --noEmit",
-		"check": "pnpm run lint && pnpm run format:check && pnpm run typecheck",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"check": "pnpm run sync && pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run test",
 		"knip": "knip",
 		"release": "release-it --only-version",
 		"screenshots:install-browser": "playwright install --with-deps chromium",
@@ -41,6 +44,7 @@
 		"sharp": "^0.35.3",
 		"typescript": "~6.0.3",
 		"unocss": "^66.7.5",
+		"vitest": "^4.1.10",
 		"yaml": "^2.9.0"
 	},
 	"volta": {
