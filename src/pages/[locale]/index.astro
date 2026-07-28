@@ -5,6 +5,8 @@ import { formations } from '../../data/formations';
 import { getPublishedPosts } from '../../lib/posts';
 import { experiences } from '../../data/experiences';
 import { localizedUrl } from '../../lib/localized_url';
+import JsonLd from '../../components/seo/json_ld.astro';
+import { buildHomeSchema } from '../../lib/structured_data';
 import PostList from '../../components/posts/post_list.astro';
 import DefaultLayout from '../../layouts/default_layout.astro';
 import SectionTitle from '../../components/section_title.astro';
@@ -58,12 +60,25 @@ const formationTimelineItems = buildFormationTimelineItems(
 	formations.slice(0, HOME_FORMATIONS_COUNT),
 	locale
 );
+
+const homeSchema =
+	Astro.site === undefined
+		? undefined
+		: buildHomeSchema({
+				siteUrl: Astro.site,
+				homeUrl: new URL(localizedUrl(locale, ROUTES.home), Astro.site).toString(),
+				jobTitle: translate('home.pageTitle'),
+				description: translate('home.introduction'),
+				locale,
+			});
 ---
 
 <DefaultLayout
 	title={translate('home.pageTitle')}
 	description={translate('home.introduction')}
 >
+	{homeSchema !== undefined && <JsonLd slot="head" schema={homeSchema} />}
+
 	<section class="relative overflow-hidden px-2">
 		<span class="hud-corner hud-corner--tl opacity-40" aria-hidden="true" />
 		<span class="hud-corner hud-corner--tr opacity-40" aria-hidden="true" />

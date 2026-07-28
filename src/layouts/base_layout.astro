@@ -5,6 +5,7 @@ import { ClientRouter } from 'astro:transitions';
 
 import { SITE_NAME } from '../constants/site';
 import { formatDocumentTitle } from '../lib/format_document_title';
+import { resolveOpenGraphImagePath } from '../lib/open_graph_image';
 import { DEFAULT_LOCALE, LOCALES, resolveLocale, useTranslations } from '../i18n/ui';
 
 export type OpenGraphType = 'website' | 'article';
@@ -38,7 +39,7 @@ const openGraphUrl =
 	Astro.site === undefined
 		? undefined
 		: new URL(Astro.url.pathname, Astro.site).toString();
-const openGraphImagePath = image ?? `/og/default-${locale}.png`;
+const openGraphImagePath = resolveOpenGraphImagePath(locale, image);
 const openGraphImageUrl =
 	Astro.site === undefined
 		? openGraphImagePath
@@ -121,6 +122,8 @@ const defaultAlternateUrl =
 				<link rel="alternate" hreflang="x-default" href={defaultAlternateUrl} />
 			)
 		}
+
+		<slot name="head" />
 
 		<ClientRouter />
 	</head>

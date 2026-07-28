@@ -22,6 +22,7 @@ const { title, description, openGraphType, image, imageAlt } = Astro.props;
 	image={image}
 	imageAlt={imageAlt}
 >
+	<slot name="head" slot="head" />
 	<div class="relative z-1 flex min-h-dvh flex-col">
 		<div class="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 p-4">
 			<Navbar />

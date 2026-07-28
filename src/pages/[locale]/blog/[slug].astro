@@ -2,10 +2,13 @@
 import { render, type CollectionEntry } from 'astro:content';
 
 import { getPublishedPosts } from '../../../lib/posts';
+import JsonLd from '../../../components/seo/json_ld.astro';
 import PostLayout from '../../../layouts/post_layout.astro';
 import { formatPublishedDate } from '../../../lib/format_date';
+import { buildArticleSchema } from '../../../lib/structured_data';
 import SectionTitle from '../../../components/section_title.astro';
 import { estimateReadingTimeMinutes } from '../../../lib/reading_time';
+import { resolveOpenGraphImagePath } from '../../../lib/open_graph_image';
 import { LOCALES, resolveLocale, useTranslations } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
@@ -36,6 +39,23 @@ const { Content } = await render(post);
 const publishedAtLabel = formatPublishedDate(post.data.publishedAt, locale);
 const estimatedReadTime = estimateReadingTimeMinutes(post.body ?? '');
 const readTimeLabel = `${estimatedReadTime} ${translate('post.readTimeUnit')}`;
+
+const articleSchema =
+	Astro.site === undefined
+		? undefined
+		: buildArticleSchema({
+				siteUrl: Astro.site,
+				articleUrl: new URL(Astro.url.pathname, Astro.site).toString(),
+				headline: post.data.title,
+				description: post.data.description,
+				publishedAt: post.data.publishedAt,
+				tags: post.data.tags,
+				imageUrl: new URL(
+					resolveOpenGraphImagePath(locale, undefined),
+					Astro.site
+				).toString(),
+				locale,
+			});
 ---
 
 <PostLayout
@@ -43,6 +63,7 @@ const readTimeLabel = `${estimatedReadTime} ${translate('post.readTimeUnit')}`;
 	description={post.data.description}
 	openGraphType="article"
 >
+	{articleSchema !== undefined && <JsonLd slot="head" schema={articleSchema} />}
 	<SectionTitle title={post.data.title} level="h1" />
 	<div class="flex items-center gap-4 text-sm text-gray-400">
 		{publishedAtLabel} &middot; {readTimeLabel}

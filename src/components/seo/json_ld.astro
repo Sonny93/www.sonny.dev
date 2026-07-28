@@ -1,0 +1,12 @@
+---
+import type { JsonLdSchema } from '../../lib/structured_data';
+
+type Props = {
+	schema: JsonLdSchema;
+};
+
+const { schema } = Astro.props;
+const serializedSchema = JSON.stringify(schema).replaceAll('<', '\\u003c');
+---
+
+<script type="application/ld+json" is:inline set:html={serializedSchema} />
