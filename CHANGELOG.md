@@ -1,5 +1,7 @@
 # Changelog
 
+## [3.2.1](https://github.com/Sonny93/www/compare/3.2.0...3.2.1) (2026-07-31)
+
 ## [3.2.0](https://github.com/Sonny93/www/compare/3.1.2...3.2.0) (2026-07-28)
 
 ### Features
