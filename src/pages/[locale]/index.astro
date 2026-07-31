@@ -10,6 +10,7 @@ import PageLayout from '../../layouts/page_layout.astro';
 import { buildHomeSchema } from '../../lib/structured_data';
 import PostList from '../../components/posts/post_list.astro';
 import SectionTitle from '../../components/section_title.astro';
+import SectionMoreLink from '../../components/section_more_link.astro';
 import ProjectList from '../../components/projects/project_list.astro';
 import VerticalTimeline from '../../components/timeline/vertical_timeline.astro';
 import {
@@ -138,10 +139,11 @@ const homeSchema =
 		latestPosts.length > 0 && (
 			<section class="flex w-full flex-col gap-4">
 				<SectionTitle title={translate('home.latestArticles')} />
-				<a href={blogUrl} class="self-end text-sm text-gray-400">
-					{translate('home.viewAllArticles')} &rarr;
-				</a>
 				<PostList posts={latestPosts} />
+				<SectionMoreLink
+					href={blogUrl}
+					label={translate('home.viewAllArticles')}
+				/>
 			</section>
 		)
 	}
@@ -150,28 +152,27 @@ const homeSchema =
 		featuredProjects.length > 0 && (
 			<section class="flex w-full flex-col gap-4">
 				<SectionTitle title={translate('home.featuredProjects')} />
-				<a href={projectsUrl} class="self-end text-sm text-gray-400">
-					{translate('home.viewAllProjects')} &rarr;
-				</a>
 				<ProjectList projects={featuredProjects} locale={locale} />
+				<SectionMoreLink
+					href={projectsUrl}
+					label={translate('home.viewAllProjects')}
+				/>
 			</section>
 		)
 	}
 
-		<div class="flex w-full flex-col gap-10">
-			<a
-				href={backgroundUrl}
-				class="self-end text-sm text-gray-400 hover:text-white"
-			>
-				{translate('home.viewFullBackground')} &rarr;
-			</a>
-			<VerticalTimeline
-				title={translate('home.experiences')}
-				items={experienceTimelineItems}
-			/>
-			<VerticalTimeline
-				title={translate('home.formations')}
-				items={formationTimelineItems}
-			/>
-		</div>
+	<div class="flex w-full flex-col gap-10">
+		<VerticalTimeline
+			title={translate('home.experiences')}
+			items={experienceTimelineItems}
+		/>
+		<VerticalTimeline
+			title={translate('home.formations')}
+			items={formationTimelineItems}
+		/>
+		<SectionMoreLink
+			href={backgroundUrl}
+			label={translate('home.viewFullBackground')}
+		/>
+	</div>
 </PageLayout>
